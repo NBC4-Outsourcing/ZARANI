@@ -1,5 +1,5 @@
 import React from 'react';
-import * as CS from '../styles/mainPageComunityStyle';
+import * as CS from '../styles/mainComunityStyle';
 
 const MainPageComunity = () => {
   return (

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import { deleteWrite, getWriteList } from './supabaseTest';
 import {
@@ -13,21 +13,25 @@ import {
   WriteNickName
 } from 'components/styles/ComunityStyle';
 import CommentList from './CommentList';
+import CommentInputForm from './CommentInputForm';
+import { getFormattedDate } from './formattedDate';
 
 const WritingList = () => {
   const { isLoading, isError, data } = useQuery('comunityWriteList', getWriteList);
-
-  const getFormattedDate = (date) =>
-    new Date(date).toLocaleDateString('ko', {
-      year: '2-digit',
-      month: '2-digit',
-      day: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit'
-    });
+  const [modalOpen, setModalOpen] = useState(false);
+  const [writeId, setWriteId] = useState(null);
 
   const onClicDeleteHandler = (id) => {
     deleteWrite(id);
+  };
+
+  const onClickCommentHandler = (id) => {
+    setModalOpen(!modalOpen);
+    if (writeId) {
+      setWriteId(null);
+    } else {
+      setWriteId(id);
+    }
   };
 
   if (isLoading) {
@@ -39,6 +43,7 @@ const WritingList = () => {
   }
   return (
     <>
+      {modalOpen ? <CommentInputForm onClickCommentHandler={onClickCommentHandler} writeId={writeId} /> : false}
       {data.map((item) => {
         return (
           <WriteListSection key={item.id}>
@@ -47,16 +52,16 @@ const WritingList = () => {
                 <WriteImage src={item.avatar} />
                 <WriteNickName>{item.nickname}</WriteNickName>
               </WriteHead>
-              <WriteContent>{item.content.writeContent}</WriteContent>
+              <WriteContent>{item.content}</WriteContent>
               <WriteFoot>
                 <WriteDate>{getFormattedDate(item.date)}</WriteDate>
                 <WriteButtons>
-                  <button>댓글</button>
+                  <button onClick={() => onClickCommentHandler(item.id)}>댓글</button>
                   <button onClick={() => onClicDeleteHandler(item.id)}>삭제</button>
                 </WriteButtons>
               </WriteFoot>
             </WriteConteiner>
-            <CommentList />
+            <CommentList writeId={item.id} />
           </WriteListSection>
         );
       })}

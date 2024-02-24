@@ -1,5 +1,10 @@
 import styled from 'styled-components';
 
+// Comunity.jsx style
+export const ComunityDiv = styled.div`
+  width: 100%;
+`;
+
 // InputForm.jsx style.
 export const ComunityForm = styled.form`
   display: flex;
@@ -83,4 +88,61 @@ export const WriteButtons = styled.div`
 export const CommentListSection = styled.section`
   border: 1px solid black;
   width: 40%;
+  height: 250px;
+  overflow: auto;
+`;
+
+export const CommentListContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  background-color: gray;
+  border-radius: 8px;
+  margin: 2%;
+  height: 100px;
+  padding: 2%;
+`;
+
+export const CommentListInfo = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+`;
+
+export const CommentListComment = styled.p`
+  background-color: whitesmoke;
+  margin: 1%;
+  padding: 1%;
+  border-radius: 8px;
+  height: 50%;
+`;
+
+export const CommentListButton = styled.button`
+  width: 50px;
+  margin-left: auto;
+  margin-top: 5px;
+  background-color: var(--subColor1);
+  border: none;
+  border-radius: 8px;
+`;
+
+// CommentInputForm.jsx style
+export const ComentInputFormBackGround = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgb(0, 0, 0, 0.8);
+`;
+
+export const CommentInputFormStyle = styled.form`
+  width: 300px;
+  height: 200px;
+  z-index: 999;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 8px;
+  background-color: whitesmoke;
+  padding: 1%;
 `;

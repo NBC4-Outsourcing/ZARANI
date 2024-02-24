@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-  width: 43%;
+  max-width: 100%;
+  min-width: 500px;
   height: 200px;
-  margin: 30px 0 30px 50px;
+  margin-top: 30px;
   display: flex;
   flex-direction: column;
   background-color: #f0f0f0;

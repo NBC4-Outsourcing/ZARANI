@@ -1,7 +1,13 @@
 import styled from 'styled-components';
 
+export const MainWrapper = styled.div`
+  display: flex;
+  gap: 20px;
+`;
 export const Wrapper = styled.div`
   height: 85px;
+  max-width: 100%;
+  min-width: 100%;
   border-bottom: 1px solid #eeeeee;
   display: flex;
   justify-content: space-between;

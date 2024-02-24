@@ -1,5 +1,5 @@
 import React from 'react';
-import * as NS from '../styles/mainPageNavStyle';
+import * as NS from '../styles/mainNavStyle';
 const MainPageNav = () => {
   return (
     <NS.Wrapper>
