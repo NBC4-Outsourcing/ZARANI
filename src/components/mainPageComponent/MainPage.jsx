@@ -1,7 +1,12 @@
 import React from 'react';
+import MainPageHeader from './MainPageHeader';
 
 const MainPage = () => {
-  return <div>메인페이지 입니다.</div>;
+  return (
+    <>
+      <MainPageHeader />
+    </>
+  );
 };
 
 export default MainPage;
