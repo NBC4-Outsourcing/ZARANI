@@ -15,7 +15,7 @@ const insertWriting = async (newWrite) => {
   }
 };
 
-const getWrites = async () => {
+const getWriteList = async () => {
   const { data, error } = await supabase.from('comunityWrite').select('*');
   if (!error) {
     return data;
@@ -25,4 +25,4 @@ const getWrites = async () => {
   }
 };
 
-export { insertWriting };
+export { insertWriting, getWriteList };
