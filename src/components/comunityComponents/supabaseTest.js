@@ -33,4 +33,15 @@ const deleteWrite = async (id) => {
     alert('성공적으로 삭제 되었습니다.');
   }
 };
-export { insertWriting, getWriteList, deleteWrite };
+
+const insertComment = async (newComment) => {
+  const { data, error } = await supabase.from('CommentWrite').insert([newComment]).select();
+  if (!error) {
+    alert('댓글을 저장하는데 성공했습니다.');
+    return data;
+  } else {
+    console.error(error);
+    alert('댓글을 저장하지 못했습니다.');
+  }
+};
+export { insertWriting, getWriteList, deleteWrite, insertComment };

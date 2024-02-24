@@ -89,3 +89,26 @@ export const CommentListSection = styled.section`
   border: 1px solid black;
   width: 40%;
 `;
+
+// CommentInputForm.jsx style
+export const ComentInputFormBackGround = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgb(0, 0, 0, 0.8);
+`;
+
+export const CommentInputFormStyle = styled.form`
+  width: 300px;
+  height: 200px;
+  z-index: 999;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 8px;
+  background-color: whitesmoke;
+  padding: 1%;
+`;
