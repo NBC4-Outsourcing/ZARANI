@@ -44,4 +44,14 @@ const insertComment = async (newComment) => {
     alert('댓글을 저장하지 못했습니다.');
   }
 };
-export { insertWriting, getWriteList, deleteWrite, insertComment };
+
+const getCommentList = async () => {
+  const { data, error } = await supabase.from('commentWrite').select('*');
+  if (!error) {
+    return data;
+  } else {
+    console.error(error);
+    alert('데이터를 가져오지 못 했습니다.');
+  }
+};
+export { insertWriting, getWriteList, deleteWrite, insertComment, getCommentList };
