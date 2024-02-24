@@ -25,4 +25,12 @@ const getWriteList = async () => {
   }
 };
 
-export { insertWriting, getWriteList };
+const deleteWrite = async (id) => {
+  const { error } = await supabase.from('comunityWrite').delete().eq('id', id);
+  if (error) {
+    alert('삭제하지 못 했습니다.');
+  } else {
+    alert('성공적으로 삭제 되었습니다.');
+  }
+};
+export { insertWriting, getWriteList, deleteWrite };
