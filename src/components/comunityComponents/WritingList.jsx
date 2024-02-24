@@ -1,7 +1,17 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import { getWriteList } from './supabaseTest';
-import { WriteDiv } from 'components/styles/ComunityStyle';
+import {
+  WriteButtons,
+  WriteConteiner,
+  WriteContent,
+  WriteDate,
+  WriteFoot,
+  WriteHead,
+  WriteImage,
+  WriteListSection,
+  WriteNickName
+} from 'components/styles/ComunityStyle';
 
 const WritingList = () => {
   const { isLoading, isError, data } = useQuery('comunityWriteList', getWriteList);
@@ -26,12 +36,25 @@ const WritingList = () => {
     <>
       {data.map((item) => {
         return (
-          <WriteDiv key={item.id}>
-            <img src={item.avatar} />
-            <p>{item.nickname}</p>
-            <p>{item.content.writeContent}</p>
-            <p>{getFormattedDate(item.date)}</p>
-          </WriteDiv>
+          <WriteListSection key={item.id}>
+            <WriteConteiner>
+              <WriteHead>
+                <WriteImage src={item.avatar} />
+                <WriteNickName>{item.nickname}</WriteNickName>
+              </WriteHead>
+              <WriteContent>{item.content.writeContent}</WriteContent>
+              <WriteFoot>
+                <WriteDate>{getFormattedDate(item.date)}</WriteDate>
+                <WriteButtons>
+                  <button>댓글</button>
+                  <button>삭제</button>
+                </WriteButtons>
+              </WriteFoot>
+            </WriteConteiner>
+            <div>
+              <p>댓글을 입력해주시기 바랍니다.</p>
+            </div>
+          </WriteListSection>
         );
       })}
     </>
