@@ -90,6 +90,14 @@ export const CommentListSection = styled.section`
   width: 40%;
 `;
 
+export const CommentListContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  margin: 2%;
+  height: 100px;
+`;
+
 // CommentInputForm.jsx style
 export const ComentInputFormBackGround = styled.div`
   position: fixed;
