@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSelectFile, setThumnailImg, setUserInfo } from 'shared/redux/modules/userSlice';
 import * as MP from 'components/styles/MyPageStyle';
@@ -6,6 +6,7 @@ import * as MP from 'components/styles/MyPageStyle';
 const MyPage = () => {
   const dispatch = useDispatch();
   const { userId, avatar } = useSelector((store) => store.user.userInfo);
+  const [isEdit, setIsEdit] = useState(false);
   const { selectImage, thumnailImage } = useSelector((store) => store.user);
   console.log(selectImage);
 
@@ -33,16 +34,23 @@ const MyPage = () => {
           <MP.ImgFileInput type="file" accept="image/*" id="imgfileChoice" onChange={onChangeImage} />
         </MP.ImgWrapDiv>
         <div>
-          <p>id : qwer1234</p>
-          <p>닉네임 : 보라돌이 </p>
-          <label htmlFor="nickname"> 닉네임</label>
-          <input
-            type="text"
-            id="nickname"
-            minLength={6}
-            maxLength={10}
-            placeholder="닉네임을 적어주세요. (6자~10자 이내)"
-          />
+          {!isEdit ? (
+            <div>
+              <p>id : qwer1234</p>
+              <p>닉네임 : 보라돌이 </p>
+            </div>
+          ) : (
+            <div>
+              <label htmlFor="nickname"> 닉네임</label>
+              <input
+                type="text"
+                id="nickname"
+                minLength={6}
+                maxLength={10}
+                placeholder="닉네임을 적어주세요. (6자~10자 이내)"
+              />
+            </div>
+          )}
         </div>
       </MP.MyPageContentsForm>
     </section>
