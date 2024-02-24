@@ -1,10 +1,11 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSelectFile, setThumnailImg, setUserInfo } from 'shared/redux/modules/userSlice';
+import * as MP from 'components/styles/MyPageStyle';
 
 const MyPage = () => {
   const dispatch = useDispatch();
-  const { userId, avata } = useSelector((store) => store.user.userInfo);
+  const { userId, avatar } = useSelector((store) => store.user.userInfo);
   const { selectImage, thumnailImage } = useSelector((store) => store.user);
   console.log(selectImage);
 
@@ -22,7 +23,7 @@ const MyPage = () => {
   return (
     <section>
       <form>
-        <img src={thumnailImage} alt="기본이미지" />
+        <MP.ThumnailImg src={thumnailImage} alt="기본이미지" />
         <label htmlFor="imgfileChoice">이미지 등록</label>
         <input type="file" accept="image/*" id="imgfileChoice" onChange={onChangeImage} />
         <label htmlFor="nickname"> 닉네임</label>
