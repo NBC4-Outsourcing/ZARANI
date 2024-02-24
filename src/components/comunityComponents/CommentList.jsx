@@ -7,13 +7,14 @@ import {
 } from 'components/styles/ComunityStyle';
 import React from 'react';
 import { useQuery } from 'react-query';
-import { getCommentList } from './supabaseTest';
+import { deleteComment, getCommentList } from './supabaseTest';
 import { getFormattedDate } from './formattedDate';
 
 const CommentList = ({ writeId }) => {
   const { isLoading, isError, data } = useQuery('commentWriteList', getCommentList);
 
   const filterComment = data?.filter((item) => item.writeId === writeId);
+
   if (isLoading) {
     return <div>로딩 중입니다.</div>;
   }
@@ -30,7 +31,7 @@ const CommentList = ({ writeId }) => {
               <p>{getFormattedDate(item.date)}</p>
             </CommentListInfo>
             <CommentListComment>{item.comment}</CommentListComment>
-            <CommentListButton>삭제</CommentListButton>
+            <CommentListButton onClick={() => deleteComment(item.id)}>삭제</CommentListButton>
           </CommentListContainer>
         );
       })}

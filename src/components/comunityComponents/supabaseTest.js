@@ -54,4 +54,13 @@ const getCommentList = async () => {
     alert('데이터를 가져오지 못 했습니다.');
   }
 };
-export { insertWriting, getWriteList, deleteWrite, insertComment, getCommentList };
+
+const deleteComment = async (id) => {
+  const { error } = await supabase.from('commentWrite').delete().eq('id', id);
+  if (error) {
+    alert('삭제하지 못 했습니다.');
+  } else {
+    alert('성공적으로 삭제 되었습니다.');
+  }
+};
+export { insertWriting, getWriteList, deleteWrite, insertComment, getCommentList, deleteComment };
