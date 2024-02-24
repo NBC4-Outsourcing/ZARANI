@@ -23,11 +23,15 @@ const MyPage = () => {
   return (
     <section>
       <form>
-        <MP.ThumnailImg src={thumnailImage} alt="기본이미지" />
-        <label htmlFor="imgfileChoice">이미지 등록</label>
-        <input type="file" accept="image/*" id="imgfileChoice" onChange={onChangeImage} />
-        <label htmlFor="nickname"> 닉네임</label>
-        <input type="text" id="nickname" />
+        <div>
+          <MP.ThumnailImg src={thumnailImage} alt="기본이미지" />
+          <label htmlFor="imgfileChoice">이미지 등록</label>
+          <input type="file" accept="image/*" id="imgfileChoice" onChange={onChangeImage} />
+        </div>
+        <div>
+          <label htmlFor="nickname"> 닉네임</label>
+          <input type="text" id="nickname" />
+        </div>
       </form>
     </section>
   );
