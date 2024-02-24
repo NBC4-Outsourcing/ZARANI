@@ -4,9 +4,14 @@ const MainPageNav = () => {
   return (
     <NS.Wrapper>
       <NS.ListSection>
-        <img />
-        <img />
-        <img />
+        <NS.ImgList />
+        <NS.ImgList />
+        <NS.ImgList />
+      </NS.ListSection>
+      <NS.ListSection>
+        <NS.ImgList />
+        <NS.ImgList />
+        <NS.ImgList />
       </NS.ListSection>
     </NS.Wrapper>
   );
