@@ -4,12 +4,11 @@ import { supabase } from './supabaseTest';
 
 const InputForm = () => {
   // 커뮤니티 글 input value,onchange
-  const [content, setContent, onChangeContentHandler, reset] = useInput({
+  const [content, , onChangeContentHandler, reset] = useInput({
     writeContent: ''
   });
 
   const { writeContent } = content;
-  console.log(writeContent);
 
   // 커뮤니티 글 등록 함수
   const onSubmitHandler = async (e) => {
@@ -29,6 +28,7 @@ const InputForm = () => {
     } else {
       alert('글이 정상적으로 저장 되었습니다.');
     }
+    reset();
   };
 
   return (
