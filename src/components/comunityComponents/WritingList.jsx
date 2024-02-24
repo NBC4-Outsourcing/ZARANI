@@ -52,9 +52,7 @@ const WritingList = () => {
                 </WriteButtons>
               </WriteFoot>
             </WriteConteiner>
-            <div>
-              <CommentList />
-            </div>
+            <CommentList />
           </WriteListSection>
         );
       })}

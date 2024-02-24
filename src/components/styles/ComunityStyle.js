@@ -78,3 +78,9 @@ export const WriteButtons = styled.div`
   display: flex;
   justify-content: space-between;
 `;
+
+// CommentList.jsx style
+export const CommentListSection = styled.section`
+  border: 1px solid black;
+  width: 40%;
+`;

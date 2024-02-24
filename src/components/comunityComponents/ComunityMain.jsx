@@ -3,9 +3,9 @@ import WritingList from './WritingList';
 
 const ComunityMain = () => {
   return (
-    <div>
+    <main>
       <WritingList />
-    </div>
+    </main>
   );
 };
 
