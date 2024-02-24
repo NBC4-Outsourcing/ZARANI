@@ -1,6 +1,6 @@
 import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = 'https://qyahoxqikvxujxdzlhsn.supabase.co';
+const supabaseUrl = 'https://rtjzvtuqyafegkvoirwc.supabase.co';
 const supabaseKey = process.env.REACT_APP_SUPABASE_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
@@ -35,7 +35,7 @@ const deleteWrite = async (id) => {
 };
 
 const insertComment = async (newComment) => {
-  const { data, error } = await supabase.from('CommentWrite').insert([newComment]).select();
+  const { data, error } = await supabase.from('commentWrite').insert([newComment]).select();
   if (!error) {
     alert('댓글을 저장하는데 성공했습니다.');
     return data;
