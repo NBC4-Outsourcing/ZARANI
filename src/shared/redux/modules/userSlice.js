@@ -1,6 +1,6 @@
 //imageSlice.js
 import { createSlice } from '@reduxjs/toolkit';
-import defaultImg from 'asset/defaultImage.png';
+import defaultImg from 'assets/defaultImage.png';
 
 const initialState = {
   userInfo: {

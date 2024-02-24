@@ -1,3 +1,4 @@
+import Comunity from 'pages/Comunity';
 import Home from 'pages/Home';
 import MyPage from 'pages/MyPage';
 import React from 'react';
@@ -8,6 +9,7 @@ const Router = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/comunity" element={<Comunity />} />
         <Route path="mypage" element={<MyPage />} />
       </Routes>
     </BrowserRouter>
