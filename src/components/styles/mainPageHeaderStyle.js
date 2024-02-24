@@ -27,6 +27,20 @@ export const StBtn = styled.button`
     transform: scale(1.05);
   }
 `;
+export const LogoutBtn = styled.button`
+  width: 100px;
+  height: 45px;
+  color: black;
+  background-color: #fab891;
+  border: 0px;
+  border-radius: 7px;
+  margin-right: 25px;
+  cursor: pointer;
+  &:hover {
+    transition: all 0.2s;
+    transform: scale(1.05);
+  }
+`;
 
 export const LoginStyle = styled.div`
   display: flex;

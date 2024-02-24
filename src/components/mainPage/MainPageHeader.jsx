@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import * as HS from '../mainPageComponent/mainPageHeaderStyle';
+import * as HS from '../styles/mainPageHeaderStyle';
 import img from '../../assets/logo.png';
 import { useNavigate } from 'react-router-dom';
 
@@ -19,7 +19,7 @@ const MainPageHeader = () => {
         <HS.LoginStyle>
           <HS.StBtn onClick={handComunityPage}> 커뮤니티</HS.StBtn>
           <HS.AvatarStyle />
-          <HS.StBtn>로그아웃</HS.StBtn>
+          <HS.LogoutBtn>로그아웃</HS.LogoutBtn>
         </HS.LoginStyle>
       ) : (
         <HS.StBtn onClick={handLoginPage}>로그인</HS.StBtn>
