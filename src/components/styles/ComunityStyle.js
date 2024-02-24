@@ -15,3 +15,5 @@ export const ComunityInput = styled.input`
   width: 40%;
   height: 70%;
 `;
+
+export const WriteDiv = styled.div``;
