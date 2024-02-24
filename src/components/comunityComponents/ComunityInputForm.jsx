@@ -2,7 +2,7 @@ import { ComunityForm, ComunityInput } from 'components/styles/ComunityStyle';
 import useInput from 'hooks/useInput';
 import { insertWriting } from './supabaseTest';
 
-const InputForm = () => {
+const ComunityInputForm = () => {
   // 커뮤니티 글 input value,onchange
   const [content, , onChangeContentHandler, reset] = useInput({
     writeContent: ''
@@ -25,18 +25,20 @@ const InputForm = () => {
   };
 
   return (
-    <ComunityForm onSubmit={onSubmitHandler}>
-      <label>보라돌이</label>
-      <ComunityInput
-        maxLength={'80'}
-        placeholder="최대 80자까지만 입력할 수 있습니다."
-        name="writeContent"
-        value={writeContent}
-        onChange={onChangeContentHandler}
-      />
-      <button type="submit">등록</button>
-    </ComunityForm>
+    <div>
+      <ComunityForm onSubmit={onSubmitHandler}>
+        <label>보라돌이</label>
+        <ComunityInput
+          maxLength={'80'}
+          placeholder="최대 80자까지만 입력할 수 있습니다."
+          name="writeContent"
+          value={writeContent}
+          onChange={onChangeContentHandler}
+        />
+        <button type="submit">등록</button>
+      </ComunityForm>
+    </div>
   );
 };
 
-export default InputForm;
+export default ComunityInputForm;

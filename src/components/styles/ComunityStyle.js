@@ -1,5 +1,10 @@
 import styled from 'styled-components';
 
+// Comunity.jsx style
+export const ComunityDiv = styled.div`
+  width: 100%;
+`;
+
 // InputForm.jsx style.
 export const ComunityForm = styled.form`
   display: flex;
