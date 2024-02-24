@@ -1,22 +1,37 @@
 import styled from 'styled-components';
 
 export const MyPageContentsForm = styled.form`
-  background-color: black;
-  width: 500px;
-  height: 500px;
-
   display: flex;
   flex-direction: row;
 
   padding: 38px;
 `;
 
-export const ThumnailImg = styled.img`
-  min-width: 50px;
+export const ImgWrapDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const ThumnailImg = styled.div`
+  background-color: black;
+  /* display: flex;
+  flex-direction: column;
+  align-items: center; */
+
+  min-width: 80px;
   max-width: 240px;
-  width: 100%;
-  min-height: 50px;
+  min-height: 80px;
   max-height: 240px;
 
-  object-fit: cover;
+  border-radius: 20px;
+
+  > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+`;
+
+export const ImgFileInput = styled.input`
+  display: none;
 `;
