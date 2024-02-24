@@ -22,18 +22,18 @@ const imageSlice = createSlice({
       const newData = action.payload;
       state.userInfo = newData;
     },
-    setSelectFile: (state, action) => {
+    settingSelectFile: (state, action) => {
       state.selectImage = action.payload;
     },
     setThumnailImg: (state, action) => {
       state.thumnailImage = action.payload;
-    },
-    setUserInfo: (state, aciton) => {
-      state.userInfo = { ...state.userInfo, ...aciton.payload };
     }
+    // setUserInfo: (state, aciton) => {
+    //   state.userInfo = { ...state.userInfo, ...aciton.payload };
+    // }
   }
   // ,extraReducers: {}
 });
 
-export const { setUserInfo, setSelectFile, setThumnailImg } = imageSlice.actions;
+export const { setUserInfo, settingSelectFile, setThumnailImg } = imageSlice.actions;
 export default imageSlice.reducer;
