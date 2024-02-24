@@ -4,7 +4,12 @@ import { supabase } from './supabaseTest';
 
 const InputForm = () => {
   // 커뮤니티 글 input value,onchange
-  const [content, onChangeContentHandler] = useInput();
+  const [content, setContent, onChangeContentHandler, reset] = useInput({
+    writeContent: ''
+  });
+
+  const { writeContent } = content;
+  console.log(writeContent);
 
   // 커뮤니티 글 등록 함수
   const onSubmitHandler = async (e) => {
@@ -32,7 +37,8 @@ const InputForm = () => {
       <ComunityInput
         maxLength={'80'}
         placeholder="최대 80자까지만 입력할 수 있습니다."
-        value={content}
+        name="writeContent"
+        value={writeContent}
         onChange={onChangeContentHandler}
       />
       <button type="submit">등록</button>
