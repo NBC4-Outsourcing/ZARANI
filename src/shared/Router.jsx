@@ -1,12 +1,14 @@
-import Home from "pages/Home";
-import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from 'pages/Home';
+import MyPage from 'pages/MyPage';
+import React from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="mypage" element={<MyPage />} />
       </Routes>
     </BrowserRouter>
   );
