@@ -33,8 +33,16 @@ const MyPage = () => {
           <MP.ImgFileInput type="file" accept="image/*" id="imgfileChoice" onChange={onChangeImage} />
         </MP.ImgWrapDiv>
         <div>
+          <p>id : qwer1234</p>
+          <p>닉네임 : 보라돌이 </p>
           <label htmlFor="nickname"> 닉네임</label>
-          <input type="text" id="nickname" />
+          <input
+            type="text"
+            id="nickname"
+            minLength={6}
+            maxLength={10}
+            placeholder="닉네임을 적어주세요. (6자~10자 이내)"
+          />
         </div>
       </MP.MyPageContentsForm>
     </section>

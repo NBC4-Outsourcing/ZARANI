@@ -13,7 +13,6 @@ export const ImgWrapDiv = styled.div`
 `;
 
 export const ThumnailImg = styled.div`
-  background-color: black;
   /* display: flex;
   flex-direction: column;
   align-items: center; */
@@ -23,11 +22,11 @@ export const ThumnailImg = styled.div`
   min-height: 80px;
   max-height: 240px;
 
-  border-radius: 20px;
-
   > img {
     width: 100%;
     height: 100%;
+
+    border-radius: 20px;
     object-fit: cover;
   }
 `;
