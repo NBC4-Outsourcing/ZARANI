@@ -14,20 +14,12 @@ import {
 } from 'components/styles/ComunityStyle';
 import CommentList from './CommentList';
 import CommentInputForm from './CommentInputForm';
+import { getFormattedDate } from './formattedDate';
 
 const WritingList = () => {
   const { isLoading, isError, data } = useQuery('comunityWriteList', getWriteList);
   const [modalOpen, setModalOpen] = useState(false);
   const [writeId, setWriteId] = useState(null);
-
-  const getFormattedDate = (date) =>
-    new Date(date).toLocaleDateString('ko', {
-      year: '2-digit',
-      month: '2-digit',
-      day: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit'
-    });
 
   const onClicDeleteHandler = (id) => {
     deleteWrite(id);
@@ -69,7 +61,7 @@ const WritingList = () => {
                 </WriteButtons>
               </WriteFoot>
             </WriteConteiner>
-            <CommentList />
+            <CommentList writeId={item.id} />
           </WriteListSection>
         );
       })}
