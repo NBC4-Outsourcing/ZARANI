@@ -1,29 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useQuery } from 'react-query';
 import { setUserInfo } from 'shared/redux/modules/userSlice';
-import MyPageReviews from 'components/myPageComponent/MyPageReviews';
 import { readUserInfo } from 'components/myPageComponent/myPageSupabase';
+import MyPageReviews from 'components/myPageComponent/MyPageReviews';
 import MyPageContents from 'components/myPageComponent/MyPageContents';
 import MyPageHeader from 'components/myPageComponent/MyPageHeader';
 
 const MyPage = () => {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const userInfo = async () => {
-      const userDb = await readUserInfo();
-      userDb.forEach((user) => {
-        dispatch(setUserInfo(user));
-      });
-    };
-    userInfo();
-  }, [dispatch]);
+  const { isLoading, isError, data } = useQuery('user', readUserInfo);
+  dispatch(setUserInfo(data));
+
+  if (isLoading) return <div>로딩중입니다...</div>;
+  if (isError) return <div>오류로 인해 정보를 받아오지 못 하고 있습니다.</div>;
 
   return (
     <section>
       <MyPageHeader />
       <MyPageContents />
-
       <MyPageReviews />
     </section>
   );
