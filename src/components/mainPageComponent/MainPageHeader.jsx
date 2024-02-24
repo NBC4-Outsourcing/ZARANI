@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import * as HS from '../mainPageComponent/mainPageHeaderStyle';
-import img from '../styles/image/logo.png';
+import img from '../../assets/logo.png';
 import { useNavigate } from 'react-router-dom';
 
 const MainPageHeader = () => {
