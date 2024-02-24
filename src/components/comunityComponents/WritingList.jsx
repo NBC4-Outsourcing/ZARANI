@@ -12,6 +12,7 @@ import {
   WriteListSection,
   WriteNickName
 } from 'components/styles/ComunityStyle';
+import CommentList from './CommentList';
 
 const WritingList = () => {
   const { isLoading, isError, data } = useQuery('comunityWriteList', getWriteList);
@@ -52,7 +53,7 @@ const WritingList = () => {
               </WriteFoot>
             </WriteConteiner>
             <div>
-              <p>댓글을 입력해주시기 바랍니다.</p>
+              <CommentList />
             </div>
           </WriteListSection>
         );
