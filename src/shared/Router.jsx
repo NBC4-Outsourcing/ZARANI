@@ -1,5 +1,5 @@
+import MainPage from 'components/mainPageComponent/MainPage';
 import Comunity from 'pages/Comunity';
-import Home from 'pages/Home';
 import MyPage from 'pages/MyPage';
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
@@ -8,7 +8,7 @@ const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<MainPage />} />
         <Route path="/comunity" element={<Comunity />} />
         <Route path="mypage" element={<MyPage />} />
       </Routes>
