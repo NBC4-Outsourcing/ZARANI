@@ -1,8 +1,8 @@
 import React from 'react';
-import * as MS from '../styles/mainMapStyle';
+import * as S from '../styles/mainPageStyle';
 
 const MainPageMap = () => {
-  return <MS.Wrapper>MAP</MS.Wrapper>;
+  return <S.MapWrapper>MAP</S.MapWrapper>;
 };
 
 export default MainPageMap;

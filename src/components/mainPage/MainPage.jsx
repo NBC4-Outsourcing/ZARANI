@@ -1,5 +1,5 @@
 import React from 'react';
-import * as MS from '../styles/mainHeaderStyle';
+import * as S from '../styles/mainPageStyle';
 import MainPageHeader from './MainPageHeader';
 import MainPageComunity from './MainPageComunity';
 import MainPageNav from './MainPageNav';
@@ -9,13 +9,13 @@ const MainPage = () => {
   return (
     <>
       <MainPageHeader />
-      <MS.MainWrapper>
+      <S.MainWrapper>
         <div>
           <MainPageComunity />
           <MainPageNav />
         </div>
         <MainPageMap />
-      </MS.MainWrapper>
+      </S.MainWrapper>
     </>
   );
 };
