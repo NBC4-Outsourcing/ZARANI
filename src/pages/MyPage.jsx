@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSelectFile, setThumnailImg, setUserInfo } from 'shared/redux/modules/userSlice';
 import * as MP from 'components/styles/MyPageStyle';
+import MyPageReviews from 'components/myPageComponent/MyPageReviews';
 
 const MyPage = () => {
   const dispatch = useDispatch();
@@ -53,6 +54,7 @@ const MyPage = () => {
           )}
         </div>
       </MP.MyPageContentsForm>
+      <MyPageReviews />
     </section>
   );
 };
