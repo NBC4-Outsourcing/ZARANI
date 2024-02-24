@@ -6,7 +6,8 @@ const initialState = {
   userInfo: {
     userId: '',
     nickname: '',
-    avatar: ''
+    avatar: '',
+    uid: ''
   },
   selectImage: defaultImg,
   thumnailImage: defaultImg
