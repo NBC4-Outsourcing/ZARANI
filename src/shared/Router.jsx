@@ -1,3 +1,4 @@
+import Layout from 'components/layoutComponent/Layout';
 import MainPage from 'components/mainPageComponent/MainPage';
 import Comunity from 'pages/Comunity';
 import MyPage from 'pages/MyPage';
@@ -8,9 +9,11 @@ const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<MainPage />} />
-        <Route path="/comunity" element={<Comunity />} />
-        <Route path="/mypage" element={<MyPage />} />
+        <Route element={<Layout />}>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/comunity" element={<Comunity />} />
+          <Route path="/mypage" element={<MyPage />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
