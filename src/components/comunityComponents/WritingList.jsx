@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery } from 'react-query';
-import { getWriteList } from './supabaseTest';
+import { deleteWrite, getWriteList } from './supabaseTest';
 import {
   WriteButtons,
   WriteConteiner,
@@ -26,6 +26,10 @@ const WritingList = () => {
       minute: '2-digit'
     });
 
+  const onClicDeleteHandler = (id) => {
+    deleteWrite(id);
+  };
+
   if (isLoading) {
     return <div>로딩 중입니다</div>;
   }
@@ -48,7 +52,7 @@ const WritingList = () => {
                 <WriteDate>{getFormattedDate(item.date)}</WriteDate>
                 <WriteButtons>
                   <button>댓글</button>
-                  <button>삭제</button>
+                  <button onClick={() => onClicDeleteHandler(item.id)}>삭제</button>
                 </WriteButtons>
               </WriteFoot>
             </WriteConteiner>
