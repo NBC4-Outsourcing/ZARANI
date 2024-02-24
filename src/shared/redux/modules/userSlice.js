@@ -4,7 +4,8 @@ import defaultImg from 'assets/defaultImage.png';
 
 const initialState = {
   userInfo: {
-    userId: '',
+    id: '',
+    email: '',
     nickname: '',
     avatar: '',
     uid: ''

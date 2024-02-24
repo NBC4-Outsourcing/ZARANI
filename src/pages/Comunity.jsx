@@ -1,15 +1,16 @@
 import ComunityMain from 'components/comunityComponents/ComunityMain';
-import InputForm from 'components/comunityComponents/InputForm';
+import ComunityInputForm from 'components/comunityComponents/ComunityInputForm';
 import Header from 'components/layout/Header';
 import React from 'react';
+import { ComunityDiv } from 'components/styles/ComunityStyle';
 
 const Comunity = () => {
   return (
-    <div>
+    <ComunityDiv>
       <Header />
-      <InputForm />
+      <ComunityInputForm />
       <ComunityMain />
-    </div>
+    </ComunityDiv>
   );
 };
 

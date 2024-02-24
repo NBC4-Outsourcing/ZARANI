@@ -6,8 +6,8 @@ import * as MP from 'components/styles/MyPageStyle';
 const MyPageContents = () => {
   const dispatch = useDispatch();
 
-  const { userId, avatar } = useSelector((store) => store.user.userInfo);
-  console.log(userId, avatar);
+  const { id, email, nickname, avatar, uid } = useSelector((store) => store.user.userInfo);
+  console.log(id, email, nickname, avatar, uid);
   const [isEdit, setIsEdit] = useState(false);
   const { selectImage, thumnailImage } = useSelector((store) => store.user);
   console.log(selectImage);
@@ -37,8 +37,8 @@ const MyPageContents = () => {
       <div>
         {!isEdit ? (
           <div>
-            <p>id : qwer1234</p>
-            <p>닉네임 : 보라돌이 </p>
+            <p>id : {id}</p>
+            <p>닉네임 : {nickname} </p>
           </div>
         ) : (
           <div>

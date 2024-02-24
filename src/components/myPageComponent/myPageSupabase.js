@@ -1,9 +1,7 @@
-import { createClient } from '@supabase/supabase-js';
-const supabaseUrl = 'https://zcxvtpduxgfcqjbsfxgo.supabase.co';
-const supabaseKey = process.env.REACT_APP_SUPABASE_MY_PAGE_KEY;
-const supabase = createClient(supabaseUrl, supabaseKey);
+import { supabase } from 'api/supabase/supabase';
 
 export const readUserInfo = async () => {
-  let { data, error } = await supabase.from('myPage').select('*');
+  let { data, error } = await supabase.from('usersAccounts').select('*');
+  console.log(data);
   return data;
 };
