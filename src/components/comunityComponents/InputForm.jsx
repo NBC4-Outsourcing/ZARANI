@@ -17,9 +17,13 @@ const InputForm = () => {
       content
     };
 
-    const { data, error } = await supabase.from('comunityWrite').insert([newWrite]).select();
-    console.log(data);
-    console.error(error);
+    const { error } = await supabase.from('comunityWrite').insert([newWrite]).select();
+    if (error) {
+      alert('글을 서버에 저장하지 못 했습니다.');
+      console.error(error);
+    } else {
+      alert('글이 정상적으로 저장 되었습니다.');
+    }
   };
 
   return (
