@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+// InputForm.jsx style.
 export const ComunityForm = styled.form`
   display: flex;
   justify-content: space-evenly;
@@ -16,6 +17,7 @@ export const ComunityInput = styled.input`
   height: 70%;
 `;
 
+// WriteList.jsx style.
 export const WriteListSection = styled.section`
   display: flex;
   justify-content: space-evenly;
