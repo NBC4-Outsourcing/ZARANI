@@ -1,6 +1,6 @@
 // import { createClient } from '@supabase/supabase-js';
 
-// const supabaseUrl = 'https://qyahoxqikvxujxdzlhsn.supabase.co';
+// const supabaseUrl = 'https://rtjzvtuqyafegkvoirwc.supabase.co';
 // const supabaseKey = process.env.REACT_APP_SUPABASE_KEY;
 // const supabase = createClient(supabaseUrl, supabaseKey);
 
@@ -33,4 +33,34 @@
 //     alert('성공적으로 삭제 되었습니다.');
 //   }
 // };
-// export { insertWriting, getWriteList, deleteWrite };
+
+// const insertComment = async (newComment) => {
+//   const { data, error } = await supabase.from('commentWrite').insert([newComment]).select();
+//   if (!error) {
+//     alert('댓글을 저장하는데 성공했습니다.');
+//     return data;
+//   } else {
+//     console.error(error);
+//     alert('댓글을 저장하지 못했습니다.');
+//   }
+// };
+
+// const getCommentList = async () => {
+//   const { data, error } = await supabase.from('commentWrite').select('*');
+//   if (!error) {
+//     return data;
+//   } else {
+//     console.error(error);
+//     alert('데이터를 가져오지 못 했습니다.');
+//   }
+// };
+
+// const deleteComment = async (id) => {
+//   const { error } = await supabase.from('commentWrite').delete().eq('id', id);
+//   if (error) {
+//     alert('삭제하지 못 했습니다.');
+//   } else {
+//     alert('성공적으로 삭제 되었습니다.');
+//   }
+// };
+// export { insertWriting, getWriteList, deleteWrite, insertComment, getCommentList, deleteComment };

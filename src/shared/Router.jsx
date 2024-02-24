@@ -1,5 +1,5 @@
 import Layout from 'components/layoutComponent/Layout';
-import MainPage from 'components/mainPageComponent/MainPage';
+import MainPage from 'components/mainPage/MainPage';
 import ReviewForm from 'components/reviewComponents/ReviewForm';
 import Comunity from 'pages/Comunity';
 import MyPage from 'pages/MyPage';
