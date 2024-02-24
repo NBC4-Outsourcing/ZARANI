@@ -88,14 +88,40 @@ export const WriteButtons = styled.div`
 export const CommentListSection = styled.section`
   border: 1px solid black;
   width: 40%;
+  height: 250px;
+  overflow: auto;
 `;
 
 export const CommentListContainer = styled.div`
   display: flex;
   flex-direction: column;
-  border: 1px solid black;
+  background-color: gray;
+  border-radius: 8px;
   margin: 2%;
   height: 100px;
+  padding: 2%;
+`;
+
+export const CommentListInfo = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+`;
+
+export const CommentListComment = styled.p`
+  background-color: whitesmoke;
+  margin: 1%;
+  padding: 1%;
+  border-radius: 8px;
+  height: 50%;
+`;
+
+export const CommentListButton = styled.button`
+  width: 50px;
+  margin-left: auto;
+  margin-top: 5px;
+  background-color: var(--subColor1);
+  border: none;
+  border-radius: 8px;
 `;
 
 // CommentInputForm.jsx style

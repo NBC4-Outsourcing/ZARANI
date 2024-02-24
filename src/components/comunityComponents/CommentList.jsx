@@ -1,4 +1,10 @@
-import { CommentListContainer, CommentListSection } from 'components/styles/ComunityStyle';
+import {
+  CommentListButton,
+  CommentListComment,
+  CommentListContainer,
+  CommentListInfo,
+  CommentListSection
+} from 'components/styles/ComunityStyle';
 import React from 'react';
 import { useQuery } from 'react-query';
 import { getCommentList } from './supabaseTest';
@@ -11,16 +17,20 @@ const CommentList = ({ writeId }) => {
   if (isLoading) {
     return <div>로딩 중입니다.</div>;
   }
+  if (isError) {
+    alert('데이터를 가져오는 동안 에러가 발생했습니다.');
+  }
   return (
     <CommentListSection>
       {filterComment.map((item) => {
         return (
           <CommentListContainer key={item.id}>
-            <div>
+            <CommentListInfo>
               <p>{item.nickname}</p>
               <p>{getFormattedDate(item.date)}</p>
-            </div>
-            <p>{item.comment}</p>
+            </CommentListInfo>
+            <CommentListComment>{item.comment}</CommentListComment>
+            <CommentListButton>삭제</CommentListButton>
           </CommentListContainer>
         );
       })}
