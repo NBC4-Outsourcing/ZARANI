@@ -13,7 +13,7 @@ export const updateUserInfo = async (objectInfo, id) => {
   const { error } = await supabase.from('usersAccounts').update(objectInfo).eq('id', id);
   if (error) {
     console.log(error);
-    alert('정보가 변경되지 않았습니다.');
+    // alert('정보가 변경되지 않았습니다.');
   }
 };
 
@@ -23,7 +23,7 @@ export const uploadImage = async (filePath, image) => {
       cacheControl: '3600',
       upsert: true
     });
-
+    console.log(data);
     if (error) {
       console.error('파일 업로드 오류:', error.message);
       throw error;

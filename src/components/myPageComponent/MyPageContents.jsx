@@ -11,7 +11,7 @@ import defaultImg from 'assets/defaultImage.png';
 const MyPageContents = ({ data }) => {
   const dispatch = useDispatch();
   const { id, email, nickname, avatar, uid } = data;
-  console.log(nickname);
+  console.log(data);
   const [selectImage, setSelectImage, ,] = useInput(defaultImg);
   const [thumnailImage, setThumnailImage, ,] = useInput(avatar || defaultImg);
   const [isEdit, setIsEdit] = useState(false);
@@ -19,12 +19,16 @@ const MyPageContents = ({ data }) => {
     nickname
   });
   const editValueNickname = editValue.nickname;
+
   useEffect(() => {
-    if (data) {
-      updateUserInfo(data);
-      setThumnailImage(avatar);
-    }
-  }, [dispatch, data]);
+    const mutationData = async () => {
+      if (data) {
+        await updateUserInfo(data, id);
+        setThumnailImage(avatar);
+      }
+    };
+    mutationData();
+  }, [dispatch, data, avatar, id]);
   // 이미지, 닉네임, 내용 DB저장
 
   const [mutation] = useSetMutation(updateUserInfo, 'user');
@@ -34,26 +38,27 @@ const MyPageContents = ({ data }) => {
     const editSaveCheck = window.confirm('수정내용을 저장하시겠습니까?');
     if (editSaveCheck === false) {
       alert('수정을 취소하셨습니다.');
+      if (selectImage !== thumnailImage) setThumnailImage(avatar || defaultImg);
       setIsEdit(false);
       return;
     }
 
     if (!selectImage) {
       alert('이미지를 선택해주세요!');
+      return;
     }
     if (selectImage) {
       const filePath = `userImage/${uid}`;
       const data = await uploadImage(filePath, selectImage);
-      const imageUrl = supabase.storage.from('unAuthUserImage').getPublicUrl(data.key);
-      console.log(imageUrl);
+      const imageUrl = supabase.storage.from('unAuthUserImage').getPublicUrl(data.path);
       const ImgDbUrl = imageUrl.data.publicUrl;
       // ex ) https://rtjzvtuqyafegkvoirwc.supabase.co/storage/v…ge/userImage/1d25d250-5dea-47f5-a465-05f74a7bd79d'
       const newData = { id, email, nickname: editValueNickname, avatar: ImgDbUrl, uid };
       console.log(ImgDbUrl);
-
       await updateUserInfo(newData, id);
       mutation.mutate(newData);
       setSelectImage(ImgDbUrl);
+      // setThumnailImage(selectImage);
       alert('수정이 완료됐습니다.');
       setIsEdit(false);
     }
@@ -87,7 +92,6 @@ const MyPageContents = ({ data }) => {
     if (selectImage !== thumnailImage) setThumnailImage(avatar || defaultImg);
     // if (isEdit && selectImage !== thumnailImage) setThumnailImage(avatar);
   };
-  // const thumnail = avatar ? avatar : thumnailImage;
   return (
     <MP.MyPageContentsForm>
       <MP.ImgWrapDiv>
