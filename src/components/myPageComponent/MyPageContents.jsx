@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { settingSelectFile, setThumnailImg, setUserInfo } from 'shared/redux/modules/userSlice';
+import { settingSelectFile, setThumnailImg, setUserInfo, setSelectFile } from 'shared/redux/modules/userSlice';
 import * as MP from 'components/styles/MyPageStyle';
 import { supabase } from 'api/supabase/supabase';
 import useInput from 'hooks/useInput';
+import { updateUserInfo } from './myPageSupabase';
 
 const MyPageContents = () => {
   const dispatch = useDispatch();
@@ -13,40 +14,44 @@ const MyPageContents = () => {
   const [editValue, setEditValue, onChange, reset] = useInput({
     nickname
   });
+  console.log(avatar);
+  console.log(selectImage);
   const editValueNickname = editValue.nickname;
-  const currEmail = email ? email : null;
+  // const currEmail = email ? email : null;
+  const currEmail = email;
   // 이미지, 닉네임, 내용 DB저장
   const onSubmitHandler = async (e) => {
     e.preventDefault();
-    if (selectImage) {
-      try {
-        const { data, error } = await supabase.storage
-          .from('userImage')
-          .upload(`${currEmail}/${uid}`, selectImage, { cacheControl: '3600', upsert: false });
-        alert('수정이 완료됐습니다.!');
-        if (error) {
-          alert('파일이 업로드 되지 않았습니다.');
-          return;
-        }
-        try {
-          const res = await supabase.storage.from('userImage').getPublicUrl(data.path);
-          console.log(res);
-          dispatch(settingSelectFile(res.data.publicUrl));
-          // dispatch(setUserInfo(editValue));
-        } catch (error) {
-          console.log(error);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    }
+    const fileExt = selectImage.split('.').pop();
+    console.log(fileExt);
     const editSaveCheck = window.confirm('수정내용을 저장하시겠습니까?');
     if (editSaveCheck === false) {
       alert('수정을 취소하셨습니다.');
       setIsEdit(false);
       return;
     }
-    dispatch(setUserInfo(editValue));
+    if (!selectImage) {
+      alert('이미지를 선택해주세요!');
+    }
+    const filePath = `${uid}/${selectImage}`;
+    try {
+      const { data, error } = await supabase.storage.from('unAuthUserImage').upload(filePath, selectImage);
+      alert('수정이 완료됐습니다.!');
+      console.log(error);
+      if (error) {
+        alert('파일이 업로드 되지 않았어용.');
+        return;
+      }
+
+      const imageUrl = supabase.storage.from('userImage').getPublicUrl(data.path);
+      console.log(imageUrl.data.publicUrl);
+      // dispatch(settingSelectFile(res.data.publicUrl));
+    } catch (error) {
+      console.log(error);
+    }
+
+    dispatch(setUserInfo({ nickname: editValueNickname }));
+    updateUserInfo({ nickname: editValueNickname, avatar: selectImage }, id);
   };
 
   // 이미지 등록
@@ -58,9 +63,11 @@ const MyPageContents = () => {
     if (!e.target.files) return;
 
     const imgFile = e.target.files[0];
+
+    // console.log(fileExt);
     if (imgFile) {
-      let image = window.URL.createObjectURL(imgFile);
-      dispatch(settingSelectFile(image));
+      let image = URL.createObjectURL(imgFile);
+      dispatch(setSelectFile(image));
       dispatch(setThumnailImg(image));
     }
   };
@@ -69,6 +76,7 @@ const MyPageContents = () => {
     e.preventDefault();
     setIsEdit(true);
     setEditValue({ nickname });
+    dispatch(setThumnailImg(selectImage));
   };
   // 이미지 편집 취소
   const onEditCancelHandler = (e) => {
@@ -80,7 +88,7 @@ const MyPageContents = () => {
     <MP.MyPageContentsForm>
       <MP.ImgWrapDiv>
         <MP.ThumnailImg>
-          <img src={avatar ? avatar : thumnailImage} alt="기본이미지" />
+          <img src={thumnailImage} alt="기본이미지" />
         </MP.ThumnailImg>
         <MP.ImgFileInput type="file" accept="image/*" id="imgfileChoice" onChange={onChangeAddImage} />
         {!isEdit ? (

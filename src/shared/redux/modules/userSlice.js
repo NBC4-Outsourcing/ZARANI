@@ -22,7 +22,7 @@ const imageSlice = createSlice({
       const newData = action.payload;
       state.userInfo = newData;
     },
-    settingSelectFile: (state, action) => {
+    setSelectFile: (state, action) => {
       state.selectImage = action.payload;
     },
     setThumnailImg: (state, action) => {
@@ -35,5 +35,5 @@ const imageSlice = createSlice({
   // ,extraReducers: {}
 });
 
-export const { setUserInfo, settingSelectFile, setThumnailImg } = imageSlice.actions;
+export const { setUserInfo, setSelectFile, setThumnailImg } = imageSlice.actions;
 export default imageSlice.reducer;
