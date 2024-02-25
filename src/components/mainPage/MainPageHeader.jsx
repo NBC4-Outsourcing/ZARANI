@@ -17,6 +17,9 @@ const MainPageHeader = () => {
   const handMypage = () => {
     navigate('/mypage');
   };
+  const handLogOut = () => {
+    //로그아웃 로직
+  };
   return (
     <S.HeaderWrapper>
       <S.LogoImage src={img} />
@@ -24,7 +27,7 @@ const MainPageHeader = () => {
         <S.LoginStyle>
           <S.StBtn onClick={handComunityPage}> 커뮤니티</S.StBtn>
           <S.AvatarStyle src={selectImage} onClick={handMypage} />
-          <S.LogoutBtn>로그아웃</S.LogoutBtn>
+          <S.LogoutBtn onClick={handLogOut}>로그아웃</S.LogoutBtn>
         </S.LoginStyle>
       ) : (
         <S.StBtn onClick={handLoginPage}>로그인</S.StBtn>
