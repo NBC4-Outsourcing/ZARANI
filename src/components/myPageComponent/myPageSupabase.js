@@ -10,21 +10,28 @@ export const readUserInfo = async () => {
 };
 
 export const updateUserInfo = async (objectInfo, id) => {
-  const { error } = await supabase.from('countries').update(objectInfo).eq('id', id);
+  console.log(objectInfo);
+  const { error } = await supabase.from('usersAccounts').update(objectInfo).eq('id', id);
   if (error) {
     alert('정보가 변경되지 않았습니다.');
+  } else {
+    alert('수정 됐습니다.');
   }
 };
 
-export const updateImage = async (filePath, image) => {
-  const { data, error } = await supabase.storage.from('unAuthUserImage').upload(filePath, image, {
-    cacheControl: '3600',
-    upsert: false
-  });
-  alert('수정이 완료됐습니다.!');
-  console.log(error);
-  if (error) {
-    alert('파일이 업로드 되지 않았어용.');
-    return;
+export const uploadImage = async (filePath, image) => {
+  try {
+    const { data, error } = await supabase.storage.from('unAuthUserImage').upload(filePath, image, {
+      cacheControl: '3600',
+      upsert: true
+    });
+
+    if (error) {
+      console.error('파일 업로드 오류:', error.message);
+      throw error;
+    }
+    return data;
+  } catch (error) {
+    console.log(error);
   }
 };
