@@ -21,7 +21,7 @@ const MyPage = () => {
   return (
     <section>
       <MyPageHeader />
-      <MyPageContents />
+      <MyPageContents data={data} />
       <MyPageReviews />
     </section>
   );

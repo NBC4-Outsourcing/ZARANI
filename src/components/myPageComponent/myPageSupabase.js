@@ -12,9 +12,8 @@ export const readUserInfo = async () => {
 export const updateUserInfo = async (objectInfo, id) => {
   const { error } = await supabase.from('usersAccounts').update(objectInfo).eq('id', id);
   if (error) {
+    console.log(error);
     alert('정보가 변경되지 않았습니다.');
-  } else {
-    alert('수정 됐습니다.');
   }
 };
 

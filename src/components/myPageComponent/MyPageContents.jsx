@@ -1,31 +1,33 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setThumnailImg, setUserInfo, setSelectFile } from 'shared/redux/modules/userSlice';
 import { readUserInfo, updateUserInfo, uploadImage } from './myPageSupabase';
 import { supabase } from 'api/supabase/supabase';
 import useInput from 'hooks/useInput';
 import * as MP from 'components/styles/MyPageStyle';
-import { useQuery } from 'react-query';
+// import { useQuery } from 'react-query';
+import useSetMutation from 'hooks/useSetMutations';
+import defaultImg from 'assets/defaultImage.png';
 
-const MyPageContents = () => {
+const MyPageContents = ({ data }) => {
   const dispatch = useDispatch();
-  const { id, email, nickname, avatar, uid } = useSelector((store) => store.user.userInfo);
-  const { selectImage, thumnailImage } = useSelector((store) => store.user);
+  const { id, email, nickname, avatar, uid } = data;
+  console.log(nickname);
+  const [selectImage, setSelectImage, ,] = useInput(defaultImg);
+  const [thumnailImage, setThumnailImage, ,] = useInput(avatar || defaultImg);
   const [isEdit, setIsEdit] = useState(false);
-  const [editValue, setEditValue, onChange, reset] = useInput({
+  const [editValue, setEditValue, onChange] = useInput({
     nickname
   });
   const editValueNickname = editValue.nickname;
-
-  const { isLoading, isError, data } = useQuery('user', readUserInfo);
-  console.log(data);
   useEffect(() => {
     if (data) {
-      dispatch(setUserInfo(data));
-      dispatch(setThumnailImg(data.avatar));
+      updateUserInfo(data);
+      setThumnailImage(data.avatar);
     }
   }, [dispatch, data]);
   // 이미지, 닉네임, 내용 DB저장
+
+  const [mutation] = useSetMutation(updateUserInfo, 'user');
   const onSubmitHandler = async (e) => {
     e.preventDefault();
 
@@ -42,16 +44,19 @@ const MyPageContents = () => {
     if (selectImage) {
       const filePath = `userImage/${uid}`;
       const data = await uploadImage(filePath, selectImage);
-      const imageUrl = supabase.storage.from('unAuthUserImage').getPublicUrl(data.path);
+      const imageUrl = supabase.storage.from('unAuthUserImage').getPublicUrl(data.key);
+      console.log(imageUrl);
       const ImgDbUrl = imageUrl.data.publicUrl;
       // ex ) https://rtjzvtuqyafegkvoirwc.supabase.co/storage/v…ge/userImage/1d25d250-5dea-47f5-a465-05f74a7bd79d'
       const newData = { id, email, nickname: editValueNickname, avatar: ImgDbUrl, uid };
       console.log(ImgDbUrl);
+
       await updateUserInfo(newData, id);
-      dispatch(setUserInfo(newData));
-      dispatch(setSelectFile(ImgDbUrl));
+      mutation.mutate(newData);
+      setSelectImage(ImgDbUrl);
+      alert('수정 됐습니다.');
+      setIsEdit(false);
     }
-    setIsEdit(false);
   };
 
   // 이미지 등록
@@ -63,8 +68,8 @@ const MyPageContents = () => {
     if (!imgFile) return;
     if (imgFile) {
       let image = URL.createObjectURL(imgFile);
-      dispatch(setSelectFile(imgFile));
-      dispatch(setThumnailImg(image));
+      setSelectImage(imgFile);
+      setThumnailImage(image);
     }
   };
 
@@ -78,9 +83,11 @@ const MyPageContents = () => {
   const onEditCancelHandler = (e) => {
     e.preventDefault();
     setIsEdit(false);
-    if (isEdit && selectImage !== thumnailImage) dispatch(setThumnailImg(avatar));
+    //  setThumnailImage(avatar);
+    if (selectImage !== thumnailImage) setThumnailImage(avatar || defaultImg);
+    // if (isEdit && selectImage !== thumnailImage) setThumnailImage(avatar);
   };
-  const thumnail = avatar ? avatar : thumnailImage;
+  // const thumnail = avatar ? avatar : thumnailImage;
   return (
     <MP.MyPageContentsForm>
       <MP.ImgWrapDiv>
