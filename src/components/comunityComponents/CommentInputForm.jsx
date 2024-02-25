@@ -2,11 +2,13 @@ import { ComentInputFormBackGround, CommentInputFormStyle } from 'components/sty
 import React from 'react';
 import { insertComment } from './ComunitySupabase';
 import useInput from 'hooks/useInput';
+import useSetMutation from 'hooks/useSetMutations';
 
 const CommentInputForm = ({ onClickCommentHandler, writeId }) => {
   const [comment, , onChangeContentHandler] = useInput({
     writeComment: ''
   });
+  const [mutation] = useSetMutation(insertComment, 'commentWriteList');
   const { writeComment } = comment;
   const onSubmitHandler = async (e) => {
     e.preventDefault();
@@ -16,7 +18,7 @@ const CommentInputForm = ({ onClickCommentHandler, writeId }) => {
       writeId,
       comment: writeComment
     };
-    insertComment(newComment);
+    mutation.mutate(newComment);
     onClickCommentHandler();
   };
   return (

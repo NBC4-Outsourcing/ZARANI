@@ -12,8 +12,10 @@ import React from 'react';
 import { getFormattedDate } from './formattedDate';
 import useInput from 'hooks/useInput';
 import { updateWrite } from './ComunitySupabase';
+import useSetMutation from 'hooks/useSetMutations';
 
 const ComunityWriteEditForm = ({ item, setEditFormId }) => {
+  const [mutation] = useSetMutation(updateWrite, 'comunityWriteList');
   const [changeContent, , onChangeContentHandler, ,] = useInput({
     changeContents: item.content
   });
@@ -24,7 +26,8 @@ const ComunityWriteEditForm = ({ item, setEditFormId }) => {
     const newContent = {
       content: changeContents
     };
-    updateWrite(newContent, id);
+    const check = [newContent, id];
+    mutation.mutate(check);
     setEditFormId(null);
   };
 

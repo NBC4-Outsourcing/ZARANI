@@ -16,6 +16,7 @@ import CommentList from './CommentList';
 import CommentInputForm from './CommentInputForm';
 import { getFormattedDate } from './formattedDate';
 import ComunityWriteEditForm from './ComunityWriteEditForm';
+import useSetMutation from 'hooks/useSetMutations';
 
 const WritingList = () => {
   const { isLoading, isError, data } = useQuery('comunityWriteList', getWriteList);
@@ -23,8 +24,10 @@ const WritingList = () => {
   const [editFormId, setEditFormId] = useState(null);
   const [writeId, setWriteId] = useState(null);
 
+  const [mutation] = useSetMutation(deleteWrite, 'comunityWriteList');
+
   const onClicDeleteHandler = (id) => {
-    deleteWrite(id);
+    mutation.mutate(id);
   };
 
   const onClickEditForm = (id) => {
