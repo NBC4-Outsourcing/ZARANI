@@ -15,14 +15,20 @@ import {
 import CommentList from './CommentList';
 import CommentInputForm from './CommentInputForm';
 import { getFormattedDate } from './formattedDate';
+import ComunityWriteEditForm from './ComunityWriteEditForm';
 
 const WritingList = () => {
   const { isLoading, isError, data } = useQuery('comunityWriteList', getWriteList);
   const [modalOpen, setModalOpen] = useState(false);
+  const [editFormId, setEditFormId] = useState(null);
   const [writeId, setWriteId] = useState(null);
 
   const onClicDeleteHandler = (id) => {
     deleteWrite(id);
+  };
+
+  const onClickEditForm = (id) => {
+    setEditFormId(id);
   };
 
   const onClickCommentHandler = (id) => {
@@ -45,7 +51,12 @@ const WritingList = () => {
     <>
       {modalOpen ? <CommentInputForm onClickCommentHandler={onClickCommentHandler} writeId={writeId} /> : false}
       {data.map((item) => {
-        return (
+        return editFormId === item.id ? (
+          <WriteListSection key={item.id}>
+            <ComunityWriteEditForm />
+            <CommentList writeId={item.id} />
+          </WriteListSection>
+        ) : (
           <WriteListSection key={item.id}>
             <WriteConteiner>
               <WriteHead>
@@ -57,6 +68,7 @@ const WritingList = () => {
                 <WriteDate>{getFormattedDate(item.date)}</WriteDate>
                 <WriteButtons>
                   <button onClick={() => onClickCommentHandler(item.id)}>댓글</button>
+                  <button onClick={() => onClickEditForm(item.id)}>수정</button>
                   <button onClick={() => onClicDeleteHandler(item.id)}>삭제</button>
                 </WriteButtons>
               </WriteFoot>
