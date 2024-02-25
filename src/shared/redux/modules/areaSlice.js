@@ -1,7 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  value: {}
+  value: {
+    lat: 37.57241118053246,
+    lng: 126.70242841204563
+  }
 };
 
 const areaSlice = createSlice({

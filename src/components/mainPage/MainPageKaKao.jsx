@@ -1,14 +1,13 @@
 import React from 'react';
-import { Map, MapMarker } from 'react-kakao-maps-sdk';
+import { Map } from 'react-kakao-maps-sdk';
+import { useSelector } from 'react-redux';
 
 const MainPageKaKao = () => {
+  const serchValue = useSelector((state) => state.area.value);
   return (
-    <Map // 지도를 표시할 Container
-      center={{
-        // 지도의 중심좌표
-        lat: 33.450701,
-        lng: 126.570667
-      }}
+    <Map
+      // 지도를 표시할 Container
+      center={serchValue}
       style={{
         // 지도의 크기
         width: '100%',
