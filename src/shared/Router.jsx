@@ -1,5 +1,6 @@
 import Layout from 'components/layoutComponent/Layout';
-import MainPage from 'components/mainPageComponent/MainPage';
+import MainPage from 'components/mainPage/MainPage';
+import ReviewForm from 'components/reviewComponents/ReviewForm';
 import Comunity from 'pages/Comunity';
 import Login from 'pages/Login';
 import MyPage from 'pages/MyPage';
@@ -14,6 +15,7 @@ const Router = () => {
           <Route path="/" element={<MainPage />} />
           <Route path="/comunity" element={<Comunity />} />
           <Route path="/mypage" element={<MyPage />} />
+          <Route path="/reviewpage" element={<ReviewForm />} />
           <Route path="/login" element={<Login />} />
         </Route>
       </Routes>

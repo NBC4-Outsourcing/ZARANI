@@ -7,7 +7,7 @@ import {
 } from 'components/styles/ComunityStyle';
 import React from 'react';
 import { useQuery } from 'react-query';
-import { deleteComment, getCommentList } from './supabaseTest';
+import { deleteComment, getCommentList } from './ComunitySupabase';
 import { getFormattedDate } from './formattedDate';
 
 const CommentList = ({ writeId }) => {
