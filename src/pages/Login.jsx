@@ -1,4 +1,4 @@
-import { LoginPageDiv, WidthFiftyPercentDiv, WidthHundredPercentImg } from 'components/styles/LoginStyle';
+import * as LS from 'components/styles/LoginStyle';
 import React, { useState } from 'react';
 import defaultImage from 'assets/defaultImage.png';
 import LoginInputForm from 'components/loginPageComponents/LoginInputForm';
@@ -8,27 +8,27 @@ const Login = () => {
   const [isSignUpPage, setSignUpPage] = useState(false);
   return (
     <>
-      <LoginPageDiv>
+      <LS.LoginPageDiv>
         {isSignUpPage ? (
           <>
-            <WidthFiftyPercentDiv>
-              <WidthHundredPercentImg src={defaultImage} alt="로고 이미지" />
-            </WidthFiftyPercentDiv>
-            <WidthFiftyPercentDiv>
+            <LS.WidthFiftyPercentDiv>
+              <LS.WidthHundredPercentImg src={defaultImage} alt="로고 이미지" />
+            </LS.WidthFiftyPercentDiv>
+            <LS.WidthFiftyPercentDiv>
               <LoginInputForm isSignUpPage={isSignUpPage} setSignUpPage={setSignUpPage} />
-            </WidthFiftyPercentDiv>
+            </LS.WidthFiftyPercentDiv>
           </>
         ) : (
           <>
-            <WidthFiftyPercentDiv>
+            <LS.WidthFiftyPercentDiv>
               <LoginInputForm isSignUpPage={isSignUpPage} setSignUpPage={setSignUpPage} />
-            </WidthFiftyPercentDiv>
-            <WidthFiftyPercentDiv>
-              <WidthHundredPercentImg src={defaultImage} alt="로고 이미지" />
-            </WidthFiftyPercentDiv>
+            </LS.WidthFiftyPercentDiv>
+            <LS.WidthFiftyPercentDiv>
+              <LS.WidthHundredPercentImg src={defaultImage} alt="로고 이미지" />
+            </LS.WidthFiftyPercentDiv>
           </>
         )}
-      </LoginPageDiv>
+      </LS.LoginPageDiv>
     </>
   );
 };
