@@ -4,6 +4,7 @@ import ReviewForm from 'components/reviewComponents/ReviewForm';
 import Comunity from 'pages/Comunity';
 import Login from 'pages/Login';
 import MyPage from 'pages/MyPage';
+import { ReviewPage } from 'pages/ReviewPage';
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
@@ -15,7 +16,7 @@ const Router = () => {
           <Route path="/" element={<MainPage />} />
           <Route path="/comunity" element={<Comunity />} />
           <Route path="/mypage" element={<MyPage />} />
-          <Route path="/reviewpage" element={<ReviewForm />} />
+          <Route path="/reviewpage" element={<ReviewPage />} />
           <Route path="/login" element={<Login />} />
         </Route>
       </Routes>
