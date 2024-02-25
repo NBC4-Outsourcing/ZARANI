@@ -58,9 +58,13 @@ export const LoginStyle = styled.div`
 export const AvatarStyle = styled.img`
   width: 60px;
   height: 60px;
-  border: 1px solid black;
   border-radius: 50%;
   margin-right: 25px;
+  cursor: pointer;
+  &:hover {
+    transition: all 0.2s;
+    transform: scale(1.05);
+  }
 `;
 
 //MainPageComunity.jsx
