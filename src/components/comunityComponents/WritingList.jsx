@@ -16,6 +16,7 @@ import CommentList from './CommentList';
 import CommentInputForm from './CommentInputForm';
 import { getFormattedDate } from './formattedDate';
 import ComunityWriteEditForm from './ComunityWriteEditForm';
+import useSetMutation from 'hooks/useSetMutations';
 
 const WritingList = () => {
   const { isLoading, isError, data } = useQuery('comunityWriteList', getWriteList);
@@ -23,8 +24,10 @@ const WritingList = () => {
   const [editFormId, setEditFormId] = useState(null);
   const [writeId, setWriteId] = useState(null);
 
+  const [mutation] = useSetMutation(deleteWrite, 'comunityWriteList');
+
   const onClicDeleteHandler = (id) => {
-    deleteWrite(id);
+    mutation.mutate(id);
   };
 
   const onClickEditForm = (id) => {
@@ -51,28 +54,27 @@ const WritingList = () => {
     <>
       {modalOpen ? <CommentInputForm onClickCommentHandler={onClickCommentHandler} writeId={writeId} /> : false}
       {data.map((item) => {
-        return editFormId === item.id ? (
+        return (
           <WriteListSection key={item.id}>
-            <ComunityWriteEditForm />
-            <CommentList writeId={item.id} />
-          </WriteListSection>
-        ) : (
-          <WriteListSection key={item.id}>
-            <WriteConteiner>
-              <WriteHead>
-                <WriteImage src={item.avatar} />
-                <WriteNickName>{item.nickname}</WriteNickName>
-              </WriteHead>
-              <WriteContent>{item.content}</WriteContent>
-              <WriteFoot>
-                <WriteDate>{getFormattedDate(item.date)}</WriteDate>
-                <WriteButtons>
-                  <button onClick={() => onClickCommentHandler(item.id)}>댓글</button>
-                  <button onClick={() => onClickEditForm(item.id)}>수정</button>
-                  <button onClick={() => onClicDeleteHandler(item.id)}>삭제</button>
-                </WriteButtons>
-              </WriteFoot>
-            </WriteConteiner>
+            {editFormId === item.id ? (
+              <ComunityWriteEditForm item={item} setEditFormId={setEditFormId} />
+            ) : (
+              <WriteConteiner>
+                <WriteHead>
+                  <WriteImage src={item.avatar} />
+                  <WriteNickName>{item.nickname}</WriteNickName>
+                </WriteHead>
+                <WriteContent>{item.content}</WriteContent>
+                <WriteFoot>
+                  <WriteDate>{getFormattedDate(item.date)}</WriteDate>
+                  <WriteButtons>
+                    <button onClick={() => onClickCommentHandler(item.id)}>댓글</button>
+                    <button onClick={() => onClickEditForm(item.id)}>수정</button>
+                    <button onClick={() => onClicDeleteHandler(item.id)}>삭제</button>
+                  </WriteButtons>
+                </WriteFoot>
+              </WriteConteiner>
+            )}
             <CommentList writeId={item.id} />
           </WriteListSection>
         );
