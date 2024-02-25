@@ -20,9 +20,7 @@ const MyPageReviews = () => {
     };
     readMyReview();
   }, []);
-  console.log(myReview);
-  // const [id, nickname, content, data, email] = myReview;
-  // if (error) <div> 정보를 불러오지 못하고 있습니다.</div>;
+
   return (
     <article>
       {myReview.map((reviews) => {

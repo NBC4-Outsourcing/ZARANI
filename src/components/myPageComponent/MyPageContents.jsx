@@ -11,7 +11,6 @@ import defaultImg from 'assets/defaultImage.png';
 const MyPageContents = ({ data }) => {
   const dispatch = useDispatch();
   const { id, email, nickname, avatar, uid } = data;
-  console.log(data);
   const [selectImage, setSelectImage, ,] = useInput(defaultImg);
   const [thumnailImage, setThumnailImage, ,] = useInput(avatar || defaultImg);
   const [isEdit, setIsEdit] = useState(false);

@@ -20,7 +20,6 @@ export const readMyReview = async () => {
 };
 
 export const updateUserInfo = async (objectInfo, id) => {
-  console.log(id);
   if (!id) return;
   const { error } = await supabase.from('usersAccounts').update(objectInfo).eq('id', id);
   if (error) {
@@ -45,7 +44,6 @@ export const uploadImage = async (filePath, image) => {
 export const downloadImage = async (filePath) => {
   try {
     const { data, error } = await supabase.storage.from('unAuthUserImage').download(filePath);
-    console.log(data);
     if (error) {
       alert('이미지를 받아오지 못하고 있습니다. 문의해주세요.');
       return;
