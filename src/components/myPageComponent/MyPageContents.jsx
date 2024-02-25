@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { readUserInfo, updateUserInfo, uploadImage } from './myPageSupabase';
+import { downloadImage, getImageUrl, readUserInfo, updateUserInfo, uploadImage } from './myPageSupabase';
 import { supabase } from 'api/supabase/supabase';
 import useInput from 'hooks/useInput';
 import * as MP from 'components/styles/MyPageStyle';
@@ -20,18 +20,19 @@ const MyPageContents = ({ data }) => {
   });
   const editValueNickname = editValue.nickname;
 
-  useEffect(() => {
-    const mutationData = async () => {
-      if (data) {
-        await updateUserInfo(data, id);
-        setThumnailImage(avatar);
-      }
-    };
-    mutationData();
-  }, [dispatch, data, avatar, id]);
+  // useEffect(() => {
+  //   const mutationData = async () => {
+  //     if (data) {
+  //       console.log(avatar);
+  //       setThumnailImage(avatar);
+  //     }
+  //   };
+  //   mutationData();
+  // }, [dispatch, data, avatar]);
   // 이미지, 닉네임, 내용 DB저장
 
-  const [mutation] = useSetMutation(updateUserInfo, 'user');
+  const [mutation] = useSetMutation(updateUserInfo, 'usersAccounts');
+  const [downloadImgMutation] = useSetMutation(downloadImage, 'unAuthUserImage');
   const onSubmitHandler = async (e) => {
     e.preventDefault();
 
@@ -48,19 +49,25 @@ const MyPageContents = ({ data }) => {
       return;
     }
     if (selectImage) {
+      console.log(selectImage);
       const filePath = `userImage/${uid}`;
-      const data = await uploadImage(filePath, selectImage);
-      const imageUrl = supabase.storage.from('unAuthUserImage').getPublicUrl(data.path);
+      const data = await uploadImage(filePath, image);
+      console.log(data);
+      const { data: imageUrl, error } = supabase.storage.from('unAuthUserImage').getPublicUrl(data.path);
       const ImgDbUrl = imageUrl.data.publicUrl;
+      console.log(ImgDbUrl);
+
       // ex ) https://rtjzvtuqyafegkvoirwc.supabase.co/storage/v…ge/userImage/1d25d250-5dea-47f5-a465-05f74a7bd79d'
       const newData = { id, email, nickname: editValueNickname, avatar: ImgDbUrl, uid };
       console.log(ImgDbUrl);
+      console.log(id);
       await updateUserInfo(newData, id);
-      mutation.mutate(newData);
+      await mutation.mutateAsync(newData, id);
+
       setSelectImage(ImgDbUrl);
-      // setThumnailImage(selectImage);
       alert('수정이 완료됐습니다.');
       setIsEdit(false);
+      setThumnailImage(avatar);
     }
   };
 
@@ -89,7 +96,7 @@ const MyPageContents = ({ data }) => {
     e.preventDefault();
     setIsEdit(false);
     //  setThumnailImage(avatar);
-    if (selectImage !== thumnailImage) setThumnailImage(avatar || defaultImg);
+    if (selectImage !== thumnailImage) setThumnailImage(avatar);
     // if (isEdit && selectImage !== thumnailImage) setThumnailImage(avatar);
   };
   return (

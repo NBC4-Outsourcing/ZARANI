@@ -8,13 +8,8 @@ import MyPageContents from 'components/myPageComponent/MyPageContents';
 import MyPageHeader from 'components/myPageComponent/MyPageHeader';
 
 const MyPage = () => {
-  const dispatch = useDispatch();
+  const { isLoading, isError, data } = useQuery('usersAccounts', readUserInfo);
 
-  const { isLoading, isError, data } = useQuery('user', readUserInfo);
-  // console.log(data.avatar);
-  // // console.log(data.avatar);
-  // dispatch(setUserInfo(data));
-  // dispatch(setThumnailImg(data.avatar));
   if (isLoading) return <div>로딩중입니다...</div>;
   if (isError) return <div>오류로 인해 정보를 받아오지 못 하고 있습니다.</div>;
 
