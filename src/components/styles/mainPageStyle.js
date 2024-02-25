@@ -1,4 +1,10 @@
 import styled from 'styled-components';
+import img1 from '../../assets/2.png';
+import img2 from '../../assets/3.png';
+import img3 from '../../assets/4.png';
+import img4 from '../../assets/5.png';
+import img5 from '../../assets/6.png';
+import img6 from '../../assets/7.png';
 
 //MainPage.jsx
 export const MainWrapper = styled.div`
@@ -58,9 +64,13 @@ export const LoginStyle = styled.div`
 export const AvatarStyle = styled.img`
   width: 60px;
   height: 60px;
-  border: 1px solid black;
   border-radius: 50%;
   margin-right: 25px;
+  cursor: pointer;
+  &:hover {
+    transition: all 0.2s;
+    transform: scale(1.05);
+  }
 `;
 
 //MainPageComunity.jsx
@@ -108,13 +118,166 @@ export const ListSection = styled.div`
   justify-content: space-between;
   margin: 10px 0;
 `;
-export const ImgList = styled.img`
+export const ListIncheon = styled.div`
+  display: flex;
   width: 30%;
   height: 100%;
   cursor: pointer;
+  font-size: 30px;
+  font-weight: 1000;
+  color: white;
+  align-items: center;
+  justify-content: center;
+  background-image: url(${img1});
+  background-size: cover;
+  transition: all 0.2s;
   &:hover {
-    transition: all 0.2s;
     transform: scale(1.05);
+  }
+  &:hover p {
+    color: red;
+  }
+  &:hover::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+`;
+export const ListKangWondo = styled.div`
+  display: flex;
+  width: 30%;
+  height: 100%;
+  cursor: pointer;
+  font-size: 30px;
+  font-weight: 1000;
+  color: white;
+  align-items: center;
+  justify-content: center;
+  background-image: url(${img2});
+  background-size: cover;
+  transition: all 0.2s;
+  &:hover {
+    transform: scale(1.05);
+  }
+  &:hover p {
+    color: red;
+  }
+  &:hover::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+`;
+export const ListSeoul = styled.div`
+  display: flex;
+  width: 30%;
+  height: 100%;
+  cursor: pointer;
+  font-size: 30px;
+  font-weight: 1000;
+  color: white;
+  align-items: center;
+  justify-content: center;
+  background-image: url(${img3});
+  background-size: cover;
+  transition: all 0.2s;
+  &:hover {
+    transform: scale(1.05);
+  }
+  &:hover p {
+    color: red;
+  }
+  &:hover::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+`;
+export const ListJunra = styled.div`
+  display: flex;
+  width: 30%;
+  height: 100%;
+  cursor: pointer;
+  font-size: 30px;
+  font-weight: 1000;
+  color: white;
+  align-items: center;
+  justify-content: center;
+  background-image: url(${img4});
+  background-size: cover;
+  transition: all 0.2s;
+  &:hover {
+    transform: scale(1.05);
+  }
+  &:hover p {
+    color: red;
+  }
+  &:hover::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+`;
+export const ListChungcheonDo = styled.div`
+  display: flex;
+  width: 30%;
+  height: 100%;
+  cursor: pointer;
+  font-size: 30px;
+  font-weight: 1000;
+  color: white;
+  align-items: center;
+  justify-content: center;
+  background-image: url(${img5});
+  background-size: cover;
+  transition: all 0.2s;
+  &:hover {
+    transform: scale(1.05);
+  }
+  &:hover p {
+    color: red;
+  }
+  &:hover::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+`;
+export const ListJeJu = styled.div`
+  display: flex;
+  width: 30%;
+  height: 100%;
+  cursor: pointer;
+  font-size: 30px;
+  font-weight: 1000;
+  color: white;
+  align-items: center;
+  justify-content: center;
+  background-image: url(${img6});
+  background-size: cover;
+  transition: all 0.2s;
+  &:hover {
+    transform: scale(1.05);
+  }
+  &:hover p {
+    color: red;
+  }
+  &:hover::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
   }
 `;
 
