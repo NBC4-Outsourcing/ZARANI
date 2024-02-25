@@ -13,7 +13,7 @@ const MyPageContents = () => {
   const [editValue, setEditValue, onChange, reset] = useInput({
     nickname
   });
-
+  const editValueNickname = editValue.nickname;
   const currEmail = email ? email : null;
   // 이미지, 닉네임, 내용 DB저장
   const onSubmitHandler = async (e) => {
@@ -28,7 +28,6 @@ const MyPageContents = () => {
           alert('파일이 업로드 되지 않았습니다.');
           return;
         }
-        console.log(1);
         try {
           const res = await supabase.storage.from('userImage').getPublicUrl(data.path);
           console.log(res);
@@ -108,6 +107,7 @@ const MyPageContents = () => {
               type="text"
               id="nickname"
               name="nickname"
+              value={editValueNickname}
               onChange={onChange}
               minLength={6}
               maxLength={10}
