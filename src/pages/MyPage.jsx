@@ -1,33 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSelectFile, setThumnailImg, setUserInfo } from 'shared/redux/modules/userSlice';
+import { useQuery } from 'react-query';
+import { setUserInfo } from 'shared/redux/modules/userSlice';
+import { readUserInfo } from 'components/myPageComponent/myPageSupabase';
+import MyPageReviews from 'components/myPageComponent/MyPageReviews';
+import MyPageContents from 'components/myPageComponent/MyPageContents';
+import MyPageHeader from 'components/myPageComponent/MyPageHeader';
 
 const MyPage = () => {
   const dispatch = useDispatch();
-  const { userId, avata } = useSelector((store) => store.user.userInfo);
-  const { selectImage, thumnailImage } = useSelector((store) => store.user);
-  console.log(selectImage);
 
-  const onChangeImage = (e) => {
-    if (selectImage === null) return;
-    dispatch(setUserInfo({ avata: selectImage }));
-    if (!e.target.files) return;
-    const imgFile = e.target.files[0];
-    if (imgFile) {
-      let image = window.URL.createObjectURL(imgFile);
-      dispatch(setSelectFile(image));
-      dispatch(setThumnailImg(image));
-    }
-  };
+  const { isLoading, isError, data } = useQuery('user', readUserInfo);
+  dispatch(setUserInfo(data));
+
+  if (isLoading) return <div>로딩중입니다...</div>;
+  if (isError) return <div>오류로 인해 정보를 받아오지 못 하고 있습니다.</div>;
+
   return (
     <section>
-      <form>
-        <img src={thumnailImage} alt="기본이미지" />
-        <label htmlFor="imgfileChoice">이미지 등록</label>
-        <input type="file" accept="image/*" id="imgfileChoice" onChange={onChangeImage} />
-        <label htmlFor="nickname"> 닉네임</label>
-        <input type="text" id="nickname" />
-      </form>
+      <MyPageHeader />
+      <MyPageContents />
+      <MyPageReviews />
     </section>
   );
 };
