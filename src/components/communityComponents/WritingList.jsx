@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
-import { deleteWrite, getWriteList } from './ComunitySupabase';
+import { deleteWrite, getWriteList } from './CommunitySupabase';
 import {
   WriteButtons,
   WriteConteiner,
@@ -11,20 +11,20 @@ import {
   WriteImage,
   WriteListSection,
   WriteNickName
-} from 'components/styles/ComunityStyle';
+} from 'components/styles/CommunityStyle';
 import CommentList from './CommentList';
 import CommentInputForm from './CommentInputForm';
 import { getFormattedDate } from './formattedDate';
-import ComunityWriteEditForm from './ComunityWriteEditForm';
+import CommunityWriteEditForm from './CommunityWriteEditForm';
 import useSetMutation from 'hooks/useSetMutations';
 
 const WritingList = () => {
-  const { isLoading, isError, data } = useQuery('comunityWriteList', getWriteList);
+  const { isLoading, isError, data } = useQuery('communityWriteList', getWriteList);
   const [modalOpen, setModalOpen] = useState(false);
   const [editFormId, setEditFormId] = useState(null);
   const [writeId, setWriteId] = useState(null);
 
-  const [mutation] = useSetMutation(deleteWrite, 'comunityWriteList');
+  const [mutation] = useSetMutation(deleteWrite, 'communityWriteList');
 
   const onClicDeleteHandler = (id) => {
     mutation.mutate(id);
@@ -61,7 +61,7 @@ const WritingList = () => {
           return (
             <WriteListSection key={item.id}>
               {editFormId === item.id ? (
-                <ComunityWriteEditForm item={item} setEditFormId={setEditFormId} />
+                <CommunityWriteEditForm item={item} setEditFormId={setEditFormId} />
               ) : (
                 <WriteConteiner>
                   <WriteHead>

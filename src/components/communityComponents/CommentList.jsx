@@ -4,10 +4,10 @@ import {
   CommentListContainer,
   CommentListInfo,
   CommentListSection
-} from 'components/styles/ComunityStyle';
+} from 'components/styles/CommunityStyle';
 import React from 'react';
 import { useQuery } from 'react-query';
-import { deleteComment, getCommentList } from './ComunitySupabase';
+import { deleteComment, getCommentList } from './CommunitySupabase';
 import { getFormattedDate } from './formattedDate';
 import useSetMutation from 'hooks/useSetMutations';
 

@@ -7,15 +7,15 @@ import {
   WriteHead,
   WriteImage,
   WriteNickName
-} from 'components/styles/ComunityStyle';
+} from 'components/styles/CommunityStyle';
 import React from 'react';
 import { getFormattedDate } from './formattedDate';
 import useInput from 'hooks/useInput';
-import { updateWrite } from './ComunitySupabase';
+import { updateWrite } from './CommunitySupabase';
 import useSetMutation from 'hooks/useSetMutations';
 
-const ComunityWriteEditForm = ({ item, setEditFormId }) => {
-  const [mutation] = useSetMutation(updateWrite, 'comunityWriteList');
+const CommunityWriteEditForm = ({ item, setEditFormId }) => {
+  const [mutation] = useSetMutation(updateWrite, 'communityWriteList');
   const [changeContent, , onChangeContentHandler, ,] = useInput({
     changeContents: item.content
   });
@@ -58,4 +58,4 @@ const ComunityWriteEditForm = ({ item, setEditFormId }) => {
   );
 };
 
-export default ComunityWriteEditForm;
+export default CommunityWriteEditForm;

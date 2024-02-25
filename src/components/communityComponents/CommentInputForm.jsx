@@ -1,6 +1,6 @@
-import { ComentInputFormBackGround, CommentInputFormStyle } from 'components/styles/ComunityStyle';
+import { ComentInputFormBackGround, CommentInputFormStyle } from 'components/styles/CommunityStyle';
 import React from 'react';
-import { insertComment } from './ComunitySupabase';
+import { insertComment } from './CommunitySupabase';
 import useInput from 'hooks/useInput';
 import useSetMutation from 'hooks/useSetMutations';
 
