@@ -26,8 +26,7 @@ const CommunityWriteEditForm = ({ item, setEditFormId }) => {
     const newContent = {
       content: changeContents
     };
-    const check = [newContent, id];
-    mutation.mutate(check);
+    mutation.mutate([newContent, id]);
     setEditFormId(null);
   };
 
