@@ -13,6 +13,7 @@ export const ReviewList = () => {
       let { data: reviewWrite, error } = await supabase.from('reviewWrite').select('*');
       if (reviewWrite) {
         setReviewData(reviewWrite);
+        console.log('reviewWrite', reviewWrite);
         return reviewWrite;
       } else {
         console.log('error', error);
