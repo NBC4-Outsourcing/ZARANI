@@ -22,7 +22,7 @@ const MyPageContents = ({ data }) => {
   useEffect(() => {
     if (data) {
       updateUserInfo(data);
-      setThumnailImage(data.avatar);
+      setThumnailImage(avatar);
     }
   }, [dispatch, data]);
   // 이미지, 닉네임, 내용 DB저장
@@ -54,7 +54,7 @@ const MyPageContents = ({ data }) => {
       await updateUserInfo(newData, id);
       mutation.mutate(newData);
       setSelectImage(ImgDbUrl);
-      alert('수정 됐습니다.');
+      alert('수정이 완료됐습니다.');
       setIsEdit(false);
     }
   };
