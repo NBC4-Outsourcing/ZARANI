@@ -14,6 +14,7 @@ const MyPageContents = () => {
   const [editValue, setEditValue, onChange, reset] = useInput({
     nickname
   });
+  console.log(email);
   console.log(avatar);
   console.log(selectImage);
   const editValueNickname = editValue.nickname;
@@ -35,7 +36,10 @@ const MyPageContents = () => {
     }
     const filePath = `${uid}/${selectImage}`;
     try {
-      const { data, error } = await supabase.storage.from('unAuthUserImage').upload(filePath, selectImage);
+      const { data, error } = await supabase.storage.from('unAuthUserImage').upload(filePath, selectImage, {
+        cacheControl: '3600',
+        upsert: true
+      });
       alert('수정이 완료됐습니다.!');
       console.log(error);
       if (error) {
@@ -44,14 +48,17 @@ const MyPageContents = () => {
       }
 
       const imageUrl = supabase.storage.from('userImage').getPublicUrl(data.path);
-      console.log(imageUrl.data.publicUrl);
-      // dispatch(settingSelectFile(res.data.publicUrl));
+      console.log(imageUrl);
+      const ImgDbUrl = imageUrl.data.publicUrl;
+      // console.log(imageUrl.data.publicUrl);
+      dispatch(setSelectFile(ImgDbUrl));
+      dispatch(setThumnailImg(ImgDbUrl));
     } catch (error) {
       console.log(error);
     }
-
-    dispatch(setUserInfo({ nickname: editValueNickname, avatar: selectImage }));
-    updateUserInfo({ nickname: editValueNickname, avatar: selectImage }, id);
+    const newData = { nickname: editValueNickname, avatar: selectImage };
+    dispatch(setUserInfo(newData));
+    updateUserInfo(newData, id);
   };
 
   // 이미지 등록
@@ -66,6 +73,7 @@ const MyPageContents = () => {
     console.log(imgFile);
     if (imgFile) {
       let image = URL.createObjectURL(imgFile);
+      dispatch(setUserInfo({ avata: image }));
       dispatch(setSelectFile(image));
       dispatch(setThumnailImg(image));
     }
@@ -75,7 +83,6 @@ const MyPageContents = () => {
     e.preventDefault();
     setIsEdit(true);
     setEditValue({ nickname });
-    // dispatch(setThumnailImg(selectImage));
   };
   // 이미지 편집 취소
   const onEditCancelHandler = (e) => {
