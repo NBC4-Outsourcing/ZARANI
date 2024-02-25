@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
-import { deleteWrite, getWriteList } from './supabaseTest';
+import { deleteWrite, getWriteList } from './ComunitySupabase';
 import {
   WriteButtons,
   WriteConteiner,

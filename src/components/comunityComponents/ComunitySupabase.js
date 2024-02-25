@@ -1,8 +1,4 @@
-import { createClient } from '@supabase/supabase-js';
-
-const supabaseUrl = 'https://rtjzvtuqyafegkvoirwc.supabase.co';
-const supabaseKey = process.env.REACT_APP_SUPABASE_KEY;
-const supabase = createClient(supabaseUrl, supabaseKey);
+import { supabase } from 'api/supabase/supabase';
 
 const insertWriting = async (newWrite) => {
   const { data, error } = await supabase.from('comunityWrite').insert([newWrite]).select();
