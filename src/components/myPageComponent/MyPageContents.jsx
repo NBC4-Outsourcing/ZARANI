@@ -16,16 +16,13 @@ const MyPageContents = () => {
     nickname
   });
   const editValueNickname = editValue.nickname;
-  console.log(avatar);
-  // dispatch(setUserInfo(data));
-  // const currEmail = email ? email : null;
-  // const currEmail = email;
+
   const { isLoading, isError, data } = useQuery('user', readUserInfo);
   console.log(data);
   useEffect(() => {
     if (data) {
       dispatch(setUserInfo(data));
-      dispatch(setThumnailImg(data?.avatar));
+      dispatch(setThumnailImg(data.avatar));
     }
   }, [dispatch, data]);
   // 이미지, 닉네임, 내용 DB저장
