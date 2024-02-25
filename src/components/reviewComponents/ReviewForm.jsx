@@ -11,6 +11,7 @@ import {
 import { useState } from 'react';
 import imageFrame from '../../assets/imageFrame.png';
 import useInput from '../../hooks/useInput';
+import { supabase } from 'api/supabase/supabase';
 
 const ReviewForm = () => {
   const [reviewContentInput, reviewContentHandler, reset] = useInput({
@@ -43,11 +44,9 @@ const ReviewForm = () => {
     };
   };
 
-  // const getReviews= async()=>{
-  //   let { data: reviewWrite, error } = await supabase
-  //   .from('reviewWrite')
-  //   .select('date')
-  // }
+  const getReviews = async () => {
+    let { data: reviewWrite, error } = await supabase.from('reviewWrite').select('date');
+  };
 
   return (
     <div>
