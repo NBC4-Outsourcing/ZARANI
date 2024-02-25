@@ -20,7 +20,7 @@ const LoginInputForm = ({ isSignUpPage, setSignUpPage }) => {
     if (buttonType === 'signup') {
       try {
         // supabase에 회원정보 저장
-        const { data, error } = await supabase.auth.signUp({
+        const { error } = await supabase.auth.signUp({
           email,
           password,
           options: {
@@ -30,12 +30,16 @@ const LoginInputForm = ({ isSignUpPage, setSignUpPage }) => {
             }
           }
         });
-        if (error) console.log(error);
-        console.log(data);
-        alert('회원가입 되었습니다.');
-        setSignUpPage(false); // 회원가입 여부 false(=로그인 페이지)로 설정
+        if (error) {
+          console.log(error);
+          alert('회원가입에 실패했습니다.');
+        } else {
+          alert('회원가입 되었습니다.');
+          setSignUpPage(false); // 회원가입 여부 false(=로그인 페이지)로 설정
+        }
       } catch (error) {
         console.log(error);
+        alert('오류가 발생했습니다.');
       } finally {
         reset(); // input 초기화
       }
@@ -44,15 +48,16 @@ const LoginInputForm = ({ isSignUpPage, setSignUpPage }) => {
     else if (buttonType === 'login') {
       try {
         // 이메일, 비밀번호로 로그인
-        const { data, error } = await supabase.auth.signInWithPassword({
+        const { error } = await supabase.auth.signInWithPassword({
           email,
           password
         });
-        if (error) console.log(error);
-        // 세션 값과 유저 정보 return 값
-        console.log('==========');
-        console.log(data);
-        console.log('==========');
+        if (error) {
+          console.log(error);
+          alert('로그인에 실패했습니다. 다시 시도하세요.');
+        } else {
+          alert('로그인 되었습니다.');
+        }
       } catch (error) {
         console.log(error);
       }
