@@ -1,6 +1,6 @@
 import { ComentInputFormBackGround, CommentInputFormStyle } from 'components/styles/ComunityStyle';
 import React from 'react';
-import { insertComment } from './supabaseTest';
+import { insertComment } from './ComunitySupabase';
 import useInput from 'hooks/useInput';
 
 const CommentInputForm = ({ onClickCommentHandler, writeId }) => {

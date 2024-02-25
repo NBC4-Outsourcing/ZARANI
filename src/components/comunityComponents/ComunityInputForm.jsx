@@ -1,6 +1,6 @@
 import { ComunityForm, ComunityInput } from 'components/styles/ComunityStyle';
 import useInput from 'hooks/useInput';
-import { insertWriting } from './supabaseTest';
+import { insertWriting } from './ComunitySupabase';
 
 const ComunityInputForm = () => {
   // 커뮤니티 글 input value,onchange

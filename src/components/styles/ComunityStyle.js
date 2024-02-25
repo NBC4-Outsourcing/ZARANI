@@ -98,7 +98,7 @@ export const CommentListContainer = styled.div`
   background-color: gray;
   border-radius: 8px;
   margin: 2%;
-  height: 100px;
+  min-height: 100px;
   padding: 2%;
 `;
 
@@ -112,7 +112,7 @@ export const CommentListComment = styled.p`
   margin: 1%;
   padding: 1%;
   border-radius: 8px;
-  height: 50%;
+  min-height: 50px;
 `;
 
 export const CommentListButton = styled.button`
