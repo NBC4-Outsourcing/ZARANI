@@ -1,48 +1,72 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setThumnailImg, setUserInfo, setSelectFile } from 'shared/redux/modules/userSlice';
-import { updateUserInfo, uploadImage } from './myPageSupabase';
+import { downloadImage, getImageUrl, readUserInfo, updateUserInfo, uploadImage } from './myPageSupabase';
 import { supabase } from 'api/supabase/supabase';
 import useInput from 'hooks/useInput';
 import * as MP from 'components/styles/MyPageStyle';
+// import { useQuery } from 'react-query';
+import useSetMutation from 'hooks/useSetMutations';
+import defaultImg from 'assets/defaultImage.png';
 
-const MyPageContents = () => {
+const MyPageContents = ({ data }) => {
   const dispatch = useDispatch();
-  const { id, email, nickname, avatar, uid } = useSelector((store) => store.user.userInfo);
-  const { selectImage, thumnailImage } = useSelector((store) => store.user);
+  const { id, email, nickname, avatar, uid } = data;
+  const [selectImage, setSelectImage, ,] = useInput(defaultImg);
+  const [thumnailImage, setThumnailImage, ,] = useInput(avatar || defaultImg);
   const [isEdit, setIsEdit] = useState(false);
-  const [editValue, setEditValue, onChange, reset] = useInput({
+  const [editValue, setEditValue, onChange] = useInput({
     nickname
   });
   const editValueNickname = editValue.nickname;
-  // const currEmail = email ? email : null;
-  const currEmail = email;
+
+  // useEffect(() => {
+  //   const mutationData = async () => {
+  //     if (data) {
+  //       console.log(avatar);
+  //       setThumnailImage(avatar);
+  //     }
+  //   };
+  //   mutationData();
+  // }, [dispatch, data, avatar]);
   // 이미지, 닉네임, 내용 DB저장
+
+  const [mutation] = useSetMutation(updateUserInfo, 'usersAccounts');
+  const [downloadImgMutation] = useSetMutation(downloadImage, 'unAuthUserImage');
   const onSubmitHandler = async (e) => {
     e.preventDefault();
 
     const editSaveCheck = window.confirm('수정내용을 저장하시겠습니까?');
     if (editSaveCheck === false) {
       alert('수정을 취소하셨습니다.');
+      if (selectImage !== thumnailImage) setThumnailImage(avatar || defaultImg);
       setIsEdit(false);
       return;
     }
 
     if (!selectImage) {
       alert('이미지를 선택해주세요!');
+      return;
     }
     if (selectImage) {
-      const filePath = `${uid}/${selectImage}`;
-      const data = uploadImage(filePath, selectImage);
-
-      const imageUrl = supabase.storage.from('userImage').getPublicUrl(data.path);
+      console.log(selectImage);
+      const filePath = `userImage/${uid}`;
+      const data = await uploadImage(filePath, image);
+      console.log(data);
+      const { data: imageUrl, error } = supabase.storage.from('unAuthUserImage').getPublicUrl(data.path);
       const ImgDbUrl = imageUrl.data.publicUrl;
-      const newData = { nickname: editValueNickname, avatar: selectImage };
+      console.log(ImgDbUrl);
 
+      // ex ) https://rtjzvtuqyafegkvoirwc.supabase.co/storage/v…ge/userImage/1d25d250-5dea-47f5-a465-05f74a7bd79d'
+      const newData = { id, email, nickname: editValueNickname, avatar: ImgDbUrl, uid };
+      console.log(ImgDbUrl);
+      console.log(id);
       await updateUserInfo(newData, id);
-      dispatch(setUserInfo(newData));
-      dispatch(setSelectFile(ImgDbUrl));
-      dispatch(setThumnailImg(ImgDbUrl));
+      await mutation.mutateAsync(newData, id);
+
+      setSelectImage(ImgDbUrl);
+      alert('수정이 완료됐습니다.');
+      setIsEdit(false);
+      setThumnailImage(avatar);
     }
   };
 
@@ -50,16 +74,13 @@ const MyPageContents = () => {
   const onChangeAddImage = (e) => {
     e.preventDefault();
     if (selectImage === null) return;
-    // dispatch(setUserInfo({ avata: selectImage }));
 
     const imgFile = e.target.files[0];
     if (!imgFile) return;
     if (imgFile) {
-      // const blob = new Blob([reader.result], { type: 'image/*' });
       let image = URL.createObjectURL(imgFile);
-      dispatch(setUserInfo({ avata: image }));
-      dispatch(setSelectFile(image));
-      dispatch(setThumnailImg(image));
+      setSelectImage(imgFile);
+      setThumnailImage(image);
     }
   };
 
@@ -73,7 +94,9 @@ const MyPageContents = () => {
   const onEditCancelHandler = (e) => {
     e.preventDefault();
     setIsEdit(false);
-    if (isEdit && selectImage !== thumnailImage) dispatch(setThumnailImg(avatar));
+    //  setThumnailImage(avatar);
+    if (selectImage !== thumnailImage) setThumnailImage(avatar);
+    // if (isEdit && selectImage !== thumnailImage) setThumnailImage(avatar);
   };
   return (
     <MP.MyPageContentsForm>
@@ -130,16 +153,3 @@ const MyPageContents = () => {
 };
 
 export default MyPageContents;
-//    const reader = new FileReader();
-//    reader.onloadend = () => {
-//      if (reader.result instanceof ArrayBuffer) {
-//        const blob = new Blob([reader.result], { type: 'image/*' });
-//        const image = URL.createObjectURL(blob);
-//        console.log(image);
-//        dispatch(setUserInfo({ avatar: image }));
-//        dispatch(setSelectFile(image));
-//        dispatch(setThumnailImg(image));
-//      }
-//      reader.readAsArrayBuffer(imgFile);
-//      console.log(reader);
-//    };
