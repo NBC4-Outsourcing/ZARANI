@@ -119,20 +119,33 @@ export const ListSection = styled.div`
   margin: 10px 0;
 `;
 export const ListIncheon = styled.div`
-  border: 1px solid black;
+  display: flex;
   width: 30%;
   height: 100%;
   cursor: pointer;
+  font-size: 30px;
+  font-weight: 1000;
+  color: white;
+  align-items: center;
+  justify-content: center;
   background-image: url(${img1});
-  background-repeat: no-repeat;
   background-size: cover;
+  transition: all 0.2s;
   &:hover {
-    transition: all 0.2s;
     transform: scale(1.05);
+  }
+  &:hover p {
+    color: red;
+  }
+  &:hover::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
   }
 `;
 export const ListKangWondo = styled.div`
-  border: 1px solid black;
   display: flex;
   width: 30%;
   height: 100%;
@@ -149,7 +162,7 @@ export const ListKangWondo = styled.div`
     transform: scale(1.05);
   }
   &:hover p {
-    color: white;
+    color: red;
   }
   &:hover::before {
     content: '';
@@ -160,55 +173,111 @@ export const ListKangWondo = styled.div`
   }
 `;
 export const ListSeoul = styled.div`
-  border: 1px solid black;
+  display: flex;
   width: 30%;
   height: 100%;
   cursor: pointer;
+  font-size: 30px;
+  font-weight: 1000;
+  color: white;
+  align-items: center;
+  justify-content: center;
   background-image: url(${img3});
-  background-repeat: no-repeat;
   background-size: cover;
+  transition: all 0.2s;
   &:hover {
-    transition: all 0.2s;
     transform: scale(1.05);
+  }
+  &:hover p {
+    color: red;
+  }
+  &:hover::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
   }
 `;
 export const ListJunra = styled.div`
-  border: 1px solid black;
+  display: flex;
   width: 30%;
   height: 100%;
   cursor: pointer;
+  font-size: 30px;
+  font-weight: 1000;
+  color: white;
+  align-items: center;
+  justify-content: center;
   background-image: url(${img4});
-  background-repeat: no-repeat;
   background-size: cover;
+  transition: all 0.2s;
   &:hover {
-    transition: all 0.2s;
     transform: scale(1.05);
+  }
+  &:hover p {
+    color: red;
+  }
+  &:hover::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
   }
 `;
 export const ListChungcheonDo = styled.div`
-  border: 1px solid black;
+  display: flex;
   width: 30%;
   height: 100%;
   cursor: pointer;
+  font-size: 30px;
+  font-weight: 1000;
+  color: white;
+  align-items: center;
+  justify-content: center;
   background-image: url(${img5});
-  background-repeat: no-repeat;
   background-size: cover;
+  transition: all 0.2s;
   &:hover {
-    transition: all 0.2s;
     transform: scale(1.05);
+  }
+  &:hover p {
+    color: red;
+  }
+  &:hover::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
   }
 `;
 export const ListJeJu = styled.div`
-  border: 1px solid black;
+  display: flex;
   width: 30%;
   height: 100%;
   cursor: pointer;
+  font-size: 30px;
+  font-weight: 1000;
+  color: white;
+  align-items: center;
+  justify-content: center;
   background-image: url(${img6});
-  background-repeat: no-repeat;
   background-size: cover;
+  transition: all 0.2s;
   &:hover {
-    transition: all 0.2s;
     transform: scale(1.05);
+  }
+  &:hover p {
+    color: red;
+  }
+  &:hover::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
   }
 `;
 
