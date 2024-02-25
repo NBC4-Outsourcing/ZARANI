@@ -20,12 +20,16 @@ export const ReviewList = () => {
       }
     };
     fetchData();
+
+    // 이미지 불러오기
+    // const { data, error } = await supabase.storage.from('avatars').download('folder/avatar1.png')
   }, []);
+
   return (
     <ContentsList>
       {reviewData?.map((item, idx) => (
         <div key={idx}>
-          {/* <img src={item.reviewimg && item.reviewimg} alt="리뷰 이미지" /> */}
+          <img src={item.reviewimg && item.reviewimg} alt="리뷰 이미지" />
           <div>{item.nickname}</div>
           <div>{item.content}</div>
           <div>{getFormattedDate(item.date)}</div>

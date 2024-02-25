@@ -8,11 +8,13 @@ import {
   ReviewFormWrapper,
   ReviewHeader
 } from 'components/styles/ReviewStyle';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import defaultImage from '../../assets/defaultImage.png';
 import useInput from '../../hooks/useInput';
 
 const ReviewForm = () => {
+  const imgRef = useRef(null);
+
   const [reviewContentInput, , reviewContentHandler, reset] = useInput({
     reviewContent: ''
   });
@@ -57,33 +59,26 @@ const ReviewForm = () => {
   }, []);
   const [{ email, nickname, avatar, uid }] = userInfo;
 
-  // storage imgname
-  const imgName = uid;
-
   // DB에 후기 등록
   const addReview = async (e) => {
     e.preventDefault();
 
     // storage에 이미지 등록
-    // 왜!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 왜 이미지 등록이 안되냐!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!왜!!!!!!!!!!!!!!!!!!!
-    // 생각을 정리해보자, 스토리지에 이미지를 저장할거임
-    // 버킷 이름은 리뷰이미지, 업로드 폴더는 리뷰파일 이미지 이름은 uid로 만든 imgname 저장할 파일은 state에 createURL로 담았다고!!!!!!!그럼 스테이트에 이미지 url이 저장될거아냐!!아아아앙ㄺ!!!
-    // 해결방법 찾기
-    // 1. 저장된 이미지 url을 먼저 살펴보자 > 블롭으로들어감
-    let imgData = null;
+
+    // 이미지 url을 게시물 테이블에 text로 저장하면 블롭형태로 저장되어 새로고침 또는 다른탭에 들어갔다 나오면 저장된 이미지가 사라진다 하지만 게시물 테이블엔 존재함 그럼 이미지를 로컬스토리지에 한번 더 저장하면 되지 않나?
+
     if (addImg) {
-      const { data, error } = await supabase.storage.from('reviewImage').upload(`reviewFile/${imgName}`, addImg, {
+      const imgPath = imgRef.current.files[0];
+
+      const { data, error } = await supabase.storage.from('reviewImage').upload(`reviewFile/${uid}`, imgPath, {
         cacheControl: '3600',
         upsert: false
       });
       console.log('data', data);
-
       console.log('addImg', addImg);
 
       if (!error) {
-        imgData = data;
         console.log('data', data);
-        return imgData;
       } else {
         console.error('error', error);
       }
@@ -95,7 +90,7 @@ const ReviewForm = () => {
       nickname,
       avatar,
       content: reviewContent,
-      reviewimg: imgData ? imgData : null
+      reviewimg: addImg ? addImg : null
     };
     console.log('reviewimg', addImg);
 
@@ -130,7 +125,7 @@ const ReviewForm = () => {
                   {/* 이미지를 추가하기 전 기본 이미지가 보이고 추가 시 등록한 이미지를 띄움 */}
                   <img src={addImg ? addImg : defaultImage} alt="이미지" />
                   <p>{addImg ? '이미지 변경 시 이미지를 클릭해 주세요' : '이미지 추가 시 이미지를 클릭해 주세요'}</p>
-                  <input onChange={previewImg} type="file" accept="image/*" />
+                  <input ref={imgRef} onChange={previewImg} type="file" accept="image/*" />
                 </label>
                 <button onClick={addCancell}>이미지 등록 취소</button>
               </AddFormImg>
