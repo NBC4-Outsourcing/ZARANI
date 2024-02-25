@@ -11,6 +11,7 @@ import {
 import React from 'react';
 import { getFormattedDate } from './formattedDate';
 import useInput from 'hooks/useInput';
+import { updateWrite } from './ComunitySupabase';
 
 const ComunityWriteEditForm = ({ item, setEditFormId }) => {
   const [changeContent, , onChangeContentHandler, ,] = useInput({
@@ -18,6 +19,15 @@ const ComunityWriteEditForm = ({ item, setEditFormId }) => {
   });
 
   const { changeContents } = changeContent;
+
+  const onClickChnageContentBtn = (id) => {
+    const newContent = {
+      content: changeContents
+    };
+    updateWrite(newContent, id);
+    setEditFormId(null);
+  };
+
   const onClickCancleBtn = () => {
     setEditFormId(null);
   };
@@ -28,6 +38,7 @@ const ComunityWriteEditForm = ({ item, setEditFormId }) => {
         <WriteNickName>0 6{item.nickname}</WriteNickName>
       </WriteHead>
       <EditFormInput
+        name="changeContents"
         value={changeContents}
         onChange={onChangeContentHandler}
         maxLength={'80'}
@@ -36,7 +47,7 @@ const ComunityWriteEditForm = ({ item, setEditFormId }) => {
       <WriteFoot>
         <WriteDate>{getFormattedDate(item.date)}</WriteDate>
         <WriteButtons>
-          <button>수정완료</button>
+          <button onClick={() => onClickChnageContentBtn(item.id)}>수정완료</button>
           <button onClick={onClickCancleBtn}>취소</button>
         </WriteButtons>
       </WriteFoot>
