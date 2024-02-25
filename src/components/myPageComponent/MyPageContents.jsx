@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setThumnailImg, setUserInfo, setSelectFile } from 'shared/redux/modules/userSlice';
-import * as MP from 'components/styles/MyPageStyle';
+import { updateUserInfo, uploadImage } from './myPageSupabase';
 import { supabase } from 'api/supabase/supabase';
 import useInput from 'hooks/useInput';
-import { updateImage, updateUserInfo, uploadImage } from './myPageSupabase';
+import * as MP from 'components/styles/MyPageStyle';
 
 const MyPageContents = () => {
   const dispatch = useDispatch();
@@ -14,9 +14,6 @@ const MyPageContents = () => {
   const [editValue, setEditValue, onChange, reset] = useInput({
     nickname
   });
-  console.log(email);
-  console.log(avatar);
-  console.log(selectImage);
   const editValueNickname = editValue.nickname;
   // const currEmail = email ? email : null;
   const currEmail = email;
@@ -34,7 +31,6 @@ const MyPageContents = () => {
     if (!selectImage) {
       alert('이미지를 선택해주세요!');
     }
-    console.log('selectImage', selectImage);
     if (selectImage) {
       const filePath = `${uid}/${selectImage}`;
       const data = uploadImage(filePath, selectImage);
@@ -42,8 +38,7 @@ const MyPageContents = () => {
       const imageUrl = supabase.storage.from('userImage').getPublicUrl(data.path);
       const ImgDbUrl = imageUrl.data.publicUrl;
       const newData = { nickname: editValueNickname, avatar: selectImage };
-      console.log(ImgDbUrl);
-      console.log(newData);
+
       await updateUserInfo(newData, id);
       dispatch(setUserInfo(newData));
       dispatch(setSelectFile(ImgDbUrl));
@@ -60,15 +55,11 @@ const MyPageContents = () => {
     const imgFile = e.target.files[0];
     if (!imgFile) return;
     if (imgFile) {
-      // dispatch(setSelectFile(imgFile.name));
-      if (imgFile) {
-        // const blob = new Blob([reader.result], { type: 'image/*' });
-        let image = URL.createObjectURL(imgFile);
-        console.log(image);
-        dispatch(setUserInfo({ avata: image }));
-        dispatch(setSelectFile(image));
-        dispatch(setThumnailImg(image));
-      }
+      // const blob = new Blob([reader.result], { type: 'image/*' });
+      let image = URL.createObjectURL(imgFile);
+      dispatch(setUserInfo({ avata: image }));
+      dispatch(setSelectFile(image));
+      dispatch(setThumnailImg(image));
     }
   };
 
