@@ -28,11 +28,7 @@ const imageSlice = createSlice({
     setThumnailImg: (state, action) => {
       state.thumnailImage = action.payload;
     }
-    // setUserInfo: (state, aciton) => {
-    //   state.userInfo = { ...state.userInfo, ...aciton.payload };
-    // }
   }
-  // ,extraReducers: {}
 });
 
 export const { setUserInfo, setSelectFile, setThumnailImg } = imageSlice.actions;
