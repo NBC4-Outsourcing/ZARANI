@@ -51,28 +51,27 @@ const WritingList = () => {
     <>
       {modalOpen ? <CommentInputForm onClickCommentHandler={onClickCommentHandler} writeId={writeId} /> : false}
       {data.map((item) => {
-        return editFormId === item.id ? (
+        return (
           <WriteListSection key={item.id}>
-            <ComunityWriteEditForm />
-            <CommentList writeId={item.id} />
-          </WriteListSection>
-        ) : (
-          <WriteListSection key={item.id}>
-            <WriteConteiner>
-              <WriteHead>
-                <WriteImage src={item.avatar} />
-                <WriteNickName>{item.nickname}</WriteNickName>
-              </WriteHead>
-              <WriteContent>{item.content}</WriteContent>
-              <WriteFoot>
-                <WriteDate>{getFormattedDate(item.date)}</WriteDate>
-                <WriteButtons>
-                  <button onClick={() => onClickCommentHandler(item.id)}>댓글</button>
-                  <button onClick={() => onClickEditForm(item.id)}>수정</button>
-                  <button onClick={() => onClicDeleteHandler(item.id)}>삭제</button>
-                </WriteButtons>
-              </WriteFoot>
-            </WriteConteiner>
+            {editFormId === item.id ? (
+              <ComunityWriteEditForm item={item} setEditFormId={setEditFormId} />
+            ) : (
+              <WriteConteiner>
+                <WriteHead>
+                  <WriteImage src={item.avatar} />
+                  <WriteNickName>{item.nickname}</WriteNickName>
+                </WriteHead>
+                <WriteContent>{item.content}</WriteContent>
+                <WriteFoot>
+                  <WriteDate>{getFormattedDate(item.date)}</WriteDate>
+                  <WriteButtons>
+                    <button onClick={() => onClickCommentHandler(item.id)}>댓글</button>
+                    <button onClick={() => onClickEditForm(item.id)}>수정</button>
+                    <button onClick={() => onClicDeleteHandler(item.id)}>삭제</button>
+                  </WriteButtons>
+                </WriteFoot>
+              </WriteConteiner>
+            )}
             <CommentList writeId={item.id} />
           </WriteListSection>
         );
