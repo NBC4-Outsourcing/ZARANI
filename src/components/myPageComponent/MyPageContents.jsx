@@ -50,7 +50,7 @@ const MyPageContents = ({ data }) => {
     if (selectImage) {
       console.log(selectImage);
       const filePath = `userImage/${uid}`;
-      const data = await uploadImage(filePath, image);
+      const data = await uploadImage(filePath, selectImage);
       console.log(data);
       const { data: imageUrl, error } = supabase.storage.from('unAuthUserImage').getPublicUrl(data.path);
       const ImgDbUrl = imageUrl.data.publicUrl;
