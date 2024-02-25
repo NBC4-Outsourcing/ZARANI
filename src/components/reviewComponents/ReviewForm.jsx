@@ -1,27 +1,22 @@
+import { supabase } from 'api/supabase/supabase';
 import {
   AddFormContent,
   AddFormImg,
   AddFormTextarea,
   AddImgText,
-  ContentsList,
   FormContainer,
   ReviewFormWrapper,
   ReviewHeader
 } from 'components/styles/ReviewStyle';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import defaultImage from '../../assets/defaultImage.png';
 import useInput from '../../hooks/useInput';
-import { supabase } from 'api/supabase/supabase';
-import { getFormattedDate } from 'components/comunityComponents/formattedDate';
 
 const ReviewForm = () => {
   const [reviewContentInput, , reviewContentHandler, reset] = useInput({
     reviewContent: ''
   });
   const { reviewContent } = reviewContentInput;
-
-  // 데이터베이스에 저장된 후기 데이터
-  const [reviewData, setReviewData] = useState([]);
 
   // 이미지 state
   const [isImg, setIsImg] = useState(false);
@@ -35,25 +30,12 @@ const ReviewForm = () => {
       setAddImg(imgUrl);
     }
   };
-  // 이미지 미리보기 삭제 함수
-  const imgRemove = (e) => {
+  // 이미지 등록 취소
+  const addCancell = (e) => {
+    e.preventDefault();
     setAddImg(null);
+    setIsImg(false);
   };
-
-  // DB에 저장된 후기 데이터 가져오기
-  useEffect(() => {
-    const fetchData = async () => {
-      let { data: reviewWrite, error } = await supabase.from('reviewWrite').select('*');
-      if (reviewWrite) {
-        console.log('reviewWrite', reviewWrite);
-        setReviewData(reviewWrite);
-        return reviewWrite;
-      } else {
-        console.log('error', error);
-      }
-    };
-    fetchData();
-  }, []);
 
   // DB에 후기 등록
   const addReview = async (e) => {
@@ -63,20 +45,22 @@ const ReviewForm = () => {
       email: 'test02',
       nickname: '나나',
       content: reviewContent,
-      reviewimg:
-        'https://mblogthumb-phinf.pstatic.net/MjAyMDExMjJfMjMw/MDAxNjA2MDIxNzgyMzk1.H09oyhSnEC7iSlVtZ0NZsoP232HxEz_dVpvZCqBWVKAg.zLozKpLG7vaRUzYu2dst60JGAgYkMcDoEsgCp5dPZVsg.JPEG.krysaetal/IMG_7852.jpg?type=w800'
+      reviewimg: addImg ? addImg : null
     };
-    console.log('content', reviewContent);
+    console.log('reviewimg', addImg);
+
     // 데이터 등록
     const { data, error } = await supabase.from('reviewWrite').insert([newReviews]).select();
-    if (data) {
+    if (!error) {
       alert('후기가 등록 되었습니다.');
+      reset();
+      setAddImg(null);
+      setIsImg(false);
       return data;
     } else {
       alert('후기 등록에 실패했습니다.');
       console.error(error);
     }
-    reset();
   };
 
   return (
@@ -97,7 +81,7 @@ const ReviewForm = () => {
                   <img src={addImg ? addImg : defaultImage} alt="이미지" />
                   <input onChange={previewImg} type="file" accept="image/*" />
                 </label>
-                <button onClick={imgRemove}>이미지 삭제</button>
+                <button onClick={addCancell}>이미지 등록 취소</button>
               </AddFormImg>
             )}
             <AddFormTextarea
@@ -110,20 +94,6 @@ const ReviewForm = () => {
           </AddFormContent>
           <button type="submit">등록</button>
         </FormContainer>
-        {/*  */}
-        {/* 조회 목록 테스트용 */}
-        <ContentsList>
-          {reviewData?.map((item, idx) => (
-            <div key={idx}>
-              <img src={item.reviewimg} alt="리뷰 이미지" />
-              <div>{item.nickname}</div>
-              <div>{item.content}</div>
-              <div>{getFormattedDate(item.date)}</div>
-              <button>수정</button>
-              <button>삭제</button>
-            </div>
-          ))}
-        </ContentsList>
       </ReviewFormWrapper>
     </div>
   );
