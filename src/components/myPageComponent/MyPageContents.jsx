@@ -50,7 +50,7 @@ const MyPageContents = () => {
       console.log(error);
     }
 
-    dispatch(setUserInfo({ nickname: editValueNickname }));
+    dispatch(setUserInfo({ nickname: editValueNickname, avatar: selectImage }));
     updateUserInfo({ nickname: editValueNickname, avatar: selectImage }, id);
   };
 
@@ -63,8 +63,7 @@ const MyPageContents = () => {
     if (!e.target.files) return;
 
     const imgFile = e.target.files[0];
-
-    // console.log(fileExt);
+    console.log(imgFile);
     if (imgFile) {
       let image = URL.createObjectURL(imgFile);
       dispatch(setSelectFile(image));
@@ -76,7 +75,7 @@ const MyPageContents = () => {
     e.preventDefault();
     setIsEdit(true);
     setEditValue({ nickname });
-    dispatch(setThumnailImg(selectImage));
+    // dispatch(setThumnailImg(selectImage));
   };
   // 이미지 편집 취소
   const onEditCancelHandler = (e) => {
