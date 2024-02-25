@@ -14,7 +14,6 @@ const MainPageComunity = () => {
   }
   return (
     <S.ComuWrapper>
-      {console.log(data)}
       <S.TitleSection>커뮤니티</S.TitleSection>
       <S.ContentSection>
         {/* map으로 그릴 부분 */}

@@ -1,4 +1,10 @@
 import styled from 'styled-components';
+import img1 from '../../assets/2.png';
+import img2 from '../../assets/3.png';
+import img3 from '../../assets/4.png';
+import img4 from '../../assets/5.png';
+import img5 from '../../assets/6.png';
+import img6 from '../../assets/7.png';
 
 //MainPage.jsx
 export const MainWrapper = styled.div`
@@ -112,10 +118,94 @@ export const ListSection = styled.div`
   justify-content: space-between;
   margin: 10px 0;
 `;
-export const ImgList = styled.img`
+export const ListIncheon = styled.div`
+  border: 1px solid black;
   width: 30%;
   height: 100%;
   cursor: pointer;
+  background-image: url(${img1});
+  background-repeat: no-repeat;
+  background-size: cover;
+  &:hover {
+    transition: all 0.2s;
+    transform: scale(1.05);
+  }
+`;
+export const ListKangWondo = styled.div`
+  border: 1px solid black;
+  display: flex;
+  width: 30%;
+  height: 100%;
+  cursor: pointer;
+  font-size: 30px;
+  font-weight: 1000;
+  color: white;
+  align-items: center;
+  justify-content: center;
+  background-image: url(${img2});
+  background-size: cover;
+  transition: all 0.2s;
+  &:hover {
+    transform: scale(1.05);
+  }
+  &:hover p {
+    color: white;
+  }
+  &:hover::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+`;
+export const ListSeoul = styled.div`
+  border: 1px solid black;
+  width: 30%;
+  height: 100%;
+  cursor: pointer;
+  background-image: url(${img3});
+  background-repeat: no-repeat;
+  background-size: cover;
+  &:hover {
+    transition: all 0.2s;
+    transform: scale(1.05);
+  }
+`;
+export const ListJunra = styled.div`
+  border: 1px solid black;
+  width: 30%;
+  height: 100%;
+  cursor: pointer;
+  background-image: url(${img4});
+  background-repeat: no-repeat;
+  background-size: cover;
+  &:hover {
+    transition: all 0.2s;
+    transform: scale(1.05);
+  }
+`;
+export const ListChungcheonDo = styled.div`
+  border: 1px solid black;
+  width: 30%;
+  height: 100%;
+  cursor: pointer;
+  background-image: url(${img5});
+  background-repeat: no-repeat;
+  background-size: cover;
+  &:hover {
+    transition: all 0.2s;
+    transform: scale(1.05);
+  }
+`;
+export const ListJeJu = styled.div`
+  border: 1px solid black;
+  width: 30%;
+  height: 100%;
+  cursor: pointer;
+  background-image: url(${img6});
+  background-repeat: no-repeat;
+  background-size: cover;
   &:hover {
     transition: all 0.2s;
     transform: scale(1.05);
