@@ -11,6 +11,7 @@ const MyPage = () => {
   const dispatch = useDispatch();
 
   const { isLoading, isError, data } = useQuery('user', readUserInfo);
+  console.log(data);
   dispatch(setUserInfo(data));
 
   if (isLoading) return <div>로딩중입니다...</div>;

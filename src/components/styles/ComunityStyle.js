@@ -84,6 +84,16 @@ export const WriteButtons = styled.div`
   justify-content: space-between;
 `;
 
+// ComunityWriteEditForm.jsx style(WritingList.jsx 그대로 사용하는데 일부만 변경)
+export const EditFormInput = styled.textarea`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  height: 35%;
+  padding: 1.5%;
+`;
+
 // CommentList.jsx style
 export const CommentListSection = styled.section`
   border: 1px solid black;

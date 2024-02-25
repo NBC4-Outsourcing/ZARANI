@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { settingSelectFile, setThumnailImg, setUserInfo } from 'shared/redux/modules/userSlice';
-import * as MP from 'components/styles/MyPageStyle';
+import { setThumnailImg, setUserInfo, setSelectFile } from 'shared/redux/modules/userSlice';
+import { updateUserInfo, uploadImage } from './myPageSupabase';
 import { supabase } from 'api/supabase/supabase';
 import useInput from 'hooks/useInput';
+import * as MP from 'components/styles/MyPageStyle';
 
 const MyPageContents = () => {
   const dispatch = useDispatch();
@@ -14,56 +15,54 @@ const MyPageContents = () => {
     nickname
   });
   const editValueNickname = editValue.nickname;
-  const currEmail = email ? email : null;
+  // const currEmail = email ? email : null;
+  const currEmail = email;
   // 이미지, 닉네임, 내용 DB저장
   const onSubmitHandler = async (e) => {
     e.preventDefault();
-    if (selectImage) {
-      try {
-        const { data, error } = await supabase.storage
-          .from('userImage')
-          .upload(`${currEmail}/${uid}`, selectImage, { cacheControl: '3600', upsert: false });
-        alert('수정이 완료됐습니다.!');
-        if (error) {
-          alert('파일이 업로드 되지 않았습니다.');
-          return;
-        }
-        try {
-          const res = await supabase.storage.from('userImage').getPublicUrl(data.path);
-          console.log(res);
-          dispatch(settingSelectFile(res.data.publicUrl));
-          // dispatch(setUserInfo(editValue));
-        } catch (error) {
-          console.log(error);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    }
+
     const editSaveCheck = window.confirm('수정내용을 저장하시겠습니까?');
     if (editSaveCheck === false) {
       alert('수정을 취소하셨습니다.');
       setIsEdit(false);
       return;
     }
-    dispatch(setUserInfo(editValue));
+
+    if (!selectImage) {
+      alert('이미지를 선택해주세요!');
+    }
+    if (selectImage) {
+      const filePath = `${uid}/${selectImage}`;
+      const data = uploadImage(filePath, selectImage);
+
+      const imageUrl = supabase.storage.from('userImage').getPublicUrl(data.path);
+      const ImgDbUrl = imageUrl.data.publicUrl;
+      const newData = { nickname: editValueNickname, avatar: selectImage };
+
+      await updateUserInfo(newData, id);
+      dispatch(setUserInfo(newData));
+      dispatch(setSelectFile(ImgDbUrl));
+      dispatch(setThumnailImg(ImgDbUrl));
+    }
   };
 
   // 이미지 등록
   const onChangeAddImage = (e) => {
     e.preventDefault();
     if (selectImage === null) return;
-    dispatch(setUserInfo({ avata: selectImage }));
-
-    if (!e.target.files) return;
+    // dispatch(setUserInfo({ avata: selectImage }));
 
     const imgFile = e.target.files[0];
+    if (!imgFile) return;
     if (imgFile) {
-      let image = window.URL.createObjectURL(imgFile);
-      dispatch(settingSelectFile(image));
+      // const blob = new Blob([reader.result], { type: 'image/*' });
+      let image = URL.createObjectURL(imgFile);
+      dispatch(setUserInfo({ avata: image }));
+      dispatch(setSelectFile(image));
       dispatch(setThumnailImg(image));
     }
   };
+
   // 이미지 편집 모드
   const onEditContentsHandler = (e) => {
     e.preventDefault();
@@ -80,7 +79,7 @@ const MyPageContents = () => {
     <MP.MyPageContentsForm>
       <MP.ImgWrapDiv>
         <MP.ThumnailImg>
-          <img src={avatar ? avatar : thumnailImage} alt="기본이미지" />
+          <img src={thumnailImage} alt="기본이미지" />
         </MP.ThumnailImg>
         <MP.ImgFileInput type="file" accept="image/*" id="imgfileChoice" onChange={onChangeAddImage} />
         {!isEdit ? (
@@ -131,3 +130,16 @@ const MyPageContents = () => {
 };
 
 export default MyPageContents;
+//    const reader = new FileReader();
+//    reader.onloadend = () => {
+//      if (reader.result instanceof ArrayBuffer) {
+//        const blob = new Blob([reader.result], { type: 'image/*' });
+//        const image = URL.createObjectURL(blob);
+//        console.log(image);
+//        dispatch(setUserInfo({ avatar: image }));
+//        dispatch(setSelectFile(image));
+//        dispatch(setThumnailImg(image));
+//      }
+//      reader.readAsArrayBuffer(imgFile);
+//      console.log(reader);
+//    };
