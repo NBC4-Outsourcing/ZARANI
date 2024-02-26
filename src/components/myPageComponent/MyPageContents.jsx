@@ -8,7 +8,7 @@ import { useQuery } from 'react-query';
 import useSetMutation from 'hooks/useSetMutations';
 import defaultImg from 'assets/defaultImage.png';
 
-const MyPageContents = ({ data }) => {
+const MyPageContents = ({ data, isLoading }) => {
   const dispatch = useDispatch();
   const { id, email, nickname, avatar, uid } = data;
   const mutation = useSetMutation(updateUserInfo, 'usersAccounts');
@@ -19,7 +19,7 @@ const MyPageContents = ({ data }) => {
     nickname
   });
   const editValueNickname = editValue.nickname || '';
-
+  if (isLoading) return <div>로딩중입니다...</div>;
   // useEffect(() => {
   //   const mutationData = async () => {
   //     if (data) {
@@ -31,7 +31,7 @@ const MyPageContents = ({ data }) => {
   // }, [dispatch, data, avatar]);
   // 이미지, 닉네임, 내용 DB저장
 
-  const [downloadImgMutation] = useSetMutation(downloadImage, 'unAuthUserImage');
+  // const [downloadImgMutation] = useSetMutation(downloadImage, 'unAuthUserImage');
   const onSubmitHandler = async (e) => {
     e.preventDefault();
 
