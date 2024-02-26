@@ -4,7 +4,7 @@ import { useQuery } from 'react-query';
 import { getCommunityList } from './mainPageSupabase';
 
 const MainPageCommunity = () => {
-  const { isLoading, isError, data } = useQuery('communityList', getCommunityList);
+  const { isLoading, isError, data } = useQuery('communityWrite', getCommunityList);
 
   if (isLoading) {
     return <div>로딩중 입니다.</div>;
