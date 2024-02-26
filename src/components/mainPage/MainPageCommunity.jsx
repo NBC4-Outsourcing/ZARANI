@@ -1,10 +1,10 @@
 import React from 'react';
 import * as S from '../styles/mainPageStyle';
 import { useQuery } from 'react-query';
-import { getComunityList } from './mainPageSupabase';
+import { getCommunityList } from './mainPageSupabase';
 
-const MainPageComunity = () => {
-  const { isLoading, isError, data } = useQuery('comunityList', getComunityList);
+const MainPageCommunity = () => {
+  const { isLoading, isError, data } = useQuery('communityList', getCommunityList);
 
   if (isLoading) {
     return <div>로딩중 입니다.</div>;
@@ -24,4 +24,4 @@ const MainPageComunity = () => {
   );
 };
 
-export default MainPageComunity;
+export default MainPageCommunity;
