@@ -1,10 +1,10 @@
 import React from 'react';
 import * as S from '../styles/mainPageStyle';
 import { useQuery } from 'react-query';
-import { getComunityList } from './mainPageSupabase';
+import { getCommunityList } from './mainPageSupabase';
 
-const MainPageComunity = () => {
-  const { isLoading, isError, data } = useQuery('communityWrite', getComunityList);
+const MainPageCommunity = () => {
+  const { isLoading, isError, data } = useQuery('communityWrite', getCommunityList);
 
   if (isLoading) {
     return <div>로딩중 입니다.</div>;
@@ -12,8 +12,6 @@ const MainPageComunity = () => {
   if (isError) {
     <div>Not Found Data</div>;
   }
-  // db 커뮤니티 데이터
-  // console.log(data);
   return (
     <S.ComuWrapper>
       <S.TitleSection>커뮤니티</S.TitleSection>
@@ -26,4 +24,4 @@ const MainPageComunity = () => {
   );
 };
 
-export default MainPageComunity;
+export default MainPageCommunity;

@@ -1,7 +1,7 @@
 import React from 'react';
 import * as S from '../styles/mainPageStyle';
 import MainPageHeader from './MainPageHeader';
-import MainPageComunity from './MainPageComunity';
+import MainPageCommunity from './MainPageCommunity';
 import MainPageNav from './MainPageNav';
 import MainPageMap from './MainPageMap';
 import MainPageSerch from './MainPageSerch';
@@ -12,7 +12,7 @@ const MainPage = () => {
       <MainPageHeader />
       <S.MainWrapper>
         <div>
-          <MainPageComunity />
+          <MainPageCommunity />
           <MainPageNav />
           {/* <MainPageSerch /> */}
         </div>

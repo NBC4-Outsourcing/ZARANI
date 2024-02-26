@@ -1,16 +1,16 @@
-import { ComunityForm, ComunityInput } from 'components/styles/ComunityStyle';
+import { CommunityForm, CommunityInput } from 'components/styles/CommunityStyle';
 import useInput from 'hooks/useInput';
-import { insertWriting } from './ComunitySupabase';
+import { insertWriting } from './CommunitySupabase';
 import useSetMutation from 'hooks/useSetMutations';
 
-const ComunityInputForm = () => {
+const CommunityInputForm = () => {
   // 커뮤니티 글 input value,onchange
   const [content, , onChangeContentHandler, reset] = useInput({
     writeContent: ''
   });
 
   const { writeContent } = content;
-  const [mutation] = useSetMutation(insertWriting, 'comunityWriteList');
+  const [mutation] = useSetMutation(insertWriting, 'communityWriteList');
 
   // 커뮤니티 글 등록 함수
   const onSubmitHandler = async (e) => {
@@ -28,9 +28,9 @@ const ComunityInputForm = () => {
 
   return (
     <div>
-      <ComunityForm onSubmit={onSubmitHandler}>
+      <CommunityForm onSubmit={onSubmitHandler}>
         <label>보라돌이</label>
-        <ComunityInput
+        <CommunityInput
           maxLength={'80'}
           placeholder="최대 80자까지만 입력할 수 있습니다."
           name="writeContent"
@@ -38,9 +38,9 @@ const ComunityInputForm = () => {
           onChange={onChangeContentHandler}
         />
         <button type="submit">등록</button>
-      </ComunityForm>
+      </CommunityForm>
     </div>
   );
 };
 
-export default ComunityInputForm;
+export default CommunityInputForm;

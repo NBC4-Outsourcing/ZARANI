@@ -1,6 +1,6 @@
 import { supabase } from 'api/supabase/supabase';
 
-const getComunityList = async () => {
+const getCommunityList = async () => {
   try {
     const data = (await supabase.from('communityWrite').select('*')).data;
     return data;
@@ -19,4 +19,4 @@ const getUserImage = async () => {
   }
 };
 
-export { getComunityList, getUserImage };
+export { getCommunityList, getUserImage };

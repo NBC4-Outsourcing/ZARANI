@@ -7,11 +7,10 @@ import { useQuery } from 'react-query';
 
 const MainPageHeader = () => {
   const [isLogin, setIsLogin] = useState(true);
+  const { isLoading, data } = useQuery('usersAccounts', getUserImage);
   const navigate = useNavigate();
-  const { isLoading, data } = useQuery('comunityList', getUserImage);
-
-  const handComunityPage = () => {
-    navigate('/comunity');
+  const handCommunityPage = () => {
+    navigate('/community');
   };
   const handLoginPage = () => {
     navigate('/login');
@@ -30,8 +29,8 @@ const MainPageHeader = () => {
       <S.LogoImage src={img} />
       {isLogin ? (
         <S.LoginStyle>
-          <S.StBtn onClick={handComunityPage}> 커뮤니티</S.StBtn>
-          <S.AvatarStyle onClick={handMypage} src={data} />
+          <S.StBtn onClick={handCommunityPage}> 커뮤니티</S.StBtn>
+          <S.AvatarStyle src={data} onClick={handMypage} />
           <S.LogoutBtn onClick={handLogOut}>로그아웃</S.LogoutBtn>
         </S.LoginStyle>
       ) : (
