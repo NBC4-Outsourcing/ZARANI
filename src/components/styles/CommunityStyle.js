@@ -140,6 +140,7 @@ export const CommentListSection = styled.section`
   width: 40%;
   height: 250px;
   overflow: auto;
+  scrollbar-width: none;
 `;
 
 export const CommentListContainer = styled.div`
@@ -191,8 +192,8 @@ export const CommentInputFormBackGround = styled.div`
 `;
 
 export const CommentInputFormStyle = styled.form`
-  width: 300px;
-  height: 200px;
+  width: 400px;
+  height: 300px;
   z-index: 999;
   position: absolute;
   top: 50%;
@@ -201,4 +202,30 @@ export const CommentInputFormStyle = styled.form`
   border-radius: 8px;
   background-color: whitesmoke;
   padding: 1%;
+`;
+
+export const CommentListName = styled.p`
+  width: 50%;
+  height: 13%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: lightgray;
+  border-radius: 8px;
+`;
+
+export const CommentInputTextarea = styled.textarea`
+  width: 100%;
+  height: 70%;
+  margin-top: 5px;
+  background-color: lightgray;
+  border: none;
+  border-radius: 8px;
+  padding: 15px;
+  resize: none;
+`;
+
+export const CommentInputBtnDiv = styled.div`
+  display: flex;
+  gap: 75%;
 `;
