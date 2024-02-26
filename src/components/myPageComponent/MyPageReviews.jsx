@@ -3,6 +3,7 @@ import { useQuery } from 'react-query';
 import { readMyReview } from './myPageSupabase';
 import { getFormattedDate } from 'components/comunityComponents/formattedDate';
 import { supabase } from 'api/supabase/supabase';
+import { Link } from 'react-router-dom';
 
 const MyPageReviews = () => {
   const { data: myReview, error, isLoading } = useQuery('myReviews', readMyReview); //     let reviewArray = [];
@@ -30,11 +31,13 @@ const MyPageReviews = () => {
         myReview.map((reviews) => {
           const { id, nickname, content, date, email } = reviews;
           return (
-            <section key={id}>
-              <div>도로이름 : 안양천길 </div>
-              <div>content: {content}</div>
-              <div>{new Date(date).toLocaleDateString()}</div>
-            </section>
+            <Link to={`/Review/${id}`}>
+              <section key={id}>
+                <div>도로이름 : 안양천길 </div>
+                <div>content: {content}</div>
+                <div>{new Date(date).toLocaleDateString()}</div>
+              </section>
+            </Link>
           );
         })}
     </article>

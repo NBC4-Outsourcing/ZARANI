@@ -4,13 +4,12 @@ import { downloadImage, getImageUrl, readUserInfo, updateUserInfo, uploadImage }
 import { supabase } from 'api/supabase/supabase';
 import useInput from 'hooks/useInput';
 import * as MP from 'components/styles/MyPageStyle';
-// import { useQuery } from 'react-query';
+import { useQuery } from 'react-query';
 import useSetMutation from 'hooks/useSetMutations';
 import defaultImg from 'assets/defaultImage.png';
 
-const MyPageContents = ({ data }) => {
+const MyPageContents = () => {
   const dispatch = useDispatch();
-  const { id, email, nickname, avatar, uid } = data;
   const [selectImage, setSelectImage, ,] = useInput(defaultImg);
   const [thumnailImage, setThumnailImage, ,] = useInput(avatar || defaultImg);
   const [isEdit, setIsEdit] = useState(false);
@@ -18,6 +17,11 @@ const MyPageContents = ({ data }) => {
     nickname
   });
   const editValueNickname = editValue.nickname;
+  const { isLoading, isError, data } = useQuery('usersAccounts', readUserInfo);
+  const { id, email, nickname, avatar, uid } = data;
+
+  if (isLoading) return <div>로딩중입니다...</div>;
+  if (isError) return <div>오류로 인해 정보를 받아오지 못 하고 있습니다.</div>;
 
   // useEffect(() => {
   //   const mutationData = async () => {
