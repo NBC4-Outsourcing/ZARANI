@@ -1,5 +1,12 @@
 import { supabase } from 'api/supabase/supabase';
 
+const getUser = async () => {
+  const {
+    data: { user }
+  } = await supabase.auth.getUser();
+  return user;
+};
+
 const insertWriting = async (newWrite) => {
   const { error } = await supabase.from('communityWrite').insert([newWrite]).select();
   if (error) {
@@ -57,4 +64,4 @@ const deleteComment = async (id) => {
     alert('삭제하지 못 했습니다.');
   }
 };
-export { insertWriting, getWriteList, updateWrite, deleteWrite, insertComment, getCommentList, deleteComment };
+export { getUser, insertWriting, getWriteList, updateWrite, deleteWrite, insertComment, getCommentList, deleteComment };

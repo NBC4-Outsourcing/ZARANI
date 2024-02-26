@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import { deleteWrite, getCommentList, getWriteList } from './CommunitySupabase';
 import {
+  CommunityBtn,
   WriteButtons,
   WriteContainer,
   WriteContent,
@@ -17,6 +18,7 @@ import CommentInputForm from './CommentInputForm';
 import { getFormattedDate } from './formattedDate';
 import CommunityWriteEditForm from './CommunityWriteEditForm';
 import useSetMutation from 'hooks/useSetMutations';
+import Loading from '../common/Loading';
 
 const WritingList = () => {
   const { isLoading, isError, data: writeList } = useQuery('communityWriteList', getWriteList);
@@ -33,7 +35,7 @@ const WritingList = () => {
     if (filterComment.length === 0) {
       mutation.mutate(id);
     } else {
-      alert('댓글이있어');
+      alert('댓글이 있어서 삭제가 불가능 합니다.');
     }
   };
 
@@ -51,7 +53,7 @@ const WritingList = () => {
   };
 
   if (isLoading) {
-    return <div>로딩 중입니다</div>;
+    return <Loading />;
   }
   if (isError) {
     alert('글의 정보를 가져오지 못했습니다.');
@@ -79,9 +81,11 @@ const WritingList = () => {
                   <WriteFoot>
                     <WriteDate>{getFormattedDate(item.date)}</WriteDate>
                     <WriteButtons>
-                      <button onClick={() => onClickCommentHandler(item.id)}>댓글</button>
-                      <button onClick={() => onClickEditForm(item.id)}>수정</button>
-                      <button onClick={() => onClickDeleteHandler(item.id)}>삭제</button>
+                      <CommunityBtn onClick={() => onClickCommentHandler(item.id)}>댓글</CommunityBtn>
+                      <CommunityBtn onClick={() => onClickEditForm(item.id)}>수정</CommunityBtn>
+                      <CommunityBtn background={'danger'} onClick={() => onClickDeleteHandler(item.id)}>
+                        삭제
+                      </CommunityBtn>
                     </WriteButtons>
                   </WriteFoot>
                 </WriteContainer>

@@ -8,7 +8,8 @@ import useSetMutation from 'hooks/useSetMutations';
 import defaultImg from 'assets/defaultProfileImage.png';
 import { Navigate, useNavigate } from 'react-router-dom';
 
-const MyPageContents = ({ isLoading }) => {
+const MyPageContents = () => {
+  // const MyPageContents = ({ isLoading }) => {
   const navigate = useNavigate();
   const [isEdit, setIsEdit] = useState(false);
   const [selectImage, setSelectImage] = useState(defaultImg);
@@ -69,23 +70,19 @@ const MyPageContents = ({ isLoading }) => {
       return;
     }
     if (selectImage === null) return;
+
     // storage 내부 저장할 위치(폴더)를 회원 uid 또는 이메일로 정하고 스토리지에 저장.
-    const filePath = `userOneImage/${uid}`;
+    const uuid = crypto.randomUUID();
+    const filePath = `userOneImage/${uid}+${uuid}`;
     try {
       const data = await uploadImage(filePath, selectImage);
       const { data: imageUrl } = supabase.storage.from('unAuthUserImage').getPublicUrl(data.path);
       const ImgDbUrl = imageUrl.publicUrl;
+      console.log(ImgDbUrl);
       setSelectImage(ImgDbUrl);
-      //   // ex ) https://rtjzvtuqyafegkvoirwc.supabase.co/storage/v…ge/userImage/1d25d250-5dea-47f5-a465-05f74a7bd79d'
       const newData = { id, email, nickname: editValueNickname, avatar: ImgDbUrl, uid };
       await updateUserInfo(newData, id);
       setThumnailImage(newData.avatar);
-
-      // if (!ImgDbUrl) {
-      //   alert('사진을 등록해주세요!');
-      // } else {
-      //   alert('사진 등록이 완료됐습니다.');
-      // }
 
       alert('수정이 완료됐습니다.');
       setIsEdit(false);
@@ -108,7 +105,7 @@ const MyPageContents = ({ isLoading }) => {
     setIsEdit(false);
     if (isEdit && selectImage !== thumnailImage) setThumnailImage(avatar);
   };
-  if (isLoading) return <div>로딩중입니다...</div>;
+  // if (isLoading) return <div>로딩중입니다...</div>;
 
   // avatar ? avatar : thumnailImage;
   return (

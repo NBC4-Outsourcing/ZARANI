@@ -1,9 +1,11 @@
 import {
-  CommentListButton,
   CommentListComment,
   CommentListContainer,
+  CommentListHead,
   CommentListInfo,
-  CommentListSection
+  CommentListSection,
+  CommunityBtn,
+  NoComment
 } from 'components/styles/CommunityStyle';
 import React from 'react';
 import { deleteComment } from './CommunitySupabase';
@@ -19,22 +21,30 @@ const CommentList = ({ writeId, commentList, isLoading }) => {
   }
   return (
     <CommentListSection>
-      {filterComment
-        .sort((a, b) => {
-          return new Date(b.date).getTime() - new Date(a.date).getTime();
-        })
-        .map((item) => {
-          return (
-            <CommentListContainer key={item.id}>
-              <CommentListInfo>
-                <p>{item.nickname}</p>
-                <p>{getFormattedDate(item.date)}</p>
-              </CommentListInfo>
-              <CommentListComment>{item.comment}</CommentListComment>
-              <CommentListButton onClick={() => mutation.mutate(item.id)}>삭제</CommentListButton>
-            </CommentListContainer>
-          );
-        })}
+      {filterComment.length !== 0 ? (
+        filterComment
+          .sort((a, b) => {
+            return new Date(b.date).getTime() - new Date(a.date).getTime();
+          })
+          .map((item) => {
+            return (
+              <CommentListContainer key={item.id}>
+                <CommentListInfo>
+                  <CommentListHead>
+                    <p>{getFormattedDate(item.date)}</p>
+                    <p>{item.nickname}</p>
+                  </CommentListHead>
+                  <CommentListComment>{item.comment}</CommentListComment>
+                </CommentListInfo>
+                <CommunityBtn background={'danger'} onClick={() => mutation.mutate(item.id)}>
+                  삭제
+                </CommunityBtn>
+              </CommentListContainer>
+            );
+          })
+      ) : (
+        <NoComment>댓글이 없습니다.</NoComment>
+      )}
     </CommentListSection>
   );
 };
