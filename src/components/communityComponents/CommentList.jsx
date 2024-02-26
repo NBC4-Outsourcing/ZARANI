@@ -6,21 +6,16 @@ import {
   CommentListSection
 } from 'components/styles/CommunityStyle';
 import React from 'react';
-import { useQuery } from 'react-query';
-import { deleteComment, getCommentList } from './CommunitySupabase';
+import { deleteComment } from './CommunitySupabase';
 import { getFormattedDate } from './formattedDate';
 import useSetMutation from 'hooks/useSetMutations';
 
-const CommentList = ({ writeId }) => {
-  const { isLoading, isError, data } = useQuery('commentWriteList', getCommentList);
-  const filterComment = data?.filter((item) => item.writeId === writeId);
+const CommentList = ({ writeId, commentList, isLoading }) => {
+  const filterComment = commentList?.filter((item) => item.writeId === writeId);
   const [mutation] = useSetMutation(deleteComment, 'commentWriteList');
 
   if (isLoading) {
     return <div>로딩 중입니다.</div>;
-  }
-  if (isError) {
-    alert('데이터를 가져오는 동안 에러가 발생했습니다.');
   }
   return (
     <CommentListSection>
