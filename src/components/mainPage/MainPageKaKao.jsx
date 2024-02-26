@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import MainPageLanding from './MainPageLending';
+import * as S from '../styles/mainPageStyle';
 
 const { kakao } = window;
 
@@ -113,14 +114,25 @@ const MainPageKaKao = () => {
 
   return (
     <div>
-      <div id="map" style={{ width: '500px', height: '500px', position: 'relative', overflow: 'hidden' }}></div>
-      <MainPageLanding />
-      {console.log(list)}
-      <div>
-        {list.map((item, idx) => {
-          return <li key={idx}>{item.address_name}</li>;
-        })}
-      </div>
+      <div
+        id="map"
+        style={{ width: '500px', height: '481px', position: 'relative', overflow: 'hidden', marginTop: '30px' }}
+      ></div>
+
+      <S.SerchSection>
+        <MainPageLanding />
+        <S.ListContent>
+          {console.log(list)}
+          {list.map((item, idx) => {
+            return (
+              <li key={idx}>
+                <p>{item.place_name}</p>
+                <p>{item.address_name}</p>
+              </li>
+            );
+          })}
+        </S.ListContent>
+      </S.SerchSection>
     </div>
   );
 };

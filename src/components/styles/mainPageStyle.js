@@ -7,7 +7,7 @@ import img5 from '../../assets/6.png';
 import img6 from '../../assets/7.png';
 
 //MainPage.jsx
-export const MainWrapper = styled.div`
+export const MainWrapper = styled.section`
   display: flex;
   gap: 20px;
 `;
@@ -151,7 +151,8 @@ export const ListIncheon = styled.div`
     transform: scale(1.05);
   }
   &:hover p {
-    color: red;
+    color: var(--mainColor);
+    z-index: 1;
   }
   &:hover::before {
     content: '';
@@ -181,7 +182,8 @@ export const ListKangWondo = styled.div`
     transform: scale(1.05);
   }
   &:hover p {
-    color: red;
+    color: var(--mainColor);
+    z-index: 1;
   }
   &:hover::before {
     content: '';
@@ -211,7 +213,8 @@ export const ListSeoul = styled.div`
     transform: scale(1.05);
   }
   &:hover p {
-    color: red;
+    color: var(--mainColor);
+    z-index: 1;
   }
   &:hover::before {
     content: '';
@@ -241,7 +244,8 @@ export const ListJunra = styled.div`
     transform: scale(1.05);
   }
   &:hover p {
-    color: red;
+    color: var(--mainColor);
+    z-index: 1;
   }
   &:hover::before {
     content: '';
@@ -271,7 +275,8 @@ export const ListChungcheonDo = styled.div`
     transform: scale(1.05);
   }
   &:hover p {
-    color: red;
+    color: var(--mainColor);
+    z-index: 1;
   }
   &:hover::before {
     content: '';
@@ -301,7 +306,8 @@ export const ListJeJu = styled.div`
     transform: scale(1.05);
   }
   &:hover p {
-    color: red;
+    color: var(--mainColor);
+    z-index: 1;
   }
   &:hover::before {
     content: '';
@@ -380,4 +386,54 @@ export const Tel = styled.span`
 export const Pagination = styled.div`
   margin: 10px auto;
   text-align: center;
+`;
+
+// MainPageKaKao.jsx
+
+export const SerchSection = styled.section`
+  width: 100%;
+  height: 300px;
+  border: 1px solid #ccc;
+  margin-top: 20px;
+  overflow: auto;
+`;
+export const ListContent = styled.ul`
+  padding: 20px;
+  & > li {
+    line-height: 24px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+    cursor: pointer;
+    &:hover {
+      transition: all 0.2s;
+      transform: scale(1.02);
+      color: var(--mainColor);
+    }
+  }
+`;
+
+// MainPageLanding.jsx
+export const FormSearch = styled.form`
+  padding: 20px 20px 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  & > input {
+    width: 85%;
+    padding: 8px 5px;
+  }
+  & > button {
+    width: 15%;
+    padding: 8px 5px;
+    border-radius: 3px;
+    background-color: var(--mainColor);
+    border: 1px solid var(--mainColor);
+    cursor: pointer;
+    &:hover {
+      transition: all 0.2s;
+      transform: scale(1.05);
+    }
+  }
 `;
