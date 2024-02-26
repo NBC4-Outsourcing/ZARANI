@@ -34,7 +34,7 @@ const WritingList = () => {
     if (filterComment.length === 0) {
       mutation.mutate(id);
     } else {
-      alert('댓글이있어');
+      alert('댓글이 있어서 삭제가 불가능 합니다.');
     }
   };
 

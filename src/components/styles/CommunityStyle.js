@@ -4,8 +4,8 @@ import styled, { css } from 'styled-components';
 export const CommunityBtn = styled.button`
   border: none;
   background-color: lightgray;
-  width: 40px;
-  height: 25px;
+  width: 50px;
+  height: 30px;
   border-radius: 8px;
   background-color: var(--subColor1);
   margin: auto;
@@ -33,9 +33,21 @@ export const CommunityForm = styled.form`
   border-radius: 8px;
 `;
 
+export const CommunityInputName = styled.label`
+  padding: 0.5% 1%;
+  margin: 2%;
+  background-color: lightgray;
+  border-radius: 8px;
+`;
+
 export const CommunityInput = styled.input`
-  width: 40%;
+  width: 70%;
   height: 70%;
+  margin: auto;
+  background-color: lightgrey;
+  border: none;
+  border-radius: 12px;
+  padding: 10px;
 `;
 
 // Community.jsx
@@ -142,15 +154,30 @@ export const CommentListContainer = styled.div`
 
 export const CommentListInfo = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: space-evenly;
+  margin: 2%;
+`;
+
+export const CommentListHead = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid gray;
 `;
 
 export const CommentListComment = styled.p`
-  background-color: whitesmoke;
   margin: 1%;
   padding: 1%;
-  border-radius: 8px;
-  min-height: 50px;
+`;
+
+export const NoComment = styled.div`
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
 `;
 
 // CommentInputForm.jsx style
