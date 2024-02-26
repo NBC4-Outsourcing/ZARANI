@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
-import { deleteWrite, getWriteList } from './CommunitySupabase';
+import { deleteWrite, getCommentList, getWriteList } from './CommunitySupabase';
 import {
   WriteButtons,
   WriteContainer,
@@ -19,15 +19,22 @@ import CommunityWriteEditForm from './CommunityWriteEditForm';
 import useSetMutation from 'hooks/useSetMutations';
 
 const WritingList = () => {
-  const { isLoading, isError, data } = useQuery('communityWriteList', getWriteList);
+  const { isLoading, isError, data: writeList } = useQuery('communityWriteList', getWriteList);
+  const { isLoading: commentListLoading, data: commentList } = useQuery('commentWriteList', getCommentList);
   const [modalOpen, setModalOpen] = useState(false);
   const [editFormId, setEditFormId] = useState(null);
   const [writeId, setWriteId] = useState(null);
-
   const [mutation] = useSetMutation(deleteWrite, 'communityWriteList');
 
   const onClickDeleteHandler = (id) => {
-    mutation.mutate(id);
+    const filterComment = commentList.filter((item) => {
+      return item.writeId === id;
+    });
+    if (filterComment.length === 0) {
+      mutation.mutate(id);
+    } else {
+      alert('댓글이있어');
+    }
   };
 
   const onClickEditForm = (id) => {
@@ -53,7 +60,7 @@ const WritingList = () => {
   return (
     <>
       {modalOpen ? <CommentInputForm onClickCommentHandler={onClickCommentHandler} writeId={writeId} /> : false}
-      {data
+      {writeList
         .sort((a, b) => {
           return new Date(b.date).getTime() - new Date(a.date).getTime();
         })
@@ -79,7 +86,7 @@ const WritingList = () => {
                   </WriteFoot>
                 </WriteContainer>
               )}
-              <CommentList writeId={item.id} />
+              <CommentList writeId={item.id} commentList={commentList} isLoading={commentListLoading} />
             </WriteListSection>
           );
         })}
