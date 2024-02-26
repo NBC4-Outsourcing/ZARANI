@@ -138,7 +138,7 @@ export const WriteContent = styled.p`
   justify-content: center;
   align-items: center;
   background-color: lightgrey;
-  height: 35%;
+  height: 45%;
   padding: 1.5%;
   border-radius: 8px;
 `;
@@ -164,9 +164,12 @@ export const EditFormInput = styled.textarea`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid black;
-  height: 35%;
-  padding: 1.5%;
+  height: 45%;
+  padding: 3%;
+  resize: none;
+  border: none;
+  border-radius: 12px;
+  background-color: lightgray;
 `;
 
 // CommentList.jsx style

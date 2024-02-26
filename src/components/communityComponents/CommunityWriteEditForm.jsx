@@ -1,4 +1,5 @@
 import {
+  CommunityBtn,
   EditFormInput,
   WriteButtons,
   WriteContainer,
@@ -13,6 +14,7 @@ import { getFormattedDate } from './formattedDate';
 import useInput from 'hooks/useInput';
 import { updateWrite } from './CommunitySupabase';
 import useSetMutation from 'hooks/useSetMutations';
+import defaultImage from 'assets/defaultImage.png';
 
 const CommunityWriteEditForm = ({ item, setEditFormId }) => {
   const [mutation] = useSetMutation(updateWrite, 'communityWriteList');
@@ -23,6 +25,10 @@ const CommunityWriteEditForm = ({ item, setEditFormId }) => {
   const { changeContents } = changeContent;
 
   const onClickChangeContentBtn = (id) => {
+    if (!changeContents || changeContents === item.content) {
+      alert('변경할 내용을 입력해주시기 바랍니다.');
+      return;
+    }
     const newContent = {
       content: changeContents
     };
@@ -36,8 +42,8 @@ const CommunityWriteEditForm = ({ item, setEditFormId }) => {
   return (
     <WriteContainer>
       <WriteHead>
-        <WriteImage src={item.avatar} />
-        <WriteNickName>0 6{item.nickname}</WriteNickName>
+        <WriteImage src={item.avatar ? item.avatar : defaultImage} />
+        <WriteNickName>{item.nickname}</WriteNickName>
       </WriteHead>
       <EditFormInput
         name="changeContents"
@@ -49,8 +55,10 @@ const CommunityWriteEditForm = ({ item, setEditFormId }) => {
       <WriteFoot>
         <WriteDate>{getFormattedDate(item.date)}</WriteDate>
         <WriteButtons>
-          <button onClick={() => onClickChangeContentBtn(item.id)}>수정완료</button>
-          <button onClick={onClickCancelBtn}>취소</button>
+          <CommunityBtn onClick={() => onClickChangeContentBtn(item.id)}>수정완료</CommunityBtn>
+          <CommunityBtn background={'danger'} onClick={onClickCancelBtn}>
+            취소
+          </CommunityBtn>
         </WriteButtons>
       </WriteFoot>
     </WriteContainer>
