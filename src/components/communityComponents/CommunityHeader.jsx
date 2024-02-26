@@ -7,7 +7,7 @@ import {
 } from 'components/styles/CommunityStyle';
 import React from 'react';
 import defaultImage from 'assets/defaultImage.png';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logout } from 'shared/redux/modules/authSlice';
 
@@ -28,7 +28,9 @@ const CommunityHeader = ({ userData }) => {
       </div>
       <CommunityHeaderName>ZARANI COMMUNITY</CommunityHeaderName>
       <CommunityHeaderInfo>
-        <CommunityHeaderImage src={avatar ? avatar : defaultImage} />
+        <Link to={'/mypage'}>
+          <CommunityHeaderImage src={avatar ? avatar : defaultImage} />
+        </Link>
         <CommunityBtn background={'danger'} onClick={onClickLogOutHandler}>
           로그아웃
         </CommunityBtn>
