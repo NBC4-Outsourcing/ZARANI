@@ -1,8 +1,60 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
+// 공통으로 사용할 버튼
+export const CommunityBtn = styled.button`
+  cursor: pointer;
+  border: none;
+  background-color: lightgray;
+  min-width: 50px;
+  height: 30px;
+  border-radius: 8px;
+  background-color: var(--subColor1);
+  margin: auto;
+  ${(props) =>
+    props.background === 'danger' &&
+    css`
+      background-color: var(--mainColor);
+      margin: 0 0 0 auto;
+    `};
+`;
 // Community.jsx style
 export const CommunityDiv = styled.div`
   width: 100%;
+`;
+
+// CommunityHeader.jsx
+export const CommunityHeaderMain = styled.header`
+  border-bottom: 1px solid lightgray;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 70px;
+`;
+
+export const CommunityHeaderName = styled.p`
+  width: 50%;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 15%;
+  font-size: 30px;
+  font-weight: bold;
+`;
+
+export const CommunityHeaderImage = styled.img`
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-left: auto;
+`;
+
+export const CommunityHeaderInfo = styled.div`
+  display: flex;
+  align-items: center;
+  width: 20%;
 `;
 
 // InputForm.jsx style.
@@ -11,15 +63,35 @@ export const CommunityForm = styled.form`
   justify-content: space-evenly;
   align-items: center;
   width: 95%;
-  height: 50px;
+  height: 70px;
   box-shadow: 0px 0px 3px 1px gray;
   margin: 2.5%;
   border-radius: 8px;
 `;
 
+export const CommunityInputName = styled.label`
+  padding: 0.5% 1%;
+  margin: 2%;
+  background-color: lightgray;
+  border-radius: 8px;
+`;
+
 export const CommunityInput = styled.input`
-  width: 40%;
-  height: 70%;
+  width: 70%;
+  height: 60%;
+  margin: auto;
+  background-color: lightgrey;
+  border: none;
+  border-radius: 12px;
+  padding: 10px;
+`;
+
+// Community.jsx
+export const Main = styled.main`
+  margin: 2.5%;
+  padding: 0.5px;
+  background-color: lightgray;
+  border-radius: 12px;
 `;
 
 // WriteList.jsx style.
@@ -32,10 +104,11 @@ export const WriteContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  border: 1px solid black;
   width: 40%;
   height: 250px;
   padding: 1%;
+  background-color: whitesmoke;
+  border-radius: 12px;
 `;
 
 export const WriteHead = styled.div`
@@ -53,19 +126,21 @@ export const WriteNickName = styled.label`
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid black;
+  background-color: lightgray;
+  border-radius: 8px;
   width: 40%;
   height: 35%;
-  margin: 0 5%;
+  margin: 0 auto;
 `;
 
 export const WriteContent = styled.p`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid black;
+  background-color: lightgrey;
   height: 35%;
   padding: 1.5%;
+  border-radius: 8px;
 `;
 
 export const WriteFoot = styled.div`
@@ -79,7 +154,7 @@ export const WriteDate = styled.p`
 `;
 
 export const WriteButtons = styled.div`
-  width: 30%;
+  width: 50%;
   display: flex;
   justify-content: space-between;
 `;
@@ -96,16 +171,19 @@ export const EditFormInput = styled.textarea`
 
 // CommentList.jsx style
 export const CommentListSection = styled.section`
-  border: 1px solid black;
+  background-color: whitesmoke;
+  border-radius: 12px;
+  padding: 1%;
   width: 40%;
   height: 250px;
   overflow: auto;
+  scrollbar-width: none;
 `;
 
 export const CommentListContainer = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: gray;
+  background-color: lightgray;
   border-radius: 8px;
   margin: 2%;
   min-height: 100px;
@@ -114,24 +192,30 @@ export const CommentListContainer = styled.div`
 
 export const CommentListInfo = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: space-evenly;
+  margin: 2%;
+`;
+
+export const CommentListHead = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid gray;
 `;
 
 export const CommentListComment = styled.p`
-  background-color: whitesmoke;
   margin: 1%;
   padding: 1%;
-  border-radius: 8px;
-  min-height: 50px;
 `;
 
-export const CommentListButton = styled.button`
-  width: 50px;
-  margin-left: auto;
-  margin-top: 5px;
-  background-color: var(--subColor1);
-  border: none;
-  border-radius: 8px;
+export const NoComment = styled.div`
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
 `;
 
 // CommentInputForm.jsx style
@@ -145,8 +229,8 @@ export const CommentInputFormBackGround = styled.div`
 `;
 
 export const CommentInputFormStyle = styled.form`
-  width: 300px;
-  height: 200px;
+  width: 400px;
+  height: 300px;
   z-index: 999;
   position: absolute;
   top: 50%;
@@ -155,4 +239,30 @@ export const CommentInputFormStyle = styled.form`
   border-radius: 8px;
   background-color: whitesmoke;
   padding: 1%;
+`;
+
+export const CommentListName = styled.p`
+  width: 50%;
+  height: 13%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: lightgray;
+  border-radius: 8px;
+`;
+
+export const CommentInputTextarea = styled.textarea`
+  width: 100%;
+  height: 70%;
+  margin-top: 5px;
+  background-color: lightgray;
+  border: none;
+  border-radius: 8px;
+  padding: 15px;
+  resize: none;
+`;
+
+export const CommentInputBtnDiv = styled.div`
+  display: flex;
+  gap: 75%;
 `;
