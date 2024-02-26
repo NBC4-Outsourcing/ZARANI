@@ -9,16 +9,6 @@ export const readUserInfo = async () => {
   return spreadData;
 };
 
-export const readMyReview = async () => {
-  const { data, error } = await supabase.from('reviewWrite').select('*');
-  console.log(data);
-
-  if (error) {
-    alert('오류로 인해 정보를 받아오지 못 하고 있습니다.');
-  }
-  return data;
-};
-
 export const updateUserInfo = async (objectInfo, id) => {
   if (!id) return;
   const { error } = await supabase.from('usersAccounts').update(objectInfo).eq('id', id);
@@ -26,6 +16,15 @@ export const updateUserInfo = async (objectInfo, id) => {
     console.log(error);
     // alert('정보가 변경되지 않았습니다.');
   }
+};
+
+export const readMyReview = async () => {
+  const { data, error } = await supabase.from('reviewWrite').select('*');
+
+  if (error) {
+    alert('오류로 인해 정보를 받아오지 못 하고 있습니다.');
+  }
+  return data;
 };
 
 export const uploadImage = async (filePath, image) => {
