@@ -1,7 +1,7 @@
 import React from 'react';
 import WritingList from './WritingList';
 
-const ComunityMain = () => {
+const CommunityMain = () => {
   return (
     <main>
       <WritingList />
@@ -9,4 +9,4 @@ const ComunityMain = () => {
   );
 };
 
-export default ComunityMain;
+export default CommunityMain;

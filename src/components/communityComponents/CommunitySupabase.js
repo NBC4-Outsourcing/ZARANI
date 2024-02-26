@@ -1,7 +1,7 @@
 import { supabase } from 'api/supabase/supabase';
 
 const insertWriting = async (newWrite) => {
-  const { error } = await supabase.from('comunityWrite').insert([newWrite]).select();
+  const { error } = await supabase.from('communityWrite').insert([newWrite]).select();
   if (error) {
     console.error(error);
     alert('글을 저장하지 못했습니다.');
@@ -9,7 +9,7 @@ const insertWriting = async (newWrite) => {
 };
 
 const getWriteList = async () => {
-  const { data, error } = await supabase.from('comunityWrite').select('*');
+  const { data, error } = await supabase.from('communityWrite').select('*');
   if (error) {
     console.error(error);
     alert('데이터를 가져오지 못 했습니다.');
@@ -19,7 +19,7 @@ const getWriteList = async () => {
 };
 
 const updateWrite = async ([changeContent, id]) => {
-  const { error } = await supabase.from('comunityWrite').update(changeContent).eq('id', id);
+  const { error } = await supabase.from('communityWrite').update(changeContent).eq('id', id);
   if (error) {
     alert('변경하지 못 했습니다.');
     console.error(error);
@@ -27,7 +27,7 @@ const updateWrite = async ([changeContent, id]) => {
 };
 
 const deleteWrite = async (id) => {
-  const { error } = await supabase.from('comunityWrite').delete().eq('id', id).select();
+  const { error } = await supabase.from('communityWrite').delete().eq('id', id).select();
   if (error) {
     alert('삭제하지 못 했습니다.');
   }
