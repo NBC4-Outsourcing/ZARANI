@@ -3,8 +3,12 @@ import { getFormattedDate } from 'components/communityComponents/formattedDate';
 import { ContentsList } from 'components/styles/ReviewStyle';
 import React, { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
+import { getLocalStorageJSON } from 'utils/getLocalStorageJSON';
 
 export const ReviewList = () => {
+  const result = getLocalStorageJSON();
+  console.log('result', result);
+
   // 데이터베이스에 저장된 데이터 저장 state
   const [reviewData, setReviewData] = useState();
   const [reviewImg, setReviewImg] = useState();
@@ -16,7 +20,7 @@ export const ReviewList = () => {
     const readUserInfo = async () => {
       const { data, error } = await supabase.from('usersAccounts').select('*');
       setUserEmail(data);
-      console.log('data', data);
+      // console.log('userInfoData', data);
 
       if (error) {
         alert('오류로 인해 정보를 받아오지 못 하고 있습니다.');
@@ -33,6 +37,7 @@ export const ReviewList = () => {
 
   // DB에 저장된 후기 데이터 가져오기
   useEffect(() => {
+    // 게시글 불러오기
     const fetchData = async () => {
       try {
         let { data: reviewWrite, error } = await supabase.from('reviewWrite').select('*');
@@ -40,7 +45,7 @@ export const ReviewList = () => {
           setReviewData(reviewWrite);
         }
       } catch (error) {
-        console.log('error', error);
+        console.log('reviewDataError', error);
       }
     };
 
@@ -50,13 +55,15 @@ export const ReviewList = () => {
       // const { data: imageUrl, error } = supabase.storage.from('reviewImage').getPublicUrl(`reviewFile/${uid}`);
       const { data: imageUrl, error } = supabase.storage.from('reviewImage').getPublicUrl('reviewFile/testImg');
       if (!error) {
-        console.log('data', imageUrl);
-        console.log('이미지 Url 변환 성공');
+        console.log('imageUrlData', imageUrl);
+        console.log('이미지 Url 변환 성공', imageUrl);
         setReviewImg(imageUrl.publicUrl);
+        console.log('reviewImg', reviewImg);
       } else {
-        console.log('error', error);
+        console.log('imageUrlDataError', error);
       }
     };
+    console.log('reviewImg', reviewImg);
 
     fetchData();
     filePath();
@@ -68,11 +75,26 @@ export const ReviewList = () => {
   // 데이터 삭제
   const removeReview = async (email) => {
     if (window.confirm('게시물을 삭제하시겠습니까?')) {
+      // 이미지 삭제
+      try {
+        const { data, error } = await supabase.storage.from('reviewImage').remove('reviewFile/testImg');
+        if (!error) {
+          console.log('removeReviewData', data);
+          console.log('이미지 삭제 성공');
+        }
+      } catch (error) {
+        console.log('이미지 삭제 실패', error);
+      }
+
+      // 게시글 삭제
       try {
         const { error } = await supabase.from('reviewWrite').delete().eq('email', email);
         if (!error) {
           alert('게시물이 삭제되었습니다.');
           console.log('error', error);
+          setReviewData([]);
+          setReviewImg(null);
+          return;
         }
       } catch (error) {
         console.log('게시물 삭제 실패', error);
@@ -85,7 +107,8 @@ export const ReviewList = () => {
       {reviewData?.map((item, idx) => (
         <div key={idx}>
           {console.log('reviewImg', reviewImg)}
-          {item.reviewimg && <img src={reviewImg} alt="리뷰 이미지" />} <div>{item.nickname}</div>
+          {item.reviewimg && <img src={reviewImg} alt="리뷰 이미지" />}
+          <div>{item.nickname}</div>
           <div>{item.content}</div>
           <div>{getFormattedDate(item.date)}</div>
           <button>수정</button>
