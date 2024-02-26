@@ -1,4 +1,5 @@
 import {
+  CommunityBtn,
   EditFormInput,
   WriteButtons,
   WriteContainer,
@@ -15,7 +16,7 @@ import { updateWrite } from './CommunitySupabase';
 import useSetMutation from 'hooks/useSetMutations';
 import defaultImage from 'assets/defaultImage.png';
 
-const CommunityWriteEditForm = ({ item, setEditFormId, userData }) => {
+const CommunityWriteEditForm = ({ item, setEditFormId }) => {
   const [mutation] = useSetMutation(updateWrite, 'communityWriteList');
   const [changeContent, , onChangeContentHandler, ,] = useInput({
     changeContents: item.content
@@ -50,8 +51,10 @@ const CommunityWriteEditForm = ({ item, setEditFormId, userData }) => {
       <WriteFoot>
         <WriteDate>{getFormattedDate(item.date)}</WriteDate>
         <WriteButtons>
-          <button onClick={() => onClickChangeContentBtn(item.id)}>수정완료</button>
-          <button onClick={onClickCancelBtn}>취소</button>
+          <CommunityBtn onClick={() => onClickChangeContentBtn(item.id)}>수정완료</CommunityBtn>
+          <CommunityBtn background={'danger'} onClick={onClickCancelBtn}>
+            취소
+          </CommunityBtn>
         </WriteButtons>
       </WriteFoot>
     </WriteContainer>

@@ -18,7 +18,6 @@ const CommentInputForm = ({ onClickCommentHandler, writeId, userData }) => {
   const [mutation] = useSetMutation(insertComment, 'commentWriteList');
   const { writeComment } = comment;
   const { nickname } = userData.user_metadata;
-  console.log(userData);
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     const newComment = {
