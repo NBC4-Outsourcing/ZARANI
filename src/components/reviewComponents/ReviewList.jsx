@@ -9,28 +9,27 @@ export const ReviewList = () => {
   const [reviewData, setReviewData] = useState();
   const [reviewImg, setReviewImg] = useState();
 
-  // // usersAccounts data state
-  // const [imgInfo, setimgInfo] = useState([{}]);
+  // usersAccounts data state
+  const [userEmail, setUserEmail] = useState([{}]);
+  // userInfo
+  useEffect(() => {
+    const readUserInfo = async () => {
+      const { data, error } = await supabase.from('usersAccounts').select('*');
+      setUserEmail(data);
+      console.log('data', data);
 
-  // // userInfo
-  // useEffect(() => {
-  //   const readUserInfo = async () => {
-  //     const { data, error } = await supabase.from('usersAccounts').select('*');
-  //     setimgInfo(data);
-  //     console.log('data', data);
+      if (error) {
+        alert('오류로 인해 정보를 받아오지 못 하고 있습니다.');
+        return null;
+      }
+    };
 
-  //     if (error) {
-  //       alert('오류로 인해 정보를 받아오지 못 하고 있습니다.');
-  //       return null;
-  //     }
-  //   };
-
-  //   readUserInfo();
-  // }, []);
-  // const [{ uid }] = imgInfo;
-  // console.log('userInfo', imgInfo);
-  // console.log('uid', uid);
-  // // 여기까지usersAccounts data state
+    readUserInfo();
+  }, []);
+  const [userInfo] = userEmail;
+  const { email } = userInfo;
+  console.log('email', email);
+  // 여기까지usersAccounts data state
 
   // DB에 저장된 후기 데이터 가져오기
   useEffect(() => {
@@ -64,7 +63,22 @@ export const ReviewList = () => {
   }, []);
 
   // 데이터 수정
+
+  // 회원 정보가 없어 임시로 usersAccounts table email 사용, 회원 정보 완료 시 회원 email 또는 uid 활용할것
   // 데이터 삭제
+  const removeReview = async (email) => {
+    if (window.confirm('게시물을 삭제하시겠습니까?')) {
+      try {
+        const { error } = await supabase.from('reviewWrite').delete().eq('email', email);
+        if (!error) {
+          alert('게시물이 삭제되었습니다.');
+          console.log('error', error);
+        }
+      } catch (error) {
+        console.log('게시물 삭제 실패', error);
+      }
+    }
+  };
 
   return (
     <ContentsList>
@@ -75,7 +89,13 @@ export const ReviewList = () => {
           <div>{item.content}</div>
           <div>{getFormattedDate(item.date)}</div>
           <button>수정</button>
-          <button>삭제</button>
+          <button
+            onClick={() => {
+              removeReview(item.email);
+            }}
+          >
+            삭제
+          </button>
         </div>
       ))}
     </ContentsList>
