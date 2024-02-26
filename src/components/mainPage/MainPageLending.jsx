@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import MainPageKaKao from './MainPageKaKao';
 import { setAreaInfo } from 'shared/redux/modules/areaSlice';
 import { useDispatch } from 'react-redux';
 
@@ -27,7 +26,6 @@ function MainPageLanding() {
         <input placeholder="검색어를 입력하세요" onChange={onChange} value={InputText} />
         <button type="submit">검색</button>
       </form>
-      <MainPageKaKao />
     </>
   );
 }
