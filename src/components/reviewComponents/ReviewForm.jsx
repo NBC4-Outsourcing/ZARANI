@@ -14,18 +14,35 @@ import useInput from '../../hooks/useInput';
 
 const ReviewForm = () => {
   const imgRef = useRef(null);
-  // const imgName=uuid()
+
   const [reviewContentInput, , reviewContentHandler, reset] = useInput({
     reviewContent: ''
   });
   const { reviewContent } = reviewContentInput;
 
+  // usersAccounts data state
+  const [userInfo, setUserInfo] = useState([{}]);
+
+  // userInfo
+  useEffect(() => {
+    const readUserInfo = async () => {
+      const { data, error } = await supabase.from('usersAccounts').select('*');
+      setUserInfo(data);
+      console.log('data', data);
+
+      if (error) {
+        alert('오류로 인해 정보를 받아오지 못 하고 있습니다.');
+        return null;
+      }
+    };
+
+    readUserInfo();
+  }, []);
+  const [{ email, nickname, avatar, uid }] = userInfo;
+
   // 이미지 state
   const [isImg, setIsImg] = useState(false);
   const [addImg, setAddImg] = useState('');
-
-  // usersAccounts data state
-  const [userInfo, setUserInfo] = useState([{}]);
 
   // 이미지 미리보기 함수
   const previewImg = (e) => {
@@ -44,21 +61,6 @@ const ReviewForm = () => {
     setIsImg(false);
   };
 
-  // userInfo
-  useEffect(() => {
-    const readUserInfo = async () => {
-      const { data, error } = await supabase.from('usersAccounts').select('*');
-      setUserInfo(data);
-
-      if (error) {
-        alert('오류로 인해 정보를 받아오지 못 하고 있습니다.');
-        return null;
-      }
-    };
-    readUserInfo();
-  }, []);
-  const [{ email, nickname, avatar, uid }] = userInfo;
-
   // DB에 후기 등록
   const addReview = async (e) => {
     e.preventDefault();
@@ -66,8 +68,9 @@ const ReviewForm = () => {
     // storage에 이미지 등록
     if (addImg) {
       const imgPath = imgRef.current.files[0];
-      // 파일 이름 중복으로 이미지 등록 불가
-      const { data, error } = await supabase.storage.from('reviewImage').upload(`reviewFile/test`, imgPath, {
+
+      // 파일 이름 중복으로 이미지 1개 이상 등록 불가
+      const { data, error } = await supabase.storage.from('reviewImage').upload(`reviewFile/${uid}`, imgPath, {
         cacheControl: '3600',
         upsert: false
       });
