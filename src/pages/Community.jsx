@@ -18,11 +18,14 @@ const Community = () => {
     return <Loading />;
   }
 
-  if (userData === null) {
-    alert('로그인이 되어있지 않습니다.');
-    navigate('/');
-    return <div>데이터를 가져오지 못했습니다.</div>;
+  if (userData.status === 401) {
+    return (
+      <div>
+        <p>로그인이 되어있지 않습니다.</p> <button onClick={() => navigate('/')}>홈으로</button>
+      </div>
+    );
   }
+
   return (
     <CommunityDiv>
       <CommunityHeader userData={userData} />
