@@ -14,16 +14,20 @@ const Community = () => {
   const { isLoading: writeListLoading, data: writeList } = useQuery('communityWriteList', getWriteList);
   const { isLoading: commentListLoading, data: commentList } = useQuery('commentWriteList', getCommentList);
 
-  if (isLoading || writeListLoading || commentListLoading) {
+  if (isLoading) {
     return <Loading />;
-  }
-
-  if (userData.status === 401) {
-    return (
-      <div>
-        <p>로그인이 되어있지 않습니다.</p> <button onClick={() => navigate('/')}>홈으로</button>
-      </div>
-    );
+  } else if (writeListLoading) {
+    return <Loading />;
+  } else if (commentListLoading) {
+    return <Loading />;
+  } else {
+    if (userData.status === 401) {
+      return (
+        <div>
+          <p>로그인이 되어있지 않습니다.</p> <button onClick={() => navigate('/')}>홈으로</button>
+        </div>
+      );
+    }
   }
 
   return (
