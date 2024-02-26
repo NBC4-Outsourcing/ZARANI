@@ -13,6 +13,9 @@ export const ReviewList = () => {
   const [reviewData, setReviewData] = useState();
   const [reviewImg, setReviewImg] = useState();
 
+  // 수정 여부 state
+  const [isEditing, setIsEditing] = useState(false);
+
   // usersAccounts data state
   const [userEmail, setUserEmail] = useState([{}]);
   // userInfo
@@ -69,8 +72,6 @@ export const ReviewList = () => {
     filePath();
   }, []);
 
-  // 데이터 수정
-
   // 회원 정보가 없어 임시로 usersAccounts table email 사용, 회원 정보 완료 시 회원 email 또는 uid 활용할것
   // 데이터 삭제
   const removeReview = async (email) => {
@@ -87,12 +88,16 @@ export const ReviewList = () => {
       }
 
       // 게시글 삭제
+      // 선택한 게시물만 삭제하도록 수정
       try {
         const { error } = await supabase.from('reviewWrite').delete().eq('email', email);
         if (!error) {
           alert('게시물이 삭제되었습니다.');
           console.log('error', error);
-          setReviewData([]);
+
+          setReviewData((prevData) => prevData.filter((item) => item.email !== email));
+
+          // 이미지도 선택한 이미지와 이름이 같으면 삭제되도록
           setReviewImg(null);
           return;
         }
@@ -102,6 +107,8 @@ export const ReviewList = () => {
     }
   };
 
+  // 데이터 수정
+  const modifyReview = () => {};
   return (
     <ContentsList>
       {reviewData?.map((item, idx) => (

@@ -1,11 +1,9 @@
 import Layout from 'components/layoutComponent/Layout';
 import MainPage from 'components/mainPage/MainPage';
-import ReviewForm from 'components/reviewComponents/ReviewForm';
 import Community from 'pages/Community';
 import Login from 'pages/Login';
 import MyPage from 'pages/MyPage';
 import { ReviewPage } from 'pages/ReviewPage';
-import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 const Router = () => {
