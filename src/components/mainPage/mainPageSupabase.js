@@ -1,8 +1,8 @@
 import { supabase } from 'api/supabase/supabase';
 
-const getComunityList = async () => {
+const getCommunityList = async () => {
   try {
-    const data = (await supabase.from('comunityWrite').select('*')).data;
+    const data = (await supabase.from('communityWrite').select('*')).data;
     return data;
   } catch (error) {
     console.log(error);
@@ -10,4 +10,4 @@ const getComunityList = async () => {
   }
 };
 
-export { getComunityList };
+export { getCommunityList };
