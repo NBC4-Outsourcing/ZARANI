@@ -4,6 +4,7 @@ import MainPageHeader from './MainPageHeader';
 import MainPageComunity from './MainPageComunity';
 import MainPageNav from './MainPageNav';
 import MainPageMap from './MainPageMap';
+import MainPageSerch from './MainPageSerch';
 
 const MainPage = () => {
   return (
@@ -13,6 +14,7 @@ const MainPage = () => {
         <div>
           <MainPageComunity />
           <MainPageNav />
+          {/* <MainPageSerch /> */}
         </div>
         <MainPageMap />
       </S.MainWrapper>

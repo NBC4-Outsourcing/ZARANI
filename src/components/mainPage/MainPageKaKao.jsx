@@ -1,9 +1,7 @@
 import React from 'react';
 import { Map, MapTypeId } from 'react-kakao-maps-sdk';
 import { useSelector } from 'react-redux';
-import { useKakaoLoader } from 'react-kakao-maps-sdk';
 const MainPageKaKao = () => {
-  useKakaoLoader();
   const serchValue = useSelector((state) => state.area.value);
   return (
     <Map
