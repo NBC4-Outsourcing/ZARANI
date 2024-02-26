@@ -1,6 +1,6 @@
-import { ComentInputFormBackGround, CommentInputFormStyle } from 'components/styles/ComunityStyle';
+import { CommentInputFormBackGround, CommentInputFormStyle } from 'components/styles/CommunityStyle';
 import React from 'react';
-import { insertComment } from './ComunitySupabase';
+import { insertComment } from './CommunitySupabase';
 import useInput from 'hooks/useInput';
 import useSetMutation from 'hooks/useSetMutations';
 
@@ -22,7 +22,7 @@ const CommentInputForm = ({ onClickCommentHandler, writeId }) => {
     onClickCommentHandler();
   };
   return (
-    <ComentInputFormBackGround>
+    <CommentInputFormBackGround>
       <CommentInputFormStyle onSubmit={onSubmitHandler}>
         <p>보라돌이</p>
         <input
@@ -37,7 +37,7 @@ const CommentInputForm = ({ onClickCommentHandler, writeId }) => {
           취소
         </button>
       </CommentInputFormStyle>
-    </ComentInputFormBackGround>
+    </CommentInputFormBackGround>
   );
 };
 

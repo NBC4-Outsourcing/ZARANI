@@ -1,5 +1,5 @@
 import { supabase } from 'api/supabase/supabase';
-import { getFormattedDate } from 'components/comunityComponents/formattedDate';
+import { getFormattedDate } from 'components/communityComponents/formattedDate';
 import { ContentsList } from 'components/styles/ReviewStyle';
 import React, { useEffect, useState } from 'react';
 

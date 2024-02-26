@@ -4,10 +4,10 @@ import {
   CommentListContainer,
   CommentListInfo,
   CommentListSection
-} from 'components/styles/ComunityStyle';
+} from 'components/styles/CommunityStyle';
 import React from 'react';
 import { useQuery } from 'react-query';
-import { deleteComment, getCommentList } from './ComunitySupabase';
+import { deleteComment, getCommentList } from './CommunitySupabase';
 import { getFormattedDate } from './formattedDate';
 import useSetMutation from 'hooks/useSetMutations';
 
@@ -24,18 +24,22 @@ const CommentList = ({ writeId }) => {
   }
   return (
     <CommentListSection>
-      {filterComment.map((item) => {
-        return (
-          <CommentListContainer key={item.id}>
-            <CommentListInfo>
-              <p>{item.nickname}</p>
-              <p>{getFormattedDate(item.date)}</p>
-            </CommentListInfo>
-            <CommentListComment>{item.comment}</CommentListComment>
-            <CommentListButton onClick={() => mutation.mutate(item.id)}>삭제</CommentListButton>
-          </CommentListContainer>
-        );
-      })}
+      {filterComment
+        .sort((a, b) => {
+          return new Date(b.date).getTime() - new Date(a.date).getTime();
+        })
+        .map((item) => {
+          return (
+            <CommentListContainer key={item.id}>
+              <CommentListInfo>
+                <p>{item.nickname}</p>
+                <p>{getFormattedDate(item.date)}</p>
+              </CommentListInfo>
+              <CommentListComment>{item.comment}</CommentListComment>
+              <CommentListButton onClick={() => mutation.mutate(item.id)}>삭제</CommentListButton>
+            </CommentListContainer>
+          );
+        })}
     </CommentListSection>
   );
 };

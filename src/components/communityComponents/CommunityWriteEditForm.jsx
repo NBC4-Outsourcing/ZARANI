@@ -1,41 +1,40 @@
 import {
   EditFormInput,
   WriteButtons,
-  WriteConteiner,
+  WriteContainer,
   WriteDate,
   WriteFoot,
   WriteHead,
   WriteImage,
   WriteNickName
-} from 'components/styles/ComunityStyle';
+} from 'components/styles/CommunityStyle';
 import React from 'react';
 import { getFormattedDate } from './formattedDate';
 import useInput from 'hooks/useInput';
-import { updateWrite } from './ComunitySupabase';
+import { updateWrite } from './CommunitySupabase';
 import useSetMutation from 'hooks/useSetMutations';
 
-const ComunityWriteEditForm = ({ item, setEditFormId }) => {
-  const [mutation] = useSetMutation(updateWrite, 'comunityWriteList');
+const CommunityWriteEditForm = ({ item, setEditFormId }) => {
+  const [mutation] = useSetMutation(updateWrite, 'communityWriteList');
   const [changeContent, , onChangeContentHandler, ,] = useInput({
     changeContents: item.content
   });
 
   const { changeContents } = changeContent;
 
-  const onClickChnageContentBtn = (id) => {
+  const onClickChangeContentBtn = (id) => {
     const newContent = {
       content: changeContents
     };
-    const check = [newContent, id];
-    mutation.mutate(check);
+    mutation.mutate([newContent, id]);
     setEditFormId(null);
   };
 
-  const onClickCancleBtn = () => {
+  const onClickCancelBtn = () => {
     setEditFormId(null);
   };
   return (
-    <WriteConteiner>
+    <WriteContainer>
       <WriteHead>
         <WriteImage src={item.avatar} />
         <WriteNickName>0 6{item.nickname}</WriteNickName>
@@ -50,12 +49,12 @@ const ComunityWriteEditForm = ({ item, setEditFormId }) => {
       <WriteFoot>
         <WriteDate>{getFormattedDate(item.date)}</WriteDate>
         <WriteButtons>
-          <button onClick={() => onClickChnageContentBtn(item.id)}>수정완료</button>
-          <button onClick={onClickCancleBtn}>취소</button>
+          <button onClick={() => onClickChangeContentBtn(item.id)}>수정완료</button>
+          <button onClick={onClickCancelBtn}>취소</button>
         </WriteButtons>
       </WriteFoot>
-    </WriteConteiner>
+    </WriteContainer>
   );
 };
 
-export default ComunityWriteEditForm;
+export default CommunityWriteEditForm;

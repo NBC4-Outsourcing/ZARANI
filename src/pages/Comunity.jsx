@@ -1,17 +1,17 @@
-import ComunityMain from 'components/comunityComponents/ComunityMain';
-import ComunityInputForm from 'components/comunityComponents/ComunityInputForm';
+import CommunityMain from 'components/communityComponents/CommunityMain';
+import CommunityInputForm from 'components/communityComponents/CommunityInputForm';
 import Header from 'components/layout/Header';
 import React from 'react';
-import { ComunityDiv } from 'components/styles/ComunityStyle';
+import { CommunityDiv } from 'components/styles/CommunityStyle';
 
-const Comunity = () => {
+const Community = () => {
   return (
-    <ComunityDiv>
+    <CommunityDiv>
       <Header />
-      <ComunityInputForm />
-      <ComunityMain />
-    </ComunityDiv>
+      <CommunityInputForm />
+      <CommunityMain />
+    </CommunityDiv>
   );
 };
 
-export default Comunity;
+export default Community;

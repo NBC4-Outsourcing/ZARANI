@@ -10,13 +10,11 @@ import MyPageHeader from 'components/myPageComponent/MyPageHeader';
 const MyPage = () => {
   const { isLoading, isError, data } = useQuery('usersAccounts', readUserInfo);
 
-  if (isLoading) return <div>로딩중입니다...</div>;
   if (isError) return <div>오류로 인해 정보를 받아오지 못 하고 있습니다.</div>;
-
   return (
     <section>
       <MyPageHeader />
-      <MyPageContents data={data} />
+      <MyPageContents data={data} isLoading={isLoading} />
       <MyPageReviews />
     </section>
   );
