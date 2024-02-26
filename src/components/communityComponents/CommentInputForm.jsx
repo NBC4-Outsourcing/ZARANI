@@ -1,4 +1,11 @@
-import { CommentInputFormBackGround, CommentInputFormStyle } from 'components/styles/CommunityStyle';
+import {
+  CommentInputBtnDiv,
+  CommentInputFormBackGround,
+  CommentInputFormStyle,
+  CommentInputTextarea,
+  CommentListName,
+  CommunityBtn
+} from 'components/styles/CommunityStyle';
 import React from 'react';
 import { insertComment } from './CommunitySupabase';
 import useInput from 'hooks/useInput';
@@ -24,18 +31,20 @@ const CommentInputForm = ({ onClickCommentHandler, writeId }) => {
   return (
     <CommentInputFormBackGround>
       <CommentInputFormStyle onSubmit={onSubmitHandler}>
-        <p>보라돌이</p>
-        <input
+        <CommentListName>보라돌이</CommentListName>
+        <CommentInputTextarea
           maxLength={'80'}
           placeholder="최대 80자까지만 입력할 수 있습니다."
           name="writeComment"
           value={writeComment}
           onChange={onChangeContentHandler}
         />
-        <button type="submit">등록</button>
-        <button type="button" onClick={onClickCommentHandler}>
-          취소
-        </button>
+        <CommentInputBtnDiv>
+          <CommunityBtn type="submit">등록</CommunityBtn>
+          <CommunityBtn background={'danger'} type="button" onClick={onClickCommentHandler}>
+            취소
+          </CommunityBtn>
+        </CommentInputBtnDiv>
       </CommentInputFormStyle>
     </CommentInputFormBackGround>
   );
