@@ -2,7 +2,7 @@ import { supabase } from 'api/supabase/supabase';
 
 const getComunityList = async () => {
   try {
-    const data = (await supabase.from('comunityWrite').select('*')).data;
+    const data = (await supabase.from('communityWrite').select('*')).data;
     return data;
   } catch (error) {
     console.log(error);
