@@ -1,14 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import * as S from '../styles/mainPageStyle';
 import img from '../../assets/logo.png';
 import { useNavigate } from 'react-router-dom';
 import { getUserImage } from './mainPageSupabase';
 import { useQuery } from 'react-query';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from 'shared/redux/modules/authSlice';
 
 const MainPageHeader = () => {
-  const [isLogin, setIsLogin] = useState(true);
+  const { loginState } = useSelector((state) => state.auth);
   const { isLoading, data } = useQuery('usersAccounts', getUserImage);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const handCommunityPage = () => {
     navigate('/community');
   };
@@ -19,7 +22,8 @@ const MainPageHeader = () => {
     navigate('/mypage');
   };
   const handLogOut = () => {
-    //로그아웃 로직
+    dispatch(logout());
+    alert('로그아웃 되었습니다');
   };
   if (isLoading) {
     <div>로딩중입니다.</div>;
@@ -27,7 +31,7 @@ const MainPageHeader = () => {
   return (
     <S.HeaderWrapper>
       <S.LogoImage src={img} />
-      {isLogin ? (
+      {loginState ? (
         <S.LoginStyle>
           <S.StBtn onClick={handCommunityPage}> 커뮤니티</S.StBtn>
           <S.AvatarStyle src={data} onClick={handMypage} />

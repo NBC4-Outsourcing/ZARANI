@@ -2,7 +2,9 @@ import { supabase } from 'api/supabase/supabase';
 import * as LS from 'components/styles/LoginStyle';
 import useInput from 'hooks/useInput';
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { login } from 'shared/redux/modules/authSlice';
 
 const LoginInputForm = ({ isSignUpPage, setSignUpPage }) => {
   // useInput
@@ -14,6 +16,7 @@ const LoginInputForm = ({ isSignUpPage, setSignUpPage }) => {
   const { email, password, nickname } = form;
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   // submit 핸들러
   const onSubmitHandler = async (e) => {
@@ -59,6 +62,7 @@ const LoginInputForm = ({ isSignUpPage, setSignUpPage }) => {
           console.log(error);
           alert('로그인에 실패했습니다. 다시 시도하세요.');
         } else {
+          dispatch(login()); // login state 변경
           alert('로그인 되었습니다.');
           navigate('/');
         }

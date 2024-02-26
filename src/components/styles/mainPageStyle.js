@@ -73,7 +73,7 @@ export const AvatarStyle = styled.img`
   }
 `;
 
-//MainPageComunity.jsx
+//MainPageCommunity.jsx
 export const ComuWrapper = styled.div`
   max-width: 100%;
   min-width: 500px;
