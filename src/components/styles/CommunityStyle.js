@@ -2,9 +2,10 @@ import styled, { css } from 'styled-components';
 
 // 공통으로 사용할 버튼
 export const CommunityBtn = styled.button`
+  cursor: pointer;
   border: none;
   background-color: lightgray;
-  width: 50px;
+  min-width: 50px;
   height: 30px;
   border-radius: 8px;
   background-color: var(--subColor1);
@@ -21,13 +22,48 @@ export const CommunityDiv = styled.div`
   width: 100%;
 `;
 
+// CommunityHeader.jsx
+export const CommunityHeaderMain = styled.header`
+  border-bottom: 1px solid lightgray;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 70px;
+`;
+
+export const CommunityHeaderName = styled.p`
+  width: 50%;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 15%;
+  font-size: 30px;
+  font-weight: bold;
+`;
+
+export const CommunityHeaderImage = styled.img`
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-left: auto;
+`;
+
+export const CommunityHeaderInfo = styled.div`
+  display: flex;
+  align-items: center;
+  width: 20%;
+`;
+
 // InputForm.jsx style.
 export const CommunityForm = styled.form`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   width: 95%;
-  height: 50px;
+  height: 70px;
   box-shadow: 0px 0px 3px 1px gray;
   margin: 2.5%;
   border-radius: 8px;
@@ -42,7 +78,7 @@ export const CommunityInputName = styled.label`
 
 export const CommunityInput = styled.input`
   width: 70%;
-  height: 70%;
+  height: 60%;
   margin: auto;
   background-color: lightgrey;
   border: none;
@@ -55,6 +91,7 @@ export const Main = styled.main`
   margin: 2.5%;
   padding: 0.5px;
   background-color: lightgray;
+  border-radius: 12px;
 `;
 
 // WriteList.jsx style.
