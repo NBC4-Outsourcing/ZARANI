@@ -11,14 +11,22 @@ import {
 import { useEffect, useRef, useState } from 'react';
 import defaultImage from '../../assets/defaultImage.png';
 import useInput from '../../hooks/useInput';
+import { useQuery } from 'react-query';
+import { readUserInfo } from 'components/myPageComponent/myPageSupabase';
 
 const ReviewForm = () => {
-  const imgRef = useRef(null);
+  // // userInfo
+  // const { isLoading, isError, data } = useQuery('usersAccounts', readUserInfo);
 
-  const [reviewContentInput, , reviewContentHandler, reset] = useInput({
-    reviewContent: ''
-  });
-  const { reviewContent } = reviewContentInput;
+  // console.log('data', data);
+
+  // // [{}] 이런식으로 배열 안에 객체가 있을 경우 구조분해를 위해 배열안에 데이터를 넣어서 배열을 열어주고, 객체를 구조분해하면 된다 => 배열 구조분해
+  // const [reviewData] = data;
+  // console.log('object', reviewData);
+
+  // const { email, nickname, avatar, uid } = reviewData;
+  // console.log('email, nickname, avatar, uid', email, nickname, avatar, uid);
+  // // 여기까지 userInfo
 
   // usersAccounts data state
   const [userInfo, setUserInfo] = useState([{}]);
@@ -39,6 +47,14 @@ const ReviewForm = () => {
     readUserInfo();
   }, []);
   const [{ email, nickname, avatar, uid }] = userInfo;
+  // 여기까지usersAccounts data
+
+  const imgRef = useRef(null);
+
+  const [reviewContentInput, , reviewContentHandler, reset] = useInput({
+    reviewContent: ''
+  });
+  const { reviewContent } = reviewContentInput;
 
   // 이미지 state
   const [isImg, setIsImg] = useState(false);

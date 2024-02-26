@@ -10,13 +10,13 @@ export const ReviewList = () => {
   const [reviewImg, setReviewImg] = useState();
 
   // usersAccounts data state
-  const [userInfo, setUserInfo] = useState([{}]);
+  const [imgInfo, setimgInfo] = useState([{}]);
 
   // userInfo
   useEffect(() => {
     const readUserInfo = async () => {
       const { data, error } = await supabase.from('usersAccounts').select('*');
-      setUserInfo(data);
+      setimgInfo(data);
       console.log('data', data);
 
       if (error) {
@@ -27,7 +27,10 @@ export const ReviewList = () => {
 
     readUserInfo();
   }, []);
-  const [{ uid }] = userInfo;
+  const [{ uid }] = imgInfo;
+  console.log('userInfo', imgInfo);
+  console.log('uid', uid);
+  // 여기까지usersAccounts data state
 
   // DB에 저장된 후기 데이터 가져오기
   useEffect(() => {
@@ -35,7 +38,6 @@ export const ReviewList = () => {
       try {
         let { data: reviewWrite, error } = await supabase.from('reviewWrite').select('*');
         if (!error) {
-          console.log('reviewWrite', reviewWrite);
           setReviewData(reviewWrite);
         }
       } catch (error) {
@@ -62,6 +64,7 @@ export const ReviewList = () => {
   // 데이터 수정
   // 데이터 삭제
 
+  // uid를 받아와도 이미지에 이름이 안들어가는 경우가 생김
   return (
     <ContentsList>
       {reviewData?.map((item, idx) => (
