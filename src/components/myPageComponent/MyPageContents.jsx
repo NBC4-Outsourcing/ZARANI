@@ -32,8 +32,7 @@ const MyPageContents = ({ data, isLoading }) => {
       alert('수정을 취소하셨습니다.');
       console.log(avatar);
       if (selectImage !== thumnailImage) setThumnailImage(avatar);
-      // if (selectImage !== thumnailImage) setThumnailImage(avatar || thumnailImage);
-      // if (selectImage !== thumnailImage) setThumnailImage(avatar || defaultImg);
+
       console.log(avatar);
       setIsEdit(false);
       return;
@@ -49,13 +48,7 @@ const MyPageContents = ({ data, isLoading }) => {
     }
     if (selectImage) {
       const filePath = `userImage/${uid}`;
-      // 파일명에 해쉬값, => 웹팩, 이미지 요청 => 파라미터
-      // 주소값으로 캐싱,
-      // 캐시 방지하는 방법 =>
-      // -이미지 주소에 특정 해시값.date()
-      // -옵션 cashe control 사용
-      // -document.querySelector('section img:nth-child(4)').src = "/ryan.gif?time=" + new Date();
-      //
+
       const data = await uploadImage(filePath, selectImage);
       const { data: imageUrl, error } = supabase.storage.from('unAuthUserImage').getPublicUrl(data.path);
       const ImgDbUrl = imageUrl.publicUrl;
@@ -163,6 +156,17 @@ const MyPageContents = ({ data, isLoading }) => {
 };
 
 export default MyPageContents;
+
+// if (selectImage !== thumnailImage) setThumnailImage(avatar || thumnailImage);
+// if (selectImage !== thumnailImage) setThumnailImage(avatar || defaultImg);
+
+// 파일명에 해쉬값, => 웹팩, 이미지 요청 => 파라미터
+// 주소값으로 캐싱,
+// 캐시 방지하는 방법 =>
+// -이미지 주소에 특정 해시값.date()
+// -옵션 cashe control 사용
+// -document.querySelector('section img:nth-child(4)').src = "/ryan.gif?time=" + new Date();
+//
 
 //  setThumnailImage(avatar);
 // if (selectImage !== thumnailImage) setThumnailImage(avatar ? avatar : thumnailImage);
