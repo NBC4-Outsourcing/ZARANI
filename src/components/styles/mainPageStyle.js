@@ -289,3 +289,64 @@ export const MapWrapper = styled.div`
   border: 1px solid black;
   margin-top: 30px;
 `;
+
+//MainPageSerch.jsx
+
+export const Wrapper = styled.div`
+  position: relative;
+  width: 100%;
+  height: 500px;
+`;
+
+export const MenuWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 250px;
+  margin: 10px 0 30px 10px;
+  padding: 5px;
+  overflow-y: auto;
+  background: rgba(255, 255, 255, 0.7);
+  z-index: 1;
+  font-size: 12px;
+  border-radius: 10px;
+`;
+
+export const PlacesList = styled.ul`
+  list-style: none;
+`;
+
+export const Item = styled.li`
+  position: relative;
+  border-bottom: 1px solid #888;
+  overflow: hidden;
+  cursor: pointer;
+  min-height: 65px;
+`;
+
+export const MarkerBackground = styled.span`
+  float: left;
+  position: absolute;
+  width: 36px;
+  height: 37px;
+  margin: 10px 0 0 10px;
+  background-image: url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png);
+  background-repeat: no-repeat;
+
+  // marker_1부터 marker_15까지 background-position 적용
+  background-position: ${({ index }) => `0 -${index * 46 + 10}px`};
+`;
+
+export const Info = styled.div`
+  padding: 10px 0 10px 55px;
+`;
+
+export const Tel = styled.span`
+  color: #009900;
+`;
+
+export const Pagination = styled.div`
+  margin: 10px auto;
+  text-align: center;
+`;
