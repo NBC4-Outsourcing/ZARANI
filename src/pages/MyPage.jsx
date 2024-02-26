@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useQuery } from 'react-query';
-import { setThumnailImg, setUserInfo } from 'shared/redux/modules/userSlice';
 import { readUserInfo } from 'components/myPageComponent/myPageSupabase';
 import MyPageReviews from 'components/myPageComponent/MyPageReviews';
 import MyPageContents from 'components/myPageComponent/MyPageContents';
 import MyPageHeader from 'components/myPageComponent/MyPageHeader';
+import defaultImg from 'assets/defaultProfileImage.png';
 
 const MyPage = () => {
   const { isLoading, isError, data } = useQuery('usersAccounts', readUserInfo);

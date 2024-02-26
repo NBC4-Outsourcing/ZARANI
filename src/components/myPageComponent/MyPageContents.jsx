@@ -7,23 +7,44 @@ import * as MP from 'components/styles/MyPageStyle';
 import { useQuery } from 'react-query';
 import useSetMutation from 'hooks/useSetMutations';
 import defaultImg from 'assets/defaultProfileImage.png';
+import { Navigate } from 'react-router-dom';
 
 const MyPageContents = ({ data, isLoading }) => {
   console.log(data);
   const dispatch = useDispatch();
   const { id, email, nickname, avatar, uid } = data || {};
   const [mutation] = useSetMutation(updateUserInfo, 'usersAccounts');
-  const [selectImage, setSelectImage, ,] = useInput(avatar);
-  const [thumnailImage, setThumnailImage, ,] = useInput(avatar || defaultImg);
+  const [selectImage, setSelectImage] = useState(defaultImg);
+  const [thumnailImage, setThumnailImage] = useState(defaultImg);
   const [isEdit, setIsEdit] = useState(false);
   const [editValue, setEditValue, onChange] = useInput({
     nickname
   });
   const editValueNickname = editValue.nickname || '';
-
   if (isLoading || !data) return <div>로딩중입니다...</div>;
+  if (!data.avatar || !data.id || !data.nickname) {
+    alert(`로그인 해주세요!`);
+    return <Navigate to="/" replace="true" />;
+  }
+  useEffect(() => {
+    const imgOneRender = async () => {
+      try {
+        if (data) {
+          setThumnailImage(data.avatar);
+          await updateUserInfo(data, data.id);
+          setEditValue(data.nickname);
+        } else {
+          setThumnailImage(defaultImg);
+        }
+      } catch (error) {
+        console.log('로그인 해주세요!', error);
+        alert('로그인 해주세요!');
+        return <Navigate to="/" replace="true" />;
+      }
+    };
+    imgOneRender();
+  }, [data.avatar, data.id, data.nickname]);
 
-  // const [downloadImgMutation] = useSetMutation(downloadImage, 'unAuthUserImage');
   const onSubmitHandler = async (e) => {
     e.preventDefault();
 
@@ -31,44 +52,39 @@ const MyPageContents = ({ data, isLoading }) => {
     if (editSaveCheck === false) {
       alert('수정을 취소하셨습니다.');
       console.log(avatar);
-      if (selectImage !== thumnailImage) setThumnailImage(avatar);
-
+      // if (selectImage !== thumnailImage) setThumnailImage(avatar);
       console.log(avatar);
       setIsEdit(false);
       return;
     }
-    if (selectImage.name === undefined) {
+    if (!selectImage || selectImage.name === undefined) {
       alert('이미지를 선택해주세요.');
       return;
     }
+    if (selectFile === null) return;
 
-    if (!selectImage) {
-      alert('이미지를 선택해주세요!');
-      return;
-    }
-    if (selectImage) {
-      const filePath = `userImage/${uid}`;
+    // if (selectImage) {
+    const filePath = `userImage/${uid}`;
+    const data = await uploadImage(filePath, selectImage);
+    const { data: imageUrl, error } = supabase.storage.from('unAuthUserImage').getPublicUrl(data.path);
+    const ImgDbUrl = imageUrl.publicUrl;
 
-      const data = await uploadImage(filePath, selectImage);
-      const { data: imageUrl, error } = supabase.storage.from('unAuthUserImage').getPublicUrl(data.path);
-      const ImgDbUrl = imageUrl.publicUrl;
+    //   // ex ) https://rtjzvtuqyafegkvoirwc.supabase.co/storage/v…ge/userImage/1d25d250-5dea-47f5-a465-05f74a7bd79d'
+    //   const newData = { id, email, nickname: editValueNickname, avatar: ImgDbUrl, uid };
+    //   await updateUserInfo(newData, id);
+    //   mutation.mutate([newData, id]);
+    //   if (!selectImage) {
+    //     alert('사진을 등록해주세요!');
+    //   } else {
+    //     alert('사진 등록이 완료됐습니다.');
+    //   }
+    //   console.log(ImgDbUrl);
+    //   console.log(id);
 
-      // ex ) https://rtjzvtuqyafegkvoirwc.supabase.co/storage/v…ge/userImage/1d25d250-5dea-47f5-a465-05f74a7bd79d'
-      const newData = { id, email, nickname: editValueNickname, avatar: ImgDbUrl, uid };
-      await updateUserInfo(newData, id);
-      mutation.mutate([newData, id]);
-      if (!selectImage) {
-        alert('사진을 등록해주세요!');
-      } else {
-        alert('사진 등록이 완료됐습니다.');
-      }
-      console.log(ImgDbUrl);
-      console.log(id);
-
-      setSelectImage(ImgDbUrl);
-      alert('수정이 완료됐습니다.');
-      setIsEdit(false);
-    }
+    //   setSelectImage(ImgDbUrl);
+    //   alert('수정이 완료됐습니다.');
+    //   setIsEdit(false);
+    // }
   };
 
   // setThumnailImage(ImgDbUrl);
@@ -91,6 +107,7 @@ const MyPageContents = ({ data, isLoading }) => {
     e.preventDefault();
     setIsEdit(true);
     setEditValue({ nickname });
+    setThumnailImage(avatar);
   };
   // 이미지 편집 취소
   const onEditCancelHandler = (e) => {
@@ -105,7 +122,7 @@ const MyPageContents = ({ data, isLoading }) => {
     <MP.MyPageContentsForm>
       <MP.ImgWrapDiv>
         <MP.ThumnailImg>
-          <img src={avatar ? avatar : thumnailImage} alt="기본이미지" />
+          <img src={thumnailImage} alt="기본이미지" />
         </MP.ThumnailImg>
         <MP.ImgFileInput type="file" accept="image/*" id="imgfileChoice" onChange={onChangeAddImage} />
         {!isEdit ? (
@@ -156,6 +173,8 @@ const MyPageContents = ({ data, isLoading }) => {
 };
 
 export default MyPageContents;
+
+// const [downloadImgMutation] = useSetMutation(downloadImage, 'unAuthUserImage');
 
 // if (selectImage !== thumnailImage) setThumnailImage(avatar || thumnailImage);
 // if (selectImage !== thumnailImage) setThumnailImage(avatar || defaultImg);
