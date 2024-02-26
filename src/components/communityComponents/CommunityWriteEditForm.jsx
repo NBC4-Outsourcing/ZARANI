@@ -25,6 +25,10 @@ const CommunityWriteEditForm = ({ item, setEditFormId }) => {
   const { changeContents } = changeContent;
 
   const onClickChangeContentBtn = (id) => {
+    if (!changeContents || changeContents === item.content) {
+      alert('변경할 내용을 입력해주시기 바랍니다.');
+      return;
+    }
     const newContent = {
       content: changeContents
     };

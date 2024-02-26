@@ -16,6 +16,10 @@ const CommunityInputForm = ({ userData }) => {
   // 커뮤니티 글 등록 함수
   const onSubmitHandler = async (e) => {
     e.preventDefault();
+    if (!writeContent) {
+      alert('내용을 입력해주시기 바랍니다.');
+      return;
+    }
     const newWrite = {
       nickname,
       userId: userData.email,

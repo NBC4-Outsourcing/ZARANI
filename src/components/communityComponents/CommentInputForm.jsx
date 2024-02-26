@@ -20,6 +20,10 @@ const CommentInputForm = ({ onClickCommentHandler, writeId, userData }) => {
   const { nickname } = userData.user_metadata;
   const onSubmitHandler = async (e) => {
     e.preventDefault();
+    if (!writeComment) {
+      alert('댓글을 작성해주시기 바랍니다.');
+      return;
+    }
     const newComment = {
       nickname,
       userId: userData.email,
