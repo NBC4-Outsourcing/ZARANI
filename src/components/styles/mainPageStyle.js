@@ -83,6 +83,11 @@ export const ComuWrapper = styled.div`
   flex-direction: column;
   background-color: #eee;
   gap: 10px;
+  cursor: pointer;
+  &:hover {
+    transition: all 0.2s;
+    transform: scale(1.05);
+  }
 `;
 export const TitleSection = styled.div`
   font-size: 30px;
