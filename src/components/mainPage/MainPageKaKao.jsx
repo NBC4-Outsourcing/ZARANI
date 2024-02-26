@@ -10,7 +10,7 @@ const MainPageKaKao = () => {
   const serchBtn = data.serchTxt.serchTxt;
 
   useEffect(() => {
-    var markers = [];
+    let markers = [];
     const container = document.getElementById('map');
     const options = {
       center: new kakao.maps.LatLng(33.450701, 126.570667),
@@ -49,8 +49,8 @@ const MainPageKaKao = () => {
       // 검색 결과 목록에 추가된 항목들을 제거
       removeMarker();
       // 마커를 생성하고 지도에 표시
-      for (var i = 0; i < places.length; i++) {
-        var placePosition = new kakao.maps.LatLng(places[i].y, places[i].x),
+      for (let i = 0; i < places.length; i++) {
+        let placePosition = new kakao.maps.LatLng(places[i].y, places[i].x),
           marker = addMarker(placePosition, i);
 
         // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
@@ -96,7 +96,7 @@ const MainPageKaKao = () => {
     }
     // 지도 위에 표시되고 있는 마커를 모두 제거
     function removeMarker() {
-      for (var i = 0; i < markers.length; i++) {
+      for (let i = 0; i < markers.length; i++) {
         markers[i].setMap(null);
       }
       markers = [];
@@ -104,7 +104,7 @@ const MainPageKaKao = () => {
 
     // 인포윈도우에 장소명 표시
     function displayInfowindow(marker, title) {
-      var content = '<div style="padding:5px;z-index:1;">' + title + '</div>';
+      let content = '<div style="padding:5px;z-index:1;">' + title + '</div>';
 
       infowindow.setContent(content);
       infowindow.open(map, marker);
@@ -115,6 +115,7 @@ const MainPageKaKao = () => {
     <div>
       <div id="map" style={{ width: '500px', height: '500px', position: 'relative', overflow: 'hidden' }}></div>
       <MainPageLanding />
+      {console.log(list)}
       <div>
         {list.map((item, idx) => {
           return <li key={idx}>{item.address_name}</li>;

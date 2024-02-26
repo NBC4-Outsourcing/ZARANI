@@ -81,10 +81,12 @@ export const ComuWrapper = styled.div`
   margin-top: 30px;
   display: flex;
   flex-direction: column;
-  background-color: #f0f0f0;
+  background-color: #eee;
+  gap: 10px;
 `;
 export const TitleSection = styled.div`
   font-size: 30px;
+  font-weight: 700;
   display: flex;
   justify-content: center;
   margin-top: 10px;
@@ -95,13 +97,19 @@ export const ContentSection = styled.div`
   justify-content: space-between;
   margin-top: 10px;
 `;
+
 export const Content = styled.span`
   font-size: 18px;
   margin-left: 15px;
+  width: 350px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 export const Nickname = styled.span`
   font-size: 18px;
   margin-right: 15px;
+  color: #999;
 `;
 
 // MainPageNav.jsx
@@ -131,6 +139,9 @@ export const ListIncheon = styled.div`
   background-image: url(${img1});
   background-size: cover;
   transition: all 0.2s;
+  & > p {
+    text-shadow: 1px 1px 2px #000;
+  }
   &:hover {
     transform: scale(1.05);
   }
@@ -158,6 +169,9 @@ export const ListKangWondo = styled.div`
   background-image: url(${img2});
   background-size: cover;
   transition: all 0.2s;
+  & > p {
+    text-shadow: 1px 1px 2px #000;
+  }
   &:hover {
     transform: scale(1.05);
   }
@@ -185,6 +199,9 @@ export const ListSeoul = styled.div`
   background-image: url(${img3});
   background-size: cover;
   transition: all 0.2s;
+  & > p {
+    text-shadow: 1px 1px 2px #000;
+  }
   &:hover {
     transform: scale(1.05);
   }
@@ -212,6 +229,9 @@ export const ListJunra = styled.div`
   background-image: url(${img4});
   background-size: cover;
   transition: all 0.2s;
+  & > p {
+    text-shadow: 1px 1px 2px #000;
+  }
   &:hover {
     transform: scale(1.05);
   }
@@ -239,6 +259,9 @@ export const ListChungcheonDo = styled.div`
   background-image: url(${img5});
   background-size: cover;
   transition: all 0.2s;
+  & > p {
+    text-shadow: 1px 1px 2px #000;
+  }
   &:hover {
     transform: scale(1.05);
   }
@@ -266,6 +289,9 @@ export const ListJeJu = styled.div`
   background-image: url(${img6});
   background-size: cover;
   transition: all 0.2s;
+  & > p {
+    text-shadow: 1px 1px 2px #000;
+  }
   &:hover {
     transform: scale(1.05);
   }
