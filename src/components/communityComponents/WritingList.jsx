@@ -27,12 +27,13 @@ const WritingList = () => {
   const [mutation] = useSetMutation(deleteWrite, 'communityWriteList');
 
   const onClickDeleteHandler = (id) => {
-    for (let i = 0; i < commentList.length; i++) {
-      if (commentList[i].writeId === id) {
-        alert('댓글이 있는 글은 삭제가 불가능 합니다.');
-        return;
-      }
+    const filterComment = commentList.filter((item) => {
+      return item.writeId === id;
+    });
+    if (filterComment.length === 0) {
       mutation.mutate(id);
+    } else {
+      alert('댓글이있어');
     }
   };
 
