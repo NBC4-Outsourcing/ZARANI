@@ -16,15 +16,10 @@ const MyPageContents = ({ data, isLoading }) => {
   const [selectImage, setSelectImage, ,] = useInput(avatar);
   const [thumnailImage, setThumnailImage, ,] = useInput(avatar || defaultImg);
   const [isEdit, setIsEdit] = useState(false);
-  const [saveImg, setSaveImg] = useState();
   const [editValue, setEditValue, onChange] = useInput({
     nickname
   });
   const editValueNickname = editValue.nickname || '';
-  // useEffect(() => {
-  //   // avatar가 변경될 때 thumnailImage도 함께 변경되도록 설정
-  //   setThumnailImage(avatar || defaultImg);
-  // }, [avatar]);
 
   if (isLoading || !data) return <div>로딩중입니다...</div>;
 
@@ -36,7 +31,8 @@ const MyPageContents = ({ data, isLoading }) => {
     if (editSaveCheck === false) {
       alert('수정을 취소하셨습니다.');
       console.log(avatar);
-      if (selectImage !== thumnailImage) setThumnailImage(avatar || thumnailImage);
+      if (selectImage !== thumnailImage) setThumnailImage(avatar);
+      // if (selectImage !== thumnailImage) setThumnailImage(avatar || thumnailImage);
       // if (selectImage !== thumnailImage) setThumnailImage(avatar || defaultImg);
       console.log(avatar);
       setIsEdit(false);
@@ -63,15 +59,11 @@ const MyPageContents = ({ data, isLoading }) => {
       const data = await uploadImage(filePath, selectImage);
       const { data: imageUrl, error } = supabase.storage.from('unAuthUserImage').getPublicUrl(data.path);
       const ImgDbUrl = imageUrl.publicUrl;
-      // const ImgDbUrl = `${imageUrl.data.publicUrl}?t=${new Date().getTime()}`;
-      console.log(imageUrl);
-      console.log(selectImage);
-      console.log(data);
-      console.log(ImgDbUrl);
 
       // ex ) https://rtjzvtuqyafegkvoirwc.supabase.co/storage/v…ge/userImage/1d25d250-5dea-47f5-a465-05f74a7bd79d'
       const newData = { id, email, nickname: editValueNickname, avatar: ImgDbUrl, uid };
       await updateUserInfo(newData, id);
+      mutation.mutate([newData, id]);
       if (!selectImage) {
         alert('사진을 등록해주세요!');
       } else {
@@ -95,8 +87,8 @@ const MyPageContents = ({ data, isLoading }) => {
     const imgFile = e.target.files[0];
     if (!imgFile) return;
     if (imgFile) {
-      let image = URL.createObjectURL(imgFile);
       setSelectImage(imgFile);
+      let image = URL.createObjectURL(imgFile);
       setThumnailImage(image);
     }
   };
@@ -111,17 +103,16 @@ const MyPageContents = ({ data, isLoading }) => {
   const onEditCancelHandler = (e) => {
     e.preventDefault();
     setIsEdit(false);
-    //  setThumnailImage(avatar);
-    if (selectImage !== thumnailImage) setThumnailImage(avatar || thumnailImage);
-    // if (isEdit && selectImage !== thumnailImage) setThumnailImage(avatar);
+
+    if (isEdit && selectImage !== thumnailImage) setThumnailImage(avatar);
   };
 
-  avatar ? avatar : thumnailImage;
+  // avatar ? avatar : thumnailImage;
   return (
     <MP.MyPageContentsForm>
       <MP.ImgWrapDiv>
         <MP.ThumnailImg>
-          <img src={thumnailImage} alt="기본이미지" />
+          <img src={avatar ? avatar : thumnailImage} alt="기본이미지" />
         </MP.ThumnailImg>
         <MP.ImgFileInput type="file" accept="image/*" id="imgfileChoice" onChange={onChangeAddImage} />
         {!isEdit ? (
@@ -173,6 +164,14 @@ const MyPageContents = ({ data, isLoading }) => {
 
 export default MyPageContents;
 
+//  setThumnailImage(avatar);
+// if (selectImage !== thumnailImage) setThumnailImage(avatar ? avatar : thumnailImage);
+// if (selectImage !== thumnailImage) setThumnailImage(avatar || thumnailImage);
+// useEffect(() => {
+//   // avatar가 변경될 때 thumnailImage도 함께 변경되도록 설정
+//   setThumnailImage(avatar || defaultImg);
+// }, [avatar]);
+
 // useEffect(() => {
 //   // 컴포넌트가 unmount될 때 이전에 생성된 이미지 URL 해제
 //   return () => {
@@ -203,3 +202,9 @@ export default MyPageContents;
 //   mutationData();
 // }, [dispatch, data, avatar]);
 // 이미지, 닉네임, 내용 DB저장
+
+// const ImgDbUrl = `${imageUrl.data.publicUrl}?t=${new Date().getTime()}`;
+// console.log(imageUrl);
+// console.log(selectImage);
+// console.log(data);
+// console.log(ImgDbUrl);
