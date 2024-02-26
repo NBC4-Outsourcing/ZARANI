@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { readMyReview } from './myPageSupabase';
-import { getFormattedDate } from 'components/comunityComponents/formattedDate';
+import { getFormattedDate } from 'components/communityComponents/formattedDate';
 import { supabase } from 'api/supabase/supabase';
 
 const MyPageReviews = () => {

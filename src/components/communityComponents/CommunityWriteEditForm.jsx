@@ -1,7 +1,7 @@
 import {
   EditFormInput,
   WriteButtons,
-  WriteConteiner,
+  WriteContainer,
   WriteDate,
   WriteFoot,
   WriteHead,
@@ -22,7 +22,7 @@ const CommunityWriteEditForm = ({ item, setEditFormId }) => {
 
   const { changeContents } = changeContent;
 
-  const onClickChnageContentBtn = (id) => {
+  const onClickChangeContentBtn = (id) => {
     const newContent = {
       content: changeContents
     };
@@ -30,11 +30,11 @@ const CommunityWriteEditForm = ({ item, setEditFormId }) => {
     setEditFormId(null);
   };
 
-  const onClickCancleBtn = () => {
+  const onClickCancelBtn = () => {
     setEditFormId(null);
   };
   return (
-    <WriteConteiner>
+    <WriteContainer>
       <WriteHead>
         <WriteImage src={item.avatar} />
         <WriteNickName>0 6{item.nickname}</WriteNickName>
@@ -49,11 +49,11 @@ const CommunityWriteEditForm = ({ item, setEditFormId }) => {
       <WriteFoot>
         <WriteDate>{getFormattedDate(item.date)}</WriteDate>
         <WriteButtons>
-          <button onClick={() => onClickChnageContentBtn(item.id)}>수정완료</button>
-          <button onClick={onClickCancleBtn}>취소</button>
+          <button onClick={() => onClickChangeContentBtn(item.id)}>수정완료</button>
+          <button onClick={onClickCancelBtn}>취소</button>
         </WriteButtons>
       </WriteFoot>
-    </WriteConteiner>
+    </WriteContainer>
   );
 };
 

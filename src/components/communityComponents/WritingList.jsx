@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 import { deleteWrite, getWriteList } from './CommunitySupabase';
 import {
   WriteButtons,
-  WriteConteiner,
+  WriteContainer,
   WriteContent,
   WriteDate,
   WriteFoot,
@@ -26,7 +26,7 @@ const WritingList = () => {
 
   const [mutation] = useSetMutation(deleteWrite, 'communityWriteList');
 
-  const onClicDeleteHandler = (id) => {
+  const onClickDeleteHandler = (id) => {
     mutation.mutate(id);
   };
 
@@ -63,7 +63,7 @@ const WritingList = () => {
               {editFormId === item.id ? (
                 <CommunityWriteEditForm item={item} setEditFormId={setEditFormId} />
               ) : (
-                <WriteConteiner>
+                <WriteContainer>
                   <WriteHead>
                     <WriteImage src={item.avatar} />
                     <WriteNickName>{item.nickname}</WriteNickName>
@@ -74,10 +74,10 @@ const WritingList = () => {
                     <WriteButtons>
                       <button onClick={() => onClickCommentHandler(item.id)}>댓글</button>
                       <button onClick={() => onClickEditForm(item.id)}>수정</button>
-                      <button onClick={() => onClicDeleteHandler(item.id)}>삭제</button>
+                      <button onClick={() => onClickDeleteHandler(item.id)}>삭제</button>
                     </WriteButtons>
                   </WriteFoot>
-                </WriteConteiner>
+                </WriteContainer>
               )}
               <CommentList writeId={item.id} />
             </WriteListSection>

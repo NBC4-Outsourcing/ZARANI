@@ -28,7 +28,7 @@ export const WriteListSection = styled.section`
   justify-content: space-evenly;
   margin: 2% 0;
 `;
-export const WriteConteiner = styled.div`
+export const WriteContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -135,7 +135,7 @@ export const CommentListButton = styled.button`
 `;
 
 // CommentInputForm.jsx style
-export const ComentInputFormBackGround = styled.div`
+export const CommentInputFormBackGround = styled.div`
   position: fixed;
   top: 0;
   left: 0;

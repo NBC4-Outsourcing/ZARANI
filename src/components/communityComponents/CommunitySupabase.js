@@ -19,7 +19,7 @@ const getWriteList = async () => {
 };
 
 const updateWrite = async ([changeContent, id]) => {
-  const { error } = await supabase.from('comunityWrite').update(changeContent).eq('id', id);
+  const { error } = await supabase.from('communityWrite').update(changeContent).eq('id', id);
   if (error) {
     alert('변경하지 못 했습니다.');
     console.error(error);
@@ -27,7 +27,7 @@ const updateWrite = async ([changeContent, id]) => {
 };
 
 const deleteWrite = async (id) => {
-  const { error } = await supabase.from('comunityWrite').delete().eq('id', id).select();
+  const { error } = await supabase.from('communityWrite').delete().eq('id', id).select();
   if (error) {
     alert('삭제하지 못 했습니다.');
   }
