@@ -1,7 +1,7 @@
 import { supabase } from 'api/supabase/supabase';
 
 const insertWriting = async (newWrite) => {
-  const { error } = await supabase.from('comunityWrite').insert([newWrite]).select();
+  const { error } = await supabase.from('communityWrite').insert([newWrite]).select();
   if (error) {
     console.error(error);
     alert('글을 저장하지 못했습니다.');
@@ -9,7 +9,7 @@ const insertWriting = async (newWrite) => {
 };
 
 const getWriteList = async () => {
-  const { data, error } = await supabase.from('comunityWrite').select('*');
+  const { data, error } = await supabase.from('communityWrite').select('*');
   if (error) {
     console.error(error);
     alert('데이터를 가져오지 못 했습니다.');
