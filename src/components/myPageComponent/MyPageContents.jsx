@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { downloadImage, getImageUrl, readUserInfo, updateUserInfo, uploadImage } from './myPageSupabase';
 import { supabase } from 'api/supabase/supabase';
 import useInput from 'hooks/useInput';
@@ -7,93 +6,40 @@ import * as MP from 'components/styles/MyPageStyle';
 import { useQuery } from 'react-query';
 import useSetMutation from 'hooks/useSetMutations';
 import defaultImg from 'assets/defaultProfileImage.png';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
-const MyPageContents = ({ data, isLoading }) => {
-  console.log(data);
-  const dispatch = useDispatch();
-  const { id, email, nickname, avatar, uid } = data || {};
-  const [mutation] = useSetMutation(updateUserInfo, 'usersAccounts');
+const MyPageContents = ({ isLoading }) => {
+  const navigate = useNavigate();
+  const [isEdit, setIsEdit] = useState(false);
   const [selectImage, setSelectImage] = useState(defaultImg);
   const [thumnailImage, setThumnailImage] = useState(defaultImg);
-  const [isEdit, setIsEdit] = useState(false);
+  const [userAccount, setUserAccount] = useState();
+  // const { isLoading, isError, data } = useQuery('usersAccounts', readUserInfo);
+  const { id, email, nickname, avatar, uid } = userAccount || {};
+  const [mutation] = useSetMutation(updateUserInfo, 'usersAccounts');
   const [editValue, setEditValue, onChange] = useInput({
     nickname
   });
   const editValueNickname = editValue.nickname || '';
-  if (isLoading || !data) return <div>로딩중입니다...</div>;
-  if (!data.avatar || !data.id || !data.nickname) {
-    alert(`로그인 해주세요!`);
-    return <Navigate to="/" replace="true" />;
-  }
+  const token = JSON.parse(localStorage.getItem(localStorage.key(0)));
+  const acToken = token.access_token;
+
   useEffect(() => {
-    const imgOneRender = async () => {
-      try {
-        if (data) {
-          setThumnailImage(data.avatar);
-          await updateUserInfo(data, data.id);
-          setEditValue(data.nickname);
-        } else {
-          setThumnailImage(defaultImg);
-        }
-      } catch (error) {
-        console.log('로그인 해주세요!', error);
-        alert('로그인 해주세요!');
-        return <Navigate to="/" replace="true" />;
+    const myPageData = async () => {
+      let { data: myPageInfo, error } = await supabase.from('usersAccounts').select('*');
+      if (myPageInfo) {
+        myPageInfo.forEach((userInfo) => {
+          setUserAccount(userInfo);
+          updateUserInfo(userInfo, userInfo.id);
+          setThumnailImage(userInfo.avatar);
+        });
+      } else {
+        console.log('error', error);
       }
     };
-    imgOneRender();
-  }, [data.avatar, data.id, data.nickname]);
+    myPageData();
+  }, []);
 
-  const onSubmitHandler = async (e) => {
-    e.preventDefault();
-
-    const editSaveCheck = window.confirm('수정내용을 저장하시겠습니까?');
-    if (editSaveCheck === false) {
-      alert('수정을 취소하셨습니다.');
-      console.log(avatar);
-      // if (selectImage !== thumnailImage) setThumnailImage(avatar);
-      console.log(avatar);
-      setIsEdit(false);
-      return;
-    }
-    if (!selectImage || selectImage.name === undefined) {
-      alert('이미지를 선택해주세요.');
-      return;
-    }
-    if (selectFile === null) return;
-
-    // if (selectImage) {
-    // storage 내부 저장할 위치(폴더)를 회원 uid 또는 이메일로 정하고 스토리지에 저장.
-    const filePath = `userImage/${uid}`;
-    try {
-      const data = await uploadImage(filePath, selectImage);
-    } catch (error) {
-      console.error('이미지가 업로드되지 않았어용!', error);
-      return null;
-    }
-    const { data: imageUrl } = supabase.storage.from('unAuthUserImage').getPublicUrl(data.path);
-    const ImgDbUrl = imageUrl.publicUrl;
-
-    //   // ex ) https://rtjzvtuqyafegkvoirwc.supabase.co/storage/v…ge/userImage/1d25d250-5dea-47f5-a465-05f74a7bd79d'
-    const newData = { id, email, nickname: editValueNickname, avatar: ImgDbUrl, uid };
-    await updateUserInfo(newData, id);
-    // mutation.mutate([newData, id]);
-    if (!ImgDbUrl) {
-      alert('사진을 등록해주세요!');
-    } else {
-      alert('사진 등록이 완료됐습니다.');
-    }
-    //   console.log(ImgDbUrl);
-    //   console.log(id);
-
-    //   setSelectImage(ImgDbUrl);
-    //   alert('수정이 완료됐습니다.');
-    //   setIsEdit(false);
-    // }
-  };
-
-  // setThumnailImage(ImgDbUrl);
   // 이미지 등록
   const onChangeAddImage = (e) => {
     e.preventDefault();
@@ -108,6 +54,47 @@ const MyPageContents = ({ data, isLoading }) => {
     }
   };
 
+  const onSubmitHandler = async (e) => {
+    e.preventDefault();
+
+    const editSaveCheck = window.confirm('수정내용을 저장하시겠습니까?');
+    if (editSaveCheck === false) {
+      alert('수정을 취소하셨습니다.');
+      setThumnailImage(avatar);
+      setIsEdit(false);
+      return;
+    }
+    if (!selectImage || selectImage.name === undefined) {
+      alert('이미지를 선택해주세요.');
+      return;
+    }
+    if (selectImage === null) return;
+    // storage 내부 저장할 위치(폴더)를 회원 uid 또는 이메일로 정하고 스토리지에 저장.
+    const filePath = `userOneImage/${uid}`;
+    try {
+      const data = await uploadImage(filePath, selectImage);
+      const { data: imageUrl } = supabase.storage.from('unAuthUserImage').getPublicUrl(data.path);
+      const ImgDbUrl = imageUrl.publicUrl;
+      setSelectImage(ImgDbUrl);
+      //   // ex ) https://rtjzvtuqyafegkvoirwc.supabase.co/storage/v…ge/userImage/1d25d250-5dea-47f5-a465-05f74a7bd79d'
+      const newData = { id, email, nickname: editValueNickname, avatar: ImgDbUrl, uid };
+      await updateUserInfo(newData, id);
+      setThumnailImage(newData.avatar);
+
+      // if (!ImgDbUrl) {
+      //   alert('사진을 등록해주세요!');
+      // } else {
+      //   alert('사진 등록이 완료됐습니다.');
+      // }
+
+      alert('수정이 완료됐습니다.');
+      setIsEdit(false);
+    } catch (error) {
+      alert('수정이 되지 않았습니다! 다시 해주세용!');
+      return;
+    }
+  };
+
   // 이미지 편집 모드
   const onEditContentsHandler = (e) => {
     e.preventDefault();
@@ -119,9 +106,9 @@ const MyPageContents = ({ data, isLoading }) => {
   const onEditCancelHandler = (e) => {
     e.preventDefault();
     setIsEdit(false);
-
     if (isEdit && selectImage !== thumnailImage) setThumnailImage(avatar);
   };
+  if (isLoading) return <div>로딩중입니다...</div>;
 
   // avatar ? avatar : thumnailImage;
   return (
@@ -180,6 +167,21 @@ const MyPageContents = ({ data, isLoading }) => {
 
 export default MyPageContents;
 
+// , {
+//     onSuccess: (data) => {
+//       try {
+//         if (data) {
+//           setThumnailImage(data.avatar);
+//         }
+//       } catch (error) {
+//         console.log('로그인 해주세요!', error);
+//         alert('로그인 해주세요!', error);
+//         navigate('/', { replace: true });
+//       }
+
+//       console.log('데이터를 성공적으로 가져왔습니다:', data);
+//     }
+//   }
 // const [downloadImgMutation] = useSetMutation(downloadImage, 'unAuthUserImage');
 
 // if (selectImage !== thumnailImage) setThumnailImage(avatar || thumnailImage);
