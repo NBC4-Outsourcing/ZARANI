@@ -18,6 +18,7 @@ import CommentInputForm from './CommentInputForm';
 import { getFormattedDate } from './formattedDate';
 import CommunityWriteEditForm from './CommunityWriteEditForm';
 import useSetMutation from 'hooks/useSetMutations';
+import Loading from '../common/Loading';
 
 const WritingList = () => {
   const { isLoading, isError, data: writeList } = useQuery('communityWriteList', getWriteList);
@@ -52,7 +53,7 @@ const WritingList = () => {
   };
 
   if (isLoading) {
-    return <div>로딩 중입니다</div>;
+    return <Loading />;
   }
   if (isError) {
     alert('글의 정보를 가져오지 못했습니다.');

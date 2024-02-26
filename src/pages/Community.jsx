@@ -3,6 +3,8 @@ import CommunityInputForm from 'components/communityComponents/CommunityInputFor
 import React from 'react';
 import { CommunityDiv } from 'components/styles/CommunityStyle';
 import CommunityHeader from 'components/communityComponents/CommunityHeader';
+import { useQuery } from 'react-query';
+import { getUser } from 'components/communityComponents/CommunitySupabase';
 
 const Community = () => {
   return (
