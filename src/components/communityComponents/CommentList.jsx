@@ -1,9 +1,9 @@
 import {
-  CommentListButton,
   CommentListComment,
   CommentListContainer,
   CommentListInfo,
-  CommentListSection
+  CommentListSection,
+  CommunityBtn
 } from 'components/styles/CommunityStyle';
 import React from 'react';
 import { deleteComment } from './CommunitySupabase';
@@ -32,7 +32,9 @@ const CommentList = ({ writeId, commentList, isLoading }) => {
                   <p>{getFormattedDate(item.date)}</p>
                 </CommentListInfo>
                 <CommentListComment>{item.comment}</CommentListComment>
-                <CommentListButton onClick={() => mutation.mutate(item.id)}>삭제</CommentListButton>
+                <CommunityBtn background={'danger'} onClick={() => mutation.mutate(item.id)}>
+                  삭제
+                </CommunityBtn>
               </CommentListContainer>
             );
           })

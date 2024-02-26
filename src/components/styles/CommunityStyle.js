@@ -1,5 +1,21 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
+// 공통으로 사용할 버튼
+export const CommunityBtn = styled.button`
+  border: none;
+  background-color: lightgray;
+  width: 40px;
+  height: 25px;
+  border-radius: 8px;
+  background-color: var(--subColor1);
+  margin: auto;
+  ${(props) =>
+    props.background === 'danger' &&
+    css`
+      background-color: var(--mainColor);
+      margin: 0 0 0 auto;
+    `};
+`;
 // Community.jsx style
 export const CommunityDiv = styled.div`
   width: 100%;
@@ -65,7 +81,7 @@ export const WriteNickName = styled.label`
   border-radius: 8px;
   width: 40%;
   height: 35%;
-  margin: 0 5%;
+  margin: 0 auto;
 `;
 
 export const WriteContent = styled.p`
@@ -92,14 +108,6 @@ export const WriteButtons = styled.div`
   width: 50%;
   display: flex;
   justify-content: space-between;
-`;
-
-export const WriteBtn = styled.button`
-  border: none;
-  background-color: lightgray;
-  width: 40px;
-  height: 25px;
-  border-radius: 8px;
 `;
 
 // CommunityWriteEditForm.jsx style(WritingList.jsx 그대로 사용하는데 일부만 변경)
@@ -143,15 +151,6 @@ export const CommentListComment = styled.p`
   padding: 1%;
   border-radius: 8px;
   min-height: 50px;
-`;
-
-export const CommentListButton = styled.button`
-  width: 50px;
-  margin-left: auto;
-  margin-top: 5px;
-  background-color: var(--mainColor);
-  border: none;
-  border-radius: 8px;
 `;
 
 // CommentInputForm.jsx style

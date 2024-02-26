@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import { deleteWrite, getCommentList, getWriteList } from './CommunitySupabase';
 import {
-  WriteBtn,
+  CommunityBtn,
   WriteButtons,
   WriteContainer,
   WriteContent,
@@ -80,9 +80,11 @@ const WritingList = () => {
                   <WriteFoot>
                     <WriteDate>{getFormattedDate(item.date)}</WriteDate>
                     <WriteButtons>
-                      <WriteBtn onClick={() => onClickCommentHandler(item.id)}>댓글</WriteBtn>
-                      <WriteBtn onClick={() => onClickEditForm(item.id)}>수정</WriteBtn>
-                      <WriteBtn onClick={() => onClickDeleteHandler(item.id)}>삭제</WriteBtn>
+                      <CommunityBtn onClick={() => onClickCommentHandler(item.id)}>댓글</CommunityBtn>
+                      <CommunityBtn onClick={() => onClickEditForm(item.id)}>수정</CommunityBtn>
+                      <CommunityBtn background={'danger'} onClick={() => onClickDeleteHandler(item.id)}>
+                        삭제
+                      </CommunityBtn>
                     </WriteButtons>
                   </WriteFoot>
                 </WriteContainer>
