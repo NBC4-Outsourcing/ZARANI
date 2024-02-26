@@ -14,7 +14,7 @@ import useInput from '../../hooks/useInput';
 
 const ReviewForm = () => {
   const imgRef = useRef(null);
-
+  // const imgName=uuid()
   const [reviewContentInput, , reviewContentHandler, reset] = useInput({
     reviewContent: ''
   });
@@ -64,13 +64,10 @@ const ReviewForm = () => {
     e.preventDefault();
 
     // storage에 이미지 등록
-
-    // 이미지 url을 게시물 테이블에 text로 저장하면 블롭형태로 저장되어 새로고침 또는 다른탭에 들어갔다 나오면 저장된 이미지가 사라진다 하지만 게시물 테이블엔 존재함 그럼 이미지를 로컬스토리지에 한번 더 저장하면 되지 않나?
-
     if (addImg) {
       const imgPath = imgRef.current.files[0];
-
-      const { data, error } = await supabase.storage.from('reviewImage').upload(`reviewFile/${uid}`, imgPath, {
+      // 파일 이름 중복으로 이미지 등록 불가
+      const { data, error } = await supabase.storage.from('reviewImage').upload(`reviewFile/test`, imgPath, {
         cacheControl: '3600',
         upsert: false
       });
