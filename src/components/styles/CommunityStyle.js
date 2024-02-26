@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
-// Comunity.jsx style
-export const ComunityDiv = styled.div`
+// Community.jsx style
+export const CommunityDiv = styled.div`
   width: 100%;
 `;
 
 // InputForm.jsx style.
-export const ComunityForm = styled.form`
+export const CommunityForm = styled.form`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -17,7 +17,7 @@ export const ComunityForm = styled.form`
   border-radius: 8px;
 `;
 
-export const ComunityInput = styled.input`
+export const CommunityInput = styled.input`
   width: 40%;
   height: 70%;
 `;
@@ -28,7 +28,7 @@ export const WriteListSection = styled.section`
   justify-content: space-evenly;
   margin: 2% 0;
 `;
-export const WriteConteiner = styled.div`
+export const WriteContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -84,7 +84,7 @@ export const WriteButtons = styled.div`
   justify-content: space-between;
 `;
 
-// ComunityWriteEditForm.jsx style(WritingList.jsx 그대로 사용하는데 일부만 변경)
+// CommunityWriteEditForm.jsx style(WritingList.jsx 그대로 사용하는데 일부만 변경)
 export const EditFormInput = styled.textarea`
   display: flex;
   justify-content: center;
@@ -135,7 +135,7 @@ export const CommentListButton = styled.button`
 `;
 
 // CommentInputForm.jsx style
-export const ComentInputFormBackGround = styled.div`
+export const CommentInputFormBackGround = styled.div`
   position: fixed;
   top: 0;
   left: 0;
