@@ -8,20 +8,17 @@ import { useQuery } from 'react-query';
 import useSetMutation from 'hooks/useSetMutations';
 import defaultImg from 'assets/defaultImage.png';
 
-const MyPageContents = () => {
+const MyPageContents = ({ data }) => {
   const dispatch = useDispatch();
+  const { id, email, nickname, avatar, uid } = data;
+  const mutation = useSetMutation(updateUserInfo, 'usersAccounts');
   const [selectImage, setSelectImage, ,] = useInput(defaultImg);
   const [thumnailImage, setThumnailImage, ,] = useInput(avatar || defaultImg);
   const [isEdit, setIsEdit] = useState(false);
   const [editValue, setEditValue, onChange] = useInput({
     nickname
   });
-  const editValueNickname = editValue.nickname;
-  const { isLoading, isError, data } = useQuery('usersAccounts', readUserInfo);
-  const { id, email, nickname, avatar, uid } = data;
-
-  if (isLoading) return <div>로딩중입니다...</div>;
-  if (isError) return <div>오류로 인해 정보를 받아오지 못 하고 있습니다.</div>;
+  const editValueNickname = editValue.nickname || '';
 
   // useEffect(() => {
   //   const mutationData = async () => {
@@ -34,7 +31,6 @@ const MyPageContents = () => {
   // }, [dispatch, data, avatar]);
   // 이미지, 닉네임, 내용 DB저장
 
-  const [mutation] = useSetMutation(updateUserInfo, 'usersAccounts');
   const [downloadImgMutation] = useSetMutation(downloadImage, 'unAuthUserImage');
   const onSubmitHandler = async (e) => {
     e.preventDefault();
@@ -52,28 +48,28 @@ const MyPageContents = () => {
       return;
     }
     if (selectImage) {
-      console.log(selectImage);
       const filePath = `userImage/${uid}`;
       const data = await uploadImage(filePath, selectImage);
-      console.log(data);
       const { data: imageUrl, error } = supabase.storage.from('unAuthUserImage').getPublicUrl(data.path);
-      const ImgDbUrl = imageUrl.data.publicUrl;
+      const ImgDbUrl = imageUrl.publicUrl;
+      console.log(imageUrl);
+      console.log(selectImage);
+      console.log(data);
       console.log(ImgDbUrl);
 
       // ex ) https://rtjzvtuqyafegkvoirwc.supabase.co/storage/v…ge/userImage/1d25d250-5dea-47f5-a465-05f74a7bd79d'
       const newData = { id, email, nickname: editValueNickname, avatar: ImgDbUrl, uid };
+      await updateUserInfo(newData, id);
       console.log(ImgDbUrl);
       console.log(id);
-      await updateUserInfo(newData, id);
-      await mutation.mutateAsync(newData, id);
 
       setSelectImage(ImgDbUrl);
       alert('수정이 완료됐습니다.');
       setIsEdit(false);
-      setThumnailImage(avatar);
     }
   };
 
+  // setThumnailImage(ImgDbUrl);
   // 이미지 등록
   const onChangeAddImage = (e) => {
     e.preventDefault();

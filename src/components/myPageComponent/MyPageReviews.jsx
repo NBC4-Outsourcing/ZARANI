@@ -31,7 +31,7 @@ const MyPageReviews = () => {
         myReview.map((reviews) => {
           const { id, nickname, content, date, email } = reviews;
           return (
-            <Link to={`/Review/${id}`}>
+            <Link to="/Review">
               <section key={id}>
                 <div>도로이름 : 안양천길 </div>
                 <div>content: {content}</div>
