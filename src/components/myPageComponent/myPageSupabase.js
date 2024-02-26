@@ -32,7 +32,7 @@ export const uploadImage = async (filePath, image) => {
     cacheControl: '3600',
     upsert: true
   });
-  console.log(data);
+
   if (error) {
     console.error('파일 업로드 오류', error.message);
     alert('정보를 받아오지 못하고 있습니다.');
@@ -52,19 +52,3 @@ export const downloadImage = async (filePath) => {
     alert('이미지를 받아오지 못하고 있습니다.');
   }
 };
-
-// export const getImageUrl = async (filePath, image) => {
-//   const data = await uploadImage(filePath, image);
-//   console.log(data);
-//   const { data: imageUrl, error } = supabase.storage.from('unAuthUserImage').getPublicUrl(data.path);
-//   const ImgDbUrl = imageUrl.data.publicUrl;
-//   console.log(ImgDbUrl);
-//   if (error) {
-//     alert('이미지를 받아오지 못하고 있습니다. 문의해주세요.');
-//     return;
-//   }
-//   // console.error('이미지를 받아오지 못하고 있습니다.', error);
-//   return ImgDbUrl;
-//   // } catch (error) {
-//   // }
-// };
