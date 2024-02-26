@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import * as S from '../styles/mainPageStyle';
 import img from '../../assets/logo.png';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { getUserImage } from './mainPageSupabase';
+import { useQuery } from 'react-query';
 
 const MainPageHeader = () => {
   const [isLogin, setIsLogin] = useState(true);
-  const { selectImage } = useSelector((state) => state.user);
+  const { isLoading, data } = useQuery('usersAccounts', getUserImage);
   const navigate = useNavigate();
   const handCommunityPage = () => {
     navigate('/community');
@@ -20,13 +21,16 @@ const MainPageHeader = () => {
   const handLogOut = () => {
     //로그아웃 로직
   };
+  if (isLoading) {
+    <div>로딩중입니다.</div>;
+  }
   return (
     <S.HeaderWrapper>
       <S.LogoImage src={img} />
       {isLogin ? (
         <S.LoginStyle>
           <S.StBtn onClick={handCommunityPage}> 커뮤니티</S.StBtn>
-          <S.AvatarStyle src={selectImage} onClick={handMypage} />
+          <S.AvatarStyle src={data} onClick={handMypage} />
           <S.LogoutBtn onClick={handLogOut}>로그아웃</S.LogoutBtn>
         </S.LoginStyle>
       ) : (
