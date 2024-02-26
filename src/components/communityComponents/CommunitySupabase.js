@@ -2,12 +2,8 @@ import { supabase } from 'api/supabase/supabase';
 
 const getUser = async () => {
   const {
-    data: { user },
-    error: userData
+    data: { user }
   } = await supabase.auth.getUser();
-  if (userData) {
-    alert('로그인이 되어있지 않습니다.');
-  }
   return user;
 };
 
