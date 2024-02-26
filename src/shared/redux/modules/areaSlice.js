@@ -1,10 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  value: {
-    lat: 37.57241118053246,
-    lng: 126.70242841204563
-  }
+  serchTxt: '서울 자전거 길'
 };
 
 const areaSlice = createSlice({
@@ -13,7 +10,7 @@ const areaSlice = createSlice({
   reducers: {
     setAreaInfo: (state, action) => {
       const selectArea = action.payload;
-      state.value = selectArea;
+      state.serchTxt = selectArea;
     }
   }
 });

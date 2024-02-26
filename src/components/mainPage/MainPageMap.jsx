@@ -1,13 +1,8 @@
 import React from 'react';
-import * as S from '../styles/mainPageStyle';
-import MainPageKaKao from './MainPageKaKao';
+import MainPageLanding from './MainPageLending';
 
 const MainPageMap = () => {
-  return (
-    <S.MapWrapper>
-      <MainPageKaKao />
-    </S.MapWrapper>
-  );
+  return <MainPageLanding />;
 };
 
 export default MainPageMap;
