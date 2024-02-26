@@ -1,20 +1,32 @@
-import { CommentInputFormBackGround, CommentInputFormStyle } from 'components/styles/CommunityStyle';
+import {
+  CommentInputBtnDiv,
+  CommentInputFormBackGround,
+  CommentInputFormStyle,
+  CommentInputTextarea,
+  CommentListName,
+  CommunityBtn
+} from 'components/styles/CommunityStyle';
 import React from 'react';
 import { insertComment } from './CommunitySupabase';
 import useInput from 'hooks/useInput';
 import useSetMutation from 'hooks/useSetMutations';
 
-const CommentInputForm = ({ onClickCommentHandler, writeId }) => {
+const CommentInputForm = ({ onClickCommentHandler, writeId, userData }) => {
   const [comment, , onChangeContentHandler] = useInput({
     writeComment: ''
   });
   const [mutation] = useSetMutation(insertComment, 'commentWriteList');
   const { writeComment } = comment;
+  const { nickname } = userData.user_metadata;
   const onSubmitHandler = async (e) => {
     e.preventDefault();
+    if (!writeComment) {
+      alert('댓글을 작성해주시기 바랍니다.');
+      return;
+    }
     const newComment = {
-      nickname: '보라돌이',
-      userId: 'qube7089',
+      nickname,
+      userId: userData.email,
       writeId,
       comment: writeComment
     };
@@ -24,18 +36,20 @@ const CommentInputForm = ({ onClickCommentHandler, writeId }) => {
   return (
     <CommentInputFormBackGround>
       <CommentInputFormStyle onSubmit={onSubmitHandler}>
-        <p>보라돌이</p>
-        <input
+        <CommentListName>{nickname}</CommentListName>
+        <CommentInputTextarea
           maxLength={'80'}
           placeholder="최대 80자까지만 입력할 수 있습니다."
           name="writeComment"
           value={writeComment}
           onChange={onChangeContentHandler}
         />
-        <button type="submit">등록</button>
-        <button type="button" onClick={onClickCommentHandler}>
-          취소
-        </button>
+        <CommentInputBtnDiv>
+          <CommunityBtn type="submit">등록</CommunityBtn>
+          <CommunityBtn background={'danger'} type="button" onClick={onClickCommentHandler}>
+            취소
+          </CommunityBtn>
+        </CommentInputBtnDiv>
       </CommentInputFormStyle>
     </CommentInputFormBackGround>
   );

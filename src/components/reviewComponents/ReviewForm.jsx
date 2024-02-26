@@ -46,7 +46,7 @@ const ReviewForm = () => {
 
     readUserInfo();
   }, []);
-  const [{ email, nickname, avatar, uid }] = userInfo;
+  const [{ email, nickname, avatar }] = userInfo;
   // 여기까지usersAccounts data
 
   const imgRef = useRef(null);
