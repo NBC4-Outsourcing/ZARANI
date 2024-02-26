@@ -77,6 +77,7 @@ const ReviewForm = () => {
     setIsImg(false);
   };
 
+  // 회원정보만 임시로 usersAccounts 테이블 데이터 사용
   // DB에 후기 등록
   const addReview = async (e) => {
     e.preventDefault();
@@ -86,7 +87,9 @@ const ReviewForm = () => {
       const imgPath = imgRef.current.files[0];
 
       // 파일 이름 중복으로 이미지 1개 이상 등록 불가
-      const { data, error } = await supabase.storage.from('reviewImage').upload(`reviewFile/${uid}`, imgPath, {
+      // usersAccounts테이블의 uid를 정상적으로 받아오지못해 임시로 파일명 지정 나중에 회원 정보 기능이 완성되면 회원 uid를 파일 이름에 넣어줄것
+      // const { data, error } = await supabase.storage.from('reviewImage').upload(`reviewFile/${uid}`, imgPath, {
+      const { data, error } = await supabase.storage.from('reviewImage').upload('reviewFile/testImg', imgPath, {
         cacheControl: '3600',
         upsert: false
       });

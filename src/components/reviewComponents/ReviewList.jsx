@@ -5,32 +5,32 @@ import React, { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 
 export const ReviewList = () => {
-  // 데이터베이스에 저장된 후기 데이터 저장 state
+  // 데이터베이스에 저장된 데이터 저장 state
   const [reviewData, setReviewData] = useState();
   const [reviewImg, setReviewImg] = useState();
 
-  // usersAccounts data state
-  const [imgInfo, setimgInfo] = useState([{}]);
+  // // usersAccounts data state
+  // const [imgInfo, setimgInfo] = useState([{}]);
 
-  // userInfo
-  useEffect(() => {
-    const readUserInfo = async () => {
-      const { data, error } = await supabase.from('usersAccounts').select('*');
-      setimgInfo(data);
-      console.log('data', data);
+  // // userInfo
+  // useEffect(() => {
+  //   const readUserInfo = async () => {
+  //     const { data, error } = await supabase.from('usersAccounts').select('*');
+  //     setimgInfo(data);
+  //     console.log('data', data);
 
-      if (error) {
-        alert('오류로 인해 정보를 받아오지 못 하고 있습니다.');
-        return null;
-      }
-    };
+  //     if (error) {
+  //       alert('오류로 인해 정보를 받아오지 못 하고 있습니다.');
+  //       return null;
+  //     }
+  //   };
 
-    readUserInfo();
-  }, []);
-  const [{ uid }] = imgInfo;
-  console.log('userInfo', imgInfo);
-  console.log('uid', uid);
-  // 여기까지usersAccounts data state
+  //   readUserInfo();
+  // }, []);
+  // const [{ uid }] = imgInfo;
+  // console.log('userInfo', imgInfo);
+  // console.log('uid', uid);
+  // // 여기까지usersAccounts data state
 
   // DB에 저장된 후기 데이터 가져오기
   useEffect(() => {
@@ -46,8 +46,10 @@ export const ReviewList = () => {
     };
 
     // 이미지 불러오기
+    // usersAccounts테이블의 uid를 정상적으로 받아오지못해 임시로 파일명 지정 나중에 회원 정보 기능이 완성되면 회원 uid를 파일 이름에 넣어줄것
     const filePath = async () => {
-      const { data: imageUrl, error } = supabase.storage.from('reviewImage').getPublicUrl(`reviewFile/${uid}`);
+      // const { data: imageUrl, error } = supabase.storage.from('reviewImage').getPublicUrl(`reviewFile/${uid}`);
+      const { data: imageUrl, error } = supabase.storage.from('reviewImage').getPublicUrl('reviewFile/testImg');
       if (!error) {
         console.log('data', imageUrl);
         console.log('이미지 Url 변환 성공');
@@ -64,7 +66,6 @@ export const ReviewList = () => {
   // 데이터 수정
   // 데이터 삭제
 
-  // uid를 받아와도 이미지에 이름이 안들어가는 경우가 생김
   return (
     <ContentsList>
       {reviewData?.map((item, idx) => (
