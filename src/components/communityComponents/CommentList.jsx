@@ -19,22 +19,26 @@ const CommentList = ({ writeId, commentList, isLoading }) => {
   }
   return (
     <CommentListSection>
-      {filterComment
-        .sort((a, b) => {
-          return new Date(b.date).getTime() - new Date(a.date).getTime();
-        })
-        .map((item) => {
-          return (
-            <CommentListContainer key={item.id}>
-              <CommentListInfo>
-                <p>{item.nickname}</p>
-                <p>{getFormattedDate(item.date)}</p>
-              </CommentListInfo>
-              <CommentListComment>{item.comment}</CommentListComment>
-              <CommentListButton onClick={() => mutation.mutate(item.id)}>삭제</CommentListButton>
-            </CommentListContainer>
-          );
-        })}
+      {filterComment.length !== 0 ? (
+        filterComment
+          .sort((a, b) => {
+            return new Date(b.date).getTime() - new Date(a.date).getTime();
+          })
+          .map((item) => {
+            return (
+              <CommentListContainer key={item.id}>
+                <CommentListInfo>
+                  <p>{item.nickname}</p>
+                  <p>{getFormattedDate(item.date)}</p>
+                </CommentListInfo>
+                <CommentListComment>{item.comment}</CommentListComment>
+                <CommentListButton onClick={() => mutation.mutate(item.id)}>삭제</CommentListButton>
+              </CommentListContainer>
+            );
+          })
+      ) : (
+        <div>댓글이 없습니다.</div>
+      )}
     </CommentListSection>
   );
 };

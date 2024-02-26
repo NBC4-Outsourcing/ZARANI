@@ -22,6 +22,13 @@ export const CommunityInput = styled.input`
   height: 70%;
 `;
 
+// Community.jsx
+export const Main = styled.main`
+  margin: 2.5%;
+  padding: 0.5px;
+  background-color: lightgray;
+`;
+
 // WriteList.jsx style.
 export const WriteListSection = styled.section`
   display: flex;
@@ -32,10 +39,11 @@ export const WriteContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  border: 1px solid black;
   width: 40%;
   height: 250px;
   padding: 1%;
+  background-color: whitesmoke;
+  border-radius: 12px;
 `;
 
 export const WriteHead = styled.div`
@@ -53,7 +61,8 @@ export const WriteNickName = styled.label`
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid black;
+  background-color: lightgray;
+  border-radius: 8px;
   width: 40%;
   height: 35%;
   margin: 0 5%;
@@ -63,9 +72,10 @@ export const WriteContent = styled.p`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid black;
+  background-color: lightgrey;
   height: 35%;
   padding: 1.5%;
+  border-radius: 8px;
 `;
 
 export const WriteFoot = styled.div`
@@ -79,9 +89,17 @@ export const WriteDate = styled.p`
 `;
 
 export const WriteButtons = styled.div`
-  width: 30%;
+  width: 50%;
   display: flex;
   justify-content: space-between;
+`;
+
+export const WriteBtn = styled.button`
+  border: none;
+  background-color: lightgray;
+  width: 40px;
+  height: 25px;
+  border-radius: 8px;
 `;
 
 // CommunityWriteEditForm.jsx style(WritingList.jsx 그대로 사용하는데 일부만 변경)
@@ -96,7 +114,9 @@ export const EditFormInput = styled.textarea`
 
 // CommentList.jsx style
 export const CommentListSection = styled.section`
-  border: 1px solid black;
+  background-color: whitesmoke;
+  border-radius: 12px;
+  padding: 1%;
   width: 40%;
   height: 250px;
   overflow: auto;
@@ -105,7 +125,7 @@ export const CommentListSection = styled.section`
 export const CommentListContainer = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: gray;
+  background-color: lightgray;
   border-radius: 8px;
   margin: 2%;
   min-height: 100px;
@@ -129,7 +149,7 @@ export const CommentListButton = styled.button`
   width: 50px;
   margin-left: auto;
   margin-top: 5px;
-  background-color: var(--subColor1);
+  background-color: var(--mainColor);
   border: none;
   border-radius: 8px;
 `;
