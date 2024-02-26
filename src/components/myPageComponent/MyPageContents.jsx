@@ -9,7 +9,6 @@ import defaultImg from 'assets/defaultProfileImage.png';
 import { Navigate, useNavigate } from 'react-router-dom';
 
 const MyPageContents = () => {
-  // const MyPageContents = ({ isLoading }) => {
   const navigate = useNavigate();
   const [isEdit, setIsEdit] = useState(false);
   const [selectImage, setSelectImage] = useState(defaultImg);
@@ -54,7 +53,7 @@ const MyPageContents = () => {
       setThumnailImage(image);
     }
   };
-  // 브라우져 캐싱문제 해결
+
   // 브라우져 캐싱문제 해결
   const onSubmitHandler = async (e) => {
     e.preventDefault();
@@ -79,9 +78,9 @@ const MyPageContents = () => {
       const data = await uploadImage(filePath, selectImage);
       const { data: imageUrl } = supabase.storage.from('unAuthUserImage').getPublicUrl(data.path);
       const ImgDbUrl = imageUrl.publicUrl;
-      console.log(ImgDbUrl);
-      setSelectImage(ImgDbUrl);
       const newData = { id, email, nickname: editValueNickname, avatar: ImgDbUrl, uid };
+
+      setSelectImage(ImgDbUrl);
       await updateUserInfo(newData, id);
       setThumnailImage(newData.avatar);
 
@@ -108,7 +107,6 @@ const MyPageContents = () => {
   };
   // if (isLoading) return <div>로딩중입니다...</div>;
 
-  // avatar ? avatar : thumnailImage;
   return (
     <MP.MyPageContentsForm>
       <MP.ImgWrapDiv>
