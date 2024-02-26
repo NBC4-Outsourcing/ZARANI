@@ -11,17 +11,22 @@ import { insertComment } from './CommunitySupabase';
 import useInput from 'hooks/useInput';
 import useSetMutation from 'hooks/useSetMutations';
 
-const CommentInputForm = ({ onClickCommentHandler, writeId }) => {
+const CommentInputForm = ({ onClickCommentHandler, writeId, userData }) => {
   const [comment, , onChangeContentHandler] = useInput({
     writeComment: ''
   });
   const [mutation] = useSetMutation(insertComment, 'commentWriteList');
   const { writeComment } = comment;
+  const { nickname } = userData.user_metadata;
   const onSubmitHandler = async (e) => {
     e.preventDefault();
+    if (!writeComment) {
+      alert('댓글을 작성해주시기 바랍니다.');
+      return;
+    }
     const newComment = {
-      nickname: '보라돌이',
-      userId: 'qube7089',
+      nickname,
+      userId: userData.email,
       writeId,
       comment: writeComment
     };
@@ -31,7 +36,7 @@ const CommentInputForm = ({ onClickCommentHandler, writeId }) => {
   return (
     <CommentInputFormBackGround>
       <CommentInputFormStyle onSubmit={onSubmitHandler}>
-        <CommentListName>보라돌이</CommentListName>
+        <CommentListName>{nickname}</CommentListName>
         <CommentInputTextarea
           maxLength={'80'}
           placeholder="최대 80자까지만 입력할 수 있습니다."

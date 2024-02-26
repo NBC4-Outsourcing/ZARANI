@@ -5,6 +5,7 @@ import { readUserInfo } from 'components/myPageComponent/myPageSupabase';
 import MyPageReviews from 'components/myPageComponent/MyPageReviews';
 import MyPageContents from 'components/myPageComponent/MyPageContents';
 import MyPageHeader from 'components/myPageComponent/MyPageHeader';
+import Loading from 'components/common/Loading';
 
 const MyPage = () => {
   const data = {

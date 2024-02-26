@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { useQuery } from 'react-query';
-import { deleteWrite, getCommentList, getWriteList } from './CommunitySupabase';
+import { deleteWrite } from './CommunitySupabase';
 import {
   CommunityBtn,
+  Main,
   WriteButtons,
   WriteContainer,
   WriteContent,
@@ -18,11 +18,9 @@ import CommentInputForm from './CommentInputForm';
 import { getFormattedDate } from './formattedDate';
 import CommunityWriteEditForm from './CommunityWriteEditForm';
 import useSetMutation from 'hooks/useSetMutations';
-import Loading from '../common/Loading';
+import defaultImage from 'assets/defaultImage.png';
 
-const WritingList = () => {
-  const { isLoading, isError, data: writeList } = useQuery('communityWriteList', getWriteList);
-  const { isLoading: commentListLoading, data: commentList } = useQuery('commentWriteList', getCommentList);
+const WritingList = ({ userData, writeList, commentList }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [editFormId, setEditFormId] = useState(null);
   const [writeId, setWriteId] = useState(null);
@@ -52,16 +50,13 @@ const WritingList = () => {
     }
   };
 
-  if (isLoading) {
-    return <Loading />;
-  }
-  if (isError) {
-    alert('글의 정보를 가져오지 못했습니다.');
-    return <div>Not found</div>;
-  }
   return (
-    <>
-      {modalOpen ? <CommentInputForm onClickCommentHandler={onClickCommentHandler} writeId={writeId} /> : false}
+    <Main>
+      {modalOpen ? (
+        <CommentInputForm onClickCommentHandler={onClickCommentHandler} writeId={writeId} userData={userData} />
+      ) : (
+        false
+      )}
       {writeList
         .sort((a, b) => {
           return new Date(b.date).getTime() - new Date(a.date).getTime();
@@ -70,11 +65,11 @@ const WritingList = () => {
           return (
             <WriteListSection key={item.id}>
               {editFormId === item.id ? (
-                <CommunityWriteEditForm item={item} setEditFormId={setEditFormId} />
+                <CommunityWriteEditForm item={item} setEditFormId={setEditFormId} userData={userData} />
               ) : (
                 <WriteContainer>
                   <WriteHead>
-                    <WriteImage src={item.avatar} />
+                    <WriteImage src={item.avatar ? item.avatar : defaultImage} />
                     <WriteNickName>{item.nickname}</WriteNickName>
                   </WriteHead>
                   <WriteContent>{item.content}</WriteContent>
@@ -82,19 +77,25 @@ const WritingList = () => {
                     <WriteDate>{getFormattedDate(item.date)}</WriteDate>
                     <WriteButtons>
                       <CommunityBtn onClick={() => onClickCommentHandler(item.id)}>댓글</CommunityBtn>
-                      <CommunityBtn onClick={() => onClickEditForm(item.id)}>수정</CommunityBtn>
-                      <CommunityBtn background={'danger'} onClick={() => onClickDeleteHandler(item.id)}>
-                        삭제
-                      </CommunityBtn>
+                      {userData.email === item.userId ? (
+                        <>
+                          <CommunityBtn onClick={() => onClickEditForm(item.id)}>수정</CommunityBtn>
+                          <CommunityBtn background={'danger'} onClick={() => onClickDeleteHandler(item.id)}>
+                            삭제
+                          </CommunityBtn>
+                        </>
+                      ) : (
+                        false
+                      )}
                     </WriteButtons>
                   </WriteFoot>
                 </WriteContainer>
               )}
-              <CommentList writeId={item.id} commentList={commentList} isLoading={commentListLoading} />
+              <CommentList writeId={item.id} commentList={commentList} userData={userData} />
             </WriteListSection>
           );
         })}
-    </>
+    </Main>
   );
 };
 
