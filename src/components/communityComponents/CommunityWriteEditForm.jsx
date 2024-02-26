@@ -13,8 +13,9 @@ import { getFormattedDate } from './formattedDate';
 import useInput from 'hooks/useInput';
 import { updateWrite } from './CommunitySupabase';
 import useSetMutation from 'hooks/useSetMutations';
+import defaultImage from 'assets/defaultImage.png';
 
-const CommunityWriteEditForm = ({ item, setEditFormId }) => {
+const CommunityWriteEditForm = ({ item, setEditFormId, userData }) => {
   const [mutation] = useSetMutation(updateWrite, 'communityWriteList');
   const [changeContent, , onChangeContentHandler, ,] = useInput({
     changeContents: item.content
@@ -36,8 +37,8 @@ const CommunityWriteEditForm = ({ item, setEditFormId }) => {
   return (
     <WriteContainer>
       <WriteHead>
-        <WriteImage src={item.avatar} />
-        <WriteNickName>0 6{item.nickname}</WriteNickName>
+        <WriteImage src={item.avatar ? item.avatar : defaultImage} />
+        <WriteNickName>{item.nickname}</WriteNickName>
       </WriteHead>
       <EditFormInput
         name="changeContents"

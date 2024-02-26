@@ -12,13 +12,10 @@ import { deleteComment } from './CommunitySupabase';
 import { getFormattedDate } from './formattedDate';
 import useSetMutation from 'hooks/useSetMutations';
 
-const CommentList = ({ writeId, commentList, isLoading }) => {
+const CommentList = ({ writeId, commentList, userData }) => {
   const filterComment = commentList?.filter((item) => item.writeId === writeId);
   const [mutation] = useSetMutation(deleteComment, 'commentWriteList');
 
-  if (isLoading) {
-    return <div>로딩 중입니다.</div>;
-  }
   return (
     <CommentListSection>
       {filterComment.length !== 0 ? (
@@ -36,9 +33,13 @@ const CommentList = ({ writeId, commentList, isLoading }) => {
                   </CommentListHead>
                   <CommentListComment>{item.comment}</CommentListComment>
                 </CommentListInfo>
-                <CommunityBtn background={'danger'} onClick={() => mutation.mutate(item.id)}>
-                  삭제
-                </CommunityBtn>
+                {userData.email === item.userId ? (
+                  <CommunityBtn background={'danger'} onClick={() => mutation.mutate(item.id)}>
+                    삭제
+                  </CommunityBtn>
+                ) : (
+                  false
+                )}
               </CommentListContainer>
             );
           })

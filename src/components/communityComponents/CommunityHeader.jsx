@@ -11,10 +11,10 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logout } from 'shared/redux/modules/authSlice';
 
-const CommunityHeader = ({ data }) => {
+const CommunityHeader = ({ userData }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { avatar } = data.user_metadata;
+  const { avatar } = userData.user_metadata;
 
   const onClickLogOutHandler = () => {
     dispatch(logout());
