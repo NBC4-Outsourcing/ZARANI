@@ -9,7 +9,7 @@ import { logout } from 'shared/redux/modules/authSlice';
 import useInput from 'hooks/useInput';
 import defaultImg from 'assets/defaultProfileImage.png';
 import Loading from 'components/common/Loading';
-import * as MP from 'components/styles/MyPageStyle';
+import * as MP from 'components/styles/MyPageContentsStyle';
 
 const MyPageContents = () => {
   const dispatch = useDispatch();
@@ -35,6 +35,7 @@ const MyPageContents = () => {
       setUserAccount(userInfo);
       updateUserAccount({ nickname, avatar });
       setThumnailImage(userInfo.avatar);
+
       if (!storageItem || !uid || !email) {
         console.error('유저정보가 존재하지 않습니다. 로그인해주세요.');
         alert('유저정보가 존재하지 않습니다. 로그인해주세요.');
@@ -97,8 +98,8 @@ const MyPageContents = () => {
       const ImgDbUrl = imageUrl.publicUrl;
       const newData = { email, nickname: editValueNickname, avatar: ImgDbUrl, id: uid };
       await updateUserAccount({ nickname: editValueNickname, avatar: ImgDbUrl });
-      setThumnailImage(newData.avatar);
       setSelectImage(ImgDbUrl);
+      setThumnailImage(newData.avatar);
       alert('수정이 완료됐습니다.');
       setIsEdit(false);
     } catch (error) {
@@ -147,8 +148,18 @@ const MyPageContents = () => {
       <div>
         {!isEdit ? (
           <div>
-            <p>이메일 : {email}</p>
-            <p>닉네임 : {nickname} </p>
+            <p>
+              <span>이메일 :</span>
+            </p>
+            <p>
+              <span>{email}</span>
+            </p>
+            <p>
+              <span>닉네임</span>
+            </p>
+            <p>
+              <span>{nickname}</span>
+            </p>
           </div>
         ) : (
           <div>

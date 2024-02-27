@@ -1,20 +1,29 @@
-import React, { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
-import { readMyReview } from './myPageSupabase';
-import { getFormattedDate } from 'components/communityComponents/formattedDate';
-import { supabase } from 'api/supabase/supabase';
+import { readMyReview, readUserAccount, readUserLocalAccount } from './myPageSupabase';
 import { Link } from 'react-router-dom';
+import { getLocalStorageJSON } from 'utils/getLocalStorageJSON';
+import { useEffect, useState } from 'react';
 
 const MyPageReviews = () => {
-  const { data: myReview, error, isLoading } = useQuery('myReviews', readMyReview); //     let reviewArray = [];
-  // console.log(myReview);
+  const [currUserInfo, setCurrUserInfo] = useState();
+  useEffect(() => {
+    const currUser = async () => {
+      const { data } = await readUserLocalAccount();
+      console.log(data);
+    };
+    currUser();
+  }, []);
+  const { data: myReview, error, isLoading } = useQuery('myReviews', readMyReview);
+  //     let reviewArray = [];
+  console.log(myReview);
   if (isLoading) <div>정보를 가지고 오는 중입니다..</div>;
-  if (error) <div>정보를 가지고 오지 못하고 있습니다.</div>;
+  const FilterUserReviews =
+    myReview.filter((review) => review.email === email).sort((a, b) => new Date(b.date) - new Date(a.date)) || [];
 
   return (
     <article>
-      {myReview &&
-        myReview.map((reviews) => {
+      {FilterUserReviews &&
+        FilterUserReviews.map((reviews) => {
           const { id, nickname, content, date, email, marker } = reviews;
           return (
             <Link to="/reviewPage" key={id}>
@@ -26,6 +35,7 @@ const MyPageReviews = () => {
             </Link>
           );
         })}
+      {FilterUserReviews === 0 ? <section> 자전거 도로를 이용한 후기를 써주세용 </section> : null}
     </article>
   );
 };

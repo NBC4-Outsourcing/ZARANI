@@ -9,18 +9,18 @@ const MyPageHeader = () => {
   const navigate = useNavigate();
   return (
     <MPH.HeaderArticle>
-      <section>
-        <Link to="/">홈으로</Link>
-        <p>ZARANI MyPAGE</p>
-        <button
+      <MPH.HeaderNav>
+        <MPH.HomeLink to="/">홈으로</MPH.HomeLink>
+        <MPH.TitleP>ZARANI MyPAGE</MPH.TitleP>
+        <MPH.LogoutBtn
           onClick={() => {
             dispatch(logout());
             navigate('/', { replace: true });
           }}
         >
           로그아웃
-        </button>
-      </section>
+        </MPH.LogoutBtn>
+      </MPH.HeaderNav>
     </MPH.HeaderArticle>
   );
 };
