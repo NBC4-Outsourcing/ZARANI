@@ -52,8 +52,7 @@ export const HomeLink = styled(Link)`
   cursor: pointer;
 
   &:hover {
-    background-color: ${(style) => style.hoverbgc || 'var(--subColor2)'};
-    color: ${(style) => style.hovercolor || 'var(--mainColor1)'};
+    background-color: var(--subColor2);
     box-shadow: 0rem 0rem 0.3rem 0rem var(--subColor2);
     transition: all 0.5s; // 시간차두고 바뀌도록 추가
     transform: scale(1.06, 1.06);

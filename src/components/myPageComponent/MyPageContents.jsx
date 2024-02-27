@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useQuery } from 'react-query';
 import { supabase } from 'api/supabase/supabase';
@@ -51,6 +51,8 @@ const MyPageContents = () => {
   const editValueNickname = editValue.nickname || '';
   const storageItem = getLocalStorageJSON();
   const isLogin = loginState;
+  const blankPattern = /^\s+|\s+$/g;
+  const nicknameBlank = editValueNickname.replace(blankPattern, '');
   // const currUserEmail = storageItem.user.email;
   // const uid = storageItem.user.id;
 
@@ -84,11 +86,14 @@ const MyPageContents = () => {
       setIsEdit(false);
       return;
     }
-    if (!selectImage || selectImage.name === undefined) {
-      alert('이미지를 선택해주세요.');
+
+    if (selectImage === null) return;
+
+    if (nicknameBlank === '') {
+      alert('닉네임을 적어주세요.');
       return;
     }
-    if (selectImage === null) return;
+
     // storage 내부 저장할 위치(폴더)를 회원 uid 또는 이메일로 정하고 스토리지에 저장.
     const uuid = crypto.randomUUID();
     const filePath = `userOneImage/${uid}+${uuid}`;
@@ -146,58 +151,64 @@ const MyPageContents = () => {
             </MP.PhotoAddBtn>
           )}
         </MP.ImgWrapDiv>
-        <div>
+        <MP.ContentsBtnsDiv>
+          <MP.EmailNickDiv>
+            {!isEdit ? (
+              <MP.EmailNickWrap>
+                <MP.EmailWrap>
+                  <MP.EmailP>
+                    <span>이메일&nbsp;EMAIL</span>
+                  </MP.EmailP>
+                  <MP.EmailValueP>
+                    <span>{email}</span>
+                  </MP.EmailValueP>
+                </MP.EmailWrap>
+                <MP.NickNameWrap>
+                  <MP.NickNameP>
+                    <span>닉네임&nbsp;NICKNAME</span>
+                  </MP.NickNameP>
+                  <MP.NickNameValueP>
+                    <span>{nickname}</span>
+                  </MP.NickNameValueP>
+                </MP.NickNameWrap>
+              </MP.EmailNickWrap>
+            ) : (
+              <MP.EmailNickWrap>
+                <MP.EmailWrap>
+                  <MP.EmailP>
+                    <span>이메일EMAIL</span>
+                  </MP.EmailP>
+                  <MP.EmailValueP>
+                    <span>{email}</span>
+                  </MP.EmailValueP>
+                </MP.EmailWrap>
+                <MP.NickNameWrap>
+                  <MP.NickNameP htmlFor="nickname">닉네임NICKNAME</MP.NickNameP>
+                  <MP.NickNameValuePut
+                    type="text"
+                    id="nickname"
+                    name="nickname"
+                    value={editValueNickname}
+                    onChange={onChange}
+                    minLength={6}
+                    maxLength={10}
+                    placeholder="닉네임 (6자~10자 이내)"
+                  />
+                </MP.NickNameWrap>
+              </MP.EmailNickWrap>
+            )}
+          </MP.EmailNickDiv>
           {!isEdit ? (
             <div>
-              <p>
-                <span>이메일EMAIL</span>
-              </p>
-              <p>
-                <span>{email}</span>
-              </p>
-              <p>
-                <span>닉네임NICKNAME</span>
-              </p>
-              <p>
-                <span>{nickname}</span>
-              </p>
+              <MP.EditBtn onClick={onEditContentsHandler}>수정</MP.EditBtn>
             </div>
           ) : (
-            <div>
-              <div>
-                <p>
-                  <span>이메일EMAIL</span>
-                </p>
-                <p>
-                  <span>{email}</span>
-                </p>
-              </div>
-              <label htmlFor="nickname">닉네임NICKNAME</label>
-              <div>
-                <input
-                  type="text"
-                  id="nickname"
-                  name="nickname"
-                  value={editValueNickname}
-                  onChange={onChange}
-                  minLength={6}
-                  maxLength={10}
-                  placeholder="닉네임을 적어주세요. (6자~10자 이내)"
-                />
-              </div>
-            </div>
+            <MP.DondNdCancelBtnDiv>
+              <MP.DoneBtn onClick={onSubmitHandler}>완료</MP.DoneBtn>
+              <MP.CancelBtn onClick={onEditCancelHandler}>취소</MP.CancelBtn>
+            </MP.DondNdCancelBtnDiv>
           )}
-        </div>
-        {!isEdit ? (
-          <div>
-            <MP.EditBtn onClick={onEditContentsHandler}>수정</MP.EditBtn>
-          </div>
-        ) : (
-          <div>
-            <MP.DoneBtn onClick={onSubmitHandler}>완료</MP.DoneBtn>
-            <MP.CancelBtn onClick={onEditCancelHandler}>취소</MP.CancelBtn>
-          </div>
-        )}
+        </MP.ContentsBtnsDiv>
       </MP.MyPageContentsForm>
     </MP.MyPageContentsArticle>
   );

@@ -21,11 +21,11 @@ export const MyPageContentsArticle = styled.article`
 export const MyPageContentsForm = styled.form`
   display: flex;
   flex-direction: row;
-
+  justify-content: space-around;
   border-radius: 1rem;
 
   padding: 30px;
-  gap: 1.2rem;
+  /* gap: 1.2rem; */
 `;
 
 export const ImgWrapDiv = styled.div`
@@ -82,6 +82,70 @@ export const PhotoAddBtn = styled.div`
   min-width: 50px;
   max-width: 300px;
   cursor: pointer;
+`;
+
+export const ContentsBtnsDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+`;
+
+export const EmailNickDiv = styled.div`
+  display: flex;
+
+  border-radius: 1rem;
+  box-shadow: 0px 2px 4px 2px var(--subColor2);
+
+  padding: 2rem;
+  /* gap: 1rem; */
+`;
+
+export const EmailNickWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+`;
+
+export const EmailWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  gap: 0.4rem;
+`;
+
+export const EmailP = styled.p`
+  font-size: 1.2rem;
+  font-weight: bold;
+`;
+
+export const EmailValueP = styled.p`
+  font-size: 1.1rem;
+`;
+
+export const NickNameWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  gap: 0.4rem;
+`;
+
+export const NickNameP = styled.p`
+  font-size: 1.2rem;
+  font-weight: bold;
+`;
+
+export const NickNameValueP = styled.p`
+  font-size: 1.1rem;
+`;
+
+export const NickNameValuePut = styled.input`
+  padding: 0.8rem;
+  font-size: 1.1rem;
+  background-color: var(--subColor2);
+  &:hover,
+  &:focus {
+    background-color: #fff;
+  }
 `;
 
 export const EditBtn = styled.button`
@@ -147,4 +211,11 @@ export const CancelBtn = styled.button`
     transition: all 0.5s; // 시간차두고 바뀌도록 추가
     transform: scale(1.06, 1.06);
   }
+`;
+
+export const DondNdCancelBtnDiv = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  gap: 1rem;
 `;
