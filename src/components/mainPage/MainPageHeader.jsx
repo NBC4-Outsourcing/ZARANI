@@ -2,14 +2,17 @@ import React from 'react';
 import * as S from '../styles/mainPageStyle';
 import img from '../../assets/logo.png';
 import { useNavigate } from 'react-router-dom';
-import { getUserImage } from './mainPageSupabase';
+import { getUserImage, readUserLocalAccount } from './mainPageSupabase';
 import { useQuery } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from 'shared/redux/modules/authSlice';
+import Loading from 'components/common/Loading';
 
 const MainPageHeader = () => {
   const { loginState } = useSelector((state) => state.auth);
+
   const { isLoading, data } = useQuery('usersAccounts', getUserImage);
+  // const avatar = data.user?.user_metadata.avatar;
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handCommunityPage = () => {
@@ -26,7 +29,7 @@ const MainPageHeader = () => {
     alert('로그아웃 되었습니다');
   };
   if (isLoading) {
-    <div>로딩중입니다.</div>;
+    <Loading />;
   }
   return (
     <S.HeaderWrapper>
