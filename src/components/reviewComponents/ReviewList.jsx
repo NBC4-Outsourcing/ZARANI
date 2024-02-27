@@ -39,7 +39,6 @@ export const ReviewList = () => {
   const removeReview = async (id, reviewimg) => {
     if (window.confirm('게시물을 삭제하시겠습니까?')) {
       // 이미지 삭제
-      console.log('reviewimg', reviewimg);
       try {
         const { data, error } = await supabase.storage.from('reviewImage').remove(reviewimg);
         if (!error) {
@@ -53,7 +52,7 @@ export const ReviewList = () => {
         const { error } = await supabase.from('reviewWrite').delete().eq('id', id);
         if (!error) {
           alert('게시물이 삭제되었습니다.');
-          console.log('게시물 삭제 성공', error);
+          console.log('게시물 삭제 성공');
           return;
         }
       } catch (error) {
@@ -61,7 +60,6 @@ export const ReviewList = () => {
       }
     }
   };
-  console.log('reviewData', reviewData);
   return (
     <ContentsList>
       {reviewData?.map((item) => (
@@ -69,7 +67,7 @@ export const ReviewList = () => {
           {/* 수정 버튼 클릭 시 editDataId state에 item.id가 담겨 선택한 게시물만 수정 상태로 만들어 준다 */}
           {editDataId === item.id ? (
             <>
-              <ReviewUpdateForm item={item} />
+              <ReviewUpdateForm item={item} setEditDataId={setEditDataId} />
             </>
           ) : (
             <div>
@@ -86,7 +84,7 @@ export const ReviewList = () => {
               </button>
               <button
                 onClick={() => {
-                  removeReview(item.id);
+                  removeReview(item.id, item.reviewimg);
                 }}
               >
                 삭제
