@@ -70,7 +70,6 @@ export const ReviewList = () => {
           {editDataId === item.id ? (
             <>
               <ReviewUpdateForm item={item} />
-              <button onClick={setEditDataId(null)}>취소</button>
             </>
           ) : (
             <div>

@@ -7,10 +7,12 @@ export const ReviewUpdateForm = ({ item }) => {
   const imgRef = useRef(null);
   const [editData, setEditData] = useState([item]);
   const [editImg, setEditImg] = useState('');
-  const [updateInput, onUpdateContentHandler] = useInput({
-    updateContent: ''
-  });
-  const { updateContent } = updateInput;
+  const [updateInput, setUpdateInput] = useState('');
+
+  const onUpdateContentHandler = (e) => {
+    setUpdateInput(e.target.value);
+    console.log('updateInput', updateInput);
+  };
 
   // 이미지 미리보기
   const editImgHandler = (e) => {
@@ -24,41 +26,39 @@ export const ReviewUpdateForm = ({ item }) => {
   };
 
   // 데이터 수정
-
+  console.log('editData', editData);
   const modifyReview = async (id, reviewimg) => {
     // 이미지 수정
-    // try {
-    //   const imgPath = imgRef.current.files[0];
-    //   const imgUpdate = await supabase.storage.from('reviewImage').upload(reviewimg, imgPath, {
-    //     upsert: true
-    //   });
-    //   console.log('이미지 수정 완료', imgUpdate);
-    // } catch (error) {
-    //   console.log('이미지 수정 실패', error);
-    // }
-    // // 데이터 수정
-    // try {
-    //   const modifyReviewData = {
-    //     ...editData,
-    //     // marker,
-    //     // email,
-    //     // nickname,
-    //     // avatar,
-    //     content: updateContent,
-    //     reviewimg: '이미지 수정 완료 data path'
-    //   };
-    //   const { data, error } = await supabase.from('reviewWrite').update({ id, modifyReviewData }).eq('id', id).select();
-    //   if (!error) {
-    //     console.log('게시물 수정 완료', data);
-    //   }
-    // } catch (error) {
-    //   console.log('게시물 수정 실패'), error;
-    // }
+    const storagePath = '';
+    try {
+      const imgPath = imgRef.current.files[0];
+      const imgUpdate = await supabase.storage.from('reviewImage').upload(reviewimg, imgPath, {
+        upsert: true
+      });
+      storagePath = imgUpdate.path;
+      console.log('reviewimg', reviewimg);
+      console.log('이미지 수정 완료', imgUpdate);
+    } catch (error) {
+      console.log('이미지 수정 실패', error);
+    }
+
+    // 데이터 수정
+    const modifyReviewData = {
+      ...editData[0],
+      content: updateInput,
+      reviewimg: storagePath
+    };
+    console.log('modifyReviewData', modifyReviewData);
+    const { data, error } = await supabase.from('reviewWrite').update(modifyReviewData).eq('id', id).select();
+    if (!error) {
+      console.log('게시물 수정 완료', data);
+    } else {
+      console.log('게시물 수정 실패', error);
+    }
   };
-  console.log('editData', editData);
   return (
     <div>
-      {/* {editData.map((item) => {
+      {editData.map((item) => {
         return (
           <div key={item.id}>
             <label>
@@ -67,9 +67,7 @@ export const ReviewUpdateForm = ({ item }) => {
               <input ref={imgRef} onChange={editImgHandler} type="file" accept="image/*" />
             </label>
             <div>{item.nickname}</div>
-            <textarea name="updateContent" value={updateContent} onChange={onUpdateContentHandler}>
-              {item.content}
-            </textarea>
+            <textarea value={updateInput} onChange={onUpdateContentHandler} defaultValue={item.content}></textarea>
             <button
               onClick={() => {
                 modifyReview(item.id, item.reviewimg);
@@ -79,7 +77,7 @@ export const ReviewUpdateForm = ({ item }) => {
             </button>
           </div>
         );
-      })} */}
+      })}
     </div>
   );
 };
