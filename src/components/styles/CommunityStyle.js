@@ -5,8 +5,8 @@ import styled, { css } from 'styled-components';
 export const CommunityBtn = styled.button`
   cursor: pointer;
   border: none;
-  min-width: 50px;
-  height: 30px;
+  min-width: 70px;
+  height: 35px;
   border-radius: 8px;
   transition: 0.5s ease-in-out;
   background-color: var(--subColor1);
@@ -164,7 +164,7 @@ export const WriteContent = styled.p`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: wheat;
+  background-color: var(--subColor2);
   height: 45%;
   padding: 1.5%;
   border-radius: 8px;
@@ -282,7 +282,7 @@ export const CommentListName = styled.p`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: wheat;
+  background-color: var(--subColor1);
   border-radius: 8px;
   margin: 0 auto;
 `;
@@ -291,7 +291,7 @@ export const CommentInputTextarea = styled.textarea`
   width: 100%;
   height: 50%;
   margin-top: 5px;
-  background-color: wheat;
+  background-color: var(--subColor2);
   border: none;
   border-radius: 8px;
   padding: 15px;
@@ -300,6 +300,6 @@ export const CommentInputTextarea = styled.textarea`
 
 export const CommentInputBtnDiv = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   margin-top: 5px;
 `;

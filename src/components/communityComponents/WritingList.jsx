@@ -56,14 +56,6 @@ const WritingList = ({ userData, writeList, commentList }) => {
     }
   };
 
-  const onClickCommentListBtn = (id) => {
-    if (id === commentListCheck) {
-      setCommentListCheck(null);
-    } else {
-      setCommentListCheck(id);
-    }
-  };
-
   return (
     <Main>
       {writeList
@@ -81,13 +73,7 @@ const WritingList = ({ userData, writeList, commentList }) => {
                     <WriteImage src={item.avatar ? item.avatar : defaultImage} />
                     <WriteNickName>{item.nickname}</WriteNickName>
                   </WriteHead>
-                  <WriteContent
-                    onClick={() => {
-                      onClickCommentListBtn(item.id);
-                    }}
-                  >
-                    {item.content}
-                  </WriteContent>
+                  <WriteContent>{item.content}</WriteContent>
                   <WriteFoot>
                     <WriteDate>{getFormattedDate(item.date)}</WriteDate>
                     <WriteButtons>
@@ -107,19 +93,16 @@ const WritingList = ({ userData, writeList, commentList }) => {
                 </WriteContainer>
               )}
               {commentWriteCheck === item.id ? (
-                <CommentInputForm
-                  onClickCommentHandler={onClickCommentHandler}
-                  writeId={writeId}
-                  userData={userData}
-                  commentListCheck={commentListCheck}
-                  onClickCommentListBtn={onClickCommentListBtn}
-                />
-              ) : (
-                false
-              )}
-
-              {commentListCheck === item.id ? (
-                <CommentList writeId={item.id} commentList={commentList} userData={userData} />
+                <>
+                  {' '}
+                  <CommentInputForm
+                    onClickCommentHandler={onClickCommentHandler}
+                    writeId={writeId}
+                    userData={userData}
+                    commentListCheck={commentListCheck}
+                  />
+                  <CommentList writeId={item.id} commentList={commentList} userData={userData} />
+                </>
               ) : (
                 false
               )}

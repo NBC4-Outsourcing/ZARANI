@@ -56,9 +56,6 @@ const CommentInputForm = ({ onClickCommentHandler, writeId, userData, commentLis
       />
       <CommentInputBtnDiv>
         <CommunityBtn type="submit">등록</CommunityBtn>
-        <CommunityBtn $background={'danger'} type="button" onClick={onClickCommentHandler}>
-          취소
-        </CommunityBtn>
       </CommentInputBtnDiv>
     </CommentInputFormStyle>
   );
