@@ -11,7 +11,7 @@ export const CommunityBtn = styled.button`
   transition: 0.5s ease-in-out;
   background-color: var(--subColor1);
   ${(props) =>
-    props.background === 'danger' &&
+    props.$background === 'danger' &&
     css`
       background-color: var(--mainColor);
     `};
@@ -140,6 +140,8 @@ export const WriteContainer = styled.div`
 export const WriteHead = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
+  gap: 30px;
 `;
 
 export const WriteImage = styled.img`
@@ -154,9 +156,8 @@ export const WriteNickName = styled.label`
   justify-content: center;
   background-color: wheat;
   border-radius: 8px;
-  width: 40%;
-  height: 35%;
-  margin: 0 auto;
+  width: 30%;
+  height: 50%;
 `;
 
 export const WriteContent = styled.p`
@@ -265,43 +266,32 @@ export const NoComment = styled.div`
 `;
 
 // CommentInputForm.jsx style
-export const CommentInputFormBackGround = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background-color: rgb(0, 0, 0, 0.8);
-`;
 
 export const CommentInputFormStyle = styled.form`
-  width: 400px;
-  height: 300px;
-  z-index: 999;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  width: 80%;
+  height: 200px;
   border-radius: 8px;
-  background-color: wheat;
   padding: 1%;
+  border: 2px solid lightgray;
+  margin-top: 3px;
 `;
 
 export const CommentListName = styled.p`
-  width: 50%;
-  height: 13%;
+  width: 30%;
+  height: 23%;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--subColor2);
+  background-color: wheat;
   border-radius: 8px;
+  margin: 0 auto;
 `;
 
 export const CommentInputTextarea = styled.textarea`
   width: 100%;
-  height: 70%;
+  height: 50%;
   margin-top: 5px;
-  background-color: var(--subColor2);
+  background-color: wheat;
   border: none;
   border-radius: 8px;
   padding: 15px;
@@ -310,6 +300,6 @@ export const CommentInputTextarea = styled.textarea`
 
 export const CommentInputBtnDiv = styled.div`
   display: flex;
-  gap: 75%;
+  justify-content: space-between;
   margin-top: 5px;
 `;

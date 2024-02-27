@@ -36,7 +36,7 @@ const CommunityHeader = ({ userData }) => {
         <Link to={'/mypage'}>
           <CommunityHeaderProfileImage src={avatar ? avatar : defaultImage} />
         </Link>
-        <CommunityBtn background={'danger'} onClick={onClickLogOutHandler}>
+        <CommunityBtn $background={'danger'} onClick={onClickLogOutHandler}>
           로그아웃
         </CommunityBtn>
       </CommunityHeaderInfo>

@@ -33,11 +33,13 @@ const CommunityWriteEditForm = ({ item, setEditFormId }) => {
       alert('변경할 내용을 입력해주시기 바랍니다.');
       return;
     }
-    const newContent = {
-      content: changeContents
-    };
-    mutation.mutate([newContent, id]);
-    setEditFormId(null);
+    if (window.confirm('수정하시겠습니까?')) {
+      const newContent = {
+        content: changeContents
+      };
+      mutation.mutate([newContent, id]);
+      setEditFormId(null);
+    }
   };
 
   const onClickCancelBtn = () => {

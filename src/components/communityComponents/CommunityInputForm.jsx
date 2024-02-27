@@ -24,14 +24,16 @@ const CommunityInputForm = ({ userData }) => {
       alert('내용을 입력해주시기 바랍니다.');
       return;
     }
-    const newWrite = {
-      nickname,
-      userId: userData.email,
-      avatar,
-      content: writeContent
-    };
-    mutation.mutate(newWrite);
-    reset();
+    if (window.confirm('작성하시겠습니까? (댓글이 달릴경우 댓글이 삭제되지 않는 한 글을 삭제할 수 없습니다.)')) {
+      const newWrite = {
+        nickname,
+        userId: userData.email,
+        avatar,
+        content: writeContent
+      };
+      mutation.mutate(newWrite);
+      reset();
+    }
   };
 
   return (
