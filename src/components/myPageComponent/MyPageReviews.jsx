@@ -22,7 +22,7 @@ const MyPageReviews = () => {
 
   return (
     <article>
-      {FilterUserReviews &&
+      {FilterUserReviews.length > 0 ? (
         FilterUserReviews.map((reviews) => {
           const { id, nickname, content, date, email, marker } = reviews;
           return (
@@ -34,8 +34,10 @@ const MyPageReviews = () => {
               </section>
             </Link>
           );
-        })}
-      {FilterUserReviews === 0 ? <section> 자전거 도로를 이용한 후기를 써주세용 </section> : null}
+        })
+      ) : (
+        <section> 자전거 도로를 이용한 후기를 써주세용 </section>
+      )}
     </article>
   );
 };
