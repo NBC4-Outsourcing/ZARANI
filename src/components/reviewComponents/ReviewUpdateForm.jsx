@@ -7,12 +7,13 @@ export const ReviewUpdateForm = ({ item, setEditDataId }) => {
   const imgRef = useRef(null);
   const contentRef = useRef(null);
   const imgName = uuid();
-
-  const [editData, setEditData] = useState([item]);
+  const editData = [item];
   const [editImg, setEditImg] = useState('');
   const { email } = editData[0];
 
-  const [updateInput, , onUpdateContentHandler, reset] = useInput({ updateContent: '' });
+  console.log('editData', editData);
+
+  const [updateInput, , onUpdateContentHandler] = useInput({ updateContent: '' });
   const { updateContent } = updateInput;
 
   // 이미지 미리보기
@@ -26,7 +27,7 @@ export const ReviewUpdateForm = ({ item, setEditDataId }) => {
     }
   };
 
-  const modifyReview = async (id, reviewimg, editData) => {
+  const modifyReview = async (id, reviewimg) => {
     // 이미지 수정
     let storagePath = '';
     const newPath = email + imgName;
@@ -50,12 +51,15 @@ export const ReviewUpdateForm = ({ item, setEditDataId }) => {
       contentRef.current.focus();
       return;
     }
+
     const modifyReviewData = {
       // ...editData[0],
-      ...editData,
+      ...editData[0],
       content: updateContent,
       reviewimg: storagePath ? storagePath : reviewimg
     };
+
+    console.log('reviewimg', reviewimg);
     console.log('modifyReviewData', modifyReviewData);
     const { data, error } = await supabase.from('reviewWrite').update(modifyReviewData).eq('id', id).select();
     if (!error) {
@@ -73,15 +77,15 @@ export const ReviewUpdateForm = ({ item, setEditDataId }) => {
 
   return (
     <div>
-      {editData.map((item) => {
+      {editData.map((data) => {
         return (
-          <div key={item.id}>
+          <div key={data.id}>
             <label>
-              {item.imageUrl && <img src={editImg ? editImg : item.imageUrl} alt="이미지" />}
+              {data.imageUrl && <img src={editImg ? editImg : data.imageUrl} alt="이미지" />}
               <p>이미지 수정 시 이미지를 클릭해 주세요</p>
               <input ref={imgRef} onChange={editImgHandler} type="file" accept="image/*" />
             </label>
-            <div>{item.nickname}</div>
+            <div>{data.nickname}</div>
             <textarea
               value={updateContent} // 여기 초기값... 기존  메세지도 보여주고 새 메세지도 넣어야하는데
               name="updateContent"
@@ -92,7 +96,7 @@ export const ReviewUpdateForm = ({ item, setEditDataId }) => {
             ></textarea>
             <button
               onClick={() => {
-                modifyReview(item.id, item.reviewimg);
+                modifyReview(data.id, data.reviewimg);
               }}
             >
               수정완료
