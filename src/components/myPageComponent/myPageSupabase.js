@@ -6,7 +6,7 @@ export const updateUserAccount = async ({ nickname, avatar }) => {
   });
   if (error) {
     console.log('updateUserAccount', error);
-    console.error('저장을 다시 시도해주세요!');
+    console.error('업데이트를 다시 시도해주세요!');
     // alert('회원정보가 저장되지 않았습니다.');
   }
   return data;
