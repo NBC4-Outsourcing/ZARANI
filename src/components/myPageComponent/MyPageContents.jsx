@@ -98,9 +98,9 @@ const MyPageContents = () => {
       const ImgDbUrl = imageUrl.publicUrl;
       const newData = { email, nickname: editValueNickname, avatar: ImgDbUrl, id: uid };
       await updateUserAccount({ nickname: editValueNickname, avatar: ImgDbUrl });
+      alert('수정이 완료됐습니다.');
       setSelectImage(ImgDbUrl);
       setThumnailImage(newData.avatar);
-      alert('수정이 완료됐습니다.');
       setIsEdit(false);
     } catch (error) {
       alert('수정이 되지 않았습니다! 다시 해주세용!');
@@ -195,7 +195,7 @@ const MyPageContents = () => {
         ) : (
           <div>
             <MP.DoneBtn onClick={onSubmitHandler}>완료</MP.DoneBtn>
-            <button onClick={onEditCancelHandler}>취소</button>
+            <MP.CancelBtn onClick={onEditCancelHandler}>취소</MP.CancelBtn>
           </div>
         )}
       </MP.MyPageContentsForm>

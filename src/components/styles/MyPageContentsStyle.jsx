@@ -70,8 +70,7 @@ export const AddBtnLabel = styled.label`
   cursor: pointer;
 
   &:hover {
-    background-color: ${(style) => style.hoverbgc || 'var(--subColor2)'};
-    color: ${(style) => style.hovercolor || 'var(--mainColor1)'};
+    background-color: var(--subColor2);
     box-shadow: 0rem 0rem 0.3rem 0rem var(--subColor2);
     transform: scale(2, 2);
     transition: all 0.3s; // 시간차두고 바뀌도록 추가
@@ -100,17 +99,15 @@ export const EditBtn = styled.button`
   cursor: pointer;
 
   &:hover {
-    background-color: ${(style) => style.hoverbgc || 'var(--subColor2)'};
-    color: ${(style) => style.hovercolor || 'var(--mainColor1)'};
+    background-color: var(--subColor2);
     box-shadow: 0rem 0rem 0.3rem 0rem var(--subColor2);
-    transition: all 0.3s; // 시간차두고 바뀌도록 추가
-    transform: scale(1.03, 1.03);
+    transition: all 0.5s; // 시간차두고 바뀌도록 추가
+    transform: scale(1.06, 1.06);
   }
 `;
 
 export const DoneBtn = styled.button`
   background-color: var(--subColor1);
-  width: 100%;
   padding: 0.7rem 2rem;
 
   border: none;
@@ -123,10 +120,31 @@ export const DoneBtn = styled.button`
   cursor: pointer;
 
   &:hover {
-    background-color: ${(style) => style.hoverbgc || 'var(--subColor2)'};
-    color: ${(style) => style.hovercolor || 'var(--mainColor1)'};
+    background-color: var(--subColor2);
     box-shadow: 0rem 0rem 0.3rem 0rem var(--subColor2);
-    transition: all 0.3s; // 시간차두고 바뀌도록 추가
+    transition: all 0.5s; // 시간차두고 바뀌도록 추가
+    transform: scale(1.06, 1.06);
+  }
+`;
+
+export const CancelBtn = styled.button`
+  background-color: var(--mainColor);
+
+  padding: 0.7rem 2rem;
+
+  border: none;
+  border-radius: 0.8rem;
+
+  box-shadow: 0rem 0rem 0.3rem 0rem var(--mainColor);
+  text-align: center;
+  font-size: 1.2rem;
+
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--mainColor);
+    box-shadow: 0rem 0rem 0.3rem 0rem var(--mainColor);
+    transition: all 0.5s; // 시간차두고 바뀌도록 추가
     transform: scale(1.06, 1.06);
   }
 `;
