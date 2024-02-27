@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { downloadImage, getImageUrl, readUserInfo, updateUserInfo, uploadImage } from './myPageSupabase';
+import { readUserAccount, readUserInfo, updateUserAccount, updateUserInfo, uploadImage } from './myPageSupabase';
 import { supabase } from 'api/supabase/supabase';
 import useInput from 'hooks/useInput';
 import * as MP from 'components/styles/MyPageStyle';
@@ -7,34 +7,50 @@ import { useQuery } from 'react-query';
 import useSetMutation from 'hooks/useSetMutations';
 import defaultImg from 'assets/defaultProfileImage.png';
 import { Navigate, useNavigate } from 'react-router-dom';
+import { getLocalStorageJSON } from 'utils/getLocalStorageJSON';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from 'shared/redux/modules/authSlice';
 
 const MyPageContents = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isEdit, setIsEdit] = useState(false);
+  const loginState = useSelector((store) => store.auth.loginState);
+  console.log(loginState);
   const [selectImage, setSelectImage] = useState(defaultImg);
   const [thumnailImage, setThumnailImage] = useState(defaultImg);
   const [userAccount, setUserAccount] = useState();
-  // const { isLoading, isError, data } = useQuery('usersAccounts', readUserInfo);
-  const { id, email, nickname, avatar, uid } = userAccount || {};
+  const { isLoading, isError, data } = useQuery('usersAccounts', readUserAccount);
+  const { email, nickname, avatar, uid } = userAccount || {};
   const [mutation] = useSetMutation(updateUserInfo, 'usersAccounts');
   const [editValue, setEditValue, onChange] = useInput({
     nickname
   });
   const editValueNickname = editValue.nickname || '';
-  const token = JSON.parse(localStorage.getItem(localStorage.key(0)));
-  const acToken = token.access_token;
+  const storageItem = getLocalStorageJSON();
+  // const acToken = storageItem.access_token;
+  const user = supabase.auth.getUser();
+  const isLogin = loginState;
 
+  if (isLogin === false) {
+    dispatch(logout());
+    alert('로그인 해주세요');
+    navigate('/');
+  }
+  // localstorage email과 같은 데이터들 filter email === email.sort((a,b) => b-a => date())
   useEffect(() => {
     const myPageData = async () => {
-      let { data: myPageInfo, error } = await supabase.from('usersAccounts').select('*');
-      if (myPageInfo) {
-        myPageInfo.forEach((userInfo) => {
-          setUserAccount(userInfo);
-          updateUserInfo(userInfo, userInfo.id);
-          setThumnailImage(userInfo.avatar);
-        });
-      } else {
-        console.log('error', error);
+      try {
+        let { data: myPageInfo, error } = await supabase.from('usersAccounts').select('*');
+        if (myPageInfo) {
+          myPageInfo.forEach((userInfo) => {
+            setUserAccount(userInfo);
+            updateUserAccount(userInfo, userInfo.id);
+            setThumnailImage(userInfo.avatar);
+          });
+        }
+      } catch (error) {
+        console.log(error);
       }
     };
     myPageData();
@@ -76,12 +92,13 @@ const MyPageContents = () => {
     const filePath = `userOneImage/${uid}+${uuid}`;
     try {
       const data = await uploadImage(filePath, selectImage);
+      console.log(data);
       const { data: imageUrl } = supabase.storage.from('unAuthUserImage').getPublicUrl(data.path);
       const ImgDbUrl = imageUrl.publicUrl;
-      const newData = { id, email, nickname: editValueNickname, avatar: ImgDbUrl, uid };
+      const newData = { email, nickname: editValueNickname, avatar: ImgDbUrl, id };
 
+      await updateUserAccount({ nickname: editValueNickname, avatar: ImgDbUrl });
       setSelectImage(ImgDbUrl);
-      await updateUserInfo(newData, id);
       setThumnailImage(newData.avatar);
 
       alert('수정이 완료됐습니다.');
@@ -105,7 +122,7 @@ const MyPageContents = () => {
     setIsEdit(false);
     if (isEdit && selectImage !== thumnailImage) setThumnailImage(avatar);
   };
-  // if (isLoading) return <div>로딩중입니다...</div>;
+  if (isLoading) return <div>로딩중입니다...</div>;
 
   return (
     <MP.MyPageContentsForm>
@@ -162,6 +179,32 @@ const MyPageContents = () => {
 };
 
 export default MyPageContents;
+
+// , {
+//     onSuccess: (data) => {
+//       const storageItem = getLocalStorageJSON();
+//       const acToken = storageItem.access_token;
+//       const uid = storageItem.user.id;
+//       const email = storageItem.user.email;
+//       const nickname = storageItem.user.user_metadata.nickname;
+//       const avatar = storageItem.user.user_metadata.avatar;
+//       console.log('uid', storageItem.user.id);
+//       console.log('email', storageItem.user.email);
+//       console.log('nickname', storageItem.user.user_metadata.nickname);
+//       console.log('avatar', storageItem.user.user_metadata.avatar);
+//       const userInfo = {
+//         uid,
+//         email,
+//         nickname,
+//         avatar
+//       };
+//       setUserAccount(userInfo);
+//       updateUserAccount({ nickname, avatar });
+//       setThumnailImage(avatar);
+
+//       console.log('데이터를 성공적으로 가져왔습니다:', data);
+//     }
+//   }
 
 // , {
 //     onSuccess: (data) => {

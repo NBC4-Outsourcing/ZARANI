@@ -1,5 +1,24 @@
 import { supabase } from 'api/supabase/supabase';
 
+export const updateUserAccount = async ({ nickname, avatar }) => {
+  const { error } = await supabase.auth.signUp({
+    options: {
+      data: {
+        nickname,
+        avatar
+      }
+    }
+  });
+  // if (error) {
+  //   alert('회원정보가 저장되지 않았습니다.');
+  // }
+};
+
+export const readUserAccount = async () => {
+  const { data } = await supabase.auth.getUser();
+  return data;
+};
+
 export const readUserInfo = async () => {
   const { data, error } = await supabase.from('usersAccounts').select('*');
   // const [spreadData] = data;
