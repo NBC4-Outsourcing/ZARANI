@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { login } from 'shared/redux/modules/authSlice';
 import defaultProfileImage from 'assets/defaultProfileImage.png';
+import { getCurrentLoggedInUserList, getLoginUserInfo, insertCurrentLoginUser } from './loginPageSupabase';
 
 const LoginInputForm = ({ isSignUpPage, setSignUpPage }) => {
   // useInput
@@ -64,14 +65,38 @@ const LoginInputForm = ({ isSignUpPage, setSignUpPage }) => {
           alert('로그인에 실패했습니다. 다시 시도하세요.');
         } else {
           // 에러가 발생하지 않았을 때
-          // 1. DB에서 접속한 유저 리스트를 가져옴
-          // 2. localStorage에서 user의 이메일을 가져옴
-          // 3. localStorage의 user의 이메일이 DB의 접속한 유저 리스트에 존재하는지 확인)
-          // 4. 존재하면, 존재합니다!! BACKBACK!!
-          // 5. 존재하지 않으면, localStorage의 유저 정보를 DB에 저장
-          dispatch(login()); // login state 변경
-          alert('로그인 되었습니다.');
-          navigate('/');
+          // 1. 지금 로그인하려는 유저의 정보를 가져옴
+          const loginUserInfo = await getLoginUserInfo();
+          // 2. 현재 로그인 상태인 유저 LIST를 DB로부터 가져옴
+          const currentLoggedInUser = await getCurrentLoggedInUserList();
+          // 지금 로그인하려는 유저의 정보(1 - 이메일, 아이디)
+          const { email, id } = loginUserInfo.user;
+          // 지금 로그인하려는 유저의 정보(2 - 아바타, 닉네임)
+          const { avatar, nickname } = loginUserInfo.user.user_metadata;
+          // 현재 로그인 상태인 유저의 이메일 리스트를 map함수로 추출함
+          const currentLoggedInEmail = currentLoggedInUser.map((account) => account.email);
+          // 3. 지금 로그인하려는 유저의 정보가 DB에 있는가?
+          const isCurrentLoggedIn = currentLoggedInEmail.includes(email);
+          // 3-1. 로그인된 상태!!
+          if (isCurrentLoggedIn) {
+            console.error('Error: 이미 로그인된 유저입니다.');
+            return alert('이미 로그인한 유저입니다.');
+          }
+          // 3-2. 로그인 안된 상태!! 로그인 가능!!
+          else {
+            // 새로운 유저의 정보 객체 생성
+            const newLoginUser = {
+              uid: id,
+              email,
+              nickname,
+              avatar
+            };
+            // DB에 지금 로그인하는 유저의 정보를 입력
+            await insertCurrentLoginUser(newLoginUser);
+            dispatch(login());
+            alert('로그인 되었습니다.');
+            navigate('/');
+          }
         }
       } catch (error) {
         console.log(error);
