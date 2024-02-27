@@ -48,7 +48,6 @@ const MyPageContents = () => {
     }
   });
   const { email, nickname, avatar, uid } = userAccount || {};
-  console.log(thumnailImage);
   const [mutation] = useSetMutation(updateUserAccount, 'usersAccounts');
   const [editValue, setEditValue, onChange] = useInput({
     nickname
@@ -62,9 +61,9 @@ const MyPageContents = () => {
   console.log(loginState);
 
   if (isLogin === false) {
-    // dispatch(logout());
+    dispatch(logout());
     alert('로그인 유저만 사용가능합니다. 로그인 해주세요');
-    navigate('/login');
+    navigate('/login', { replace: true });
   }
 
   // 이미지 등록
@@ -101,7 +100,6 @@ const MyPageContents = () => {
     const filePath = `userOneImage/${uid}+${uuid}`;
     try {
       const data = await uploadImage(filePath, selectImage);
-      console.log(data);
       const { data: imageUrl } = supabase.storage.from('unAuthUserImage').getPublicUrl(data.path);
       const ImgDbUrl = imageUrl.publicUrl;
       const newData = { email, nickname: editValueNickname, avatar: ImgDbUrl, id: uid };
@@ -129,13 +127,16 @@ const MyPageContents = () => {
     setIsEdit(false);
     if (isEdit && selectImage !== thumnailImage) setThumnailImage(avatar);
   };
+
   if (isLoading)
     return (
       <div>
         <Loading />
       </div>
     );
+
   if (isError) return <div> 정보를 받아올 수 없습니다...</div>;
+
   return (
     <MP.MyPageContentsForm>
       <MP.ImgWrapDiv>
