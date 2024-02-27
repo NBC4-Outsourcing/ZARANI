@@ -1,10 +1,9 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { deleteWrite } from './CommunitySupabase';
 import {
   CommunityBtn,
   Main,
   WriteButtons,
-  WriteCommentList,
   WriteContainer,
   WriteContent,
   WriteDate,
@@ -25,7 +24,6 @@ const WritingList = ({ userData, writeList, commentList }) => {
   const [editFormId, setEditFormId] = useState(null);
   const [writeId, setWriteId] = useState(null);
   const [commentWriteCheck, setCommentWriteCheck] = useState(null);
-  const [commentListCheck, setCommentListCheck] = useState(null);
   const [mutation] = useSetMutation(deleteWrite, 'communityWriteList');
 
   const onClickDeleteHandler = (id) => {
@@ -95,12 +93,7 @@ const WritingList = ({ userData, writeList, commentList }) => {
               {commentWriteCheck === item.id ? (
                 <>
                   {' '}
-                  <CommentInputForm
-                    onClickCommentHandler={onClickCommentHandler}
-                    writeId={writeId}
-                    userData={userData}
-                    commentListCheck={commentListCheck}
-                  />
+                  <CommentInputForm writeId={writeId} userData={userData} />
                   <CommentList writeId={item.id} commentList={commentList} userData={userData} />
                 </>
               ) : (
