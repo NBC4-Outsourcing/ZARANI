@@ -10,7 +10,7 @@ import { insertComment } from './CommunitySupabase';
 import useInput from 'hooks/useInput';
 import useSetMutation from 'hooks/useSetMutations';
 
-const CommentInputForm = ({ writeId, userData, commentListCheck }) => {
+const CommentInputForm = ({ writeId, userData }) => {
   const [comment, , onChangeContentHandler, reset] = useInput({
     writeComment: ''
   });
@@ -36,9 +36,6 @@ const CommentInputForm = ({ writeId, userData, commentListCheck }) => {
       };
       mutation.mutate(newComment);
       reset();
-      if (commentListCheck === writeId) {
-        return;
-      }
     }
   };
   return (
