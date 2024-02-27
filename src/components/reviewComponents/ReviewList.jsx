@@ -3,6 +3,7 @@ import { getFormattedDate } from 'components/communityComponents/formattedDate';
 import { ContentsList } from 'components/styles/ReviewStyle';
 import { useEffect, useState } from 'react';
 import { ReviewUpdateForm } from './ReviewUpdateForm';
+import defaultProfileImage from '../../assets/defaultProfileImage.png';
 
 export const ReviewList = () => {
   // 데이터베이스에 저장된 데이터 저장 state
@@ -27,7 +28,7 @@ export const ReviewList = () => {
           const imgUrl = supabase.storage.from('reviewImage').getPublicUrl(item.reviewimg);
           return { ...item, imageUrl: imgUrl.data.publicUrl };
         });
-
+        console.log('reviewsWriteData', reviewsWriteData);
         setReviewData(reviewsWriteData);
       }
     };
@@ -60,39 +61,46 @@ export const ReviewList = () => {
       }
     }
   };
+  console.log('ReviewData', reviewData);
+
   return (
     <ContentsList>
-      {reviewData?.map((item) => (
-        <div key={item.id}>
-          {/* 수정 버튼 클릭 시 editDataId state에 item.id가 담겨 선택한 게시물만 수정 상태로 만들어 준다 */}
-          {editDataId === item.id ? (
-            <>
-              <ReviewUpdateForm item={item} setEditDataId={setEditDataId} />
-            </>
-          ) : (
-            <div>
-              {item.imageUrl && <img src={item.imageUrl} alt="리뷰 이미지" />}
-              <div>{item.nickname}</div>
-              <div>{item.content}</div>
-              <div>{getFormattedDate(item.date)}</div>
-              <button
-                onClick={() => {
-                  setEditDataId(item.id);
-                }}
-              >
-                수정
-              </button>
-              <button
-                onClick={() => {
-                  removeReview(item.id, item.reviewimg);
-                }}
-              >
-                삭제
-              </button>
-            </div>
-          )}
-        </div>
-      ))}
+      {reviewData?.map((item) => {
+        console.log('item', item);
+        console.log('imageUrl', item.imageUrl);
+        return (
+          <div key={item.id}>
+            {/* 수정 버튼 클릭 시 editDataId state에 item.id가 담겨 선택한 게시물만 수정 상태로 만들어 준다 */}
+            {editDataId === item.id ? (
+              <>
+                <ReviewUpdateForm item={item} setEditDataId={setEditDataId} />
+              </>
+            ) : (
+              <div>
+                {item.imageUrl && <img src={item.imageUrl} alt="리뷰 이미지" />}
+                {/* <img src={item.imageUrl ? item.imageUrl : defaultProfileImage} alt="리뷰 이미지" /> */}
+                <div>{item.nickname}</div>
+                <div>{item.content}</div>
+                <div>{getFormattedDate(item.date)}</div>
+                <button
+                  onClick={() => {
+                    setEditDataId(item.id);
+                  }}
+                >
+                  수정
+                </button>
+                <button
+                  onClick={() => {
+                    removeReview(item.id, item.reviewimg);
+                  }}
+                >
+                  삭제
+                </button>
+              </div>
+            )}
+          </div>
+        );
+      })}
     </ContentsList>
   );
 };
