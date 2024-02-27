@@ -2,7 +2,14 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useQuery } from 'react-query';
 import { supabase } from 'api/supabase/supabase';
-import { readUserAccount, readUserInfo, updateUserAccount, updateUserInfo, uploadImage } from './myPageSupabase';
+import {
+  readUserAccount,
+  readUserInfo,
+  readUserLocalAccount,
+  updateUserAccount,
+  updateUserInfo,
+  uploadImage
+} from './myPageSupabase';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { getLocalStorageJSON } from 'utils/getLocalStorageJSON';
 import { logout } from 'shared/redux/modules/authSlice';
@@ -21,13 +28,12 @@ const MyPageContents = () => {
   const [thumnailImage, setThumnailImage] = useState(defaultImg);
 
   const [userAccount, setUserAccount] = useState();
-  const { isLoading, isError, data } = useQuery('usersAccounts', readUserAccount, {
+  const { isLoading, isError, data } = useQuery('usersAccounts', readUserLocalAccount, {
     onSuccess: (data) => {
-      const storageItem = getLocalStorageJSON();
-      const uid = storageItem.user?.id;
-      const email = storageItem.user?.email;
-      const nickname = storageItem.user?.user_metadata.nickname;
-      const avatar = storageItem.user?.user_metadata.avatar;
+      const uid = data.user?.id;
+      const email = data.user?.email;
+      const nickname = data.user?.user_metadata.nickname;
+      const avatar = data.user?.user_metadata.avatar;
       const userInfo = {
         uid,
         email,
@@ -40,7 +46,7 @@ const MyPageContents = () => {
       if (!storageItem || !uid || !email) {
         console.error('유저정보가 존재하지 않습니다. 로그인해주세요.');
         alert('유저정보가 존재하지 않습니다. 로그인해주세요.');
-        // dispatch(logout());
+        dispatch(logout());
         navigate('/login');
       }
 
@@ -48,6 +54,7 @@ const MyPageContents = () => {
     }
   });
   const { email, nickname, avatar, uid } = userAccount || {};
+  console.log('email, nickname=>', email, nickname);
   const [mutation] = useSetMutation(updateUserAccount, 'usersAccounts');
   const [editValue, setEditValue, onChange] = useInput({
     nickname
@@ -104,7 +111,6 @@ const MyPageContents = () => {
       const ImgDbUrl = imageUrl.publicUrl;
       const newData = { email, nickname: editValueNickname, avatar: ImgDbUrl, id: uid };
       await updateUserAccount({ nickname: editValueNickname, avatar: ImgDbUrl });
-      mutation.mutate({ nickname: editValueNickname, avatar: ImgDbUrl });
       setThumnailImage(newData.avatar);
       setSelectImage(ImgDbUrl);
       alert('수정이 완료됐습니다.');
