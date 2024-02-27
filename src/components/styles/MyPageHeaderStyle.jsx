@@ -40,23 +40,43 @@ export const TitleP = styled.p`
 // 홈버튼
 export const HomeLink = styled(Link)`
   background-color: var(--subColor1);
+  padding: 0.7rem 2rem;
 
-  padding: 1rem 2rem;
-  border: 1px solid var(--subColor1);
+  border: none;
+  border-radius: 0.8rem;
 
-  border-radius: 1rem;
+  box-shadow: 0rem 0rem 0.3rem 0rem var(--subColor1);
+  text-align: center;
+  font-size: 1.2rem;
 
-  font-size: 1.1rem;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--subColor2);
+    box-shadow: 0rem 0rem 0.3rem 0rem var(--subColor2);
+    transition: all 0.5s; // 시간차두고 바뀌도록 추가
+    transform: scale(1.06, 1.06);
+  }
 `;
 
 // 로그아웃 버튼
 export const LogoutBtn = styled.button`
   background-color: var(--mainColor);
+  padding: 0.7rem 2rem;
 
-  padding: 0.8rem 2rem;
+  border: none;
+  border-radius: 0.8rem;
 
-  border: 1px solid var(--mainColor);
-  border-radius: 1rem;
+  box-shadow: 0rem 0rem 0.3rem 0rem var(--mainColor);
+  text-align: center;
+  font-size: 1.2rem;
 
-  font-size: 1.1rem;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--mainColor);
+    box-shadow: 0rem 0rem 0.3rem 0rem var(--mainColor);
+    transition: all 0.5s; // 시간차두고 바뀌도록 추가
+    transform: scale(1.06, 1.06);
+  }
 `;
