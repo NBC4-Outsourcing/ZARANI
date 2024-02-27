@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { getLocalStorageJSON } from 'utils/getLocalStorageJSON';
-import { useState } from 'react';
 import { getFormattedDate } from 'components/communityComponents/formattedDate';
 import Loading from 'components/common/Loading';
 import * as MPR from 'components/styles/MyPageReviews';
@@ -46,7 +45,7 @@ const MyPageReviews = ({ myReview, isLoading }) => {
           );
         })
       ) : (
-        <article> 자전거 도로를 이용한 후기를 써주세용 </article>
+        <MPR.MyReviewsArticle> 내가 공유한 자전거 도로 후기 </MPR.MyReviewsArticle>
       )}
     </MPR.MyReviewsSection>
   );

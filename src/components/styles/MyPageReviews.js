@@ -11,3 +11,13 @@ export const MyReviewsSection = styled.section`
   border-radius: 1rem;
   box-shadow: 0 2px 3px 2px var(--subColor2);
 `;
+
+export const MyReviewsArticle = styled.article`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 1rem;
+`;
