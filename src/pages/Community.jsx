@@ -10,9 +10,15 @@ import { useNavigate } from 'react-router-dom';
 
 const Community = () => {
   const navigate = useNavigate();
-  const { isLoading, data: userData } = useQuery('userData', getUser);
-  const { isLoading: writeListLoading, data: writeList } = useQuery('communityWriteList', getWriteList);
-  const { isLoading: commentListLoading, data: commentList } = useQuery('commentWriteList', getCommentList);
+  const { isLoading, data: userData } = useQuery('userData', getUser, {
+    refetchOnWindowFocus: false
+  });
+  const { isLoading: writeListLoading, data: writeList } = useQuery('communityWriteList', getWriteList, {
+    refetchOnWindowFocus: false
+  });
+  const { isLoading: commentListLoading, data: commentList } = useQuery('commentWriteList', getCommentList, {
+    refetchOnWindowFocus: false
+  });
 
   if (isLoading || writeListLoading || commentListLoading) {
     return <Loading />;
