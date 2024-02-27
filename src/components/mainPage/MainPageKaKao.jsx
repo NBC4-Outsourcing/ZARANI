@@ -127,6 +127,7 @@ const MainPageKaKao = () => {
           {list.map((item, idx) => {
             return (
               <li key={idx}>
+                <p>{idx + 1}</p>
                 <p>{item.place_name}</p>
                 <p>{item.place_name}</p>
               </li>

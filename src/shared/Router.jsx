@@ -1,5 +1,5 @@
 import Layout from 'components/layoutComponent/Layout';
-import MainPage from 'components/mainPage/MainPage';
+import MainPage from 'pages/MainPage';
 import Community from 'pages/Community';
 import Login from 'pages/Login';
 import MyPage from 'pages/MyPage';
