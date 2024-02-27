@@ -23,6 +23,7 @@ const MainPageKaKao = () => {
     const ps = new kakao.maps.services.Places();
     //검색 결과 목록 또는 마커 클릭시 장소명 인포윈도우
     const infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
+    console.log(infowindow);
 
     ps.keywordSearch(serchBtn, placesSearchCB);
 
@@ -111,7 +112,7 @@ const MainPageKaKao = () => {
       infowindow.open(map, marker);
     }
   }, [serchBtn]);
-
+  console.log(list);
   return (
     <div>
       <div
@@ -127,7 +128,7 @@ const MainPageKaKao = () => {
             return (
               <li key={idx}>
                 <p>{item.place_name}</p>
-                <p>{item.address_name}</p>
+                <p>{item.place_name}</p>
               </li>
             );
           })}
