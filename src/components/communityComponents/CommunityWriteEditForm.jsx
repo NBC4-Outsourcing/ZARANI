@@ -9,7 +9,7 @@ import {
   WriteImage,
   WriteNickName
 } from 'components/styles/CommunityStyle';
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { getFormattedDate } from './formattedDate';
 import useInput from 'hooks/useInput';
 import { updateWrite } from './CommunitySupabase';
@@ -17,10 +17,14 @@ import useSetMutation from 'hooks/useSetMutations';
 import defaultImage from 'assets/defaultImage.png';
 
 const CommunityWriteEditForm = ({ item, setEditFormId }) => {
+  const CommunityEditInputRef = useRef(null);
   const [mutation] = useSetMutation(updateWrite, 'communityWriteList');
   const [changeContent, , onChangeContentHandler, ,] = useInput({
     changeContents: item.content
   });
+  useEffect(() => {
+    CommunityEditInputRef.current.focus();
+  }, []);
 
   const { changeContents } = changeContent;
 
@@ -46,6 +50,7 @@ const CommunityWriteEditForm = ({ item, setEditFormId }) => {
         <WriteNickName>{item.nickname}</WriteNickName>
       </WriteHead>
       <EditFormInput
+        ref={CommunityEditInputRef}
         name="changeContents"
         value={changeContents}
         onChange={onChangeContentHandler}

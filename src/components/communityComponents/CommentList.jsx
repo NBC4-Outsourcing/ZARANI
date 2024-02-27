@@ -5,6 +5,7 @@ import {
   CommentListHead,
   CommentListInfo,
   CommentListSection,
+  CommentListTitle,
   CommunityBtn,
   NoComment
 } from 'components/styles/CommunityStyle';
@@ -19,6 +20,7 @@ const CommentList = ({ writeId, commentList, userData }) => {
 
   return (
     <CommentListSection>
+      <CommentListTitle>댓글 목록</CommentListTitle>
       {filterComment.length !== 0 ? (
         filterComment
           .sort((a, b) => {

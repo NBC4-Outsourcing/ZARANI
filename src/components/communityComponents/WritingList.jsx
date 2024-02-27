@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { deleteWrite } from './CommunitySupabase';
 import {
   CommunityBtn,
   Main,
   WriteButtons,
+  WriteCommentList,
   WriteContainer,
   WriteContent,
   WriteDate,
@@ -24,6 +25,7 @@ const WritingList = ({ userData, writeList, commentList }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [editFormId, setEditFormId] = useState(null);
   const [writeId, setWriteId] = useState(null);
+  const [commentListCheck, setCommentListCheck] = useState(null);
   const [mutation] = useSetMutation(deleteWrite, 'communityWriteList');
 
   const onClickDeleteHandler = (id) => {
@@ -50,10 +52,24 @@ const WritingList = ({ userData, writeList, commentList }) => {
     }
   };
 
+  const onClickCommentListBtn = (id) => {
+    if (id === commentListCheck) {
+      setCommentListCheck(null);
+    } else {
+      setCommentListCheck(id);
+    }
+  };
+
   return (
     <Main>
       {modalOpen ? (
-        <CommentInputForm onClickCommentHandler={onClickCommentHandler} writeId={writeId} userData={userData} />
+        <CommentInputForm
+          onClickCommentHandler={onClickCommentHandler}
+          writeId={writeId}
+          userData={userData}
+          commentListCheck={commentListCheck}
+          onClickCommentListBtn={onClickCommentListBtn}
+        />
       ) : (
         false
       )}
@@ -72,7 +88,13 @@ const WritingList = ({ userData, writeList, commentList }) => {
                     <WriteImage src={item.avatar ? item.avatar : defaultImage} />
                     <WriteNickName>{item.nickname}</WriteNickName>
                   </WriteHead>
-                  <WriteContent>{item.content}</WriteContent>
+                  <WriteContent
+                    onClick={() => {
+                      onClickCommentListBtn(item.id);
+                    }}
+                  >
+                    {item.content}
+                  </WriteContent>
                   <WriteFoot>
                     <WriteDate>{getFormattedDate(item.date)}</WriteDate>
                     <WriteButtons>
@@ -91,7 +113,11 @@ const WritingList = ({ userData, writeList, commentList }) => {
                   </WriteFoot>
                 </WriteContainer>
               )}
-              <CommentList writeId={item.id} commentList={commentList} userData={userData} />
+              {commentListCheck === item.id ? (
+                <CommentList writeId={item.id} commentList={commentList} userData={userData} />
+              ) : (
+                false
+              )}
             </WriteListSection>
           );
         })}

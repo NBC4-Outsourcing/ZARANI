@@ -2,6 +2,7 @@ import { CommunityBtn, CommunityForm, CommunityInput, CommunityInputName } from 
 import useInput from 'hooks/useInput';
 import { insertWriting } from './CommunitySupabase';
 import useSetMutation from 'hooks/useSetMutations';
+import { useEffect, useRef } from 'react';
 
 const CommunityInputForm = ({ userData }) => {
   // 커뮤니티 글 input value,onchange
@@ -9,10 +10,13 @@ const CommunityInputForm = ({ userData }) => {
     writeContent: ''
   });
   const { avatar, nickname } = userData.user_metadata;
-
+  const inputRef = useRef(null);
   const { writeContent } = content;
   const [mutation] = useSetMutation(insertWriting, 'communityWriteList');
 
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
   // 커뮤니티 글 등록 함수
   const onSubmitHandler = async (e) => {
     e.preventDefault();
@@ -35,6 +39,7 @@ const CommunityInputForm = ({ userData }) => {
       <CommunityForm onSubmit={onSubmitHandler}>
         <CommunityInputName>{nickname}</CommunityInputName>
         <CommunityInput
+          ref={inputRef}
           maxLength={'80'}
           placeholder="최대 80자까지만 입력할 수 있습니다."
           name="writeContent"
