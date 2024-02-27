@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import MainPageLanding from './MainPageLending';
 import * as S from '../styles/mainPageStyle';
+import { useNavigate } from 'react-router-dom';
 
 const { kakao } = window;
 
 const MainPageKaKao = () => {
+  const navigate = useNavigate();
   const [list, setList] = useState([]);
   const data = useSelector((state) => state.area);
   const serchBtn = data.serchTxt.serchTxt;
@@ -19,11 +21,11 @@ const MainPageKaKao = () => {
     };
     //지도 생성
     const map = new kakao.maps.Map(container, options);
+
     //장소 검색 객체
     const ps = new kakao.maps.services.Places();
     //검색 결과 목록 또는 마커 클릭시 장소명 인포윈도우
     const infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
-    console.log(infowindow);
 
     ps.keywordSearch(serchBtn, placesSearchCB);
 
@@ -58,13 +60,15 @@ const MainPageKaKao = () => {
         // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
         // LatLngBounds 객체에 좌표를 추가
         bounds.extend(placePosition);
-
-        // 마커와 검색결과 항목에 mouseover 했을때
-        // 해당 장소에 인포윈도우에 장소명을 표시
-        // mouseout 했을 때는 인포윈도우를 닫음
         (function (marker, title) {
           kakao.maps.event.addListener(marker, 'mouseover', function () {
             displayInfowindow(marker, title);
+          });
+          //마커 클릭시
+          kakao.maps.event.addListener(marker, 'click', function () {
+            var level = map.getLevel() - 4;
+            map.setLevel(level, { anchor: this.getPosition() });
+            map.addOverlayMapTypeId(kakao.maps.MapTypeId.BICYCLE);
           });
 
           kakao.maps.event.addListener(marker, 'mouseout', function () {
@@ -106,13 +110,24 @@ const MainPageKaKao = () => {
 
     // 인포윈도우에 장소명 표시
     function displayInfowindow(marker, title) {
-      let content = '<div style="padding:5px;z-index:1;">' + title + '</div>';
+      let content = '<div>' + title + '<div>';
 
       infowindow.setContent(content);
       infowindow.open(map, marker);
     }
   }, [serchBtn]);
-  console.log(list);
+
+  // 문제 1.리스트를 클릭하면 해당 마커가 클릭 되는 이벤트를 줄 수 없음 마커 생성과 클릭 이벤트가 useEffect내에서 이뤄지기 때문
+  // 원하는 거 map으로 뿌려준 리스트 클릭하면 해당 리스트의 마커 클릭 하는 것 과 같은 효과를 보여주는거(확대)
+
+  const onClick = (place) => {
+    const confirm = window.confirm(`${place} 후기 페이지로 이동 하시겠습니까?`);
+    if (confirm) {
+      navigate(`/reviewpage/${place}`);
+    }
+    return;
+  };
+
   return (
     <div>
       <div
@@ -123,13 +138,12 @@ const MainPageKaKao = () => {
       <S.SerchSection>
         <MainPageLanding />
         <S.ListContent>
-          {console.log(list)}
           {list.map((item, idx) => {
             return (
-              <li key={idx}>
+              <li key={idx} onClick={() => onClick(item.place_name)}>
                 <p>{idx + 1}</p>
                 <p>{item.place_name}</p>
-                <p>{item.place_name}</p>
+                <p>후기 보러가기</p>
               </li>
             );
           })}

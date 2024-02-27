@@ -1,14 +1,18 @@
 import { supabase } from 'api/supabase/supabase';
 import { getLocalStorageJSON } from 'utils/getLocalStorageJSON';
 
+function shuffle(array) {
+  array.sort(() => Math.random() - 0.5);
+}
 const getCommunityList = async () => {
   try {
     const data = (await supabase.from('communityWrite').select('*')).data;
-    const list = [data[0], data[1], data[2]];
-    return list;
+    shuffle(data);
+    const randomList = [data[0], data[1], data[2]];
+    return randomList;
+    return randomList;
   } catch (error) {
     console.log(error);
-    alert('오류가 발생 하였습니다.');
   }
 };
 const getUserImage = async () => {
@@ -17,7 +21,6 @@ const getUserImage = async () => {
     return data[0].avatar;
   } catch (error) {
     console.log(error);
-    alert('오류가 발생 하였습니다.');
   }
 };
 export const readUserLocalAccount = async () => {

@@ -22,12 +22,10 @@ const MainPageCommunity = () => {
   return (
     <S.ComuWrapper onClick={handComunity}>
       <S.TitleSection>커뮤니티</S.TitleSection>
-      {console.log(data)}
-      {data.map((item) => {
+      {data.map((item, idx) => {
         return (
-          <S.ContentSection>
+          <S.ContentSection key={idx}>
             <S.Content>{item.content}</S.Content>
-
             <S.Nickname>{item.nickname}</S.Nickname>
           </S.ContentSection>
         );
