@@ -168,7 +168,6 @@ export const WriteContent = styled.p`
   height: 45%;
   padding: 1.5%;
   border-radius: 8px;
-  cursor: pointer;
 `;
 
 export const WriteFoot = styled.div`
