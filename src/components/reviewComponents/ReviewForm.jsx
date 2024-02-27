@@ -1,3 +1,4 @@
+import { uuid } from '@supabase/gotrue-js/dist/module/lib/helpers';
 import { supabase } from 'api/supabase/supabase';
 import {
   AddFormContent,
@@ -8,48 +9,23 @@ import {
   ReviewFormWrapper,
   ReviewHeader
 } from 'components/styles/ReviewStyle';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
+import { getLocalStorageJSON } from 'utils/getLocalStorageJSON';
 import defaultImage from '../../assets/defaultImage.png';
 import useInput from '../../hooks/useInput';
-import { useQuery } from 'react-query';
-import { readUserInfo } from 'components/myPageComponent/myPageSupabase';
 
 const ReviewForm = () => {
-  // // userInfo
-  // const { isLoading, isError, data } = useQuery('usersAccounts', readUserInfo);
-
-  // console.log('data', data);
-
-  // // [{}] 이런식으로 배열 안에 객체가 있을 경우 구조분해를 위해 배열안에 데이터를 넣어서 배열을 열어주고, 객체를 구조분해하면 된다 => 배열 구조분해
-  // const [reviewData] = data;
-  // console.log('object', reviewData);
-
-  // const { email, nickname, avatar, uid } = reviewData;
-  // console.log('email, nickname, avatar, uid', email, nickname, avatar, uid);
-  // // 여기까지 userInfo
-
-  // usersAccounts data state
-  const [userInfo, setUserInfo] = useState([{}]);
-
-  // userInfo
-  useEffect(() => {
-    const readUserInfo = async () => {
-      const { data, error } = await supabase.from('usersAccounts').select('*');
-      setUserInfo(data);
-      console.log('data', data);
-
-      if (error) {
-        alert('오류로 인해 정보를 받아오지 못 하고 있습니다.');
-        return null;
-      }
-    };
-
-    readUserInfo();
-  }, []);
-  const [{ email, nickname, avatar }] = userInfo;
-  // 여기까지usersAccounts data
-
+  // storage에 파일 객체로 이미지 저장을위한 변수
   const imgRef = useRef(null);
+  const imgName = uuid();
+
+  // 회원 정보
+  const loginData = getLocalStorageJSON();
+  const {
+    email,
+    user_metadata: { avatar, nickname }
+  } = loginData.user;
+  // console.log('회원 정보 : ', 'email : ', email, ' id : ', id, ' avatar : ', avatar, ' nickname : ', nickname);
 
   const [reviewContentInput, , reviewContentHandler, reset] = useInput({
     reviewContent: ''
@@ -71,35 +47,32 @@ const ReviewForm = () => {
     }
   };
   // 이미지 등록 취소
-  const addCancell = (e) => {
+  const addCancel = (e) => {
     e.preventDefault();
     setAddImg(null);
     setIsImg(false);
   };
 
-  // 회원정보만 임시로 usersAccounts 테이블 데이터 사용
   // DB에 후기 등록
   const addReview = async (e) => {
     e.preventDefault();
 
     // storage에 이미지 등록
+    let storagePath = '';
     if (addImg) {
       const imgPath = imgRef.current.files[0];
-
-      // 파일 이름 중복으로 이미지 1개 이상 등록 불가
-      // usersAccounts테이블의 uid를 정상적으로 받아오지못해 임시로 파일명 지정 나중에 회원 정보 기능이 완성되면 회원 uid를 파일 이름에 넣어줄것
-      // const { data, error } = await supabase.storage.from('reviewImage').upload(`reviewFile/${uid}`, imgPath, {
-      const { data, error } = await supabase.storage.from('reviewImage').upload('reviewFile/testImg', imgPath, {
-        cacheControl: '3600',
-        upsert: false
-      });
-      console.log('data', data);
-      console.log('addImg', addImg);
+      const { data, error } = await supabase.storage
+        .from('reviewImage')
+        .upload(`reviewFile/files/${email}${imgName}`, imgPath, {
+          cacheControl: '3600',
+          upsert: false
+        });
 
       if (!error) {
-        console.log('data', data);
+        console.log('이미지 등록 성공!', data);
+        storagePath = data.path; // 이미지 등록이 성공하면 이미지 경로 저장("reviewFile/files/kim@naver.com06cea4ae-f3e1-4b2f-a00c-9538c8f763d1")
       } else {
-        console.error('error', error);
+        console.error('이미지 등록 실패!', error);
       }
     }
 
@@ -109,9 +82,8 @@ const ReviewForm = () => {
       nickname,
       avatar,
       content: reviewContent,
-      reviewimg: addImg ? addImg : null
+      reviewimg: storagePath
     };
-    console.log('reviewimg', addImg);
 
     // 데이터 등록
     const { data, error } = await supabase.from('reviewWrite').insert([newReviews]).select();
@@ -146,7 +118,7 @@ const ReviewForm = () => {
                   <p>{addImg ? '이미지 변경 시 이미지를 클릭해 주세요' : '이미지 추가 시 이미지를 클릭해 주세요'}</p>
                   <input ref={imgRef} onChange={previewImg} type="file" accept="image/*" />
                 </label>
-                <button onClick={addCancell}>이미지 등록 취소</button>
+                <button onClick={addCancel}>이미지 등록 취소</button>
               </AddFormImg>
             )}
             <AddFormTextarea

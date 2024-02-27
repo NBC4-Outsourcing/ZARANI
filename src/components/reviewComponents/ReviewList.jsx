@@ -1,99 +1,59 @@
 import { supabase } from 'api/supabase/supabase';
 import { getFormattedDate } from 'components/communityComponents/formattedDate';
 import { ContentsList } from 'components/styles/ReviewStyle';
-import React, { useEffect, useState } from 'react';
-import { useQuery } from 'react-query';
-import { getLocalStorageJSON } from 'utils/getLocalStorageJSON';
+import { useEffect, useState } from 'react';
+import { ReviewUpdateForm } from './ReviewUpdateForm';
 
 export const ReviewList = () => {
-  const result = getLocalStorageJSON();
-  console.log('result', result);
-
   // 데이터베이스에 저장된 데이터 저장 state
-  const [reviewData, setReviewData] = useState();
-  const [reviewImg, setReviewImg] = useState();
+  const [reviewData, setReviewData] = useState([]);
 
-  // usersAccounts data state
-  const [userEmail, setUserEmail] = useState([{}]);
-  // userInfo
-  useEffect(() => {
-    const readUserInfo = async () => {
-      const { data, error } = await supabase.from('usersAccounts').select('*');
-      setUserEmail(data);
-      // console.log('userInfoData', data);
+  // 수정 여부 state
+  const [editDataId, setEditDataId] = useState('false');
 
-      if (error) {
-        alert('오류로 인해 정보를 받아오지 못 하고 있습니다.');
-        return null;
-      }
-    };
-
-    readUserInfo();
-  }, []);
-  const [userInfo] = userEmail;
-  const { email } = userInfo;
-  console.log('email', email);
-  // 여기까지usersAccounts data state
-
-  // DB에 저장된 후기 데이터 가져오기
+  // DB에 저장된 데이터 가져오기
   useEffect(() => {
     // 게시글 불러오기
     const fetchData = async () => {
-      try {
-        let { data: reviewWrite, error } = await supabase.from('reviewWrite').select('*');
-        if (!error) {
-          setReviewData(reviewWrite);
-        }
-      } catch (error) {
-        console.log('reviewDataError', error);
-      }
-    };
-
-    // 이미지 불러오기
-    // usersAccounts테이블의 uid를 정상적으로 받아오지못해 임시로 파일명 지정 나중에 회원 정보 기능이 완성되면 회원 uid를 파일 이름에 넣어줄것
-    const filePath = async () => {
-      // const { data: imageUrl, error } = supabase.storage.from('reviewImage').getPublicUrl(`reviewFile/${uid}`);
-      const { data: imageUrl, error } = supabase.storage.from('reviewImage').getPublicUrl('reviewFile/testImg');
-      if (!error) {
-        console.log('imageUrlData', imageUrl);
-        console.log('이미지 Url 변환 성공', imageUrl);
-        setReviewImg(imageUrl.publicUrl);
-        console.log('reviewImg', reviewImg);
+      let { data: reviewWrite, error } = await supabase.from('reviewWrite').select('*');
+      console.log('reviewWrite', reviewWrite);
+      if (error) {
+        console.log('게시물 조회 실패', error);
       } else {
-        console.log('imageUrlDataError', error);
+        console.log('게시물 조회 성공', reviewWrite);
+
+        // 이미지 불러오기
+        const reviewsWriteData = reviewWrite.map((item) => {
+          const imgUrl = supabase.storage.from('reviewImage').getPublicUrl(item.reviewimg);
+          return { ...item, imageUrl: imgUrl.data.publicUrl };
+        });
+
+        setReviewData(reviewsWriteData);
       }
     };
-    console.log('reviewImg', reviewImg);
 
     fetchData();
-    filePath();
   }, []);
 
-  // 데이터 수정
-
-  // 회원 정보가 없어 임시로 usersAccounts table email 사용, 회원 정보 완료 시 회원 email 또는 uid 활용할것
   // 데이터 삭제
-  const removeReview = async (email) => {
+  const removeReview = async (id, reviewimg) => {
     if (window.confirm('게시물을 삭제하시겠습니까?')) {
       // 이미지 삭제
+      console.log('reviewimg', reviewimg);
       try {
-        const { data, error } = await supabase.storage.from('reviewImage').remove('reviewFile/testImg');
+        const { data, error } = await supabase.storage.from('reviewImage').remove(reviewimg);
         if (!error) {
-          console.log('removeReviewData', data);
-          console.log('이미지 삭제 성공');
+          console.log('이미지 삭제 성공', data);
         }
       } catch (error) {
         console.log('이미지 삭제 실패', error);
       }
-
       // 게시글 삭제
       try {
-        const { error } = await supabase.from('reviewWrite').delete().eq('email', email);
+        const { error } = await supabase.from('reviewWrite').delete().eq('id', id);
         if (!error) {
           alert('게시물이 삭제되었습니다.');
-          console.log('error', error);
-          setReviewData([]);
-          setReviewImg(null);
+          console.log('게시물 삭제 성공', error);
           return;
         }
       } catch (error) {
@@ -101,24 +61,39 @@ export const ReviewList = () => {
       }
     }
   };
-
+  console.log('reviewData', reviewData);
   return (
     <ContentsList>
-      {reviewData?.map((item, idx) => (
-        <div key={idx}>
-          {console.log('reviewImg', reviewImg)}
-          {item.reviewimg && <img src={reviewImg} alt="리뷰 이미지" />}
-          <div>{item.nickname}</div>
-          <div>{item.content}</div>
-          <div>{getFormattedDate(item.date)}</div>
-          <button>수정</button>
-          <button
-            onClick={() => {
-              removeReview(item.email);
-            }}
-          >
-            삭제
-          </button>
+      {reviewData?.map((item) => (
+        <div key={item.id}>
+          {/* 수정 버튼 클릭 시 editDataId state에 item.id가 담겨 선택한 게시물만 수정 상태로 만들어 준다 */}
+          {editDataId === item.id ? (
+            <>
+              <ReviewUpdateForm item={item} />
+              <button onClick={setEditDataId(null)}>취소</button>
+            </>
+          ) : (
+            <div>
+              {item.imageUrl && <img src={item.imageUrl} alt="리뷰 이미지" />}
+              <div>{item.nickname}</div>
+              <div>{item.content}</div>
+              <div>{getFormattedDate(item.date)}</div>
+              <button
+                onClick={() => {
+                  setEditDataId(item.id);
+                }}
+              >
+                수정
+              </button>
+              <button
+                onClick={() => {
+                  removeReview(item.id);
+                }}
+              >
+                삭제
+              </button>
+            </div>
+          )}
         </div>
       ))}
     </ContentsList>
