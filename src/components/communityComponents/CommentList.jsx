@@ -1,4 +1,5 @@
 import {
+  CommentListBtnBackground,
   CommentListComment,
   CommentListContainer,
   CommentListHead,
@@ -34,9 +35,11 @@ const CommentList = ({ writeId, commentList, userData }) => {
                   <CommentListComment>{item.comment}</CommentListComment>
                 </CommentListInfo>
                 {userData.email === item.userId ? (
-                  <CommunityBtn background={'danger'} onClick={() => mutation.mutate(item.id)}>
-                    삭제
-                  </CommunityBtn>
+                  <CommentListBtnBackground>
+                    <CommunityBtn background={'danger'} onClick={() => mutation.mutate(item.id)}>
+                      삭제
+                    </CommunityBtn>
+                  </CommentListBtnBackground>
                 ) : (
                   false
                 )}

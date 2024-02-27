@@ -1,10 +1,19 @@
 import { supabase } from 'api/supabase/supabase';
+import { getLocalStorageJSON } from 'utils/getLocalStorageJSON';
 
 const getUser = async () => {
+  const { access_token } = getLocalStorageJSON();
+
   const {
-    data: { user }
+    data: { user },
+    error
   } = await supabase.auth.getUser();
-  return user;
+  if (error) {
+    console.error(error);
+    return error;
+  } else {
+    return user;
+  }
 };
 
 const insertWriting = async (newWrite) => {
@@ -12,6 +21,7 @@ const insertWriting = async (newWrite) => {
   if (insertWrite) {
     alert('글을 저장하지 못 했습니다.');
     console.error(insertWrite);
+    return insertWrite;
   }
 };
 
@@ -19,7 +29,7 @@ const getWriteList = async () => {
   const { data, error: getWrite } = await supabase.from('communityWrite').select('*');
   if (getWrite) {
     console.error(getWrite);
-    alert('데이터를 가져오지 못 했습니다.');
+    return getWrite;
   } else {
     return data;
   }
@@ -53,7 +63,7 @@ const getCommentList = async () => {
   const { data, error: getComment } = await supabase.from('commentWrite').select('*');
   if (getComment) {
     console.error(getComment);
-    alert('데이터를 가져오지 못 했습니다.');
+    return getComment;
   } else {
     return data;
   }
