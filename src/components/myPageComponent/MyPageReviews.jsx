@@ -26,22 +26,28 @@ const MyPageReviews = ({ myReview, isLoading }) => {
         FilterUserReviews?.map((reviews) => {
           const { id, nickname, content, date, email, marker } = reviews;
           return (
-            <Link to="/reviewPage" key={id}>
-              <article>
-                <section>
-                  <div>{marker} </div>
-                  <div>{content}</div>
-                </section>
-                <div>
+            <MPR.MoveLink to="/reviewPage" key={id}>
+              <MPR.StreetArticle>
+                <MPR.StreetNameDateDiv>
+                  <MPR.StreetNamP>
+                    <span>&#91;&nbsp;{marker}&nbsp;&#93;</span>
+                  </MPR.StreetNamP>
                   <p>
                     <span>{getFormattedDate(date)}</span>
                   </p>
+                </MPR.StreetNameDateDiv>
+
+                <MPR.MyReviewContentDiv>
                   <p>
-                    <span>{nickname}</span>
+                    <span>{content}</span>
                   </p>
-                </div>
-              </article>
-            </Link>
+                </MPR.MyReviewContentDiv>
+
+                <MPR.ReviewNicknameP>
+                  <span>{nickname}</span>
+                </MPR.ReviewNicknameP>
+              </MPR.StreetArticle>
+            </MPR.MoveLink>
           );
         })
       ) : (

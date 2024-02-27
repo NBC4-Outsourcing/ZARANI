@@ -21,22 +21,26 @@ export const MyPageContentsArticle = styled.article`
 export const MyPageContentsForm = styled.form`
   display: flex;
   flex-direction: row;
+  align-items: center;
   justify-content: space-around;
   border-radius: 1rem;
 
-  padding: 30px;
-  /* gap: 1.2rem; */
+  padding: 20px;
+  gap: 1.2rem;
 `;
 
 export const ImgWrapDiv = styled.div`
   display: flex;
   flex-direction: column;
-
+  align-items: center;
+  justify-content: center;
   border-radius: 1rem;
   gap: 2.2rem;
 `;
 
 export const ThumnailImg = styled.div`
+  display: flex;
+  align-items: center;
   min-width: 100px;
   max-width: 240px;
   /* min-height: 100px; */
@@ -59,7 +63,8 @@ export const ImgFileInput = styled.input`
 export const AddBtnLabel = styled.label`
   background-color: var(--subColor1);
   width: 100%;
-  padding: 0.7rem 4.4rem;
+  max-width: 400px;
+  padding: 0.7rem 3.4rem;
 
   border-radius: 0.8rem;
 
@@ -76,11 +81,23 @@ export const AddBtnLabel = styled.label`
     transition: all 0.3s; // 시간차두고 바뀌도록 추가
     transition-duration: 0.2s;
   }
+  @media screen and (max-width: 768px) {
+    max-width: 100%;
+    padding: 0.7rem 4.4rem;
+    /* padding: 0.7rem 4.4rem; /* 화면 너비가 768px 이하일 때 패딩을 줄여서 찌그러지지 않도록 함 */
+  }
+  @media screen and (max-width: 320px) {
+    max-width: 100%;
+    padding: 0.7rem 2rem;
+    /* padding: 0.7rem 4.4rem; /* 화면 너비가 768px 이하일 때 패딩을 줄여서 찌그러지지 않도록 함 */
+  }
 `;
 
 export const PhotoAddBtn = styled.div`
   min-width: 50px;
   max-width: 300px;
+  text-align: center;
+
   cursor: pointer;
 `;
 
