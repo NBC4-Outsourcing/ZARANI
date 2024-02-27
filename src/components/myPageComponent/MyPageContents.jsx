@@ -1,41 +1,68 @@
 import { useEffect, useState } from 'react';
-import { readUserAccount, readUserInfo, updateUserAccount, updateUserInfo, uploadImage } from './myPageSupabase';
-import { supabase } from 'api/supabase/supabase';
-import useInput from 'hooks/useInput';
-import * as MP from 'components/styles/MyPageStyle';
+import { useDispatch, useSelector } from 'react-redux';
 import { useQuery } from 'react-query';
-import useSetMutation from 'hooks/useSetMutations';
-import defaultImg from 'assets/defaultProfileImage.png';
+import { supabase } from 'api/supabase/supabase';
+import { readUserAccount, readUserInfo, updateUserAccount, updateUserInfo, uploadImage } from './myPageSupabase';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { getLocalStorageJSON } from 'utils/getLocalStorageJSON';
-import { useDispatch, useSelector } from 'react-redux';
 import { logout } from 'shared/redux/modules/authSlice';
+import useSetMutation from 'hooks/useSetMutations';
+import useInput from 'hooks/useInput';
+import defaultImg from 'assets/defaultProfileImage.png';
+import * as MP from 'components/styles/MyPageStyle';
 
 const MyPageContents = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isEdit, setIsEdit] = useState(false);
   const loginState = useSelector((store) => store.auth.loginState);
-  console.log(loginState);
   const [selectImage, setSelectImage] = useState(defaultImg);
-  const [thumnailImage, setThumnailImage] = useState(defaultImg);
   const [userAccount, setUserAccount] = useState();
-  const { isLoading, isError, data } = useQuery('usersAccounts', readUserAccount);
-  const { email, nickname, avatar, uid } = userAccount || {};
+  const { isLoading, isError, data } = useQuery('usersAccounts', readUserAccount, {
+    onSuccess: (data) => {
+      const storageItem = getLocalStorageJSON();
+      const uid = storageItem.user?.id;
+      const email = storageItem.user?.email;
+      const nickname = storageItem.user?.user_metadata.nickname;
+      const avatar = storageItem.user?.user_metadata.avatar;
+      const userInfo = {
+        uid,
+        email,
+        nickname,
+        avatar
+      };
+      setUserAccount(userInfo);
+      updateUserAccount({ nickname, avatar });
+      setThumnailImage(avatar);
+      if (!storageItem || !uid || !email) {
+        console.error('유저정보가 존재하지 않습니다. 로그인해주세요.');
+        alert('유저정보가 존재하지 않습니다. 로그인해주세요.');
+        // dispatch(logout());
+        navigate('/login');
+      }
+
+      console.log('데이터를 성공적으로 가져왔습니다:', data);
+    }
+  });
+  const { email, nickname, avatar, uid: id } = userAccount || {};
+  const [thumnailImage, setThumnailImage] = useState(avatar || defaultImg);
+  console.log(thumnailImage);
   const [mutation] = useSetMutation(updateUserInfo, 'usersAccounts');
   const [editValue, setEditValue, onChange] = useInput({
     nickname
   });
   const editValueNickname = editValue.nickname || '';
   const storageItem = getLocalStorageJSON();
-  // const acToken = storageItem.access_token;
+  // const currUserEmail = storageItem.user.email;
+  // const uid = storageItem.user.id;
   const user = supabase.auth.getUser();
   const isLogin = loginState;
+  console.log(loginState);
 
   if (isLogin === false) {
-    dispatch(logout());
-    alert('로그인 해주세요');
-    navigate('/');
+    // dispatch(logout());
+    alert('로그인 유저만 사용가능합니다. 로그인 해주세요');
+    navigate('/login');
   }
   // localstorage email과 같은 데이터들 filter email === email.sort((a,b) => b-a => date())
   useEffect(() => {
@@ -123,7 +150,7 @@ const MyPageContents = () => {
     if (isEdit && selectImage !== thumnailImage) setThumnailImage(avatar);
   };
   if (isLoading) return <div>로딩중입니다...</div>;
-
+  if (isError) return <div> 정보를 받아올 수 없습니다...</div>;
   return (
     <MP.MyPageContentsForm>
       <MP.ImgWrapDiv>
@@ -142,7 +169,7 @@ const MyPageContents = () => {
       <div>
         {!isEdit ? (
           <div>
-            <p>Email : {email}</p>
+            <p>이메일 : {email}</p>
             <p>닉네임 : {nickname} </p>
           </div>
         ) : (
@@ -206,21 +233,6 @@ export default MyPageContents;
 //     }
 //   }
 
-// , {
-//     onSuccess: (data) => {
-//       try {
-//         if (data) {
-//           setThumnailImage(data.avatar);
-//         }
-//       } catch (error) {
-//         console.log('로그인 해주세요!', error);
-//         alert('로그인 해주세요!', error);
-//         navigate('/', { replace: true });
-//       }
-
-//       console.log('데이터를 성공적으로 가져왔습니다:', data);
-//     }
-//   }
 // const [downloadImgMutation] = useSetMutation(downloadImage, 'unAuthUserImage');
 
 // if (selectImage !== thumnailImage) setThumnailImage(avatar || thumnailImage);
