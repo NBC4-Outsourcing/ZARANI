@@ -3,6 +3,7 @@ import { getLocalStorageJSON } from 'utils/getLocalStorageJSON';
 import { useState } from 'react';
 import { getFormattedDate } from 'components/communityComponents/formattedDate';
 import Loading from 'components/common/Loading';
+import * as MPR from 'components/styles/MyPageReviews';
 
 const MyPageReviews = ({ myReview, isLoading }) => {
   const myPageReviews = getLocalStorageJSON();
@@ -21,7 +22,7 @@ const MyPageReviews = ({ myReview, isLoading }) => {
   if (!myReview) return <div>데이터를 가져오는 중 문제가 발생했습니다.</div>;
 
   return (
-    <section>
+    <MPR.MyReviewsSection>
       {FilterUserReviews?.length > 0 ? (
         FilterUserReviews?.map((reviews) => {
           const { id, nickname, content, date, email, marker } = reviews;
@@ -47,7 +48,7 @@ const MyPageReviews = ({ myReview, isLoading }) => {
       ) : (
         <article> 자전거 도로를 이용한 후기를 써주세용 </article>
       )}
-    </section>
+    </MPR.MyReviewsSection>
   );
 };
 

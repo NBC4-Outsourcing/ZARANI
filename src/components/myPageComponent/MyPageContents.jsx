@@ -53,8 +53,6 @@ const MyPageContents = () => {
   const isLogin = loginState;
   const blankPattern = /^\s+|\s+$/g;
   const nicknameBlank = editValueNickname.replace(blankPattern, '');
-  // const currUserEmail = storageItem.user.email;
-  // const uid = storageItem.user.id;
 
   if (isLogin === false) {
     dispatch(logout());
