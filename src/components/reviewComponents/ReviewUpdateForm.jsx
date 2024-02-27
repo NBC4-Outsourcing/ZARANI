@@ -1,17 +1,15 @@
 import { supabase } from 'api/supabase/supabase';
 import { useRef, useState } from 'react';
-import useInput from '../../hooks/useInput';
+import useInput from 'hooks/useInput';
 import { uuid } from '@supabase/gotrue-js/dist/module/lib/helpers';
 
 export const ReviewUpdateForm = ({ item, setEditDataId }) => {
   const imgRef = useRef(null);
   const contentRef = useRef(null);
   const imgName = uuid();
-  const editData = [item];
   const [editImg, setEditImg] = useState('');
+  const editData = [item];
   const { email } = editData[0];
-
-  console.log('editData', editData);
 
   const [updateInput, , onUpdateContentHandler] = useInput({ updateContent: '' });
   const { updateContent } = updateInput;
@@ -29,22 +27,21 @@ export const ReviewUpdateForm = ({ item, setEditDataId }) => {
 
   const modifyReview = async (id, reviewimg) => {
     // 이미지 수정
+    const img = imgRef.current.files[0];
     let storagePath = '';
     const newPath = email + imgName;
-    const img = imgRef.current.files[0];
-    console.log('newPath', newPath);
-
-    try {
-      const imgUpdate = await supabase.storage.from('reviewImage').upload(newPath, img, {
-        cacheControl: '3600',
-        upsert: true
-      });
-      console.log('이미지 수정 완료', imgUpdate);
-      storagePath = imgUpdate.data.path;
-    } catch (error) {
-      console.log('이미지 수정 실패', error);
+    if (img) {
+      try {
+        const imgUpdate = await supabase.storage.from('reviewImage').upload(newPath, img, {
+          cacheControl: '3600',
+          upsert: true
+        });
+        console.log('이미지 수정 완료', imgUpdate);
+        storagePath = imgUpdate.data.path;
+      } catch (error) {
+        console.log('이미지 수정 실패', error);
+      }
     }
-
     // 데이터 수정
     if (!updateContent) {
       alert('내용을 입력해주세요');
@@ -53,14 +50,11 @@ export const ReviewUpdateForm = ({ item, setEditDataId }) => {
     }
 
     const modifyReviewData = {
-      // ...editData[0],
       ...editData[0],
       content: updateContent,
       reviewimg: storagePath ? storagePath : reviewimg
     };
 
-    console.log('reviewimg', reviewimg);
-    console.log('modifyReviewData', modifyReviewData);
     const { data, error } = await supabase.from('reviewWrite').update(modifyReviewData).eq('id', id).select();
     if (!error) {
       console.log('게시물 수정 완료', data);
@@ -108,6 +102,3 @@ export const ReviewUpdateForm = ({ item, setEditDataId }) => {
     </div>
   );
 };
-
-// 1. 디폴트 밸류를 받아오지못하고있다
-// 2. 텍스트 수정이 없으면 유효성검사 통과가 안된다

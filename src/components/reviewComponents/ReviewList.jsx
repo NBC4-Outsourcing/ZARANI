@@ -3,7 +3,6 @@ import { getFormattedDate } from 'components/communityComponents/formattedDate';
 import { ContentsList } from 'components/styles/ReviewStyle';
 import { useEffect, useState } from 'react';
 import { ReviewUpdateForm } from './ReviewUpdateForm';
-import defaultProfileImage from '../../assets/defaultProfileImage.png';
 
 export const ReviewList = () => {
   // 데이터베이스에 저장된 데이터 저장 state
@@ -17,7 +16,6 @@ export const ReviewList = () => {
     // 게시글 불러오기
     const fetchData = async () => {
       let { data: reviewWrite, error } = await supabase.from('reviewWrite').select('*');
-      console.log('reviewWrite', reviewWrite);
       if (error) {
         console.log('게시물 조회 실패', error);
       } else {
@@ -28,7 +26,6 @@ export const ReviewList = () => {
           const imgUrl = supabase.storage.from('reviewImage').getPublicUrl(item.reviewimg);
           return { ...item, imageUrl: imgUrl.data.publicUrl };
         });
-        console.log('reviewsWriteData', reviewsWriteData);
         setReviewData(reviewsWriteData);
       }
     };
@@ -61,13 +58,10 @@ export const ReviewList = () => {
       }
     }
   };
-  console.log('ReviewData', reviewData);
 
   return (
     <ContentsList>
       {reviewData?.map((item) => {
-        console.log('item', item);
-        console.log('imageUrl', item.imageUrl);
         return (
           <div key={item.id}>
             {/* 수정 버튼 클릭 시 editDataId state에 item.id가 담겨 선택한 게시물만 수정 상태로 만들어 준다 */}
