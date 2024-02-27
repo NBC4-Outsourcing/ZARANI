@@ -3,8 +3,6 @@ import { getLocalStorageJSON } from 'utils/getLocalStorageJSON';
 
 const getUser = async () => {
   const { access_token } = getLocalStorageJSON();
-  // const response = await supabase.auth.getUser(access_token);
-  // console.log(response);
 
   const {
     data: { user },
