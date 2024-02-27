@@ -1,21 +1,29 @@
 import { supabase } from 'api/supabase/supabase';
 
-export const readUserInfo = async () => {
-  const { data, error } = await supabase.from('usersAccounts').select('*');
-  // const [spreadData] = data;
+export const updateUserAccount = async ({ nickname, avatar }) => {
+  const { data, error } = await supabase.auth.updateUser({
+    data: { nickname, avatar }
+  });
   if (error) {
-    alert('오류로 인해 정보를 받아오지 못 하고 있습니다.');
+    console.log('updateUserAccount', error);
+    console.error('업데이트를 다시 시도해주세요!');
+    // alert('회원정보가 저장되지 않았습니다.');
   }
   return data;
 };
 
-export const updateUserInfo = async (objectInfo, id) => {
-  if (!id) return;
-  const { error } = await supabase.from('usersAccounts').update(objectInfo).eq('id', id);
+export const readUserAccount = async () => {
+  const { data } = await supabase.auth.getUser();
+  return data;
+};
+
+export const setUserAccount = async () => {};
+export const readUserInfo = async () => {
+  const { data, error } = await supabase.from('usersAccounts').select('*');
   if (error) {
-    console.log(error);
-    // alert('정보가 변경되지 않았습니다.');
+    alert('오류로 인해 정보를 받아오지 못 하고 있습니다.');
   }
+  return data;
 };
 
 export const readMyReview = async () => {
@@ -50,5 +58,15 @@ export const downloadImage = async (filePath) => {
     return data;
   } catch (error) {
     alert('이미지를 받아오지 못하고 있습니다.');
+  }
+};
+
+///// 사용하지 않는 것
+export const updateUserInfo = async (objectInfo, id) => {
+  if (!id) return;
+  const { error } = await supabase.from('usersAccounts').update(objectInfo).eq('id', id);
+  if (error) {
+    console.log(error);
+    // alert('정보가 변경되지 않았습니다.');
   }
 };
