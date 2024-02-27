@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 import { getLocalStorageJSON } from 'utils/getLocalStorageJSON';
-import { useState } from 'react';
 import { getFormattedDate } from 'components/communityComponents/formattedDate';
+import Loading from 'components/common/Loading';
+import * as MPR from 'components/styles/MyPageReviews';
 
 const MyPageReviews = ({ myReview, isLoading }) => {
   const myPageReviews = getLocalStorageJSON();
@@ -11,38 +12,48 @@ const MyPageReviews = ({ myReview, isLoading }) => {
     ?.filter((review) => review.email === email)
     .sort((a, b) => new Date(b.date) - new Date(a.date));
 
-  if (isLoading) <div>정보를 가지고 오는 중입니다..</div>;
-
+  if (isLoading)
+    return (
+      <div>
+        <Loading />
+      </div>
+    );
   if (!myReview) return <div>데이터를 가져오는 중 문제가 발생했습니다.</div>;
 
   return (
-    <article>
+    <MPR.MyReviewsSection>
       {FilterUserReviews?.length > 0 ? (
         FilterUserReviews?.map((reviews) => {
           const { id, nickname, content, date, email, marker } = reviews;
           return (
-            <Link to="/reviewPage" key={id}>
-              <section>
-                <article>
-                  <div>{marker} </div>
-                  <div>{content}</div>
-                </article>
-                <div>
+            <MPR.MoveLink to="/reviewPage" key={id}>
+              <MPR.StreetArticle>
+                <MPR.StreetNameDateDiv>
+                  <MPR.StreetNamP>
+                    <span>&#91;&nbsp;{marker}&nbsp;&#93;</span>
+                  </MPR.StreetNamP>
                   <p>
                     <span>{getFormattedDate(date)}</span>
                   </p>
+                </MPR.StreetNameDateDiv>
+
+                <MPR.MyReviewContentDiv>
                   <p>
-                    <span>{nickname}</span>
+                    <span>{content}</span>
                   </p>
-                </div>
-              </section>
-            </Link>
+                </MPR.MyReviewContentDiv>
+
+                <MPR.ReviewNicknameP>
+                  <span>{nickname}</span>
+                </MPR.ReviewNicknameP>
+              </MPR.StreetArticle>
+            </MPR.MoveLink>
           );
         })
       ) : (
-        <section> 자전거 도로를 이용한 후기를 써주세용 </section>
+        <MPR.MyReviewsArticle> 내가 공유한 자전거 도로 후기 </MPR.MyReviewsArticle>
       )}
-    </article>
+    </MPR.MyReviewsSection>
   );
 };
 
