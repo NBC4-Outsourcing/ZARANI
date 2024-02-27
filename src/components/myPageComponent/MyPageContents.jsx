@@ -128,69 +128,78 @@ const MyPageContents = () => {
       </div>
     );
 
-  if (isError) return <div> 정보를 받아올 수 없습니다...</div>;
+  if (isError) return <div> 정보를 받아오는 중에 문제가 발생했습니다.</div>;
 
   return (
-    <MP.MyPageContentsForm>
-      <MP.ImgWrapDiv>
-        <MP.ThumnailImg>
-          <img src={thumnailImage} alt="기본이미지" />
-        </MP.ThumnailImg>
-        <MP.ImgFileInput type="file" accept="image/*" id="imgfileChoice" onChange={onChangeAddImage} />
-        {!isEdit ? (
-          <div></div>
-        ) : (
-          <div>
-            <label htmlFor="imgfileChoice">이미지 등록</label>
-          </div>
-        )}
-      </MP.ImgWrapDiv>
-      <div>
-        {!isEdit ? (
-          <div>
-            <p>
-              <span>이메일 :</span>
-            </p>
-            <p>
-              <span>{email}</span>
-            </p>
-            <p>
-              <span>닉네임</span>
-            </p>
-            <p>
-              <span>{nickname}</span>
-            </p>
-          </div>
-        ) : (
-          <div>
+    <MP.MyPageContentsArticle>
+      <MP.MyPageContentsForm>
+        <MP.ImgWrapDiv>
+          <MP.ThumnailImg>
+            <img src={thumnailImage} alt="기본이미지" />
+          </MP.ThumnailImg>
+          <MP.ImgFileInput type="file" accept="image/*" id="imgfileChoice" onChange={onChangeAddImage} />
+          {!isEdit ? (
+            <div></div>
+          ) : (
             <div>
-              <p>Email : {email}</p>
+              <MP.addBtnLabel htmlFor="imgfileChoice">이미지 등록</MP.addBtnLabel>
             </div>
-            <label htmlFor="nickname"> 닉네임</label>
-            <input
-              type="text"
-              id="nickname"
-              name="nickname"
-              value={editValueNickname}
-              onChange={onChange}
-              minLength={6}
-              maxLength={10}
-              placeholder="닉네임을 적어주세요. (6자~10자 이내)"
-            />
+          )}
+        </MP.ImgWrapDiv>
+        <div>
+          {!isEdit ? (
+            <div>
+              <p>
+                <span>이메일EMAIL</span>
+              </p>
+              <p>
+                <span>{email}</span>
+              </p>
+              <p>
+                <span>닉네임NICKNAME</span>
+              </p>
+              <p>
+                <span>{nickname}</span>
+              </p>
+            </div>
+          ) : (
+            <div>
+              <div>
+                <p>
+                  <span>이메일EMAIL</span>
+                </p>
+                <p>
+                  <span>{email}</span>
+                </p>
+              </div>
+              <label htmlFor="nickname">닉네임NICKNAME</label>
+              <div>
+                <input
+                  type="text"
+                  id="nickname"
+                  name="nickname"
+                  value={editValueNickname}
+                  onChange={onChange}
+                  minLength={6}
+                  maxLength={10}
+                  placeholder="닉네임을 적어주세요. (6자~10자 이내)"
+                />
+              </div>
+            </div>
+          )}
+        </div>
+        {!isEdit ? (
+          <div>
+            <button onClick={onEditContentsHandler}>수정</button>
+          </div>
+        ) : (
+          <div>
+            <button onClick={onSubmitHandler}>완료</button>
+            <button onClick={onEditCancelHandler}>취소</button>
           </div>
         )}
-      </div>
-      {!isEdit ? (
-        <div>
-          <button onClick={onEditContentsHandler}>수정</button>
-        </div>
-      ) : (
-        <div>
-          <button onClick={onSubmitHandler}>완료</button>
-          <button onClick={onEditCancelHandler}>취소</button>
-        </div>
-      )}
-    </MP.MyPageContentsForm>
+      </MP.MyPageContentsForm>
+    </MP.MyPageContentsArticle>
   );
 };
 

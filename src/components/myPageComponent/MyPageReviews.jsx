@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { getLocalStorageJSON } from 'utils/getLocalStorageJSON';
 import { useState } from 'react';
 import { getFormattedDate } from 'components/communityComponents/formattedDate';
+import Loading from 'components/common/Loading';
 
 const MyPageReviews = ({ myReview, isLoading }) => {
   const myPageReviews = getLocalStorageJSON();
@@ -11,22 +12,26 @@ const MyPageReviews = ({ myReview, isLoading }) => {
     ?.filter((review) => review.email === email)
     .sort((a, b) => new Date(b.date) - new Date(a.date));
 
-  if (isLoading) <div>정보를 가지고 오는 중입니다..</div>;
-
+  if (isLoading)
+    return (
+      <div>
+        <Loading />
+      </div>
+    );
   if (!myReview) return <div>데이터를 가져오는 중 문제가 발생했습니다.</div>;
 
   return (
-    <article>
+    <section>
       {FilterUserReviews?.length > 0 ? (
         FilterUserReviews?.map((reviews) => {
           const { id, nickname, content, date, email, marker } = reviews;
           return (
             <Link to="/reviewPage" key={id}>
-              <section>
-                <article>
+              <article>
+                <section>
                   <div>{marker} </div>
                   <div>{content}</div>
-                </article>
+                </section>
                 <div>
                   <p>
                     <span>{getFormattedDate(date)}</span>
@@ -35,14 +40,14 @@ const MyPageReviews = ({ myReview, isLoading }) => {
                     <span>{nickname}</span>
                   </p>
                 </div>
-              </section>
+              </article>
             </Link>
           );
         })
       ) : (
-        <section> 자전거 도로를 이용한 후기를 써주세용 </section>
+        <article> 자전거 도로를 이용한 후기를 써주세용 </article>
       )}
-    </article>
+    </section>
   );
 };
 

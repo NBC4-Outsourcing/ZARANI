@@ -10,8 +10,10 @@ const MyPage = () => {
   return (
     <MP.MyPageContainerSection>
       <MyPageHeader />
-      <MyPageContents />
-      <MyPageReviews myReview={myReview} isLoading={isLoading} />
+      <MP.ContentsReviewArticle>
+        <MyPageContents />
+        <MyPageReviews myReview={myReview} isLoading={isLoading} />
+      </MP.ContentsReviewArticle>
     </MP.MyPageContainerSection>
   );
 };
