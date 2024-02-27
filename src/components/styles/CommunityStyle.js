@@ -9,17 +9,27 @@ export const CommunityBtn = styled.button`
   height: 30px;
   border-radius: 8px;
   background-color: var(--subColor1);
-  margin: auto;
   ${(props) =>
     props.background === 'danger' &&
     css`
       background-color: var(--mainColor);
-      margin: 0 0 0 auto;
     `};
 `;
 // Community.jsx style
 export const CommunityDiv = styled.div`
   width: 100%;
+`;
+
+export const CommunityErrorBackground = styled.div`
+  background-color: var(--mainColor);
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  font-size: large;
+  font-weight: bold;
 `;
 
 // CommunityHeader.jsx
@@ -54,7 +64,7 @@ export const CommunityHeaderImage = styled.img`
 export const CommunityHeaderInfo = styled.div`
   display: flex;
   align-items: center;
-  width: 20%;
+  gap: 40px;
 `;
 
 // InputForm.jsx style.
@@ -66,20 +76,19 @@ export const CommunityForm = styled.form`
   height: 70px;
   box-shadow: 0px 0px 3px 1px gray;
   margin: 2.5%;
+  padding: 2%;
   border-radius: 8px;
 `;
 
 export const CommunityInputName = styled.label`
   padding: 0.5% 1%;
-  margin: 2%;
   background-color: lightgray;
   border-radius: 8px;
 `;
 
 export const CommunityInput = styled.input`
   width: 70%;
-  height: 60%;
-  margin: auto;
+  height: 40px;
   background-color: lightgrey;
   border: none;
   border-radius: 12px;
@@ -156,7 +165,8 @@ export const WriteDate = styled.p`
 export const WriteButtons = styled.div`
   width: 50%;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
+  gap: 5px;
 `;
 
 // CommunityWriteEditForm.jsx style(WritingList.jsx 그대로 사용하는데 일부만 변경)
@@ -211,6 +221,10 @@ export const CommentListHead = styled.div`
 export const CommentListComment = styled.p`
   margin: 1%;
   padding: 1%;
+`;
+
+export const CommentListBtnBackground = styled.div`
+  margin-left: auto;
 `;
 
 export const NoComment = styled.div`
