@@ -1,15 +1,18 @@
 import {
   CommunityBtn,
-  CommunityHeaderImage,
   CommunityHeaderInfo,
+  CommunityHeaderLogoImage,
   CommunityHeaderMain,
-  CommunityHeaderName
+  CommunityHeaderName,
+  CommunityHeaderProfileImage,
+  CommunityHeaderTitle
 } from 'components/styles/CommunityStyle';
 import React from 'react';
 import defaultImage from 'assets/defaultImage.png';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logout } from 'shared/redux/modules/authSlice';
+import logoImage from 'assets/logo.png';
 
 const CommunityHeader = ({ userData }) => {
   const navigate = useNavigate();
@@ -26,12 +29,14 @@ const CommunityHeader = ({ userData }) => {
       <div>
         <CommunityBtn onClick={() => navigate('/')}>Home</CommunityBtn>
       </div>
-      <CommunityHeaderName>ZARANI COMMUNITY</CommunityHeaderName>
+      <CommunityHeaderTitle>
+        <CommunityHeaderLogoImage src={logoImage} /> <CommunityHeaderName>COMMUNITY</CommunityHeaderName>
+      </CommunityHeaderTitle>
       <CommunityHeaderInfo>
         <Link to={'/mypage'}>
-          <CommunityHeaderImage src={avatar ? avatar : defaultImage} />
+          <CommunityHeaderProfileImage src={avatar ? avatar : defaultImage} />
         </Link>
-        <CommunityBtn background={'danger'} onClick={onClickLogOutHandler}>
+        <CommunityBtn $background={'danger'} onClick={onClickLogOutHandler}>
           로그아웃
         </CommunityBtn>
       </CommunityHeaderInfo>

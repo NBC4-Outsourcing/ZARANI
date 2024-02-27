@@ -2,8 +2,6 @@ import { supabase } from 'api/supabase/supabase';
 import { getLocalStorageJSON } from 'utils/getLocalStorageJSON';
 
 const getUser = async () => {
-  const { access_token } = getLocalStorageJSON();
-
   const {
     data: { user },
     error

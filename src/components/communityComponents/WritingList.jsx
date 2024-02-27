@@ -21,9 +21,9 @@ import useSetMutation from 'hooks/useSetMutations';
 import defaultImage from 'assets/defaultImage.png';
 
 const WritingList = ({ userData, writeList, commentList }) => {
-  const [modalOpen, setModalOpen] = useState(false);
   const [editFormId, setEditFormId] = useState(null);
   const [writeId, setWriteId] = useState(null);
+  const [commentWriteCheck, setCommentWriteCheck] = useState(null);
   const [mutation] = useSetMutation(deleteWrite, 'communityWriteList');
 
   const onClickDeleteHandler = (id) => {
@@ -31,7 +31,7 @@ const WritingList = ({ userData, writeList, commentList }) => {
       return item.writeId === id;
     });
     if (filterComment.length === 0) {
-      mutation.mutate(id);
+      if (window.confirm('삭제하시겠습니까?')) mutation.mutate(id);
     } else {
       alert('댓글이 있어서 삭제가 불가능 합니다.');
     }
@@ -42,7 +42,11 @@ const WritingList = ({ userData, writeList, commentList }) => {
   };
 
   const onClickCommentHandler = (id) => {
-    setModalOpen(!modalOpen);
+    if (commentWriteCheck === id) {
+      setCommentWriteCheck(null);
+    } else {
+      setCommentWriteCheck(id);
+    }
     if (writeId) {
       setWriteId(null);
     } else {
@@ -52,11 +56,6 @@ const WritingList = ({ userData, writeList, commentList }) => {
 
   return (
     <Main>
-      {modalOpen ? (
-        <CommentInputForm onClickCommentHandler={onClickCommentHandler} writeId={writeId} userData={userData} />
-      ) : (
-        false
-      )}
       {writeList
         .sort((a, b) => {
           return new Date(b.date).getTime() - new Date(a.date).getTime();
@@ -80,7 +79,7 @@ const WritingList = ({ userData, writeList, commentList }) => {
                       {userData.email === item.userId ? (
                         <>
                           <CommunityBtn onClick={() => onClickEditForm(item.id)}>수정</CommunityBtn>
-                          <CommunityBtn background={'danger'} onClick={() => onClickDeleteHandler(item.id)}>
+                          <CommunityBtn $background={'danger'} onClick={() => onClickDeleteHandler(item.id)}>
                             삭제
                           </CommunityBtn>
                         </>
@@ -91,7 +90,15 @@ const WritingList = ({ userData, writeList, commentList }) => {
                   </WriteFoot>
                 </WriteContainer>
               )}
-              <CommentList writeId={item.id} commentList={commentList} userData={userData} />
+              {commentWriteCheck === item.id ? (
+                <>
+                  {' '}
+                  <CommentInputForm writeId={writeId} userData={userData} />
+                  <CommentList writeId={item.id} commentList={commentList} userData={userData} />
+                </>
+              ) : (
+                false
+              )}
             </WriteListSection>
           );
         })}

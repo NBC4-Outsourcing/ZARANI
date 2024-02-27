@@ -5,6 +5,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { login } from 'shared/redux/modules/authSlice';
+import defaultProfileImage from 'assets/defaultProfileImage.png';
 
 const LoginInputForm = ({ isSignUpPage, setSignUpPage }) => {
   // useInput
@@ -32,7 +33,7 @@ const LoginInputForm = ({ isSignUpPage, setSignUpPage }) => {
           options: {
             data: {
               nickname,
-              avatar: ''
+              avatar: defaultProfileImage
             }
           }
         });
@@ -62,6 +63,12 @@ const LoginInputForm = ({ isSignUpPage, setSignUpPage }) => {
           console.log(error);
           alert('로그인에 실패했습니다. 다시 시도하세요.');
         } else {
+          // 에러가 발생하지 않았을 때
+          // 1. DB에서 접속한 유저 리스트를 가져옴
+          // 2. localStorage에서 user의 이메일을 가져옴
+          // 3. localStorage의 user의 이메일이 DB의 접속한 유저 리스트에 존재하는지 확인)
+          // 4. 존재하면, 존재합니다!! BACKBACK!!
+          // 5. 존재하지 않으면, localStorage의 유저 정보를 DB에 저장
           dispatch(login()); // login state 변경
           alert('로그인 되었습니다.');
           navigate('/');
