@@ -19,8 +19,6 @@ const ReviewForm = () => {
   const imgRef = useRef(null);
   const imgName = uuid();
 
-  const url = 'https://rtjzvtuqyafegkvoirwc.supabase.co/storage/v1/object/public/reviewImage/reviewFile/files/';
-
   // 회원 정보
   const loginData = getLocalStorageJSON();
   const {
@@ -60,6 +58,7 @@ const ReviewForm = () => {
     e.preventDefault();
 
     // storage에 이미지 등록
+    let storagePath = '';
     if (addImg) {
       const imgPath = imgRef.current.files[0];
       const { data, error } = await supabase.storage
@@ -71,6 +70,7 @@ const ReviewForm = () => {
 
       if (!error) {
         console.log('이미지 등록 성공!', data);
+        storagePath = data.path; // 이미지 등록이 성공하면 이미지 경로 저장("reviewFile/files/kim@naver.com06cea4ae-f3e1-4b2f-a00c-9538c8f763d1")
       } else {
         console.error('이미지 등록 실패!', error);
       }
@@ -82,7 +82,7 @@ const ReviewForm = () => {
       nickname,
       avatar,
       content: reviewContent,
-      reviewimg: `${url}${email}${imgName}`
+      reviewimg: storagePath
     };
 
     // 데이터 등록
