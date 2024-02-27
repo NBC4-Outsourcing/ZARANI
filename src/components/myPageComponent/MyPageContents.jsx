@@ -10,6 +10,7 @@ import useSetMutation from 'hooks/useSetMutations';
 import useInput from 'hooks/useInput';
 import defaultImg from 'assets/defaultProfileImage.png';
 import * as MP from 'components/styles/MyPageStyle';
+import Loading from 'components/common/Loading';
 
 const MyPageContents = () => {
   const dispatch = useDispatch();
@@ -17,6 +18,8 @@ const MyPageContents = () => {
   const [isEdit, setIsEdit] = useState(false);
   const loginState = useSelector((store) => store.auth.loginState);
   const [selectImage, setSelectImage] = useState(defaultImg);
+  const [thumnailImage, setThumnailImage] = useState(defaultImg);
+
   const [userAccount, setUserAccount] = useState();
   const { isLoading, isError, data } = useQuery('usersAccounts', readUserAccount, {
     onSuccess: (data) => {
@@ -33,7 +36,7 @@ const MyPageContents = () => {
       };
       setUserAccount(userInfo);
       updateUserAccount({ nickname, avatar });
-      setThumnailImage(avatar);
+      setThumnailImage(userInfo.avatar);
       if (!storageItem || !uid || !email) {
         console.error('유저정보가 존재하지 않습니다. 로그인해주세요.');
         alert('유저정보가 존재하지 않습니다. 로그인해주세요.');
@@ -45,9 +48,7 @@ const MyPageContents = () => {
     }
   });
   const { email, nickname, avatar, uid } = userAccount || {};
-  const [thumnailImage, setThumnailImage] = useState(avatar || defaultImg);
-  console.log(thumnailImage);
-  const [mutation] = useSetMutation(updateUserInfo, 'usersAccounts');
+  const [mutation] = useSetMutation(updateUserAccount, 'usersAccounts');
   const [editValue, setEditValue, onChange] = useInput({
     nickname
   });
@@ -60,28 +61,10 @@ const MyPageContents = () => {
   console.log(loginState);
 
   if (isLogin === false) {
-    // dispatch(logout());
+    dispatch(logout());
     alert('로그인 유저만 사용가능합니다. 로그인 해주세요');
-    navigate('/login');
+    navigate('/login', { replace: true });
   }
-  // localstorage email과 같은 데이터들 filter email === email.sort((a,b) => b-a => date())
-  useEffect(() => {
-    const myPageData = async () => {
-      try {
-        let { data: myPageInfo, error } = await supabase.from('usersAccounts').select('*');
-        if (myPageInfo) {
-          myPageInfo.forEach((userInfo) => {
-            setUserAccount(userInfo);
-            updateUserAccount(userInfo, userInfo.id);
-            setThumnailImage(userInfo.avatar);
-          });
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    myPageData();
-  }, []);
 
   // 이미지 등록
   const onChangeAddImage = (e) => {
@@ -100,7 +83,6 @@ const MyPageContents = () => {
   // 브라우져 캐싱문제 해결
   const onSubmitHandler = async (e) => {
     e.preventDefault();
-
     const editSaveCheck = window.confirm('수정내용을 저장하시겠습니까?');
     if (editSaveCheck === false) {
       alert('수정을 취소하셨습니다.');
@@ -113,21 +95,18 @@ const MyPageContents = () => {
       return;
     }
     if (selectImage === null) return;
-
     // storage 내부 저장할 위치(폴더)를 회원 uid 또는 이메일로 정하고 스토리지에 저장.
     const uuid = crypto.randomUUID();
     const filePath = `userOneImage/${uid}+${uuid}`;
     try {
       const data = await uploadImage(filePath, selectImage);
-      console.log(data);
       const { data: imageUrl } = supabase.storage.from('unAuthUserImage').getPublicUrl(data.path);
       const ImgDbUrl = imageUrl.publicUrl;
-      const newData = { email, nickname: editValueNickname, avatar: ImgDbUrl, id };
-
+      const newData = { email, nickname: editValueNickname, avatar: ImgDbUrl, id: uid };
       await updateUserAccount({ nickname: editValueNickname, avatar: ImgDbUrl });
-      setSelectImage(ImgDbUrl);
+      mutation.mutate({ nickname: editValueNickname, avatar: ImgDbUrl });
       setThumnailImage(newData.avatar);
-
+      setSelectImage(ImgDbUrl);
       alert('수정이 완료됐습니다.');
       setIsEdit(false);
     } catch (error) {
@@ -141,7 +120,6 @@ const MyPageContents = () => {
     e.preventDefault();
     setIsEdit(true);
     setEditValue({ nickname });
-    setThumnailImage(avatar);
   };
   // 이미지 편집 취소
   const onEditCancelHandler = (e) => {
@@ -149,8 +127,16 @@ const MyPageContents = () => {
     setIsEdit(false);
     if (isEdit && selectImage !== thumnailImage) setThumnailImage(avatar);
   };
-  if (isLoading) return <div>로딩중입니다...</div>;
+
+  if (isLoading)
+    return (
+      <div>
+        <Loading />
+      </div>
+    );
+
   if (isError) return <div> 정보를 받아올 수 없습니다...</div>;
+
   return (
     <MP.MyPageContentsForm>
       <MP.ImgWrapDiv>
@@ -207,18 +193,32 @@ const MyPageContents = () => {
 
 export default MyPageContents;
 
+// localstorage email과 같은 데이터들 filter email === email.sort((a,b) => b-a => date())
+// useEffect(() => {
+//   const myPageData = async () => {
+//     try {
+//       let { data: myPageInfo, error } = await supabase.from('usersAccounts').select('*');
+//       if (myPageInfo) {
+//         myPageInfo.forEach((userInfo) => {
+//           setUserAccount(userInfo);
+//           updateUserAccount(userInfo, userInfo.id);
+//           setThumnailImage(userInfo.avatar);
+//         });
+//       }
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
+//   myPageData();
+// }, []);
+
 // , {
 //     onSuccess: (data) => {
 //       const storageItem = getLocalStorageJSON();
-//       const acToken = storageItem.access_token;
-//       const uid = storageItem.user.id;
-//       const email = storageItem.user.email;
-//       const nickname = storageItem.user.user_metadata.nickname;
-//       const avatar = storageItem.user.user_metadata.avatar;
-//       console.log('uid', storageItem.user.id);
-//       console.log('email', storageItem.user.email);
-//       console.log('nickname', storageItem.user.user_metadata.nickname);
-//       console.log('avatar', storageItem.user.user_metadata.avatar);
+//       const uid = storageItem.user?.id;
+//       const email = storageItem.user?.email;
+//       const nickname = storageItem.user?.user_metadata.nickname;
+//       const avatar = storageItem.user?.user_metadata.avatar;
 //       const userInfo = {
 //         uid,
 //         email,
@@ -228,65 +228,13 @@ export default MyPageContents;
 //       setUserAccount(userInfo);
 //       updateUserAccount({ nickname, avatar });
 //       setThumnailImage(avatar);
+//       if (!storageItem || !uid || !email) {
+//         console.error('유저정보가 존재하지 않습니다. 로그인해주세요.');
+//         alert('유저정보가 존재하지 않습니다. 로그인해주세요.');
+//         // dispatch(logout());
+//         navigate('/login');
+//       }
 
 //       console.log('데이터를 성공적으로 가져왔습니다:', data);
 //     }
-//   }
-
-// const [downloadImgMutation] = useSetMutation(downloadImage, 'unAuthUserImage');
-
-// if (selectImage !== thumnailImage) setThumnailImage(avatar || thumnailImage);
-// if (selectImage !== thumnailImage) setThumnailImage(avatar || defaultImg);
-
-// 파일명에 해쉬값, => 웹팩, 이미지 요청 => 파라미터
-// 주소값으로 캐싱,
-// 캐시 방지하는 방법 =>
-// -이미지 주소에 특정 해시값.date()
-// -옵션 cashe control 사용
-// -document.querySelector('section img:nth-child(4)').src = "/ryan.gif?time=" + new Date();
-//
-
-//  setThumnailImage(avatar);
-// if (selectImage !== thumnailImage) setThumnailImage(avatar ? avatar : thumnailImage);
-// if (selectImage !== thumnailImage) setThumnailImage(avatar || thumnailImage);
-// useEffect(() => {
-//   // avatar가 변경될 때 thumnailImage도 함께 변경되도록 설정
-//   setThumnailImage(avatar || defaultImg);
-// }, [avatar]);
-
-// useEffect(() => {
-//   // 컴포넌트가 unmount될 때 이전에 생성된 이미지 URL 해제
-//   return () => {
-//     URL.revokeObjectURL(thumnailImage);
-//   };
-// }, [thumnailImage]);
-
-// useEffect(() => {
-//   const ImageInit = async () => {
-//     const filePath = `userImage/${uid}`;
-//     const data = await uploadImage(filePath, selectImage);
-//     const { data: imageUrl, error } = supabase.storage.from('unAuthUserImage').getPublicUrl(data.path);
-//     const ImgDbUrl = imageUrl.publicUrl;
-//     const newData = { id, email, nickname: editValueNickname, avatar: ImgDbUrl, uid };
-//     await updateUserInfo(newData, id);
-//     setThumnailImage(ImgDbUrl);
-//   };
-//   ImageInit();
-// }, []);
-
-// useEffect(() => {
-//   const mutationData = async () => {
-//     if (data) {
-//       console.log(avatar);
-//       setThumnailImage(avatar);
-//     }
-//   };
-//   mutationData();
-// }, [dispatch, data, avatar]);
-// 이미지, 닉네임, 내용 DB저장
-
-// const ImgDbUrl = `${imageUrl.data.publicUrl}?t=${new Date().getTime()}`;
-// console.log(imageUrl);
-// console.log(selectImage);
-// console.log(data);
-// console.log(ImgDbUrl);
+//   });
