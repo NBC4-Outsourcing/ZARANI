@@ -27,38 +27,38 @@ export const ReviewUpdateForm = ({ item }) => {
 
   const modifyReview = async (id, reviewimg) => {
     // 이미지 수정
-    try {
-      const imgPath = imgRef.current.files[0];
-      const imgUpdate = await supabase.storage.from('reviewImage').upload(reviewimg, imgPath, {
-        upsert: true
-      });
-      console.log('이미지 수정 완료', imgUpdate);
-    } catch (error) {
-      console.log('이미지 수정 실패', error);
-    }
-    // 데이터 수정
-    try {
-      const modifyReviewData = {
-        ...editData,
-        // marker,
-        // email,
-        // nickname,
-        // avatar,
-        content: updateContent,
-        reviewimg: '이미지 수정 완료 data path'
-      };
-      const { data, error } = await supabase.from('reviewWrite').update({ id, modifyReviewData }).eq('id', id).select();
-      if (!error) {
-        console.log('게시물 수정 완료', data);
-      }
-    } catch (error) {
-      console.log('게시물 수정 실패'), error;
-    }
+    // try {
+    //   const imgPath = imgRef.current.files[0];
+    //   const imgUpdate = await supabase.storage.from('reviewImage').upload(reviewimg, imgPath, {
+    //     upsert: true
+    //   });
+    //   console.log('이미지 수정 완료', imgUpdate);
+    // } catch (error) {
+    //   console.log('이미지 수정 실패', error);
+    // }
+    // // 데이터 수정
+    // try {
+    //   const modifyReviewData = {
+    //     ...editData,
+    //     // marker,
+    //     // email,
+    //     // nickname,
+    //     // avatar,
+    //     content: updateContent,
+    //     reviewimg: '이미지 수정 완료 data path'
+    //   };
+    //   const { data, error } = await supabase.from('reviewWrite').update({ id, modifyReviewData }).eq('id', id).select();
+    //   if (!error) {
+    //     console.log('게시물 수정 완료', data);
+    //   }
+    // } catch (error) {
+    //   console.log('게시물 수정 실패'), error;
+    // }
   };
   console.log('editData', editData);
   return (
     <div>
-      {editData.map((item) => {
+      {/* {editData.map((item) => {
         return (
           <div key={item.id}>
             <label>
@@ -79,7 +79,7 @@ export const ReviewUpdateForm = ({ item }) => {
             </button>
           </div>
         );
-      })}
+      })} */}
     </div>
   );
 };
