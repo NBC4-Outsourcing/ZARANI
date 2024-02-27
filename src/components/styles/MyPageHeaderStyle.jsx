@@ -21,7 +21,7 @@ export const HeaderArticle = styled.article`
 export const HeaderNav = styled.section`
   width: 90%;
   min-width: 320px;
-  height: 70px;
+  padding: 1rem;
 
   display: flex;
   flex-direction: row;
@@ -30,6 +30,9 @@ export const HeaderNav = styled.section`
 `;
 
 export const TitleP = styled.p`
+  padding: 0 1rem;
+
+  text-align: center;
   font-size: 2rem;
   font-weight: bold;
 `;
@@ -37,7 +40,6 @@ export const TitleP = styled.p`
 // 홈버튼
 export const HomeLink = styled(Link)`
   background-color: var(--subColor1);
-  height: 3rem;
 
   padding: 1rem 2rem;
   border: 1px solid var(--subColor1);
@@ -50,7 +52,7 @@ export const HomeLink = styled(Link)`
 // 로그아웃 버튼
 export const LogoutBtn = styled.button`
   background-color: var(--mainColor);
-  height: 3rem;
+
   padding: 0.8rem 2rem;
 
   border: 1px solid var(--mainColor);
