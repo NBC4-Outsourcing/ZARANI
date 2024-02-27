@@ -95,12 +95,7 @@ const WritingList = ({ userData, writeList, commentList }) => {
               {commentWriteCheck === item.id ? (
                 <>
                   {' '}
-                  <CommentInputForm
-                    onClickCommentHandler={onClickCommentHandler}
-                    writeId={writeId}
-                    userData={userData}
-                    commentListCheck={commentListCheck}
-                  />
+                  <CommentInputForm writeId={writeId} userData={userData} commentListCheck={commentListCheck} />
                   <CommentList writeId={item.id} commentList={commentList} userData={userData} />
                 </>
               ) : (

@@ -1,6 +1,5 @@
 import {
   CommentInputBtnDiv,
-  CommentInputFormBackGround,
   CommentInputFormStyle,
   CommentInputTextarea,
   CommentListName,
@@ -11,8 +10,8 @@ import { insertComment } from './CommunitySupabase';
 import useInput from 'hooks/useInput';
 import useSetMutation from 'hooks/useSetMutations';
 
-const CommentInputForm = ({ onClickCommentHandler, writeId, userData, commentListCheck, onClickCommentListBtn }) => {
-  const [comment, , onChangeContentHandler] = useInput({
+const CommentInputForm = ({ writeId, userData, commentListCheck }) => {
+  const [comment, , onChangeContentHandler, reset] = useInput({
     writeComment: ''
   });
   const CommentInputRef = useRef(null);
@@ -36,11 +35,10 @@ const CommentInputForm = ({ onClickCommentHandler, writeId, userData, commentLis
         comment: writeComment
       };
       mutation.mutate(newComment);
-      onClickCommentHandler();
+      reset();
       if (commentListCheck === writeId) {
         return;
       }
-      onClickCommentListBtn(writeId);
     }
   };
   return (
