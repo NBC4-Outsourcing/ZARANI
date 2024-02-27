@@ -141,9 +141,9 @@ const MyPageContents = () => {
           {!isEdit ? (
             <div></div>
           ) : (
-            <div>
-              <MP.addBtnLabel htmlFor="imgfileChoice">이미지 등록</MP.addBtnLabel>
-            </div>
+            <MP.PhotoAddBtn>
+              <MP.AddBtnLabel htmlFor="imgfileChoice">이미지 등록</MP.AddBtnLabel>
+            </MP.PhotoAddBtn>
           )}
         </MP.ImgWrapDiv>
         <div>
@@ -190,11 +190,11 @@ const MyPageContents = () => {
         </div>
         {!isEdit ? (
           <div>
-            <button onClick={onEditContentsHandler}>수정</button>
+            <MP.EditBtn onClick={onEditContentsHandler}>수정</MP.EditBtn>
           </div>
         ) : (
           <div>
-            <button onClick={onSubmitHandler}>완료</button>
+            <MP.DoneBtn onClick={onSubmitHandler}>완료</MP.DoneBtn>
             <button onClick={onEditCancelHandler}>취소</button>
           </div>
         )}

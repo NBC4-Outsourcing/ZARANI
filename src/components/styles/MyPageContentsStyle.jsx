@@ -24,7 +24,7 @@ export const MyPageContentsForm = styled.form`
 
   border-radius: 1rem;
 
-  padding: 38px;
+  padding: 30px;
   gap: 1.2rem;
 `;
 
@@ -56,10 +56,77 @@ export const ImgFileInput = styled.input`
   display: none;
 `;
 
-export const addBtnLabel = styled.label`
+export const AddBtnLabel = styled.label`
   background-color: var(--subColor1);
-  width: 500px;
+  width: 100%;
+  padding: 0.7rem 4.4rem;
 
-  border-radius: 1rem;
-  padding: 1rem 2rem;
+  border-radius: 0.8rem;
+
+  box-shadow: 0rem 0rem 0.3rem 0rem var(--subColor1);
+  text-align: center;
+  font-size: 1.2rem;
+
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${(style) => style.hoverbgc || 'var(--subColor2)'};
+    color: ${(style) => style.hovercolor || 'var(--mainColor1)'};
+    box-shadow: 0rem 0rem 0.3rem 0rem var(--subColor2);
+    transform: scale(2, 2);
+    transition: all 0.3s; // 시간차두고 바뀌도록 추가
+    transition-duration: 0.2s;
+  }
+`;
+
+export const PhotoAddBtn = styled.div`
+  min-width: 50px;
+  max-width: 300px;
+  cursor: pointer;
+`;
+
+export const EditBtn = styled.button`
+  background-color: var(--subColor1);
+  width: 100%;
+  padding: 0.7rem 2rem;
+
+  border: none;
+  border-radius: 0.8rem;
+
+  box-shadow: 0rem 0rem 0.3rem 0rem var(--subColor1);
+  text-align: center;
+  font-size: 1.2rem;
+
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${(style) => style.hoverbgc || 'var(--subColor2)'};
+    color: ${(style) => style.hovercolor || 'var(--mainColor1)'};
+    box-shadow: 0rem 0rem 0.3rem 0rem var(--subColor2);
+    transition: all 0.3s; // 시간차두고 바뀌도록 추가
+    transform: scale(1.03, 1.03);
+  }
+`;
+
+export const DoneBtn = styled.button`
+  background-color: var(--subColor1);
+  width: 100%;
+  padding: 0.7rem 2rem;
+
+  border: none;
+  border-radius: 0.8rem;
+
+  box-shadow: 0rem 0rem 0.3rem 0rem var(--subColor1);
+  text-align: center;
+  font-size: 1.2rem;
+
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${(style) => style.hoverbgc || 'var(--subColor2)'};
+    color: ${(style) => style.hovercolor || 'var(--mainColor1)'};
+    box-shadow: 0rem 0rem 0.3rem 0rem var(--subColor2);
+    transition: all 0.3s; // 시간차두고 바뀌도록 추가
+    transform: scale(1.06, 1.06);
+  }
 `;
