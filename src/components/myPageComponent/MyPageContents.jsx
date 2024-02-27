@@ -44,7 +44,7 @@
 //       console.log('데이터를 성공적으로 가져왔습니다:', data);
 //     }
 //   });
-//   const { email, nickname, avatar, uid: id } = userAccount || {};
+//   const { email, nickname, avatar, uid } = userAccount || {};
 //   const [thumnailImage, setThumnailImage] = useState(avatar || defaultImg);
 //   console.log(thumnailImage);
 //   const [mutation] = useSetMutation(updateUserInfo, 'usersAccounts');
