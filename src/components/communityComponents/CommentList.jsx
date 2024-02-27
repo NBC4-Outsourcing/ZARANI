@@ -5,6 +5,7 @@ import {
   CommentListHead,
   CommentListInfo,
   CommentListSection,
+  CommentListTitle,
   CommunityBtn,
   NoComment
 } from 'components/styles/CommunityStyle';
@@ -17,8 +18,13 @@ const CommentList = ({ writeId, commentList, userData }) => {
   const filterComment = commentList?.filter((item) => item.writeId === writeId);
   const [mutation] = useSetMutation(deleteComment, 'commentWriteList');
 
+  const onClickCommentDeleteHandler = (id) => {
+    if (window.confirm('삭제하시겠습니까?')) mutation.mutate(id);
+  };
+
   return (
     <CommentListSection>
+      <CommentListTitle>댓글 목록</CommentListTitle>
       {filterComment.length !== 0 ? (
         filterComment
           .sort((a, b) => {
@@ -36,7 +42,7 @@ const CommentList = ({ writeId, commentList, userData }) => {
                 </CommentListInfo>
                 {userData.email === item.userId ? (
                   <CommentListBtnBackground>
-                    <CommunityBtn background={'danger'} onClick={() => mutation.mutate(item.id)}>
+                    <CommunityBtn $background={'danger'} onClick={() => onClickCommentDeleteHandler(item.id)}>
                       삭제
                     </CommunityBtn>
                   </CommentListBtnBackground>
