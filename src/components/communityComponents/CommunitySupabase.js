@@ -29,7 +29,6 @@ const getWriteList = async () => {
   const { data, error: getWrite } = await supabase.from('communityWrite').select('*');
   if (getWrite) {
     console.error(getWrite);
-    alert('데이터를 가져오지 못 했습니다.');
     return getWrite;
   } else {
     return data;
@@ -64,7 +63,7 @@ const getCommentList = async () => {
   const { data, error: getComment } = await supabase.from('commentWrite').select('*');
   if (getComment) {
     console.error(getComment);
-    alert('데이터를 가져오지 못 했습니다.');
+    return getComment;
   } else {
     return data;
   }
