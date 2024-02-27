@@ -1,23 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useQuery } from 'react-query';
 import { supabase } from 'api/supabase/supabase';
-import {
-  readUserAccount,
-  readUserInfo,
-  readUserLocalAccount,
-  updateUserAccount,
-  updateUserInfo,
-  uploadImage
-} from './myPageSupabase';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { readUserLocalAccount, updateUserAccount, uploadImage } from './myPageSupabase';
+import { useNavigate } from 'react-router-dom';
 import { getLocalStorageJSON } from 'utils/getLocalStorageJSON';
 import { logout } from 'shared/redux/modules/authSlice';
-import useSetMutation from 'hooks/useSetMutations';
 import useInput from 'hooks/useInput';
 import defaultImg from 'assets/defaultProfileImage.png';
-import * as MP from 'components/styles/MyPageStyle';
 import Loading from 'components/common/Loading';
+import * as MP from 'components/styles/MyPageStyle';
 
 const MyPageContents = () => {
   const dispatch = useDispatch();
@@ -49,23 +41,17 @@ const MyPageContents = () => {
         dispatch(logout());
         navigate('/login');
       }
-
-      console.log('데이터를 성공적으로 가져왔습니다:', data);
     }
   });
   const { email, nickname, avatar, uid } = userAccount || {};
-  console.log('email, nickname=>', email, nickname);
-  const [mutation] = useSetMutation(updateUserAccount, 'usersAccounts');
   const [editValue, setEditValue, onChange] = useInput({
     nickname
   });
   const editValueNickname = editValue.nickname || '';
   const storageItem = getLocalStorageJSON();
+  const isLogin = loginState;
   // const currUserEmail = storageItem.user.email;
   // const uid = storageItem.user.id;
-  const user = supabase.auth.getUser();
-  const isLogin = loginState;
-  console.log(loginState);
 
   if (isLogin === false) {
     dispatch(logout());
@@ -198,49 +184,3 @@ const MyPageContents = () => {
 };
 
 export default MyPageContents;
-
-// localstorage email과 같은 데이터들 filter email === email.sort((a,b) => b-a => date())
-// useEffect(() => {
-//   const myPageData = async () => {
-//     try {
-//       let { data: myPageInfo, error } = await supabase.from('usersAccounts').select('*');
-//       if (myPageInfo) {
-//         myPageInfo.forEach((userInfo) => {
-//           setUserAccount(userInfo);
-//           updateUserAccount(userInfo, userInfo.id);
-//           setThumnailImage(userInfo.avatar);
-//         });
-//       }
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-//   myPageData();
-// }, []);
-
-// , {
-//     onSuccess: (data) => {
-//       const storageItem = getLocalStorageJSON();
-//       const uid = storageItem.user?.id;
-//       const email = storageItem.user?.email;
-//       const nickname = storageItem.user?.user_metadata.nickname;
-//       const avatar = storageItem.user?.user_metadata.avatar;
-//       const userInfo = {
-//         uid,
-//         email,
-//         nickname,
-//         avatar
-//       };
-//       setUserAccount(userInfo);
-//       updateUserAccount({ nickname, avatar });
-//       setThumnailImage(avatar);
-//       if (!storageItem || !uid || !email) {
-//         console.error('유저정보가 존재하지 않습니다. 로그인해주세요.');
-//         alert('유저정보가 존재하지 않습니다. 로그인해주세요.');
-//         // dispatch(logout());
-//         navigate('/login');
-//       }
-
-//       console.log('데이터를 성공적으로 가져왔습니다:', data);
-//     }
-//   });
