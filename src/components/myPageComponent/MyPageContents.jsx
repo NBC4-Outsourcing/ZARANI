@@ -10,6 +10,7 @@ import useSetMutation from 'hooks/useSetMutations';
 import useInput from 'hooks/useInput';
 import defaultImg from 'assets/defaultProfileImage.png';
 import * as MP from 'components/styles/MyPageStyle';
+import Loading from 'components/common/Loading';
 
 const MyPageContents = () => {
   const dispatch = useDispatch();
@@ -17,6 +18,8 @@ const MyPageContents = () => {
   const [isEdit, setIsEdit] = useState(false);
   const loginState = useSelector((store) => store.auth.loginState);
   const [selectImage, setSelectImage] = useState(defaultImg);
+  const [thumnailImage, setThumnailImage] = useState(defaultImg);
+
   const [userAccount, setUserAccount] = useState();
   const { isLoading, isError, data } = useQuery('usersAccounts', readUserAccount, {
     onSuccess: (data) => {
@@ -45,7 +48,6 @@ const MyPageContents = () => {
     }
   });
   const { email, nickname, avatar, uid } = userAccount || {};
-  const [thumnailImage, setThumnailImage] = useState(avatar || defaultImg);
   console.log(thumnailImage);
   const [mutation] = useSetMutation(updateUserInfo, 'usersAccounts');
   const [editValue, setEditValue, onChange] = useInput({
@@ -100,7 +102,6 @@ const MyPageContents = () => {
   // 브라우져 캐싱문제 해결
   const onSubmitHandler = async (e) => {
     e.preventDefault();
-
     const editSaveCheck = window.confirm('수정내용을 저장하시겠습니까?');
     if (editSaveCheck === false) {
       alert('수정을 취소하셨습니다.');
@@ -113,7 +114,6 @@ const MyPageContents = () => {
       return;
     }
     if (selectImage === null) return;
-
     // storage 내부 저장할 위치(폴더)를 회원 uid 또는 이메일로 정하고 스토리지에 저장.
     const uuid = crypto.randomUUID();
     const filePath = `userOneImage/${uid}+${uuid}`;
@@ -122,12 +122,10 @@ const MyPageContents = () => {
       console.log(data);
       const { data: imageUrl } = supabase.storage.from('unAuthUserImage').getPublicUrl(data.path);
       const ImgDbUrl = imageUrl.publicUrl;
-      const newData = { email, nickname: editValueNickname, avatar: ImgDbUrl, id };
-
+      const newData = { email, nickname: editValueNickname, avatar: ImgDbUrl, id: uid };
       await updateUserAccount({ nickname: editValueNickname, avatar: ImgDbUrl });
       setSelectImage(ImgDbUrl);
       setThumnailImage(newData.avatar);
-
       alert('수정이 완료됐습니다.');
       setIsEdit(false);
     } catch (error) {
@@ -141,7 +139,7 @@ const MyPageContents = () => {
     e.preventDefault();
     setIsEdit(true);
     setEditValue({ nickname });
-    setThumnailImage(avatar);
+    // setThumnailImage(avatar);
   };
   // 이미지 편집 취소
   const onEditCancelHandler = (e) => {
@@ -149,7 +147,12 @@ const MyPageContents = () => {
     setIsEdit(false);
     if (isEdit && selectImage !== thumnailImage) setThumnailImage(avatar);
   };
-  if (isLoading) return <div>로딩중입니다...</div>;
+  if (isLoading)
+    return (
+      <div>
+        <Loading />
+      </div>
+    );
   if (isError) return <div> 정보를 받아올 수 없습니다...</div>;
   return (
     <MP.MyPageContentsForm>
