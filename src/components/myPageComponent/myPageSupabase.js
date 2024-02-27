@@ -1,4 +1,5 @@
 import { supabase } from 'api/supabase/supabase';
+import { getLocalStorageJSON } from 'utils/getLocalStorageJSON';
 
 export const updateUserAccount = async ({ nickname, avatar }) => {
   const { data, error } = await supabase.auth.updateUser({
@@ -17,7 +18,12 @@ export const readUserAccount = async () => {
   return data;
 };
 
-export const setUserAccount = async () => {};
+export const readUserLocalAccount = async () => {
+  const data = await getLocalStorageJSON();
+  return data;
+};
+
+// export const setUserAccount = async () => {};
 export const readUserInfo = async () => {
   const { data, error } = await supabase.from('usersAccounts').select('*');
   if (error) {
