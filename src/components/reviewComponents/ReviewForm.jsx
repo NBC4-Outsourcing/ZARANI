@@ -98,13 +98,11 @@ const ReviewForm = ({ setReviewData, placename }) => {
     const { data, error } = await supabase.from('reviewWrite').insert([newReviews]).select();
     if (data) {
       alert('게시물이 등록 되었습니다.');
-      console.log('data', data);
       reset();
       setAddImg(null);
       setReviewData((prev) => {
         return [...prev, newReviews];
       });
-
       return data;
     } else {
       alert('게시물 등록에 실패했습니다.');
