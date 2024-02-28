@@ -10,7 +10,6 @@ const getCommunityList = async () => {
     shuffle(data);
     const randomList = [data[0], data[1], data[2]];
     return randomList;
-    return randomList;
   } catch (error) {
     console.log(error);
   }
