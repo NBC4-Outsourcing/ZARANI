@@ -138,7 +138,7 @@ const MyPageContents = () => {
   if (isError) return <div> 정보를 받아오는 중에 문제가 발생했습니다.</div>;
 
   return (
-    <MP.MyPageContentsArticle>
+    <MP.MyPageContentsSection>
       <MP.MyPageContentsForm>
         <MP.ImgWrapDiv>
           <MP.ThumnailImg>
@@ -212,7 +212,7 @@ const MyPageContents = () => {
           )}
         </MP.ContentsBtnsDiv>
       </MP.MyPageContentsForm>
-    </MP.MyPageContentsArticle>
+    </MP.MyPageContentsSection>
   );
 };
 
