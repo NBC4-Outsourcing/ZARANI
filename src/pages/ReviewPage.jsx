@@ -30,8 +30,6 @@ export const ReviewPage = () => {
 
     fetchData();
   }, []);
-  console.log('reviewData', reviewData);
-
   return (
     <>
       <ReviewHeader />
