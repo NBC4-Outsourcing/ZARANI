@@ -44,7 +44,6 @@ export const ThumnailImg = styled.div`
   align-items: center;
   justify-content: center;
   width: 220px;
-  /* min-width: 100px; */
   min-height: 220px;
 
   > img {
@@ -65,7 +64,6 @@ export const ThumnailImg = styled.div`
     @media screen and (max-width: 320px) {
       max-width: 100%;
       padding: 0.7rem 2rem;
-      /* padding: 0.7rem 4.4rem; /* 화면 너비가 768px 이하일 때 패딩을 줄여서 찌그러지지 않도록 함 */
     }
   }
 `;
