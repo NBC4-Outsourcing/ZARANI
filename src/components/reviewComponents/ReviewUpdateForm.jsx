@@ -13,6 +13,8 @@ import {
 } from 'components/styles/ReviewStyle';
 import useInput from 'hooks/useInput';
 import { useRef, useState } from 'react';
+import { updateReview, updateStorage } from './reviewPageSupabase';
+import useSetMutation from 'hooks/useSetMutations';
 
 export const ReviewUpdateForm = ({ item, setEditDataId, setReviewData }) => {
   const imgRef = useRef(null);
@@ -24,6 +26,8 @@ export const ReviewUpdateForm = ({ item, setEditDataId, setReviewData }) => {
   const { content } = editData[0];
   const [updateInput, , onUpdateContentHandler] = useInput({ updateContent: content });
   const { updateContent } = updateInput;
+
+  const [mutation] = useSetMutation(updateReview, 'reviewList');
 
   // 이미지 미리보기
   const editImgHandler = (e) => {
@@ -42,43 +46,21 @@ export const ReviewUpdateForm = ({ item, setEditDataId, setReviewData }) => {
     let storagePath = '';
     const newPath = email + imgName;
     if (img) {
-      try {
-        const imgUpdate = await supabase.storage.from('reviewImage').upload(newPath, img, {
-          cacheControl: '3600',
-          upsert: true
-        });
-        console.log('이미지 수정 완료', imgUpdate);
-        storagePath = imgUpdate.data.path;
-      } catch (error) {
-        console.log('이미지 수정 실패', error);
-      }
+      storagePath = await updateStorage(img, storagePath, newPath);
     }
+
     // 데이터 수정
     if (!updateContent) {
       alert('내용을 입력해주세요');
       contentRef.current.focus();
       return;
     }
-
     const modifyReviewData = {
       ...editData[0],
       content: updateContent,
       reviewimg: storagePath ? storagePath : reviewimg
     };
-
-    const { data, error } = await supabase.from('reviewWrite').update(modifyReviewData).eq('id', id).select();
-    if (!error) {
-      console.log('게시물 수정 완료', data);
-      alert('게시물 수정이 완료되었습니다');
-      setEditDataId(null);
-      setReviewData((prev) =>
-        prev.map((item) => {
-          return item.id === modifyReviewData.id ? modifyReviewData : item;
-        })
-      );
-    } else {
-      console.log('게시물 수정 실패', error);
-    }
+    mutation.mutate([id, modifyReviewData, setEditDataId]);
   };
 
   const updateCancel = () => {
