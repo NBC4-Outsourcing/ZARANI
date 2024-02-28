@@ -24,6 +24,14 @@ export const ReviewHeaderDiv = styled.div`
   }
 `;
 
+export const Title = styled.div`
+  padding: 0 1rem;
+
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+`;
+
 // ReviewForm
 export const ReviewFormComponentDiv = styled.div`
   width: 48%;
@@ -74,11 +82,6 @@ export const AddFormImg = styled.div`
   & > label > input {
     display: none;
   }
-  &input {
-    /* height: 20px; */
-    /* outline: none; */
-    /* padding: 6px; */
-  }
 `;
 
 export const ImgMessage = styled.div`
@@ -114,12 +117,14 @@ export const AddFormTextarea = styled.textarea`
   border: none;
   font-size: 1.2rem;
 `;
+
 export const AddBtnDiv = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   margin: 0 1%;
 `;
+
 export const AddBtn = styled.button`
   width: 15%;
   padding: 7px;

@@ -6,7 +6,7 @@ import MyPageHeader from 'components/myPageComponent/MyPageHeader';
 import * as MP from 'components/styles/MyPageStyle';
 
 const MyPage = () => {
-  const { data: myReview, error, isLoading } = useQuery('myReviews', readMyReview);
+  const { data: myReview, isLoading } = useQuery('myReviews', readMyReview);
   return (
     <MP.MyPageContainerSection>
       <MyPageHeader />
