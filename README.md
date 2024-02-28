@@ -2,7 +2,7 @@
 
 ### < 목차 >
 
-**# 프로젝트 "팀 원장님 팔(8)로우 해주세요"소개**
+**# 프로젝트 팀 "💖원장님 팔(8)로우 해주세요"소개**
 
 - 팀원소개
 
@@ -32,11 +32,11 @@
 
 <br />
 
-## 프로젝트 팀 "원장님 팔(8)로우 해주세요" 소개
+## 프로젝트 팀 "💖원장님 팔(8)로우 해주세요" 소개
 
 <br />
 
-**팀원 소개**
+**🦌팀원 소개🦌**
 
 ---
 
@@ -45,7 +45,7 @@
 |                          ESTJ, INFJ                          |                             ISTP                             |                             ISFP                             |                             ESTP                             |                          ENFJ, INFP                          |
 | <p><img src="https://lh7-us.googleusercontent.com/ZEv3frQuAlfIw0p3Rgj1pbH4zvN9Jojtf8J5aaowsPDnLnJBJ6X_5OSwiSpu-dTiWtqOb6jYxNr_0UijYhhcaVCqcKR4n5yHdk0A6-2_DVrIac2wnVTHOYIVE5ORBpAwzoDdm_y3qj8EHFPNlj7cDCE" width="100%" height="100%px"/></p> | <p><img src="https://lh7-us.googleusercontent.com/lK7tTfpP88h4O_fo3PcA6Byqsi47kOVliRXVqEMZqtSwOgw_9KYNwtBgMFjggtBMjddifWgUUtUZOYiwttGLSniZdBWikgtci6DA9C2Ux0i7NMSHSo47cDwuhDtVU8abNg97DlWxSYQF6soxfkkTUPI" width="100%" height="100%"/></p> | <p><img src="https://lh7-us.googleusercontent.com/01bJM0Q5X0Oc6QwSwo_PnQmUeggzToXW52bA4mnVK0twbFVPPcKQFPg5Xh0kJ46TtfFcZmr8dMNSz6FVIQKllCtL1hVL41oQWDQqHv479ZiDW90wNYiLskgxcAYNodRBT4r6tX8IcBW0WYwl8-Y-7ZA" width="100%" height="100%"/></p> | <p><img src="https://lh7-us.googleusercontent.com/k8bbP8HAvkZe5hPaqzaMfU5r2URn_-ZykIAoWfNxHbdfeSuLAYJH44FwQ24WLEQr3QI2kJBWoWwJz_VPVZGfUmXRZ-g6oxj91Y07lB8oHGai2yCnxePgX476c2jsNiej7Z69KtAsIMWLo5xPMsHdyr4" width="100%" height="100%"/></p> | <p><img src="https://lh7-us.googleusercontent.com/FdFX_DLcLDNfr8lThDp2ekM2dmax-vskQ6DtqzPgRGWf2kpDbYWOLU1t8lOEprkpAS17qUBZWYiupva8fXyp5RC1AhWovRYRF8lCDKe8lJQ10vyuP58TI3KKu6Ln25QAUwVhNI_IwaDS343W87FzxJk" width="100%" height="100%"/></p> |
 |             [@G-NooN](https://github.com/G-NooN)             |             [@CodHan](https://github.com/CodHan)             |        [@DecidedCard](https://github.com/DecidedCard)        |           [@seokahee](https://github.com/seokahee)           |          [@r03181231](https://github.com/r03181231)          |
-|                             팀장                             |                             팀원                             |                             팀원                             |                             팀원                             |                             팀원                             |
+|                            🦌 팀장                             |                            🦌 팀원                             |                            🦌 팀원                             |                            🦌 팀원                             |                            🦌 팀원                             |
 |                           FrontEnd                           |                           FrontEnd                           |                           FrontEnd                           |                           FrontEnd                           |                           FrontEnd                           |
 
 <br />
@@ -54,7 +54,7 @@
 
 
 
-**팀 목표** 
+**🦌팀 목표🦌** 
 
 ---
 
@@ -80,7 +80,7 @@
 
 **프로젝트 소개** : 각 지역의 주요 자전거길에 대해 후기를 남기고 공유하는 서비스입니다.
 
-**프로젝트 목표** : 문화생활과 일상에서 자전거 도로를 이용하는 사용자들이 자전거도로의 위치를
+**프로젝트 목표** : 문화생활과 일상에서 자전거 도로를 이용하는 사용자들이 자전거 도로의 위치를
 지도와 검색을 통해 쉽게 찾도록 하고, 이용한 후기와 정보를 공유할 수 있게 해줍니다.
 
 <br />
@@ -98,7 +98,7 @@
 
 <br />
 
-# Code Convention
+### Code Convention
 
 1. **주석은 반드시 쓸 것!!!**
 2. Airbnb ESLint 사용
@@ -136,14 +136,15 @@
 ```
 
 
+<br />
 
 <br />
 
 
 
-- # **프로젝트 운영 방식 및 Rules 예시**
+### **프로젝트 운영 방식 및 Rules 예시**
 
-  ### **깃허브 규칙**
+  #### **깃허브 규칙**
 
   - 브랜치 이름 : 기능 이름
 
@@ -244,8 +245,6 @@
 
 <br />
 
-<br />
-
 
 ## 🚩시작 가이드
 
@@ -272,3 +271,142 @@ $ yarn run start
 
 
 
+<br />
+
+<br />
+
+
+## 🖼 프로젝트 화면 구성 및 기능
+
+<br />
+
+<br />
+
+
+|                  컬러 가이드와 메인 페이지                   |                   로그인과 로그아웃 페이지                   |
+| :----------------------------------------------------------: | :----------------------------------------------------------: |
+| <p><img src="https://lh7-us.googleusercontent.com/2P_vT7hSCIpUHeBSSRoTDXHLlzJWvBnd5PWqB08fK-DrhWh7BwEWU0DasZ_mkfaiC5MRysM8756XqZOBUNRx609XlMtZImjlwWjR5phWXVyLajQ4Fn7SnLkC50up9NGqIqywX4wReJ7zq78cB2QdQ7M" align="center" width="100%" height="100%" ></p><br /><p><img src="https://lh7-us.googleusercontent.com/BRsc_el_abz8thiBKsUimyigww-DGwplbT2LC5_iTMKQQBtzggT5bTZfXM-fwuyOQ6ExnAPmXCrhIub8LYAINe6SPX6J9WNfpS90EhuP0DE-Dh6eSSGL9owNjrBJX8ut4wEJNlZed4q-db0mPB0ckAE" align="center" width="100%" height="100%" ></p> | <p><img src="https://lh7-us.googleusercontent.com/raHOQyDC8IluJDSWHlNo3FO9gw0DOMXW21OoMP4jky0_qzfjBWcy3svMU6XFvCdWSVkcLHJJ0bWnBr3gZ_b0J7fSO1jILXQ0z3mk9rZm0uTKlFtxkSxIbMrLat5XERj6lGXdmzjr62y1H5GP5818gYU" width="100%" height="100%"><p><br /><p><img src="https://lh7-us.googleusercontent.com/0IQdPfddXHNGHkq0gHlBXdrwRHBmaErOGLBbXyECxSDSkEalDXu5iVfVbpr2etQPGgKzATQtTb1ZX-Jyh7zSmv9rSOr50k1qZnsE903DsmsRvho2RzKbx6vwZKRoD6iH6exBXZVcd5JZV-78VNuwtRY" width="100%" height="100%"><p> |
+|                         후기 페이지                          |                       커뮤니티 페이지                        |
+| <p><img src="https://lh7-us.googleusercontent.com/UfeQyBs5LYURZ6dE2U31MHW_QWl71n_foyskSQf-BaK4ThhB_tf0zXzFUK-FzA53HzSKZV1cY0iFlFb5L8mCygnOMCmRI3QXXAcLuPWmAskDLngMzaLcQDXTN3yGgP5mh8gqovAjszQNHrciQOLTyUg" width="100%" height="100%" /><p><br /><p><img src="https://lh7-us.googleusercontent.com/cjTscwZ0QQyK9vEtrfpGyrbo7tbetQA3oLYMC0ClQ46OhMXiktppH7ptNP7e05o_Sw1tINVRh7KPd7w1wd6ztEjo0wQlvfYdg73puuJ6Q1E1pD7Bvw65UeXZvH5Fz_f-M1lus5ZUdqHQ2vfrP4t3CGs" width="100%" height="100%" /><p> | <p><img src="https://lh7-us.googleusercontent.com/ViANyXsQ-xuCU82zyU-OLeAwpKASL2urXpG0cbTTH0HDq3HztpXE_r_FeUvtX9lHOD17rHJhk5YMjeFi84t2tMTH_dIBZ5_5KuLefs-03NpME4b1arMLUiBcB-Bab7M3F7GRGygOuH2kGEgxjyytrR4" width="100%" height="100%" /><p><br /><p><img src="https://lh7-us.googleusercontent.com/JO91b1zyrPAUtGs2XLa8WyhgpiLPKD7Vc2n8w4inRk_Sb28aNL3SO852Vh0qpd9QljUSgQaDwrcyMncobeID9GDSt-Yn21j2gTmrIN1f3QgBUBfGPwmEDw2ykLQcWQ7s0-SPyTqdJTsB5mlvsaHraJk" width="100%" height="100%" /><p> |
+|                          마이페이지                          |                                                              |
+| <p><img src="https://lh7-us.googleusercontent.com/SjNaonYWyQ3HE8cn3Dx1iBY5GSKj1vmQ4cHNXxZmY46WeMZAoCIqMk4DT4deU1IiBclZNRFDDUbQ81YvUahD5Z7bfeBqhI1kIdaklYcsA0LAVPvUjcnYRX76KlMhyUOARpOmH3k8rLEfRY1G_SjeNwA" width="100%" height="100%"><p><br /><p><img src="https://lh7-us.googleusercontent.com/sshh_i1ujYJo_W7WI2SVJo4E_Tnx0ynDyXdOxhlQqT_qVhdbr8HuiyTmtoDvW7B9ztqIfwOjvAQQ2Ob-C9sCvZj2dXMkCxWSr2QpDfvYRv48mSPQrO9yR3p7ytKYL-z7crMIrTjcoo_SrOOJKW04UNE" width="100%" height="100%"><p> |                                                              |
+
+
+
+
+
+<br />
+<br />
+<br />
+
+
+
+### 1. 📍필수 요구 사항 (CRUD구현)
+
+- 아래 3가지 중에 **한 가지**를 반드시 활용해서 만들어주세요.
+
+- [x] 지도 API
+
+  지도상에 Marker를 표시하고 활용해 보세요
+
+  네이버 / 카카오 / 구글 지도 등 api 종류는 자유롭게 조사하여 선택하세요
+
+  - Youtube API
+
+    [API Reference | YouTube Data API | Google Developers](https://developers.google.com/youtube/v3/docs?hl=ko)
+
+    [YouTube Data API (v3) - Quota Calculator | Google Developers](https://developers.google.com/youtube/v3/determine_quota_cost?hl=en)
+
+    Youtube API의 하루 할당량(quota)은 10,000 이며, API 종류에 따라 quota cost가 다르니 고려해서 선택해야 합니다. (참고: search list API는 1회 당 100 이므로 하루 최대 100번까지만 검색 기능 사용 가능)
+
+  - 설문조사
+
+    - 스프레드시트 또는 csv파일을 json파일로 내보내서 db처럼 활용해봅시다.
+
+    - 구글 스프레드시트의 확장 프로그램 → 부가 기능 설치 → “Export Sheet Data” 기능 활용
+
+    - 스프레드시트 : 원하는 데이터를 수집하고 테이블로 정렬 후 json 파일로 변환해서 사용
+
+    - csv : 캐글에서 원하는 csv파일을 찾아서 스프레드시트에 옮긴 후 json으로 변환해서 사용
+
+      [Kaggle: Your Machine Learning and Data Science Community](https://www.kaggle.com/)
+
+- 상태관리 라이브러리는 RTK를 사용하고, React-query 또는 Redux Thunk 사용은 택1 진행
+
+- firebase 또는 json-server 또는 supabase 택1 진행
+
+- [ ] Youtube API
+
+  [API Reference | YouTube Data API | Google Developers](https://developers.google.com/youtube/v3/docs?hl=ko)
+
+  [YouTube Data API (v3) - Quota Calculator | Google Developers](https://developers.google.com/youtube/v3/determine_quota_cost?hl=en)
+
+  Youtube API의 하루 할당량(quota)은 10,000 이며, API 종류에 따라 quota cost가 다르니 고려해서 선택해야 합니다. (참고: search list API는 1회 당 100 이므로 하루 최대 100번까지만 검색 기능 사용 가능)
+
+- [ ] 설문조사
+
+  - 스프레드시트 또는 csv파일을 json파일로 내보내서 db처럼 활용해봅시다.
+
+  - 구글 스프레드시트의 확장 프로그램 → 부가 기능 설치 → “Export Sheet Data” 기능 활용
+  - 스프레드시트 : 원하는 데이터를 수집하고 테이블로 정렬 후 json 파일로 변환해서 사용
+  - csv : 캐글에서 원하는 csv파일을 찾아서 스프레드시트에 옮긴 후 json으로 변환해서 사용
+  - [Kaggle: Your Machine Learning and Data Science Community](https://www.kaggle.com/)
+  - 상태관리 라이브러리는 RTK를 사용하고, React-query 또는 Redux Thunk 사용은 택1 진행
+
+  - Vercel 이라는 호스팅플랫폼을 이용해 배포합니다.
+  - firebase 또는 json-server 또는 supabase 택1 진행
+
+
+
+<br />
+
+### 2. 🎁선택 요구 사항 (추가 구현 기능)    
+
+- [x] 무한스크롤 구현 (Intersection Observer API (Web API)를 사용해보기)
+
+- [ ] Youtube API 요청을 통해 pagination 구현
+
+- [ ] React Query의 Optimistic Update 적용해보기
+
+- [x] firebase Auth, JWT 인증 서버(펜레터함 참고), supabase auth(선택)를 사용하여 로그인 회원가입 기능 구현
+
+  - firebase를 쓰시는 경우 인증은 firebase auth를 사용해주세요.
+
+  - json-server를 쓰시는 경우 JWT 인증 서버를 사용해주세요.
+
+  - (선택) supabase를 쓰시는 경우 Supabase Auth(https://supabase.com/docs/guides/auth)
+
+    
+
+<br />
+
+<br />
+
+### 기능 담당
+
+| 기능                                                         | 담당자 |
+| ------------------------------------------------------------ | ------ |
+| 메인페이지(커뮤니티 게시글 목록 랜덤표시,지역별 카테고리 검색 기능,  마커 및 리스트 생성) | 한은범 |
+| 로그인, 회원가입, 유저 데이터 관리                           | 조진훈 |
+| 커뮤니티 페이지( 글 등록, 글 조회, 글 수정, 글 삭제, 댓글 등록, 댓글 조회, 댓글 삭제 ) | 정해준 |
+| 후기 페이지(이미지와 글 등록, 조회, 수정, 삭제)              | 서가희 |
+| 마이페이지(이미지 업로드, 닉네임 편집, 내가 쓴 후기들 보기)  | 남해리 |
+
+
+
+<br />
+
+
+## 🎫 파일 구조
+
+<div>
+  <p><img src="https://lh7-us.googleusercontent.com/yFl2iOedO2W28bO2H31PxzP3Rbx1AtWwp7H8Lf4W0KT99V32eyN26rbXcS1PgLcencB196vuJCf-JyMvqkvZT7hEEKNbLXgdJi0DllL80dxg_BGl_f9zMYmutYZ6cpFdy2_w6K8wRbeAykaCbBq5Up4" width="150px" align="left"/><p>
+  <p><img src="https://lh7-us.googleusercontent.com/KiWZYxy-PzeLbLzJIVwtG_3gN4nJKLMvBWkr10ruxjbyYm92IuPQAh92JQbBZAmhwAiCMJDsduT7ynRy2ACNpt0o0p62cGQPKySqyon5ERrLHLGSAV-_tmJ6Df4dHG3ZvgY-VDbQsaUvDJjvY4In8Dc" width="150px" align="left"/><p>
+  <p><img src="https://lh7-us.googleusercontent.com/hwceHIR5ReCd5EPpWzUL871Lf5zpCvCC9-QoFmImj8KE6jd0zt-6WBsl0mwB18FT2Lanacglrf5G8yc6GDIoghEXK3juYpGgel23u-lV0GaKcJcFuNFciC8RtM957xwv5VK2lMZzM5tNeNbPfu2BdOo" width="150px" align="left"/><p>
+  <p><img src="https://lh7-us.googleusercontent.com/1PWmjXpEl0MHk7jxRXqiicZxYfU9SET_wSpZDxvuPo4rvJWPTon0zGcZoTXce2bSChXU9528VquEK2PKF_qQQnkxxjek2FQy0w5kRsDpjtWJ57CUOQVn1k_pCUjXXDILGbG2AgRl6RFFC0RHXJqGJvY" width="150px" align="left"/><p>
+  <p><img src="https://lh7-us.googleusercontent.com/0x2zl36df_YGg1HdLMo-6g-iU4MNpN0hnWbXVIieJ05nhJ5hM3s907XrPFv2RDpqgLECJxg8JLMdHeT408JiRkjARny1xuggnPq0cQ2SsNh2GiB5JwW7h2Z-Q9Qogxyb95Im5EkyRsaRIHHQv5LXCuE" width="150px" align="left"/><p>
+</div>
+
+<br />
+
+<br />
