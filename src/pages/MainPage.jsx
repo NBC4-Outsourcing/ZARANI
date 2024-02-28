@@ -4,6 +4,7 @@ import MainPageHeader from '../components/mainPage/MainPageHeader';
 import MainPageCommunity from '../components/mainPage/MainPageCommunity';
 import MainPageNav from '../components/mainPage/MainPageNav';
 import MainPageKaKao from '../components/mainPage/MainPageKaKao';
+import MainPageList from 'components/mainPage/MainPageList';
 
 const MainPage = () => {
   return (
@@ -13,6 +14,7 @@ const MainPage = () => {
         <div>
           <MainPageCommunity />
           <MainPageNav />
+          <MainPageList />
         </div>
         <MainPageKaKao />
       </S.MainWrapper>
