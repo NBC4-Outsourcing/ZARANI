@@ -174,14 +174,14 @@ const MyPageContents = () => {
               <MP.EmailNickWrap>
                 <MP.EmailWrap>
                   <MP.EmailP>
-                    <span>이메일EMAIL</span>
+                    <span>이메일&nbsp;EMAIL</span>
                   </MP.EmailP>
                   <MP.EmailValueP>
                     <span>{email}</span>
                   </MP.EmailValueP>
                 </MP.EmailWrap>
                 <MP.NickNameWrap>
-                  <MP.NickNameP htmlFor="nickname">닉네임NICKNAME</MP.NickNameP>
+                  <MP.NickNameP htmlFor="nickname">닉네임&nbsp;NICKNAME</MP.NickNameP>
                   <MP.NickNameValuePut
                     type="text"
                     id="nickname"
