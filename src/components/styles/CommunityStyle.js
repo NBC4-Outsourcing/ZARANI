@@ -58,6 +58,7 @@ export const CommunityHeaderName = styled.p`
   height: 50%;
   font-size: 30px;
   font-weight: bold;
+  margin-top: 15px;
 `;
 
 export const CommunityHeaderLogoImage = styled.img`
