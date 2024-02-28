@@ -1,5 +1,4 @@
 import { uuid } from '@supabase/gotrue-js/dist/module/lib/helpers';
-import defaultProfileImage from 'assets/defaultProfileImage.png';
 import {
   ContentBtns,
   ContentWrapper,
@@ -25,8 +24,11 @@ export const ReviewUpdateForm = ({ item, setEditDataId }) => {
   const { content } = editData[0];
   const [updateInput, , onUpdateContentHandler] = useInput({ updateContent: content });
   const { updateContent } = updateInput;
-
   const [mutation] = useSetMutation(updateReview, 'reviewList');
+
+  // 이미지를 저장하지 않은 경우 기본 이미지(깃헙에서 가져옴)
+  const defaultProfileImage =
+    'https://github.com/NBC4-Outsourcing/zarani/blob/main/src/assets/defaultProfileImage.png?raw=true';
 
   // 이미지 미리보기
   const editImgHandler = (e) => {
