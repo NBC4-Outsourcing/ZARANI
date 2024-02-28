@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useQuery } from 'react-query';
 import { supabase } from 'api/supabase/supabase';
@@ -56,7 +56,8 @@ const MyPageContents = () => {
 
   if (isLogin === false) {
     alert('로그인 유저만 사용가능합니다. 로그인 해주세요');
-    navigate('/login', { replace: true });
+    // navigate('/login', { replace: true });
+    navigate('/login');
   }
 
   // 이미지 등록
@@ -81,6 +82,11 @@ const MyPageContents = () => {
       alert('수정을 취소하셨습니다.');
       setThumnailImage(avatar);
       setIsEdit(false);
+      return;
+    }
+
+    if (selectImage.name === undefined) {
+      alert('이미지를 선택해주세요.');
       return;
     }
 
