@@ -1,11 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-// :root{
-//   --mainColor: #fab891;
-//   --subColor1: #cae0d2;
-//   --subColor2: #EEEEEE;
-// }
 export const HeaderArticle = styled.article`
   width: 100%;
 
@@ -40,7 +35,7 @@ export const TitleP = styled.p`
 // 홈버튼
 export const HomeLink = styled(Link)`
   background-color: var(--subColor1);
-  padding: 0.7rem 2rem;
+  padding: 1rem 2rem;
 
   border: none;
   border-radius: 0.8rem;
@@ -52,8 +47,8 @@ export const HomeLink = styled(Link)`
   cursor: pointer;
 
   &:hover {
-    background-color: var(--subColor2);
-    box-shadow: 0rem 0rem 0.3rem 0rem var(--subColor2);
+    background-color: var(--subColor1);
+    box-shadow: 0rem 0rem 0.3rem 0rem var(--subColor1);
     transition: all 0.5s; // 시간차두고 바뀌도록 추가
     transform: scale(1.06, 1.06);
   }
