@@ -412,6 +412,11 @@ export const ListContent = styled.ul`
     }
   }
 `;
+export const InfoStyle = styled.div`
+  width: 100px;
+  height: 200px;
+  border: 1px solid blue;
+`;
 
 // MainPageLanding.jsx
 export const FormSearch = styled.form`
