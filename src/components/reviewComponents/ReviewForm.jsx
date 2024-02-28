@@ -72,7 +72,6 @@ const ReviewForm = ({ setReviewData, placename }) => {
         });
 
       if (!error) {
-        console.log('이미지 등록 성공!', data);
         storagePath = data.path; // 이미지 등록이 성공하면 이미지 경로 저장("reviewFile/files/kim@naver.com06cea4ae-f3e1-4b2f-a00c-9538c8f763d1")
       } else {
         console.error('이미지 등록 실패!', error);
