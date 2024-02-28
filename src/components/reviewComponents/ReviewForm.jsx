@@ -46,8 +46,6 @@ const ReviewForm = ({ setReviewData, placename }) => {
     if (imgFile) {
       const imgUrl = URL.createObjectURL(imgFile);
       setAddImg(imgUrl);
-    } else {
-      console.log('이미지 파일이 선택되지 않았습니다');
     }
   };
   // 이미지 등록 취소
@@ -72,7 +70,6 @@ const ReviewForm = ({ setReviewData, placename }) => {
         });
 
       if (!error) {
-        console.log('이미지 등록 성공!', data);
         storagePath = data.path; // 이미지 등록이 성공하면 이미지 경로 저장("reviewFile/files/kim@naver.com06cea4ae-f3e1-4b2f-a00c-9538c8f763d1")
       } else {
         console.error('이미지 등록 실패!', error);
@@ -98,7 +95,6 @@ const ReviewForm = ({ setReviewData, placename }) => {
     const { data, error } = await supabase.from('reviewWrite').insert([newReviews]).select();
     if (data) {
       alert('게시물이 등록 되었습니다.');
-      console.log('data', data);
       reset();
       setAddImg(null);
       setReviewData((prev) => {
@@ -130,7 +126,7 @@ const ReviewForm = ({ setReviewData, placename }) => {
                 </ImgMessage>
                 <input ref={imgRef} onChange={previewImg} type="file" accept="image/*" />
               </label>
-              <ImgCancelBtn onClick={addCancel}>이미지 등록 취소</ImgCancelBtn>
+              {addImg && <ImgCancelBtn onClick={addCancel}>이미지 등록 취소</ImgCancelBtn>}
             </AddFormImg>
             <AddFormTextarea
               value={reviewContent}
