@@ -84,6 +84,11 @@ const MyPageContents = () => {
       return;
     }
 
+    if (selectImage.name === undefined) {
+      alert('이미지를 선택해주세요.');
+      return;
+    }
+
     if (selectImage === null) return;
 
     if (nicknameBlank === '') {

@@ -1,9 +1,8 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
 import { logout } from 'shared/redux/modules/authSlice';
-import * as MPH from 'components/styles/MyPageHeaderStyle';
 import { getLoginUserInfo, removeCurrentLoginUser } from 'components/loginPageComponents/loginPageSupabase';
+import * as MPH from 'components/styles/MyPageHeaderStyle';
 
 const MyPageHeader = () => {
   const dispatch = useDispatch();
