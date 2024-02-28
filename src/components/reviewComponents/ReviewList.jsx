@@ -15,7 +15,7 @@ import {
 import { useState } from 'react';
 import { ReviewUpdateForm } from './ReviewUpdateForm';
 
-export const ReviewList = ({ reviewData, setReviewData, placename }) => {
+export const ReviewList = ({ reviewData, setReviewData, placename, userData }) => {
   // 수정 여부 state
   const [editDataId, setEditDataId] = useState(null);
   const [openItemId, setOpenItemId] = useState(null);

@@ -6,7 +6,6 @@ import * as MPR from 'components/styles/MyPageReviews';
 const MyPageReviews = ({ myReview, isLoading }) => {
   const myPageReviews = getLocalStorageJSON();
   const email = myPageReviews.user?.email;
-
   const FilterUserReviews = myReview
     ?.filter((review) => review.email === email)
     .sort((a, b) => new Date(b.date) - new Date(a.date));
@@ -25,7 +24,7 @@ const MyPageReviews = ({ myReview, isLoading }) => {
         FilterUserReviews?.map((reviews) => {
           const { id, nickname, content, date, marker } = reviews;
           return (
-            <MPR.MoveLink to="/reviewPage" key={id}>
+            <MPR.MoveLink to={`/reviewPage/${marker}`} key={id}>
               <MPR.StreetArticle>
                 <MPR.StreetNameDateDiv>
                   <MPR.StreetNamP>
