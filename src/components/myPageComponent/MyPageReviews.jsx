@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { getLocalStorageJSON } from 'utils/getLocalStorageJSON';
 import { getFormattedDate } from 'components/communityComponents/formattedDate';
 import Loading from 'components/common/Loading';
@@ -24,7 +23,7 @@ const MyPageReviews = ({ myReview, isLoading }) => {
     <MPR.MyReviewsSection>
       {FilterUserReviews?.length > 0 ? (
         FilterUserReviews?.map((reviews) => {
-          const { id, nickname, content, date, email, marker } = reviews;
+          const { id, nickname, content, date, marker } = reviews;
           return (
             <MPR.MoveLink to="/reviewPage" key={id}>
               <MPR.StreetArticle>

@@ -4,7 +4,6 @@ import { getUser } from 'components/communityComponents/CommunitySupabase';
 import ReviewForm from 'components/reviewComponents/ReviewForm';
 import ReviewHeader from 'components/reviewComponents/ReviewHeader';
 import { ReviewList } from 'components/reviewComponents/ReviewList';
-import { ReviewUpdateForm } from 'components/reviewComponents/ReviewUpdateForm';
 import { CommunityBtn, CommunityErrorBackground } from 'components/styles/CommunityStyle';
 import { ReviewContainer } from 'components/styles/ReviewStyle';
 import { useEffect, useState } from 'react';

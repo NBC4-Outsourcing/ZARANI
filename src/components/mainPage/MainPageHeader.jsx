@@ -3,7 +3,7 @@ import * as S from '../styles/mainPageStyle';
 import img from '../../assets/logo.png';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from 'react-query';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { logout } from 'shared/redux/modules/authSlice';
 import Loading from 'components/common/Loading';
 import { getLoginUserInfo, removeCurrentLoginUser } from 'components/loginPageComponents/loginPageSupabase';
