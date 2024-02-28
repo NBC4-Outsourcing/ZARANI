@@ -1,11 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-// :root{
-//   --mainColor: #fab891;
-//   --subColor1: #cae0d2;
-//   --subColor2: #EEEEEE;
-// }
 export const HeaderArticle = styled.article`
   width: 100%;
 
@@ -40,7 +35,7 @@ export const TitleP = styled.p`
 // 홈버튼
 export const HomeLink = styled(Link)`
   background-color: var(--subColor1);
-  padding: 1cqmaxrem 2rem;
+  padding: 1rem 2rem;
 
   border: none;
   border-radius: 0.8rem;

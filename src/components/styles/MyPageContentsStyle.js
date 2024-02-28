@@ -55,12 +55,8 @@ export const ThumnailImg = styled.div`
 
   > img {
     width: 100%;
-
-    /* min-width: 100px; */
-    /* min-width: 100%; */
     min-width: 100%;
 
-    /* min-height: 220px; */
     max-height: 220px;
     box-shadow: 0 2px 4px 3px lightgray;
 
@@ -104,17 +100,14 @@ export const AddBtnLabel = styled.label`
   }
 
   @media screen and (min-width: 1280px) {
-    background-color: greenyellow;
     padding: 0.7rem 3.6rem;
   }
   @media screen and (max-width: 1280px) {
     padding: 0.7rem 3.8rem;
-    background-color: blue;
   }
   @media screen and (max-width: 620px) {
     max-width: 100%;
     padding: 0.7rem 3.8rem;
-    background-color: green;
   }
 `;
 
