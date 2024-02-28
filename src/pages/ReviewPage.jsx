@@ -2,7 +2,6 @@ import { supabase } from 'api/supabase/supabase';
 import ReviewForm from 'components/reviewComponents/ReviewForm';
 import ReviewHeader from 'components/reviewComponents/ReviewHeader';
 import { ReviewList } from 'components/reviewComponents/ReviewList';
-import { ReviewUpdateForm } from 'components/reviewComponents/ReviewUpdateForm';
 import { ReviewContainer } from 'components/styles/ReviewStyle';
 import { useEffect, useState } from 'react';
 

@@ -39,7 +39,6 @@ const ReviewForm = ({ setReviewData }) => {
   const { reviewContent } = reviewContentInput;
 
   // 이미지 state
-  const [isImg, setIsImg] = useState(false);
   const [addImg, setAddImg] = useState('');
 
   // 이미지 미리보기 함수
@@ -56,7 +55,6 @@ const ReviewForm = ({ setReviewData }) => {
   const addCancel = (e) => {
     e.preventDefault();
     setAddImg(null);
-    setIsImg(false);
   };
 
   // DB에 후기 등록
@@ -103,7 +101,6 @@ const ReviewForm = ({ setReviewData }) => {
       console.log('data', data);
       reset();
       setAddImg(null);
-      setIsImg(false);
       setReviewData((prev) => {
         return [...prev, newReviews];
       });
@@ -126,7 +123,7 @@ const ReviewForm = ({ setReviewData }) => {
             <AddFormImg>
               <label>
                 {/* 이미지를 추가하기 전 기본 이미지가 보이고 추가 시 등록한 이미지를 띄움 */}
-                <img onClick={() => setIsImg(true)} src={addImg ? addImg : zarani} alt="이미지" />
+                <img src={addImg ? addImg : zarani} alt="이미지" />
                 <ImgMessage>
                   <p>{addImg ? '이미지 변경 시 이미지를 클릭해 주세요' : '이미지 추가 시 이미지를 클릭해 주세요'}</p>
                   <img src={check} />
