@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { logout } from 'shared/redux/modules/authSlice';
 import { useParams } from 'react-router-dom';
 import * as MPH from 'components/styles/MyPageHeaderStyle';
+import * as RV from 'components/styles/ReviewStyle';
 
 const ReviewHeader = ({ placename }) => {
   const dispatch = useDispatch();
@@ -23,7 +24,7 @@ const ReviewHeader = ({ placename }) => {
       <ReviewHeaderDiv>
         <MPH.HeaderNav>
           <MPH.HomeLink to="/">홈으로</MPH.HomeLink>
-          <MPH.TitleP>{<h1>{headerName}</h1>}</MPH.TitleP>
+          <RV.Title>{<h1>{headerName}</h1>}</RV.Title>
           <div style={{ fontSize: '1.2rem' }}>자전거 도로 후기</div>
         </MPH.HeaderNav>
       </ReviewHeaderDiv>

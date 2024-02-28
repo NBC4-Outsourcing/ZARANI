@@ -103,7 +103,10 @@ const ReviewForm = ({ setReviewData, placename }) => {
       reset();
       setAddImg(null);
       setIsImg(false);
-      // setReviewData();
+      setReviewData((prev) => {
+        return [...prev, newReviews];
+      });
+
       return data;
     } else {
       alert('게시물 등록에 실패했습니다.');

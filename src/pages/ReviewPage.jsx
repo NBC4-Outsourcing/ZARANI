@@ -27,8 +27,6 @@ export const ReviewPage = () => {
       if (error) {
         console.log('게시물 조회 실패', error);
       } else {
-        console.log('게시물 조회 성공', reviewWrite);
-
         // 이미지 불러오기
         const reviewsWriteData = reviewWrite.map((item) => {
           const imgUrl = supabase.storage.from('reviewImage').getPublicUrl(item.reviewimg);
