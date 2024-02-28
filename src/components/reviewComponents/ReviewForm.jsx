@@ -19,7 +19,8 @@ import useInput from 'hooks/useInput';
 import { useRef, useState } from 'react';
 import { getLocalStorageJSON } from 'utils/getLocalStorageJSON';
 
-const ReviewForm = ({ setViewChange }) => {
+const ReviewForm = ({ setReviewData }) => {
+  // const ReviewForm = () => {
   // storage에 파일 객체로 이미지 저장을위한 변수
   const imgRef = useRef(null);
   const contentRef = useRef(null);
@@ -103,7 +104,7 @@ const ReviewForm = ({ setViewChange }) => {
       reset();
       setAddImg(null);
       setIsImg(false);
-      setViewChange(data);
+      setReviewData(data);
       return data;
     } else {
       alert('게시물 등록에 실패했습니다.');

@@ -1,13 +1,11 @@
 import { uuid } from '@supabase/gotrue-js/dist/module/lib/helpers';
 import { supabase } from 'api/supabase/supabase';
-import check from 'assets/check.gif';
 import {
   ContentBtns,
   ContentWrapper,
   ListMapWrapper,
   UpdateBtnsWrapper,
   UpdateImg,
-  UpdateImgMessage,
   UpdateImgWrapper,
   UpdateList,
   UpdateText
@@ -15,7 +13,7 @@ import {
 import useInput from 'hooks/useInput';
 import { useRef, useState } from 'react';
 
-export const ReviewUpdateForm = ({ item, setEditDataId }) => {
+export const ReviewUpdateForm = ({ item, setEditDataId, setReviewData }) => {
   const imgRef = useRef(null);
   const contentRef = useRef(null);
   const imgName = uuid();
@@ -23,7 +21,6 @@ export const ReviewUpdateForm = ({ item, setEditDataId }) => {
   const editData = [item];
   const { email } = editData[0];
   const { content } = editData[0];
-
   const [updateInput, , onUpdateContentHandler] = useInput({ updateContent: content });
   const { updateContent } = updateInput;
 
@@ -73,6 +70,11 @@ export const ReviewUpdateForm = ({ item, setEditDataId }) => {
       console.log('게시물 수정 완료', data);
       alert('게시물 수정이 완료되었습니다');
       setEditDataId(null);
+      setReviewData((prev) =>
+        prev.map((item) => {
+          return item.id === modifyReviewData.id ? modifyReviewData : item;
+        })
+      );
     } else {
       console.log('게시물 수정 실패', error);
     }
@@ -100,7 +102,6 @@ export const ReviewUpdateForm = ({ item, setEditDataId }) => {
               </UpdateImgWrapper>
 
               <UpdateBtnsWrapper>
-                {/* <UpdateText> */}
                 <UpdateText
                   value={updateContent}
                   name="updateContent"
@@ -109,7 +110,6 @@ export const ReviewUpdateForm = ({ item, setEditDataId }) => {
                   placeholder="최대 80자까지만 입력할 수 있습니다."
                   ref={contentRef}
                 ></UpdateText>
-                {/* </UpdateText> */}
                 <ContentBtns>
                   <button
                     onClick={() => {

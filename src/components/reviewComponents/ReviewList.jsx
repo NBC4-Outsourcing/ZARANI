@@ -15,38 +15,33 @@ import {
 import { useEffect, useState } from 'react';
 import { ReviewUpdateForm } from './ReviewUpdateForm';
 
-export const ReviewList = ({ viewChange, setViewChange }) => {
-  // 데이터베이스에 저장된 데이터 저장 state
-  const [reviewData, setReviewData] = useState([]);
-  // 수정 여부 state
-  const [editDataId, setEditDataId] = useState('false');
+export const ReviewList = ({ reviewData, setReviewData }) => {
+  // const [reviewData, setReviewData] = useState([]);
 
-  // const addItems = (viewChange) => {
-  //   setReviewData((prev) => [...reviewData, viewChange]);
-  // };
-  // // addItems();
+  // 수정 여부 state
+  const [editDataId, setEditDataId] = useState(null);
 
   // DB에 저장된 데이터 가져오기
-  useEffect(() => {
-    // 게시글 불러오기
-    const fetchData = async () => {
-      let { data: reviewWrite, error } = await supabase.from('reviewWrite').select('*');
-      if (error) {
-        console.log('게시물 조회 실패', error);
-      } else {
-        console.log('게시물 조회 성공', reviewWrite);
+  // useEffect(() => {
+  //   // 게시글 불러오기
+  //   // const fetchData = async () => {
+  //   //   let { data: reviewWrite, error } = await supabase.from('reviewWrite').select('*');
+  //   //   if (error) {
+  //   //     console.log('게시물 조회 실패', error);
+  //   //   } else {
+  //   //     console.log('게시물 조회 성공', reviewWrite);
 
-        // 이미지 불러오기
-        const reviewsWriteData = reviewWrite.map((item) => {
-          const imgUrl = supabase.storage.from('reviewImage').getPublicUrl(item.reviewimg);
-          return { ...item, imageUrl: imgUrl.data.publicUrl };
-        });
-        setReviewData(reviewsWriteData);
-      }
-    };
+  //   //     // 이미지 불러오기
+  //   //     const reviewsWriteData = reviewWrite.map((item) => {
+  //   //       const imgUrl = supabase.storage.from('reviewImage').getPublicUrl(item.reviewimg);
+  //   //       return { ...item, imageUrl: imgUrl.data.publicUrl };
+  //   //     });
+  //   //     setReviewData(reviewsWriteData);
+  //   //   }
+  //   // };
 
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
 
   // 데이터 삭제
   const removeReview = async (id, reviewimg) => {
@@ -78,13 +73,17 @@ export const ReviewList = ({ viewChange, setViewChange }) => {
   const contentToggle = (id) => {
     setOpenItemId((prevId) => (prevId === id ? null : id));
   };
+  console.log('reviewData', reviewData);
+
   return (
     <ContentsList>
       {reviewData?.map((item) => {
+        console.log('reviewData', reviewData);
+
         return (
           <ListMapWrapper key={item.id}>
             {editDataId === item.id ? (
-              <ReviewUpdateForm item={item} setEditDataId={setEditDataId} />
+              <ReviewUpdateForm item={item} setEditDataId={setEditDataId} setReviewData={setReviewData} />
             ) : (
               <>
                 {openItemId === item.id ? (
