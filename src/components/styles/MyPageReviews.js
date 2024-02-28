@@ -42,7 +42,6 @@ export const MoveLink = styled(Link)`
   padding: 1.4rem;
   gap: 4rem;
   &:hover {
-    /* background-color: var(--subColor2);*/
     box-shadow: 0rem 0.1rem 0.6rem 0rem var(--mainColor);
     transform: scale(1.04, 1.04);
     transition: all 0.4s; // 시간차두고 바뀌도록 추가
