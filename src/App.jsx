@@ -11,6 +11,7 @@ const App = () => {
       <GlobalStyle />
       <Router />
     </QueryClientProvider>
+    //주석
   );
 };
 
