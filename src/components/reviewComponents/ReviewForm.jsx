@@ -19,8 +19,7 @@ import useInput from 'hooks/useInput';
 import { useRef, useState } from 'react';
 import { getLocalStorageJSON } from 'utils/getLocalStorageJSON';
 
-const ReviewForm = ({ setReviewData }) => {
-  // const ReviewForm = () => {
+const ReviewForm = ({ setReviewData, placename }) => {
   // storage에 파일 객체로 이미지 저장을위한 변수
   const imgRef = useRef(null);
   const contentRef = useRef(null);
@@ -87,7 +86,7 @@ const ReviewForm = ({ setReviewData }) => {
       return;
     }
     const newReviews = {
-      marker: '안양천길',
+      marker: placename.placename,
       email,
       nickname,
       avatar,
@@ -104,7 +103,10 @@ const ReviewForm = ({ setReviewData }) => {
       reset();
       setAddImg(null);
       setIsImg(false);
-      // setReviewData();
+      setReviewData((prev) => {
+        return [...prev, newReviews];
+      });
+
       return data;
     } else {
       alert('게시물 등록에 실패했습니다.');

@@ -14,17 +14,9 @@ const getCommunityList = async () => {
     console.log(error);
   }
 };
-const getUserImage = async () => {
-  try {
-    const data = (await supabase.from('usersAccounts').select('*')).data;
-    return data[0].avatar;
-  } catch (error) {
-    console.log(error);
-  }
-};
 export const readUserLocalAccount = async () => {
   const data = await getLocalStorageJSON();
   return data;
 };
 
-export { getCommunityList, getUserImage };
+export { getCommunityList };

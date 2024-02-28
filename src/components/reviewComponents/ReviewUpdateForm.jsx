@@ -12,6 +12,7 @@ import {
 } from 'components/styles/ReviewStyle';
 import useInput from 'hooks/useInput';
 import { useRef, useState } from 'react';
+import zarani from 'assets/zarani.png';
 
 export const ReviewUpdateForm = ({ item, setEditDataId, setReviewData }) => {
   const imgRef = useRef(null);
@@ -91,9 +92,8 @@ export const ReviewUpdateForm = ({ item, setEditDataId, setReviewData }) => {
           <ListMapWrapper key={data.id}>
             <ContentWrapper>
               <UpdateImgWrapper>
-                {/* <ListNickName>{data.nickname}</ListNickName> */}
                 <label>
-                  {data.imageUrl && <img src={editImg ? editImg : data.imageUrl} alt="이미지" />}
+                  {data.imageUrl ? <img src={editImg ? editImg : data.imageUrl} alt="이미지" /> : <img src={zarani} />}
                   <UpdateImg>
                     <p>이미지 변경 시 이미지를 클릭해 주세요</p>
                   </UpdateImg>

@@ -2,18 +2,15 @@ import React from 'react';
 import * as S from '../styles/mainPageStyle';
 import img from '../../assets/logo.png';
 import { useNavigate } from 'react-router-dom';
-import { getUserImage, readUserLocalAccount } from './mainPageSupabase';
 import { useQuery } from 'react-query';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { logout } from 'shared/redux/modules/authSlice';
 import Loading from 'components/common/Loading';
 import { getLoginUserInfo, removeCurrentLoginUser } from 'components/loginPageComponents/loginPageSupabase';
+import { getUser } from 'components/communityComponents/CommunitySupabase';
 
 const MainPageHeader = () => {
-  const { loginState } = useSelector((state) => state.auth);
-
-  const { isLoading, data } = useQuery('usersAccounts', getUserImage);
-  // const avatar = data.user?.user_metadata.avatar;
+  const { isLoading, data } = useQuery('usersAccounts', getUser);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handCommunityPage = () => {
@@ -36,15 +33,15 @@ const MainPageHeader = () => {
     alert('로그아웃 되었습니다');
   };
   if (isLoading) {
-    <Loading />;
+    return <Loading />;
   }
   return (
     <S.HeaderWrapper>
       <S.LogoImage src={img} />
-      {loginState ? (
+      {!data.name ? (
         <S.LoginStyle>
           <S.StBtn onClick={handCommunityPage}> 커뮤니티</S.StBtn>
-          <S.AvatarStyle src={data} onClick={handMypage} />
+          <S.AvatarStyle src={data.user_metadata?.avatar} onClick={handMypage} />
           <S.LogoutBtn onClick={handLogOut}>로그아웃</S.LogoutBtn>
         </S.LoginStyle>
       ) : (
