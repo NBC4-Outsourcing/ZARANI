@@ -260,6 +260,7 @@
  
 
  
+![image](https://github.com/NBC4-Outsourcing/zarani/assets/152264010/4747a2fc-a280-4ada-8bdb-c610d40f6f07)
 
 
 <br />
@@ -436,7 +437,11 @@ $ yarn run start
 | :--: | ------------------------------------------------------------ |
 | 원인 | 다른 이미지지만 같은 경로의 이름으로 브라우저가 캐시에 저장하고 로드하기 때문에 같은 경로의 이름으로 이미 저장된 데이터를 계속 불러왔던 것.. |
 | 해결 | 저장한 유저를 구분하기 위해 유저의 고유한 정보와 계속 랜덤으로 생성해주는 uuid로 이미지를 생성해줘서 다른 이름과 이미지를 스토리지에 저장해줬습니다. |
+|      | 해결 전 코드 |
+|      |  <img src="https://github.com/NBC4-Outsourcing/zarani/assets/152264010/35f4da6b-469b-49fb-8fef-c6473df00727" />            |
+|      | 해결 후 코드 |
 |      | <img src="https://lh7-us.googleusercontent.com/Vh1sIiDecDYeoDjjk4xBwoiAah99h3Wr4RZIS6Zr2Q2QtT-ovVdcdYGev8vJfmOUrWrfncqsmLejmvCqvgyOA6Al-OyNm0BdwyOlpbyXB0q295vFDkCqFhoG3KoMfvwu1TggHAyDi0uBTGqFFTvz91Y" /> |
+
 
 
 
