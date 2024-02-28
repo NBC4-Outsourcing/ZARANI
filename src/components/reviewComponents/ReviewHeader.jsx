@@ -5,10 +5,7 @@ import { logout } from 'shared/redux/modules/authSlice';
 import { useParams } from 'react-router-dom';
 import * as MPH from 'components/styles/MyPageHeaderStyle';
 
-const ReviewHeader = () => {
-  const placename = useParams();
-  console.log('placename', placename);
-
+const ReviewHeader = ({ placename }) => {
   const dispatch = useDispatch();
   const handLogOut = async () => {
     // 현재 로그인 중인 유저의 정보를 가져옴
@@ -27,10 +24,9 @@ const ReviewHeader = () => {
         <MPH.HeaderNav>
           <MPH.HomeLink to="/">홈으로</MPH.HomeLink>
           <MPH.TitleP>{<h1>{headerName}</h1>}</MPH.TitleP>
-          <MPH.LogoutBtn onClick={handLogOut}>로그아웃</MPH.LogoutBtn>
+          <div style={{ fontSize: '1.2rem' }}>자전거 도로 후기</div>
         </MPH.HeaderNav>
       </ReviewHeaderDiv>
-      {/* <ReviewHeaderDiv>{<h1>{headerName}</h1>}</ReviewHeaderDiv>; */}
     </>
   );
 };

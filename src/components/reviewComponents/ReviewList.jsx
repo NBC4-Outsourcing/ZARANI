@@ -15,7 +15,8 @@ import {
 import { useEffect, useState } from 'react';
 import { ReviewUpdateForm } from './ReviewUpdateForm';
 
-export const ReviewList = ({ reviewData, setReviewData }) => {
+export const ReviewList = ({ reviewData, setReviewData, placename }) => {
+  console.log(placename.placename);
   // const [reviewData, setReviewData] = useState([]);
 
   // 수정 여부 state
@@ -78,9 +79,7 @@ export const ReviewList = ({ reviewData, setReviewData }) => {
   return (
     <ContentsList>
       {reviewData?.map((item) => {
-        console.log('reviewData', reviewData);
-
-        return (
+        return placename.placename === item.marker ? (
           <ListMapWrapper key={item.id}>
             {editDataId === item.id ? (
               <ReviewUpdateForm item={item} setEditDataId={setEditDataId} setReviewData={setReviewData} />
@@ -129,6 +128,8 @@ export const ReviewList = ({ reviewData, setReviewData }) => {
               </>
             )}
           </ListMapWrapper>
+        ) : (
+          false
         );
       })}
     </ContentsList>
