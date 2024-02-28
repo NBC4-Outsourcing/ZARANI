@@ -92,7 +92,6 @@ export const ReviewUpdateForm = ({ item, setEditDataId, setReviewData }) => {
           <ListMapWrapper key={data.id}>
             <ContentWrapper>
               <UpdateImgWrapper>
-                {/* <ListNickName>{data.nickname}</ListNickName> */}
                 <label>
                   {data.imageUrl ? <img src={editImg ? editImg : data.imageUrl} alt="이미지" /> : <img src={zarani} />}
                   <UpdateImg>
