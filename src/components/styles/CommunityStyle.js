@@ -1,4 +1,3 @@
-import { hover } from '@testing-library/user-event/dist/hover';
 import styled, { css } from 'styled-components';
 
 // 공통으로 사용할 버튼
