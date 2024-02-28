@@ -9,7 +9,6 @@ import { useQuery } from 'react-query';
 import { useNavigate, useParams } from 'react-router-dom';
 
 export const ReviewPage = () => {
-  // 데이터베이스에 저장된 게시물을 담는 state
   const placename = useParams();
   const { isLoading, data: userData } = useQuery('userData', getUser, {
     refetchOnWindowFocus: false
