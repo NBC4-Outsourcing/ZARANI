@@ -74,11 +74,6 @@ export const AddFormImg = styled.div`
   & > label > input {
     display: none;
   }
-  &input {
-    /* height: 20px; */
-    /* outline: none; */
-    /* padding: 6px; */
-  }
 `;
 
 export const ImgMessage = styled.div`
@@ -237,11 +232,6 @@ export const UpdateList = styled.div`
   flex-direction: column;
 `;
 
-export const UpdateMapWrapper = styled.div`
-  /* display: flex;
-  flex-direction: column;
-  align-items: center; */
-`;
 export const UpdateImgWrapper = styled.div`
   width: 100%;
   height: 50vh;

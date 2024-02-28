@@ -17,9 +17,8 @@ import { ReviewUpdateForm } from './ReviewUpdateForm';
 
 export const ReviewList = ({ reviewData, setReviewData }) => {
   // const [reviewData, setReviewData] = useState([]);
-
-  // 수정 여부 state
   const [editDataId, setEditDataId] = useState(null);
+  const [openItemId, setOpenItemId] = useState(null);
 
   // DB에 저장된 데이터 가져오기
   // useEffect(() => {
@@ -73,8 +72,8 @@ export const ReviewList = ({ reviewData, setReviewData }) => {
       }
     }
   };
-  const [openItemId, setOpenItemId] = useState(null);
 
+  // 토글 이벤트
   const contentToggle = (id) => {
     setOpenItemId((prevId) => (prevId === id ? null : id));
   };
