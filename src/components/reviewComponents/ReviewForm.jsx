@@ -104,7 +104,7 @@ const ReviewForm = ({ setReviewData }) => {
       reset();
       setAddImg(null);
       setIsImg(false);
-      setReviewData(data);
+      // setReviewData();
       return data;
     } else {
       alert('게시물 등록에 실패했습니다.');
