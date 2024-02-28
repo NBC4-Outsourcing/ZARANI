@@ -1,15 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import MainPageLanding from './MainPageLending';
-import * as S from '../styles/mainPageStyle';
-import { useNavigate } from 'react-router-dom';
 import { setList } from 'shared/redux/modules/mapListSlice';
+import * as S from '../styles/mainPageStyle';
 
 const { kakao } = window;
 
 const MainPageKaKao = () => {
-  const navigate = useNavigate();
-  // const [list, setList] = useState([]);
   const data = useSelector((state) => state.area);
   const serchBtn = data.serchTxt.serchTxt;
 
@@ -39,7 +35,6 @@ const MainPageKaKao = () => {
 
         displayPlaces(data);
 
-        // setList(data);
         dispatch(setList(data));
       } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
         alert('검색 결과가 존재하지 않습니다.');
@@ -121,15 +116,9 @@ const MainPageKaKao = () => {
     }
   }, [serchBtn]);
 
-  // 문제 1.리스트를 클릭하면 해당 마커가 클릭 되는 이벤트를 줄 수 없음 마커 생성과 클릭 이벤트가 useEffect내에서 이뤄지기 때문
-  // 원하는 거 map으로 뿌려준 리스트 클릭하면 해당 리스트의 마커 클릭 하는 것 과 같은 효과를 보여주는거(확대)
-
   return (
     <div>
-      <div
-        id="map"
-        style={{ width: '600px', height: '790px', position: 'relative', overflow: 'hidden', marginTop: '30px' }}
-      ></div>
+      <S.KaKaoWrap id="map"></S.KaKaoWrap>
     </div>
   );
 };
