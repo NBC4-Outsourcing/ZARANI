@@ -6,7 +6,7 @@ import * as MPR from 'components/styles/MyPageReviews';
 
 const MyPageReviews = ({ myReview, isLoading }) => {
   const myPageReviews = getLocalStorageJSON();
-  const email = myPageReviews.user.email;
+  const email = myPageReviews.user?.email;
 
   const FilterUserReviews = myReview
     ?.filter((review) => review.email === email)
