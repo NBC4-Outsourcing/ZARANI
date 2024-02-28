@@ -4,9 +4,11 @@ import { logout } from 'shared/redux/modules/authSlice';
 import { getLoginUserInfo, removeCurrentLoginUser } from 'components/loginPageComponents/loginPageSupabase';
 import image from 'assets/logo.png';
 import * as MPH from 'components/styles/MyPageHeaderStyle';
+import { useNavigate } from 'react-router-dom';
 
 const MyPageHeader = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const handLogOut = async () => {
     // 현재 로그인 중인 유저의 정보를 가져옴
     const currentLoginUser = await getLoginUserInfo();
@@ -16,6 +18,7 @@ const MyPageHeader = () => {
     await removeCurrentLoginUser(id);
     dispatch(logout());
     alert('로그아웃 되었습니다');
+    navigate('/', { replace: true });
   };
 
   return (
