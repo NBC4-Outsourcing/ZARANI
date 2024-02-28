@@ -1,5 +1,4 @@
 import { uuid } from '@supabase/gotrue-js/dist/module/lib/helpers';
-import { supabase } from 'api/supabase/supabase';
 import check from 'assets/check.gif';
 import defaultProfileImage from 'assets/defaultProfileImage.png';
 import {
