@@ -18,7 +18,8 @@ export const ReviewHeaderDiv = styled.div`
   flex-direction: column;
   align-items: center;
   text-align: center;
-  background-color: #eee;
+  box-shadow: 0 2px 3px 2px var(--subColor2);
+  background-color: var(--subColor2);
   h1 {
     font-size: 3rem;
   }
@@ -48,7 +49,7 @@ export const FormContainer = styled.form`
   display: flex;
   justify-content: space-around;
   flex-direction: column;
-  border: 1px solid #eee;
+  box-shadow: 0rem 0rem 0.3rem 0rem var(--subColor2);
   border-radius: 1rem;
 `;
 export const ReviewNickName = styled.div`
@@ -76,8 +77,12 @@ export const AddFormImg = styled.div`
   & > label > img {
     width: 100%;
     cursor: pointer;
-    border: 1px solid var(--subColor2);
+    box-shadow: 0rem 0rem 0.3rem 0rem var(--subColor2);
     border-radius: 1rem;
+    &:hover {
+      transition: all 0.5s;
+      transform: scale(1.05, 1.05);
+    }
   }
   & > label > input {
     display: none;
@@ -135,12 +140,14 @@ export const AddBtn = styled.button`
   cursor: pointer;
   &:hover {
     background-color: var(--subColor2);
+    transition: all 0.5s;
+    transform: scale(1.05, 1.2);
   }
 `;
 
 // ReviewList
 export const ContentsList = styled.div`
-  width: 48%;
+  width: 40%;
   padding: 1rem 0;
   display: flex;
   flex-direction: column;
@@ -169,12 +176,19 @@ export const ContentWrapper = styled.div`
 export const ToggleContent = styled.div`
   padding: 1rem;
   width: 95%;
+  box-shadow: 0 2px 3px 2px var(--subColor2);
   background-color: var(--subColor2);
   border-radius: 1rem;
   white-space: nowrap; /* 텍스트를 한 줄에만 표시 */
   overflow: hidden; /* 넘치는 텍스트를 숨김 */
   text-overflow: ellipsis; /* 넘치는 텍스트를 줄임표로 표시 */
   max-width: 93vh;
+  &:hover {
+    background-color: var(--mainColor);
+    box-shadow: 0rem 0rem 0.3rem 0rem var(--mainColor);
+    transition: all 0.5s;
+    transform: scale(1.05, 1.2);
+  }
 `;
 export const ContentImgWrapper = styled.div`
   width: 100%;
@@ -224,12 +238,16 @@ export const ContentBtns = styled.div`
     background-color: var(--subColor1);
     &:hover {
       background-color: var(--subColor2);
+      transition: all 0.5s;
+      transform: scale(1.05, 1.05);
     }
   }
   button:nth-child(2) {
     background-color: var(--mainColor);
     &:hover {
       background-color: var(--subColor2);
+      transition: all 0.5s;
+      transform: scale(1.05, 1.05);
     }
   }
 `;
@@ -247,11 +265,16 @@ export const UpdateImgWrapper = styled.div`
   height: 50vh;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   & > label > img {
     width: 70%;
     cursor: pointer;
-    border: 1px solid var(--subColor2);
+    box-shadow: 0rem 0rem 0.3rem 0rem var(--subColor2);
     border-radius: 1rem;
+    &:hover {
+      transition: all 0.5s;
+      transform: scale(1.05, 1.05);
+    }
   }
   > label > input {
     display: none;
@@ -261,6 +284,7 @@ export const UpdateImgWrapper = styled.div`
 export const UpdateImg = styled.div`
   display: flex;
   flex-direction: column;
+  margin-top: 2rem;
 `;
 export const UpdateBtnsWrapper = styled.div`
   width: 100%;

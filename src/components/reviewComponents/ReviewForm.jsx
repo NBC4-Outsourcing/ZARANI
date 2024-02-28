@@ -46,8 +46,6 @@ const ReviewForm = ({ setReviewData, placename }) => {
     if (imgFile) {
       const imgUrl = URL.createObjectURL(imgFile);
       setAddImg(imgUrl);
-    } else {
-      console.log('이미지 파일이 선택되지 않았습니다');
     }
   };
   // 이미지 등록 취소
@@ -128,7 +126,7 @@ const ReviewForm = ({ setReviewData, placename }) => {
                 </ImgMessage>
                 <input ref={imgRef} onChange={previewImg} type="file" accept="image/*" />
               </label>
-              <ImgCancelBtn onClick={addCancel}>이미지 등록 취소</ImgCancelBtn>
+              {addImg && <ImgCancelBtn onClick={addCancel}>이미지 등록 취소</ImgCancelBtn>}
             </AddFormImg>
             <AddFormTextarea
               value={reviewContent}

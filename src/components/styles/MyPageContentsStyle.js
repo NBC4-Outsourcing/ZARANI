@@ -1,12 +1,6 @@
 import styled from 'styled-components';
 
-// :root{
-//   --mainColor: #fab891;
-//   --subColor1: #cae0d2;
-//   --subColor2: #EEEEEE;
-// }
-
-export const MyPageContentsArticle = styled.article`
+export const MyPageContentsSection = styled.section`
   width: 100%;
   grid-template-columns: repeat(auto-fill, minmax(500px, 2fr));
   grid-auto-rows: auto;
