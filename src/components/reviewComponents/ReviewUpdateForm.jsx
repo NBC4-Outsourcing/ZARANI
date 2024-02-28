@@ -76,11 +76,7 @@ export const ReviewUpdateForm = ({ item, setEditDataId }) => {
             <ContentWrapper>
               <UpdateImgWrapper>
                 <label>
-                  {data.imageUrl ? (
-                    <img src={editImg ? editImg : data.imageUrl} alt="이미지" />
-                  ) : (
-                    <img src={defaultProfileImage} />
-                  )}
+                  <img src={editImg ? editImg : defaultProfileImage} alt="이미지" />
                   <UpdateImg>
                     <p>이미지 변경 시 이미지를 클릭해 주세요</p>
                   </UpdateImg>
