@@ -5,8 +5,9 @@ export const ReviewContainer = styled.div`
   width: 100%;
   display: flex;
   text-align: center;
-  justify-content: space-around;
   padding: 0 1%;
+  gap: 2rem;
+  justify-content: center;
 `;
 
 // ReviewHeader
@@ -44,12 +45,13 @@ export const ReviewFormWrapper = styled.div`
 `;
 export const FormContainer = styled.form`
   width: 100%;
-  height: 90vh;
+  height: 80vh;
   padding: 1rem;
   display: flex;
   justify-content: space-around;
   flex-direction: column;
-  box-shadow: 0rem 0rem 0.3rem 0rem var(--subColor2);
+  box-shadow: 0rem 0rem 1.5rem 0rem var(--subColor2);
+  border: 1px solid var(--subColor2);
   border-radius: 1rem;
 `;
 export const ReviewNickName = styled.div`
@@ -71,13 +73,16 @@ export const AddFormImg = styled.div`
   width: 45%;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
   align-items: center;
 
   & > label > img {
     width: 100%;
+    height: 45vh;
+    padding: 1rem;
+    object-fit: contain;
     cursor: pointer;
-    box-shadow: 0rem 0rem 0.3rem 0rem var(--subColor2);
+    border: 1px solid var(--subColor2);
+    box-shadow: 0rem 0rem 2rem 0rem var(--subColor2);
     border-radius: 1rem;
     &:hover {
       transition: all 0.5s;
@@ -91,12 +96,9 @@ export const AddFormImg = styled.div`
 
 export const ImgMessage = styled.div`
   margin: 0 auto;
-  width: 100%;
-  padding: 0 2rem;
+  padding: 2rem;
   display: flex;
   align-items: flex-end;
-  text-align: center;
-  flex-direction: row;
   justify-content: space-evenly;
   img {
     width: 10%;
@@ -109,6 +111,7 @@ export const ImgCancelBtn = styled.button`
   border-radius: 5px;
   font-size: 1rem;
   background-color: var(--subColor1);
+
   cursor: pointer;
   &:hover {
     background-color: var(--subColor2);
@@ -118,9 +121,13 @@ export const ImgCancelBtn = styled.button`
 export const AddFormTextarea = styled.textarea`
   width: 50%;
   height: 60vh;
-  padding: 1rem;
-  border: none;
+  padding: 1.2rem;
+  line-height: 1.5;
   font-size: 1.2rem;
+  border-radius: 1rem;
+  border: 1px solid var(--subColor2);
+  box-shadow: 0rem 0rem 2rem 0rem var(--subColor2);
+  resize: none;
 `;
 
 export const AddBtnDiv = styled.div`
@@ -137,9 +144,11 @@ export const AddBtn = styled.button`
   border-radius: 5px;
   font-size: 1.2rem;
   background-color: var(--subColor1);
+  box-shadow: 0rem 0rem 0.5rem 0rem var(--subColor1);
   cursor: pointer;
   &:hover {
     background-color: var(--subColor2);
+    box-shadow: 0rem 0rem 0.5rem 0rem var(--subColor2);
     transition: all 0.5s;
     transform: scale(1.05, 1.2);
   }
@@ -153,6 +162,8 @@ export const ContentsList = styled.div`
   flex-direction: column;
   gap: 1rem;
   border-radius: 1rem;
+  box-shadow: 0rem 0rem 1.5rem 0rem var(--subColor2);
+  border: 1px solid var(--subColor2);
 `;
 
 export const ListMapWrapper = styled.div`
@@ -175,7 +186,7 @@ export const ContentWrapper = styled.div`
 `;
 export const ToggleContent = styled.div`
   padding: 1rem;
-  width: 95%;
+  width: 85%;
   box-shadow: 0 2px 3px 2px var(--subColor2);
   background-color: var(--subColor2);
   border-radius: 1rem;
@@ -184,7 +195,7 @@ export const ToggleContent = styled.div`
   text-overflow: ellipsis; /* 넘치는 텍스트를 줄임표로 표시 */
   max-width: 93vh;
   &:hover {
-    background-color: var(--mainColor);
+    background-color: #fab891ad;
     box-shadow: 0rem 0rem 0.3rem 0rem var(--mainColor);
     transition: all 0.5s;
     transform: scale(1.05, 1.2);
@@ -219,6 +230,7 @@ export const ListContent = styled.div`
   padding: 1rem;
   border-radius: 0.5rem;
   background-color: var(--subColor2);
+  line-height: 1.5;
 `;
 
 export const ContentBtns = styled.div`
@@ -299,4 +311,5 @@ export const UpdateText = styled.textarea`
   height: 25vh;
   padding: 1rem;
   border-radius: 0.5rem;
+  line-height: 1.5;
 `;
