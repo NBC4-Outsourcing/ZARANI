@@ -58,6 +58,7 @@ export const CommunityHeaderName = styled.p`
   height: 50%;
   font-size: 30px;
   font-weight: bold;
+  margin-top: 15px;
 `;
 
 export const CommunityHeaderLogoImage = styled.img`
@@ -127,8 +128,9 @@ export const WriteContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   width: 80%;
-  height: 250px;
+  height: 300px;
   padding: 1%;
+  margin: 10px;
   border-radius: 12px;
   border: 2px solid lightgray;
   transition: 0.3s ease-in-out;
@@ -184,7 +186,7 @@ export const WriteButtons = styled.div`
   width: 50%;
   display: flex;
   justify-content: flex-end;
-  gap: 5px;
+  gap: 15px;
 `;
 
 export const WriteCommentList = styled.div`
