@@ -1,7 +1,19 @@
-import { supabase } from 'api/supabase/supabase';
-import { useRef, useState } from 'react';
-import useInput from 'hooks/useInput';
 import { uuid } from '@supabase/gotrue-js/dist/module/lib/helpers';
+import { supabase } from 'api/supabase/supabase';
+import check from 'assets/check.gif';
+import {
+  ContentBtns,
+  ContentWrapper,
+  ListMapWrapper,
+  UpdateBtnsWrapper,
+  UpdateImg,
+  UpdateImgMessage,
+  UpdateImgWrapper,
+  UpdateList,
+  UpdateText
+} from 'components/styles/ReviewStyle';
+import useInput from 'hooks/useInput';
+import { useRef, useState } from 'react';
 
 export const ReviewUpdateForm = ({ item, setEditDataId }) => {
   const imgRef = useRef(null);
@@ -12,7 +24,7 @@ export const ReviewUpdateForm = ({ item, setEditDataId }) => {
   const { email } = editData[0];
   const { content } = editData[0];
 
-  const [updateInput, , onUpdateContentHandler] = useInput({ updateContent: `${content}` });
+  const [updateInput, , onUpdateContentHandler] = useInput({ updateContent: content });
   const { updateContent } = updateInput;
 
   // 이미지 미리보기
@@ -71,35 +83,48 @@ export const ReviewUpdateForm = ({ item, setEditDataId }) => {
   };
 
   return (
-    <div>
+    <UpdateList>
       {editData.map((data) => {
         return (
-          <div key={data.id}>
-            <label>
-              {data.imageUrl && <img src={editImg ? editImg : data.imageUrl} alt="이미지" />}
-              <p>이미지 수정 시 이미지를 클릭해 주세요</p>
-              <input ref={imgRef} onChange={editImgHandler} type="file" accept="image/*" />
-            </label>
-            <div>{data.nickname}</div>
-            <textarea
-              value={updateContent} // 여기 초기값... 기존  메세지도 보여주고 새 메세지도 넣어야하는데
-              name="updateContent"
-              onChange={onUpdateContentHandler}
-              maxLength={80}
-              placeholder="최대 80자까지만 입력할 수 있습니다."
-              ref={contentRef}
-            ></textarea>
-            <button
-              onClick={() => {
-                modifyReview(data.id, data.reviewimg);
-              }}
-            >
-              수정완료
-            </button>
-            <button onClick={updateCancel}>취소</button>
-          </div>
+          <ListMapWrapper key={data.id}>
+            <ContentWrapper>
+              <UpdateImgWrapper>
+                {/* <ListNickName>{data.nickname}</ListNickName> */}
+                <label>
+                  {data.imageUrl && <img src={editImg ? editImg : data.imageUrl} alt="이미지" />}
+                  <UpdateImg>
+                    <p>이미지 변경 시 이미지를 클릭해 주세요</p>
+                  </UpdateImg>
+                  <input ref={imgRef} onChange={editImgHandler} type="file" accept="image/*" />
+                </label>
+              </UpdateImgWrapper>
+
+              <UpdateBtnsWrapper>
+                {/* <UpdateText> */}
+                <UpdateText
+                  value={updateContent}
+                  name="updateContent"
+                  onChange={onUpdateContentHandler}
+                  maxLength={80}
+                  placeholder="최대 80자까지만 입력할 수 있습니다."
+                  ref={contentRef}
+                ></UpdateText>
+                {/* </UpdateText> */}
+                <ContentBtns>
+                  <button
+                    onClick={() => {
+                      modifyReview(data.id, data.reviewimg);
+                    }}
+                  >
+                    수정완료
+                  </button>
+                  <button onClick={updateCancel}>취소</button>
+                </ContentBtns>
+              </UpdateBtnsWrapper>
+            </ContentWrapper>
+          </ListMapWrapper>
         );
       })}
-    </div>
+    </UpdateList>
   );
 };

@@ -14,6 +14,9 @@ export const ReviewHeaderDiv = styled.div`
   width: 100%;
   padding: 1rem;
   margin-bottom: 2%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
   background-color: #eee;
   h1 {
@@ -137,7 +140,6 @@ export const ContentsList = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  border: 1px solid var(--subColor2);
   border-radius: 1rem;
 `;
 
@@ -225,4 +227,52 @@ export const ContentBtns = styled.div`
       background-color: var(--subColor2);
     }
   }
+`;
+
+// ReviewUpdateForm
+export const UpdateList = styled.div`
+  width: 95%;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+`;
+
+export const UpdateMapWrapper = styled.div`
+  /* display: flex;
+  flex-direction: column;
+  align-items: center; */
+`;
+export const UpdateImgWrapper = styled.div`
+  width: 100%;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  & > label > img {
+    width: 70%;
+    cursor: pointer;
+    border: 1px solid var(--subColor2);
+    border-radius: 1rem;
+  }
+  > label > input {
+    display: none;
+  }
+`;
+
+export const UpdateImg = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+export const UpdateBtnsWrapper = styled.div`
+  width: 100%;
+  height: 35vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+`;
+export const UpdateText = styled.textarea`
+  width: 100%;
+  height: 25vh;
+  padding: 1rem;
+  border-radius: 0.5rem;
 `;
