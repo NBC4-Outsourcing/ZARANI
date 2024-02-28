@@ -20,7 +20,7 @@ const MyPageContents = () => {
   const [thumnailImage, setThumnailImage] = useState(defaultImg);
 
   const [userAccount, setUserAccount] = useState();
-  const { isLoading, isError, data } = useQuery('usersAccounts', readUserLocalAccount, {
+  const { isLoading, isError } = useQuery('usersAccounts', readUserLocalAccount, {
     onSuccess: (data) => {
       const uid = data.user?.id;
       const email = data.user?.email;
