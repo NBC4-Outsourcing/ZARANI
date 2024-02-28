@@ -24,7 +24,7 @@ const MyPageHeader = () => {
         <MPH.HomeLink to="/">홈으로</MPH.HomeLink>
         <MPH.TitleP>
           <MPH.LogoImg src={image} alt="기본이미지" />
-          &nbsp;MyPAGE
+          <span>My&nbsp;PAGE</span>
         </MPH.TitleP>
         <MPH.LogoutBtn onClick={handLogOut}>로그아웃</MPH.LogoutBtn>
       </MPH.HeaderNav>
