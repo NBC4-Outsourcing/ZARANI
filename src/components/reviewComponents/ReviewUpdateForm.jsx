@@ -1,5 +1,4 @@
 import { uuid } from '@supabase/gotrue-js/dist/module/lib/helpers';
-import { supabase } from 'api/supabase/supabase';
 import defaultProfileImage from 'assets/defaultProfileImage.png';
 import {
   ContentBtns,
@@ -12,11 +11,11 @@ import {
   UpdateText
 } from 'components/styles/ReviewStyle';
 import useInput from 'hooks/useInput';
+import useSetMutation from 'hooks/useSetMutations';
 import { useRef, useState } from 'react';
 import { updateReview, updateStorage } from './reviewPageSupabase';
-import useSetMutation from 'hooks/useSetMutations';
 
-export const ReviewUpdateForm = ({ item, setEditDataId, setReviewData }) => {
+export const ReviewUpdateForm = ({ item, setEditDataId }) => {
   const imgRef = useRef(null);
   const contentRef = useRef(null);
   const imgName = uuid();
