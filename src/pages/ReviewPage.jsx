@@ -1,4 +1,3 @@
-import { supabase } from 'api/supabase/supabase';
 import Loading from 'components/common/Loading';
 import { getUser } from 'components/communityComponents/CommunitySupabase';
 import ReviewForm from 'components/reviewComponents/ReviewForm';
@@ -6,7 +5,6 @@ import ReviewHeader from 'components/reviewComponents/ReviewHeader';
 import { ReviewList } from 'components/reviewComponents/ReviewList';
 import { CommunityBtn, CommunityErrorBackground } from 'components/styles/CommunityStyle';
 import { ReviewContainer } from 'components/styles/ReviewStyle';
-import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { useNavigate, useParams } from 'react-router-dom';
 

@@ -1,7 +1,6 @@
 import { supabase } from 'api/supabase/supabase';
-import { getLocalStorageJSON } from 'utils/getLocalStorageJSON';
 
-// DB에 후기 등록
+// 게시물 등록
 export const insertReview = async ([
   placename,
   imgPath,
@@ -40,7 +39,7 @@ export const insertReview = async ([
     imageUrl: '' // reviewList component에서 조회 시 url이 들어감
   };
 
-  // 데이터 등록
+  // 글 등록
   const { data, error } = await supabase.from('reviewWrite').insert([newReviews]).select();
   if (data) {
     alert('게시물이 등록 되었습니다.');
@@ -53,11 +52,13 @@ export const insertReview = async ([
   }
 };
 
+// 게시물 조회
 export const getReviewList = async () => {
   const { data: reviewWrite, error } = await supabase.from('reviewWrite').select('*');
   if (error) {
     console.error(error);
   } else {
+    // 이미지 조회
     const reviewsWriteData = reviewWrite.map((item) => {
       const imgUrl = supabase.storage.from('reviewImage').getPublicUrl(item.reviewimg);
       if (!imgUrl.error) {
@@ -71,6 +72,7 @@ export const getReviewList = async () => {
   }
 };
 
+// 게시물 삭제
 export const deleteReview = async ([id, reviewimg]) => {
   console.log('id, reviewimg', id, reviewimg);
   // 이미지 삭제
@@ -92,6 +94,7 @@ export const deleteReview = async ([id, reviewimg]) => {
   }
 };
 
+// 이미지 수정
 export const updateStorage = async (img, storagePath, newPath) => {
   const imgUpdate = await supabase.storage.from('reviewImage').upload(newPath, img, {
     cacheControl: '3600',
@@ -106,6 +109,7 @@ export const updateStorage = async (img, storagePath, newPath) => {
   }
 };
 
+// 게시물 수정
 export const updateReview = async ([id, modifyReviewData, setEditDataId]) => {
   const { data, error } = await supabase.from('reviewWrite').update(modifyReviewData).eq('id', id).select();
   if (!error) {
