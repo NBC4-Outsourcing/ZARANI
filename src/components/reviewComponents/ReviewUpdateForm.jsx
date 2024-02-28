@@ -71,12 +71,13 @@ export const ReviewUpdateForm = ({ item, setEditDataId }) => {
   return (
     <UpdateList>
       {editData.map((data) => {
+        console.log('editData', editData);
         return (
           <ListMapWrapper key={data.id}>
             <ContentWrapper>
               <UpdateImgWrapper>
                 <label>
-                  {data.imageUrl ? (
+                  {data.reviewimg ? (
                     <img src={editImg ? editImg : data.imageUrl} alt="이미지" />
                   ) : (
                     <img src={defaultProfileImage} />
