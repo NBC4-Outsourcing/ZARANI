@@ -18,6 +18,7 @@ import { ReviewUpdateForm } from './ReviewUpdateForm';
 export const ReviewList = ({ reviewData, setReviewData, placename }) => {
   // 수정 여부 state
   const [editDataId, setEditDataId] = useState(null);
+  const [openItemId, setOpenItemId] = useState(null);
 
   // 데이터 삭제
   const removeReview = async (id, reviewimg) => {
@@ -49,8 +50,8 @@ export const ReviewList = ({ reviewData, setReviewData, placename }) => {
       }
     }
   };
-  const [openItemId, setOpenItemId] = useState(null);
 
+  // 토글 이벤트
   const contentToggle = (id) => {
     setOpenItemId((prevId) => (prevId === id ? null : id));
   };

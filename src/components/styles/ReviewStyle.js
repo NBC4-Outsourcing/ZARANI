@@ -242,11 +242,6 @@ export const UpdateList = styled.div`
   flex-direction: column;
 `;
 
-export const UpdateMapWrapper = styled.div`
-  /* display: flex;
-  flex-direction: column;
-  align-items: center; */
-`;
 export const UpdateImgWrapper = styled.div`
   width: 100%;
   height: 50vh;

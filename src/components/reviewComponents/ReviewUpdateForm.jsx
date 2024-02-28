@@ -1,5 +1,6 @@
 import { uuid } from '@supabase/gotrue-js/dist/module/lib/helpers';
 import { supabase } from 'api/supabase/supabase';
+import zarani from 'assets/zarani.png';
 import {
   ContentBtns,
   ContentWrapper,
@@ -12,7 +13,6 @@ import {
 } from 'components/styles/ReviewStyle';
 import useInput from 'hooks/useInput';
 import { useRef, useState } from 'react';
-import zarani from 'assets/zarani.png';
 
 export const ReviewUpdateForm = ({ item, setEditDataId, setReviewData }) => {
   const imgRef = useRef(null);
