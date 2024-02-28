@@ -122,7 +122,6 @@ export const Nickname = styled.span`
 // MainPageNav.jsx
 
 export const NavWrapper = styled.div`
-  width: 500px;
   margin-top: 20px;
   height: 250px;
   width: 100%;
