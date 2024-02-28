@@ -22,7 +22,7 @@ export const MyPageContentsForm = styled.form`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   border-radius: 1rem;
 
   padding: 20px;
@@ -31,28 +31,48 @@ export const MyPageContentsForm = styled.form`
 
 export const ImgWrapDiv = styled.div`
   display: flex;
+  min-width: 240px;
+  min-height: 220px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   border-radius: 1rem;
-  gap: 2.2rem;
+  gap: 1.8rem;
+
+  @media screen and (max-width: 620px) {
+    max-width: 200px;
+    gap: 1.2rem;
+  }
 `;
 
 export const ThumnailImg = styled.div`
   display: flex;
   align-items: center;
-  min-width: 100px;
-  max-width: 240px;
-  /* min-height: 100px; */
-  max-height: 240px;
+  justify-content: center;
+  width: 220px;
+  /* min-width: 100px; */
+  min-height: 220px;
 
   > img {
     width: 100%;
-    height: 100%;
-    box-shadow: 0 2px 3px 2px lightgray;
+    min-width: 100%;
+
+    max-height: 220px;
+    box-shadow: 0 2px 4px 3px lightgray;
 
     border-radius: 20px;
     object-fit: cover;
+    @media screen and (max-width: 620px) {
+      min-width: 200px;
+      max-width: 100%;
+      max-height: 100px;
+      max-height: 100%;
+    }
+    @media screen and (max-width: 320px) {
+      max-width: 100%;
+      padding: 0.7rem 2rem;
+      /* padding: 0.7rem 4.4rem; /* 화면 너비가 768px 이하일 때 패딩을 줄여서 찌그러지지 않도록 함 */
+    }
   }
 `;
 
@@ -62,9 +82,6 @@ export const ImgFileInput = styled.input`
 
 export const AddBtnLabel = styled.label`
   background-color: var(--subColor1);
-  width: 100%;
-  max-width: 400px;
-  padding: 0.7rem 3.4rem;
 
   border-radius: 0.8rem;
 
@@ -81,15 +98,16 @@ export const AddBtnLabel = styled.label`
     transition: all 0.3s; // 시간차두고 바뀌도록 추가
     transition-duration: 0.2s;
   }
-  @media screen and (max-width: 768px) {
-    max-width: 100%;
-    padding: 0.7rem 4.4rem;
-    /* padding: 0.7rem 4.4rem; /* 화면 너비가 768px 이하일 때 패딩을 줄여서 찌그러지지 않도록 함 */
+
+  @media screen and (min-width: 1280px) {
+    padding: 0.7rem 3.6rem;
   }
-  @media screen and (max-width: 320px) {
+  @media screen and (max-width: 1280px) {
+    padding: 0.7rem 3.8rem;
+  }
+  @media screen and (max-width: 620px) {
     max-width: 100%;
-    padding: 0.7rem 2rem;
-    /* padding: 0.7rem 4.4rem; /* 화면 너비가 768px 이하일 때 패딩을 줄여서 찌그러지지 않도록 함 */
+    padding: 0.7rem 3.8rem;
   }
 `;
 
@@ -103,43 +121,48 @@ export const PhotoAddBtn = styled.div`
 
 export const ContentsBtnsDiv = styled.div`
   display: flex;
+  width: 100%;
   flex-direction: column;
   gap: 1.2rem;
 `;
 
 export const EmailNickDiv = styled.div`
   display: flex;
-
+  width: 100%;
   border-radius: 1rem;
   box-shadow: 0px 2px 4px 2px var(--subColor2);
 
   padding: 2rem;
-  /* gap: 1rem; */
 `;
 
 export const EmailNickWrap = styled.div`
   display: flex;
+  width: 100%;
   flex-direction: column;
   gap: 2rem;
 `;
 
 export const EmailWrap = styled.div`
   display: flex;
+  width: 100%;
   flex-direction: column;
 
   gap: 0.4rem;
 `;
 
 export const EmailP = styled.p`
+  width: 100%;
   font-size: 1.2rem;
   font-weight: bold;
 `;
 
 export const EmailValueP = styled.p`
+  width: 100%;
   font-size: 1.1rem;
 `;
 
 export const NickNameWrap = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
 
@@ -147,19 +170,26 @@ export const NickNameWrap = styled.div`
 `;
 
 export const NickNameP = styled.p`
+  width: 100%;
   font-size: 1.2rem;
   font-weight: bold;
 `;
 
 export const NickNameValueP = styled.p`
+  width: 100%;
   font-size: 1.1rem;
 `;
 
 export const NickNameValuePut = styled.input`
+  width: 100%;
+  height: 2.4rem;
+
   padding: 0.8rem;
+  border-radius: 0.8rem;
+
   font-size: 1.1rem;
   background-color: var(--subColor2);
-  &:hover,
+
   &:focus {
     background-color: #fff;
   }

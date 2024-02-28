@@ -55,7 +55,6 @@ const MyPageContents = () => {
   const nicknameBlank = editValueNickname.replace(blankPattern, '');
 
   if (isLogin === false) {
-    dispatch(logout());
     alert('로그인 유저만 사용가능합니다. 로그인 해주세요');
     navigate('/login', { replace: true });
   }
@@ -174,14 +173,14 @@ const MyPageContents = () => {
               <MP.EmailNickWrap>
                 <MP.EmailWrap>
                   <MP.EmailP>
-                    <span>이메일EMAIL</span>
+                    <span>이메일&nbsp;EMAIL</span>
                   </MP.EmailP>
                   <MP.EmailValueP>
                     <span>{email}</span>
                   </MP.EmailValueP>
                 </MP.EmailWrap>
                 <MP.NickNameWrap>
-                  <MP.NickNameP htmlFor="nickname">닉네임NICKNAME</MP.NickNameP>
+                  <MP.NickNameP htmlFor="nickname">닉네임&nbsp;NICKNAME</MP.NickNameP>
                   <MP.NickNameValuePut
                     type="text"
                     id="nickname"
