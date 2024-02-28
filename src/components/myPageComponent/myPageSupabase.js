@@ -8,7 +8,6 @@ export const updateUserAccount = async ({ nickname, avatar }) => {
   if (error) {
     console.log('updateUserAccount', error);
     console.error('업데이트를 다시 시도해주세요!');
-    // alert('회원정보가 저장되지 않았습니다.');
   }
   return data;
 };
@@ -64,15 +63,5 @@ export const downloadImage = async (filePath) => {
     return data;
   } catch (error) {
     alert('이미지를 받아오지 못하고 있습니다.');
-  }
-};
-
-///// 사용하지 않는 것
-export const updateUserInfo = async (objectInfo, id) => {
-  if (!id) return;
-  const { error } = await supabase.from('usersAccounts').update(objectInfo).eq('id', id);
-  if (error) {
-    console.log(error);
-    // alert('정보가 변경되지 않았습니다.');
   }
 };
