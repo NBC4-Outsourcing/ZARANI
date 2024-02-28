@@ -249,7 +249,7 @@
 
 | 소통 예시                                                    |
 | :----------------------------------------------------------- |
-| <img src="https://lh7-us.googleusercontent.com/aFoW3X75O-VacfTQB8PiYqbfXJZYEFXQ29Nfd89G_1MefYVJKKNNWKWWrEaPZpYcJEO8JZNxoMiYVb8U253PZL3QxoBeVYMI9ZtXJ37WIiluZzqeFsjAkuDLO7y_gZWPcBNT1eIYWPP5xCZqT7BS5T8" width="60%" height="60%" align="center" /> |
+| <img src="https://lh7-us.googleusercontent.com/aFoW3X75O-VacfTQB8PiYqbfXJZYEFXQ29Nfd89G_1MefYVJKKNNWKWWrEaPZpYcJEO8JZNxoMiYVb8U253PZL3QxoBeVYMI9ZtXJ37WIiluZzqeFsjAkuDLO7y_gZWPcBNT1eIYWPP5xCZqT7BS5T8" width="80%" height="80%" align="center" /> |
 
 
 
