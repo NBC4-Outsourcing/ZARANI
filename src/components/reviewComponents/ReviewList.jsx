@@ -1,4 +1,3 @@
-import defaultProfileImage from 'assets/defaultProfileImage.png';
 import { getFormattedDate } from 'components/communityComponents/formattedDate';
 import {
   ContentBtns,
@@ -23,8 +22,11 @@ export const ReviewList = ({ placename, userData }) => {
   // 수정 여부 state
   const [editDataId, setEditDataId] = useState(null);
   const [openItemId, setOpenItemId] = useState(null);
-
   const { isLoading, data } = useQuery('reviewList', getReviewList);
+
+  // 이미지를 저장하지 않은 경우 기본 이미지(깃헙에서 가져옴)
+  const defaultProfileImage =
+    'https://github.com/NBC4-Outsourcing/zarani/blob/main/src/assets/defaultProfileImage.png?raw=true';
 
   if (isLoading) {
     return <div>로딩중입니다</div>;
