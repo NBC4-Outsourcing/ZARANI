@@ -21,6 +21,7 @@ export const LoginForm = styled.form`
 
 export const WidthHundredPercentImg = styled.img`
   width: 100%;
+  height: 100%;
 `;
 
 export const LoginInputWrapper = styled.div`
