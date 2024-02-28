@@ -16,15 +16,12 @@ import {
   ReviewNickName
 } from 'components/styles/ReviewStyle';
 import useInput from 'hooks/useInput';
+import useSetMutation from 'hooks/useSetMutations';
 import { useRef, useState } from 'react';
 import { getLocalStorageJSON } from 'utils/getLocalStorageJSON';
+import { insertReview } from './reviewPageSupabase';
 
-const ReviewForm = ({ setReviewData, placename }) => {
-  // storage에 파일 객체로 이미지 저장을위한 변수
-  const imgRef = useRef(null);
-  const contentRef = useRef(null);
-  const imgName = uuid();
-
+const ReviewForm = ({ placename }) => {
   // 회원 정보
   const loginData = getLocalStorageJSON();
   const {
@@ -32,13 +29,18 @@ const ReviewForm = ({ setReviewData, placename }) => {
     user_metadata: { avatar, nickname }
   } = loginData.user;
 
+  // storage에 파일 객체로 이미지 저장을위한 변수
+  const imgRef = useRef(null);
+  const contentRef = useRef(null);
+  const imgName = uuid();
+  const [mutaion] = useSetMutation(insertReview, 'reviewList');
   const [reviewContentInput, , reviewContentHandler, reset] = useInput({
     reviewContent: ''
   });
   const { reviewContent } = reviewContentInput;
-
-  // 이미지 state
   const [addImg, setAddImg] = useState('');
+
+  const imgPath = imgRef.current?.files[0];
 
   // 이미지 미리보기 함수
   const previewImg = (e) => {
@@ -54,58 +56,14 @@ const ReviewForm = ({ setReviewData, placename }) => {
     setAddImg(null);
   };
 
-  // DB에 후기 등록
   const addReview = async (e) => {
     e.preventDefault();
-
-    // storage에 이미지 등록
-    let storagePath = '';
-    if (addImg) {
-      const imgPath = imgRef.current.files[0];
-      const { data, error } = await supabase.storage
-        .from('reviewImage')
-        .upload(`reviewFile/files/${email}${imgName}`, imgPath, {
-          cacheControl: '3600',
-          upsert: false
-        });
-
-      if (!error) {
-        storagePath = data.path; // 이미지 등록이 성공하면 이미지 경로 저장("reviewFile/files/kim@naver.com06cea4ae-f3e1-4b2f-a00c-9538c8f763d1")
-      } else {
-        console.error('이미지 등록 실패!', error);
-      }
-    }
     if (!reviewContent) {
       alert('내용을 입력해주세요');
       contentRef.current.focus();
       return;
     }
-    const newReviews = {
-      // userId: userData.email,
-      marker: placename.placename,
-      email,
-      nickname,
-      avatar,
-      content: reviewContent,
-      reviewimg: storagePath,
-      imageUrl: '' // reviewList component에서 조회 시 url이 들어감
-    };
-
-    // 데이터 등록
-    const { data, error } = await supabase.from('reviewWrite').insert([newReviews]).select();
-    if (data) {
-      alert('게시물이 등록 되었습니다.');
-      reset();
-      setAddImg(null);
-      setReviewData((prev) => {
-        return [...prev, newReviews];
-      });
-
-      return data;
-    } else {
-      alert('게시물 등록에 실패했습니다.');
-      console.error('error', error);
-    }
+    mutaion.mutate([placename, imgPath, imgName, reviewContent, reset, setAddImg, email, nickname, avatar]);
   };
 
   return (
