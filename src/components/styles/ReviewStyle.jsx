@@ -260,7 +260,7 @@ export const UpdateImgWrapper = styled.div`
 
 export const UpdateImg = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 `;
 export const UpdateBtnsWrapper = styled.div`
   width: 100%;
