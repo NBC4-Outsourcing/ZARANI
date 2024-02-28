@@ -244,16 +244,31 @@
   - **(중요) 자주 하기 (나중에 한꺼번에 pull 해서 오류가 와장창 생기면 본인 책임**
 
   6. 소통 예시
-     - <img src="https://lh7-us.googleusercontent.com/nkcEuGY5mRB0QQWW1Kja0v-1EVYJgGLkarhj03uVhYTx-6_M3K2vnHTVXeg6JOkbVJrJdZQqb-BsLFaJNr_I_LH0HHJ8bmvXb2B-Zo5bo5j7GKgQ3UWAkbqvcELYq76trGVVHRPmIbDdBMN74aPoAGs" width="30%" height="30%" />
-     - <img src="https://lh7-us.googleusercontent.com/CCCTCVChsWOVtVvMhGwLtsDaYof1mwljov-Eyk3CXF723csariaWuY7qp5yujkf09cYpmBh8przrL81LBsmrPajMVxvw-pJ988n71wxXdUH7F21lIPEnxe2gDNHsdtaARPAwj9EaazTtEBfDuTdm224" width="30%" height="30%" />
-     - <img src="https://lh7-us.googleusercontent.com/528-QvU83uCz5VO_urkp1INnCzL5h_R2K4gFA96daaatM66UvVwL-Uv4sfapYBksn3U4JVRUFtThLGHub_6U8K31H2c-RD7oZ-Mz7_W1IBL2dz8vrb8lL2u-cnCo9Dh-xUC5o6Zg1IyHIqCQX9G_-H8" width="30%" height="30%" />
-     - <img src="https://lh7-us.googleusercontent.com/IChEP2gYXEBvOK5Gnc46wNap8FfZ_Wv9iEUWER8LF-4L-JYanfx_JObG6_q1FXKBLD9DdC9_mRpbYm41fIAv28xaVEgQ6gbJL-jv46AlQIUriZM7_K_npesCh9m3yEtiZMb-aatwHZGuqoZ3jJU15io" width="30%" height="30%" />
-     - <img src="https://lh7-us.googleusercontent.com/8MnakKajE2fZHVgQiZsrvm6VNXU90pQcgwiRri_OcR8cCfEd82TacbuwkQU1QYYcsdcsTSauNqKaOsrNhuQXUZdCMAY94utyO8KJ2WCjS2d8rvR66BNDPEk_vVdMzt8gh6coynAUBQIOriJyg3ilEdE" width="30%" height="30%" />
 
+
+
+| 소통 예시                                                    |
+| :----------------------------------------------------------- |
+| <img src="https://lh7-us.googleusercontent.com/aFoW3X75O-VacfTQB8PiYqbfXJZYEFXQ29Nfd89G_1MefYVJKKNNWKWWrEaPZpYcJEO8JZNxoMiYVb8U253PZL3QxoBeVYMI9ZtXJ37WIiluZzqeFsjAkuDLO7y_gZWPcBNT1eIYWPP5xCZqT7BS5T8" width="60%" height="60%" align="center" /> |
+
+
+
+
+
+
+ 
+ 
+
+ 
+
+
+<br />
  
 <br />
 
 <br />
+
+---
 
 
 ## 🚩시작 가이드
