@@ -148,8 +148,10 @@ export const ListMapWrapper = styled.div`
 `;
 export const ContentWrapper = styled.div`
   width: 95%;
+  height: 50vh;
   display: flex;
   flex-direction: row;
+  align-items: center;
   img {
     width: 60%;
     height: 35vh;
@@ -162,10 +164,13 @@ export const ToggleContent = styled.div`
   width: 95%;
   background-color: var(--subColor2);
   border-radius: 1rem;
+  white-space: nowrap; /* 텍스트를 한 줄에만 표시 */
+  overflow: hidden; /* 넘치는 텍스트를 숨김 */
+  text-overflow: ellipsis; /* 넘치는 텍스트를 줄임표로 표시 */
+  max-width: 93vh;
 `;
 export const ContentImgWrapper = styled.div`
   width: 100%;
-  height: 35vh;
   display: flex;
   flex-direction: column;
   align-items: center;
