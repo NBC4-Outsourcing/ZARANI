@@ -1,6 +1,6 @@
 import { uuid } from '@supabase/gotrue-js/dist/module/lib/helpers';
 import { supabase } from 'api/supabase/supabase';
-import zarani from 'assets/zarani.png';
+import defaultProfileImage from 'assets/defaultProfileImage.png';
 import {
   ContentBtns,
   ContentWrapper,
@@ -93,7 +93,11 @@ export const ReviewUpdateForm = ({ item, setEditDataId, setReviewData }) => {
             <ContentWrapper>
               <UpdateImgWrapper>
                 <label>
-                  {data.imageUrl ? <img src={editImg ? editImg : data.imageUrl} alt="이미지" /> : <img src={zarani} />}
+                  {data.imageUrl ? (
+                    <img src={editImg ? editImg : data.imageUrl} alt="이미지" />
+                  ) : (
+                    <img src={defaultProfileImage} />
+                  )}
                   <UpdateImg>
                     <p>이미지 변경 시 이미지를 클릭해 주세요</p>
                   </UpdateImg>
@@ -106,8 +110,8 @@ export const ReviewUpdateForm = ({ item, setEditDataId, setReviewData }) => {
                   value={updateContent}
                   name="updateContent"
                   onChange={onUpdateContentHandler}
-                  maxLength={80}
-                  placeholder="최대 80자까지만 입력할 수 있습니다."
+                  maxLength={300}
+                  placeholder="최대 300자까지만 입력할 수 있습니다."
                   ref={contentRef}
                 ></UpdateText>
                 <ContentBtns>

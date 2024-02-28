@@ -1,5 +1,5 @@
 import { supabase } from 'api/supabase/supabase';
-import zarani from 'assets/zarani.png';
+import defaultProfileImage from 'assets/defaultProfileImage.png';
 import { getFormattedDate } from 'components/communityComponents/formattedDate';
 import {
   ContentBtns,
@@ -75,7 +75,7 @@ export const ReviewList = ({ reviewData, setReviewData, placename, userData }) =
                     >
                       <ContentImgWrapper>
                         <ListNickName>{item.nickname}</ListNickName>
-                        <img src={item.reviewimg ? item.imageUrl : zarani} alt="리뷰 이미지" />
+                        <img src={item.reviewimg ? item.imageUrl : defaultProfileImage} alt="리뷰 이미지" />
                         <div>{getFormattedDate(item.date)}</div>
                       </ContentImgWrapper>
                       <ContentBtnsWrapper>
