@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import MainPageLanding from './MainPageLending';
 import * as S from '../styles/mainPageStyle';
 import { useNavigate } from 'react-router-dom';
+import { setList } from 'shared/redux/modules/mapListSlice';
 
 const { kakao } = window;
 
 const MainPageKaKao = () => {
   const navigate = useNavigate();
-  const [list, setList] = useState([]);
+  // const [list, setList] = useState([]);
   const data = useSelector((state) => state.area);
   const serchBtn = data.serchTxt.serchTxt;
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     let markers = [];
@@ -36,7 +39,8 @@ const MainPageKaKao = () => {
 
         displayPlaces(data);
 
-        setList(data);
+        // setList(data);
+        dispatch(setList(data));
       } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
         alert('검색 결과가 존재하지 않습니다.');
         return;
@@ -120,35 +124,12 @@ const MainPageKaKao = () => {
   // 문제 1.리스트를 클릭하면 해당 마커가 클릭 되는 이벤트를 줄 수 없음 마커 생성과 클릭 이벤트가 useEffect내에서 이뤄지기 때문
   // 원하는 거 map으로 뿌려준 리스트 클릭하면 해당 리스트의 마커 클릭 하는 것 과 같은 효과를 보여주는거(확대)
 
-  const onClick = (place) => {
-    const confirm = window.confirm(`${place} 후기 페이지로 이동 하시겠습니까?`);
-    if (confirm) {
-      navigate(`/reviewpage/${place}`);
-    }
-    return;
-  };
-
   return (
     <div>
       <div
         id="map"
-        style={{ width: '500px', height: '481px', position: 'relative', overflow: 'hidden', marginTop: '30px' }}
+        style={{ width: '600px', height: '790px', position: 'relative', overflow: 'hidden', marginTop: '30px' }}
       ></div>
-
-      <S.SerchSection>
-        <MainPageLanding />
-        <S.ListContent>
-          {list.map((item, idx) => {
-            return (
-              <li key={idx} onClick={() => onClick(item.place_name)}>
-                <p>{idx + 1}</p>
-                <p>{item.place_name}</p>
-                <p>후기 보러가기</p>
-              </li>
-            );
-          })}
-        </S.ListContent>
-      </S.SerchSection>
     </div>
   );
 };
