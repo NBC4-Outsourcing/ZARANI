@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { logout } from 'shared/redux/modules/authSlice';
 import { getLoginUserInfo, removeCurrentLoginUser } from 'components/loginPageComponents/loginPageSupabase';
+import image from 'assets/logo.png';
 import * as MPH from 'components/styles/MyPageHeaderStyle';
 
 const MyPageHeader = () => {
@@ -21,7 +22,10 @@ const MyPageHeader = () => {
     <MPH.HeaderArticle>
       <MPH.HeaderNav>
         <MPH.HomeLink to="/">홈으로</MPH.HomeLink>
-        <MPH.TitleP>ZARANI MyPAGE</MPH.TitleP>
+        <MPH.TitleP>
+          <MPH.LogoImg src={image} alt="기본이미지" />
+          &nbsp;MyPAGE
+        </MPH.TitleP>
         <MPH.LogoutBtn onClick={handLogOut}>로그아웃</MPH.LogoutBtn>
       </MPH.HeaderNav>
     </MPH.HeaderArticle>
