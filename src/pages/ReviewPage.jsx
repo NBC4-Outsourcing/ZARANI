@@ -55,7 +55,7 @@ export const ReviewPage = () => {
       <ReviewHeader placename={placename} />
       <ReviewContainer>
         <ReviewForm setReviewData={setReviewData} placename={placename} />
-        <ReviewList reviewData={reviewData} setReviewData={setReviewData} placename={placename} />
+        <ReviewList reviewData={reviewData} setReviewData={setReviewData} placename={placename} userData={userData} />
       </ReviewContainer>
     </>
   );

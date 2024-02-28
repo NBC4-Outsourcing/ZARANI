@@ -84,6 +84,7 @@ const ReviewForm = ({ setReviewData, placename }) => {
       return;
     }
     const newReviews = {
+      // userId: userData.email,
       marker: placename.placename,
       email,
       nickname,
