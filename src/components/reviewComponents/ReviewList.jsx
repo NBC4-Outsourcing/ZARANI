@@ -1,40 +1,47 @@
 import { supabase } from 'api/supabase/supabase';
+import zarani from 'assets/zarani.png';
 import { getFormattedDate } from 'components/communityComponents/formattedDate';
-import { ContentsList } from 'components/styles/ReviewStyle';
+import {
+  ContentBtns,
+  ContentBtnsWrapper,
+  ContentImgWrapper,
+  ContentWrapper,
+  ContentsList,
+  ListContent,
+  ListMapWrapper,
+  ListNickName,
+  ToggleContent
+} from 'components/styles/ReviewStyle';
 import { useEffect, useState } from 'react';
 import { ReviewUpdateForm } from './ReviewUpdateForm';
-import defaultProfileImage from '../../assets/defaultProfileImage.png';
 
-export const ReviewList = () => {
-  // 데이터베이스에 저장된 데이터 저장 state
-  const [reviewData, setReviewData] = useState([]);
+export const ReviewList = ({ reviewData, setReviewData }) => {
+  // const [reviewData, setReviewData] = useState([]);
 
   // 수정 여부 state
-  const [editDataId, setEditDataId] = useState('false');
+  const [editDataId, setEditDataId] = useState(null);
 
   // DB에 저장된 데이터 가져오기
-  useEffect(() => {
-    // 게시글 불러오기
-    const fetchData = async () => {
-      let { data: reviewWrite, error } = await supabase.from('reviewWrite').select('*');
-      console.log('reviewWrite', reviewWrite);
-      if (error) {
-        console.log('게시물 조회 실패', error);
-      } else {
-        console.log('게시물 조회 성공', reviewWrite);
+  // useEffect(() => {
+  //   // 게시글 불러오기
+  //   // const fetchData = async () => {
+  //   //   let { data: reviewWrite, error } = await supabase.from('reviewWrite').select('*');
+  //   //   if (error) {
+  //   //     console.log('게시물 조회 실패', error);
+  //   //   } else {
+  //   //     console.log('게시물 조회 성공', reviewWrite);
 
-        // 이미지 불러오기
-        const reviewsWriteData = reviewWrite.map((item) => {
-          const imgUrl = supabase.storage.from('reviewImage').getPublicUrl(item.reviewimg);
-          return { ...item, imageUrl: imgUrl.data.publicUrl };
-        });
-        console.log('reviewsWriteData', reviewsWriteData);
-        setReviewData(reviewsWriteData);
-      }
-    };
+  //   //     // 이미지 불러오기
+  //   //     const reviewsWriteData = reviewWrite.map((item) => {
+  //   //       const imgUrl = supabase.storage.from('reviewImage').getPublicUrl(item.reviewimg);
+  //   //       return { ...item, imageUrl: imgUrl.data.publicUrl };
+  //   //     });
+  //   //     setReviewData(reviewsWriteData);
+  //   //   }
+  //   // };
 
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
 
   // 데이터 삭제
   const removeReview = async (id, reviewimg) => {
@@ -61,44 +68,67 @@ export const ReviewList = () => {
       }
     }
   };
-  console.log('ReviewData', reviewData);
+  const [openItemId, setOpenItemId] = useState(null);
+
+  const contentToggle = (id) => {
+    setOpenItemId((prevId) => (prevId === id ? null : id));
+  };
+  console.log('reviewData', reviewData);
 
   return (
     <ContentsList>
       {reviewData?.map((item) => {
-        console.log('item', item);
-        console.log('imageUrl', item.imageUrl);
+        console.log('reviewData', reviewData);
+
         return (
-          <div key={item.id}>
-            {/* 수정 버튼 클릭 시 editDataId state에 item.id가 담겨 선택한 게시물만 수정 상태로 만들어 준다 */}
+          <ListMapWrapper key={item.id}>
             {editDataId === item.id ? (
-              <>
-                <ReviewUpdateForm item={item} setEditDataId={setEditDataId} />
-              </>
+              <ReviewUpdateForm item={item} setEditDataId={setEditDataId} setReviewData={setReviewData} />
             ) : (
-              <div>
-                {item.imageUrl && <img src={item.imageUrl} alt="리뷰 이미지" />}
-                {/* <img src={item.imageUrl ? item.imageUrl : defaultProfileImage} alt="리뷰 이미지" /> */}
-                <div>{item.nickname}</div>
-                <div>{item.content}</div>
-                <div>{getFormattedDate(item.date)}</div>
-                <button
-                  onClick={() => {
-                    setEditDataId(item.id);
-                  }}
-                >
-                  수정
-                </button>
-                <button
-                  onClick={() => {
-                    removeReview(item.id, item.reviewimg);
-                  }}
-                >
-                  삭제
-                </button>
-              </div>
+              <>
+                {openItemId === item.id ? (
+                  <ContentWrapper
+                    onClick={() => {
+                      contentToggle(item.id);
+                    }}
+                  >
+                    <ContentImgWrapper>
+                      <ListNickName>{item.nickname}</ListNickName>
+                      <img src={item.reviewimg ? item.imageUrl : zarani} alt="리뷰 이미지" />
+                      <div>{getFormattedDate(item.date)}</div>
+                    </ContentImgWrapper>
+                    <ContentBtnsWrapper>
+                      <ListContent>{item.content}</ListContent>
+                      <ContentBtns>
+                        <button
+                          onClick={() => {
+                            setEditDataId(item.id);
+                          }}
+                        >
+                          수정
+                        </button>
+                        <button
+                          onClick={() => {
+                            removeReview(item.id, item.reviewimg);
+                          }}
+                        >
+                          삭제
+                        </button>
+                      </ContentBtns>
+                    </ContentBtnsWrapper>
+                  </ContentWrapper>
+                ) : (
+                  <ToggleContent
+                    onClick={() => {
+                      contentToggle(item.id);
+                    }}
+                  >
+                    {item.content}
+                  </ToggleContent>
+                )}
+              </>
             )}
-          </div>
+          </ListMapWrapper>
         );
       })}
     </ContentsList>

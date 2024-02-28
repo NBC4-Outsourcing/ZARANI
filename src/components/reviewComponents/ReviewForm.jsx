@@ -1,20 +1,26 @@
 import { uuid } from '@supabase/gotrue-js/dist/module/lib/helpers';
 import { supabase } from 'api/supabase/supabase';
+import check from 'assets/check.gif';
+import zarani from 'assets/zarani.png';
 import {
+  AddBtn,
+  AddBtnDiv,
   AddFormContent,
   AddFormImg,
   AddFormTextarea,
-  AddImgText,
   FormContainer,
+  ImgCancelBtn,
+  ImgMessage,
+  ReviewFormComponentDiv,
   ReviewFormWrapper,
-  ReviewHeader
+  ReviewNickName
 } from 'components/styles/ReviewStyle';
+import useInput from 'hooks/useInput';
 import { useRef, useState } from 'react';
 import { getLocalStorageJSON } from 'utils/getLocalStorageJSON';
-import defaultImage from '../../assets/defaultImage.png';
-import useInput from '../../hooks/useInput';
 
-const ReviewForm = () => {
+const ReviewForm = ({ setReviewData }) => {
+  // const ReviewForm = () => {
   // storage에 파일 객체로 이미지 저장을위한 변수
   const imgRef = useRef(null);
   const contentRef = useRef(null);
@@ -26,7 +32,6 @@ const ReviewForm = () => {
     email,
     user_metadata: { avatar, nickname }
   } = loginData.user;
-  // console.log('회원 정보 : ', 'email : ', email, ' id : ', id, ' avatar : ', avatar, ' nickname : ', nickname);
 
   const [reviewContentInput, , reviewContentHandler, reset] = useInput({
     reviewContent: ''
@@ -95,9 +100,11 @@ const ReviewForm = () => {
     const { data, error } = await supabase.from('reviewWrite').insert([newReviews]).select();
     if (data) {
       alert('게시물이 등록 되었습니다.');
+      console.log('data', data);
       reset();
       setAddImg(null);
       setIsImg(false);
+      // setReviewData();
       return data;
     } else {
       alert('게시물 등록에 실패했습니다.');
@@ -106,27 +113,25 @@ const ReviewForm = () => {
   };
 
   return (
-    <div>
-      <ReviewHeader>
-        <h1>안양천길</h1>
-      </ReviewHeader>
+    <ReviewFormComponentDiv>
       <ReviewFormWrapper>
         <FormContainer onSubmit={addReview}>
-          <p>보라돌이</p>
+          <ReviewNickName>
+            <p>{nickname}</p>
+          </ReviewNickName>
           <AddFormContent>
-            {/* isImg의 기본값은 false 텍스트 클릭 시 아래 파일 input이 보인다  */}
-            {isImg ? null : <AddImgText onClick={() => setIsImg(true)}>이미지 추가</AddImgText>}
-            {isImg && (
-              <AddFormImg>
-                <label>
-                  {/* 이미지를 추가하기 전 기본 이미지가 보이고 추가 시 등록한 이미지를 띄움 */}
-                  <img src={addImg ? addImg : defaultImage} alt="이미지" />
+            <AddFormImg>
+              <label>
+                {/* 이미지를 추가하기 전 기본 이미지가 보이고 추가 시 등록한 이미지를 띄움 */}
+                <img onClick={() => setIsImg(true)} src={addImg ? addImg : zarani} alt="이미지" />
+                <ImgMessage>
                   <p>{addImg ? '이미지 변경 시 이미지를 클릭해 주세요' : '이미지 추가 시 이미지를 클릭해 주세요'}</p>
-                  <input ref={imgRef} onChange={previewImg} type="file" accept="image/*" />
-                </label>
-                <button onClick={addCancel}>이미지 등록 취소</button>
-              </AddFormImg>
-            )}
+                  <img src={check} />
+                </ImgMessage>
+                <input ref={imgRef} onChange={previewImg} type="file" accept="image/*" />
+              </label>
+              <ImgCancelBtn onClick={addCancel}>이미지 등록 취소</ImgCancelBtn>
+            </AddFormImg>
             <AddFormTextarea
               value={reviewContent}
               name="reviewContent"
@@ -136,10 +141,12 @@ const ReviewForm = () => {
               ref={contentRef}
             ></AddFormTextarea>
           </AddFormContent>
-          <button type="submit">등록</button>
+          <AddBtnDiv>
+            <AddBtn type="submit">등록</AddBtn>
+          </AddBtnDiv>
         </FormContainer>
       </ReviewFormWrapper>
-    </div>
+    </ReviewFormComponentDiv>
   );
 };
 
