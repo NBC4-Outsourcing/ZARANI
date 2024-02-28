@@ -58,66 +58,62 @@ export const ReviewList = ({ reviewData, setReviewData, placename, userData }) =
 
   return (
     <ContentsList>
-      {reviewData?.map((item) => {
-        return placename.placename === item.marker ? (
-          <ListMapWrapper key={item.id}>
-            {editDataId === item.id ? (
-              <ReviewUpdateForm item={item} setEditDataId={setEditDataId} setReviewData={setReviewData} />
-            ) : (
-              <>
-                {openItemId === item.id ? (
-                  <ContentWrapper
-                    onClick={() => {
-                      contentToggle(item.id);
-                    }}
-                  >
-                    <ContentImgWrapper>
-                      <ListNickName>{item.nickname}</ListNickName>
-                      <img src={item.reviewimg ? item.imageUrl : zarani} alt="리뷰 이미지" />
-                      <div>{getFormattedDate(item.date)}</div>
-                    </ContentImgWrapper>
-                    <ContentBtnsWrapper>
-                      <ListContent>{item.content}</ListContent>
-                      <ContentBtns>
-                        {item.email === userData.email ? (
-                          <>
-                            <button
-                              onClick={() => {
-                                setEditDataId(item.id);
-                              }}
-                            >
-                              수정
-                            </button>
-                            <button
-                              onClick={() => {
-                                removeReview(item.id, item.reviewimg);
-                              }}
-                            >
-                              삭제
-                            </button>
-                          </>
-                        ) : (
-                          false
-                        )}
-                      </ContentBtns>
-                    </ContentBtnsWrapper>
-                  </ContentWrapper>
-                ) : (
-                  <ToggleContent
-                    onClick={() => {
-                      contentToggle(item.id);
-                    }}
-                  >
-                    {item.content}
-                  </ToggleContent>
-                )}
-              </>
-            )}
-          </ListMapWrapper>
-        ) : (
-          false
-        );
-      })}
+      {reviewData
+        .sort((a, b) => new Date(b.date) - new Date(a.date))
+        ?.map((item) => {
+          return placename.placename === item.marker ? (
+            <ListMapWrapper key={item.id}>
+              {editDataId === item.id ? (
+                <ReviewUpdateForm item={item} setEditDataId={setEditDataId} setReviewData={setReviewData} />
+              ) : (
+                <>
+                  {openItemId === item.id ? (
+                    <ContentWrapper
+                      onClick={() => {
+                        contentToggle(item.id);
+                      }}
+                    >
+                      <ContentImgWrapper>
+                        <ListNickName>{item.nickname}</ListNickName>
+                        <img src={item.reviewimg ? item.imageUrl : zarani} alt="리뷰 이미지" />
+                        <div>{getFormattedDate(item.date)}</div>
+                      </ContentImgWrapper>
+                      <ContentBtnsWrapper>
+                        <ListContent>{item.content}</ListContent>
+                        <ContentBtns>
+                          <button
+                            onClick={() => {
+                              setEditDataId(item.id);
+                            }}
+                          >
+                            수정
+                          </button>
+                          <button
+                            onClick={() => {
+                              removeReview(item.id, item.reviewimg);
+                            }}
+                          >
+                            삭제
+                          </button>
+                        </ContentBtns>
+                      </ContentBtnsWrapper>
+                    </ContentWrapper>
+                  ) : (
+                    <ToggleContent
+                      onClick={() => {
+                        contentToggle(item.id);
+                      }}
+                    >
+                      {item.content}
+                    </ToggleContent>
+                  )}
+                </>
+              )}
+            </ListMapWrapper>
+          ) : (
+            false
+          );
+        })}
     </ContentsList>
   );
 };
