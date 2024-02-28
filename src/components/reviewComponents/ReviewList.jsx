@@ -61,6 +61,11 @@ export const ReviewList = ({ reviewData, setReviewData }) => {
         if (!error) {
           alert('게시물이 삭제되었습니다.');
           console.log('게시물 삭제 성공');
+          setReviewData((prev) =>
+            prev.filter((item) => {
+              return item.id !== id;
+            })
+          );
           return;
         }
       } catch (error) {
@@ -73,13 +78,10 @@ export const ReviewList = ({ reviewData, setReviewData }) => {
   const contentToggle = (id) => {
     setOpenItemId((prevId) => (prevId === id ? null : id));
   };
-  console.log('reviewData', reviewData);
 
   return (
     <ContentsList>
       {reviewData?.map((item) => {
-        console.log('reviewData', reviewData);
-
         return (
           <ListMapWrapper key={item.id}>
             {editDataId === item.id ? (
