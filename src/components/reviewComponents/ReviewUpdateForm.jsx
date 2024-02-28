@@ -10,8 +10,9 @@ export const ReviewUpdateForm = ({ item, setEditDataId }) => {
   const [editImg, setEditImg] = useState('');
   const editData = [item];
   const { email } = editData[0];
+  const { content } = editData[0];
 
-  const [updateInput, , onUpdateContentHandler] = useInput({ updateContent: '' });
+  const [updateInput, , onUpdateContentHandler] = useInput({ updateContent: `${content}` });
   const { updateContent } = updateInput;
 
   // 이미지 미리보기

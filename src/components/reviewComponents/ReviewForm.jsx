@@ -12,16 +12,14 @@ import {
   ImgCancelBtn,
   ImgMessage,
   ReviewFormComponentDiv,
-  ReviewFormDiv,
   ReviewFormWrapper,
-  ReviewHeader,
   ReviewNickName
 } from 'components/styles/ReviewStyle';
 import useInput from 'hooks/useInput';
 import { useRef, useState } from 'react';
 import { getLocalStorageJSON } from 'utils/getLocalStorageJSON';
 
-const ReviewForm = () => {
+const ReviewForm = ({ setViewChange }) => {
   // storage에 파일 객체로 이미지 저장을위한 변수
   const imgRef = useRef(null);
   const contentRef = useRef(null);
@@ -101,9 +99,11 @@ const ReviewForm = () => {
     const { data, error } = await supabase.from('reviewWrite').insert([newReviews]).select();
     if (data) {
       alert('게시물이 등록 되었습니다.');
+      console.log('data', data);
       reset();
       setAddImg(null);
       setIsImg(false);
+      setViewChange(data);
       return data;
     } else {
       alert('게시물 등록에 실패했습니다.');
@@ -113,40 +113,38 @@ const ReviewForm = () => {
 
   return (
     <ReviewFormComponentDiv>
-      <ReviewFormDiv>
-        <ReviewFormWrapper>
-          <FormContainer onSubmit={addReview}>
-            <ReviewNickName>
-              <p>{nickname}</p>
-            </ReviewNickName>
-            <AddFormContent>
-              <AddFormImg>
-                <label>
-                  {/* 이미지를 추가하기 전 기본 이미지가 보이고 추가 시 등록한 이미지를 띄움 */}
-                  <img onClick={() => setIsImg(true)} src={addImg ? addImg : zarani} alt="이미지" />
-                  <ImgMessage>
-                    <p>{addImg ? '이미지 변경 시 이미지를 클릭해 주세요' : '이미지 추가 시 이미지를 클릭해 주세요'}</p>
-                    <img src={check} />
-                  </ImgMessage>
-                  <input ref={imgRef} onChange={previewImg} type="file" accept="image/*" />
-                </label>
-                <ImgCancelBtn onClick={addCancel}>이미지 등록 취소</ImgCancelBtn>
-              </AddFormImg>
-              <AddFormTextarea
-                value={reviewContent}
-                name="reviewContent"
-                onChange={reviewContentHandler}
-                maxLength={'80'}
-                placeholder="최대 80자까지만 입력할 수 있습니다."
-                ref={contentRef}
-              ></AddFormTextarea>
-            </AddFormContent>
-            <AddBtnDiv>
-              <AddBtn type="submit">등록</AddBtn>
-            </AddBtnDiv>
-          </FormContainer>
-        </ReviewFormWrapper>
-      </ReviewFormDiv>
+      <ReviewFormWrapper>
+        <FormContainer onSubmit={addReview}>
+          <ReviewNickName>
+            <p>{nickname}</p>
+          </ReviewNickName>
+          <AddFormContent>
+            <AddFormImg>
+              <label>
+                {/* 이미지를 추가하기 전 기본 이미지가 보이고 추가 시 등록한 이미지를 띄움 */}
+                <img onClick={() => setIsImg(true)} src={addImg ? addImg : zarani} alt="이미지" />
+                <ImgMessage>
+                  <p>{addImg ? '이미지 변경 시 이미지를 클릭해 주세요' : '이미지 추가 시 이미지를 클릭해 주세요'}</p>
+                  <img src={check} />
+                </ImgMessage>
+                <input ref={imgRef} onChange={previewImg} type="file" accept="image/*" />
+              </label>
+              <ImgCancelBtn onClick={addCancel}>이미지 등록 취소</ImgCancelBtn>
+            </AddFormImg>
+            <AddFormTextarea
+              value={reviewContent}
+              name="reviewContent"
+              onChange={reviewContentHandler}
+              maxLength={'80'}
+              placeholder="최대 80자까지만 입력할 수 있습니다."
+              ref={contentRef}
+            ></AddFormTextarea>
+          </AddFormContent>
+          <AddBtnDiv>
+            <AddBtn type="submit">등록</AddBtn>
+          </AddBtnDiv>
+        </FormContainer>
+      </ReviewFormWrapper>
     </ReviewFormComponentDiv>
   );
 };

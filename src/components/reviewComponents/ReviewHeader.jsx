@@ -1,12 +1,9 @@
-import React from 'react';
-
-const ReviewHeader = () => {
+import { ReviewHeaderDiv } from 'components/styles/ReviewStyle';
+const ReviewHeader = ({ placename }) => {
   return (
-    <div>
-      <ReviewHeader>
-        <h1>안양천길</h1>
-      </ReviewHeader>
-    </div>
+    <ReviewHeaderDiv>
+      <h1>{placename}</h1>
+    </ReviewHeaderDiv>
   );
 };
 

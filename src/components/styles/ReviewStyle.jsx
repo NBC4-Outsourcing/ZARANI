@@ -1,62 +1,72 @@
 import styled from 'styled-components';
 
+// ReviewPage
 export const ReviewContainer = styled.div`
-  display: flex;
-  gap: 2%;
-`;
-// ReviewForm
-export const ReviewFormComponentDiv = styled.div`
   width: 100%;
+  display: flex;
+  text-align: center;
+  justify-content: space-around;
+  padding: 0 1%;
 `;
-export const ReviewHeader = styled.div`
-  padding: 10px;
+
+// ReviewHeader
+export const ReviewHeaderDiv = styled.div`
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 2%;
   text-align: center;
   background-color: #eee;
   h1 {
-    font-size: 50px;
+    font-size: 3rem;
   }
 `;
-export const ReviewFormDiv = styled.div`
-  width: 95%;
-  margin: 0 auto;
+
+// ReviewForm
+export const ReviewFormComponentDiv = styled.div`
+  width: 48%;
 `;
 
 export const ReviewFormWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  margin-top: 3%;
 `;
 export const FormContainer = styled.form`
-  width: 50%;
-  height: 80vh;
+  width: 100%;
+  height: 90vh;
+  padding: 1rem;
   display: flex;
   justify-content: space-around;
   flex-direction: column;
   border: 1px solid #eee;
-  border-radius: 5px;
+  border-radius: 1rem;
 `;
 export const ReviewNickName = styled.div`
   width: 15%;
   margin: 0 auto;
-  padding: 10px;
-  font-size: 20px;
+  padding: 1rem;
+  font-size: 1rem;
   font-weight: 700;
   text-align: center;
   background-color: var(--subColor2);
-  border-radius: 10px;
+  border-radius: 1rem;
 `;
 export const AddFormContent = styled.div`
   display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 `;
 export const AddFormImg = styled.div`
-  width: 50%;
+  width: 45%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+
   & > label > img {
     width: 100%;
     cursor: pointer;
+    border: 1px solid var(--subColor2);
+    border-radius: 1rem;
   }
   & > label > input {
     display: none;
@@ -70,8 +80,8 @@ export const AddFormImg = styled.div`
 
 export const ImgMessage = styled.div`
   margin: 0 auto;
-  width: 75%;
-  padding: 10px;
+  width: 100%;
+  padding: 0 2rem;
   display: flex;
   align-items: flex-end;
   text-align: center;
@@ -83,10 +93,10 @@ export const ImgMessage = styled.div`
 `;
 export const ImgCancelBtn = styled.button`
   width: 40%;
-  padding: 10px;
+  padding: 0.5rem;
   border: none;
   border-radius: 5px;
-  font-size: 16px;
+  font-size: 1rem;
   background-color: var(--subColor1);
   cursor: pointer;
   &:hover {
@@ -96,10 +106,10 @@ export const ImgCancelBtn = styled.button`
 
 export const AddFormTextarea = styled.textarea`
   width: 50%;
-  height: 65vh;
-  padding: 10px;
+  height: 60vh;
+  padding: 1rem;
   border: none;
-  font-size: 17px;
+  font-size: 1.2rem;
 `;
 export const AddBtnDiv = styled.div`
   display: flex;
@@ -112,7 +122,7 @@ export const AddBtn = styled.button`
   padding: 7px;
   border: none;
   border-radius: 5px;
-  font-size: 18px;
+  font-size: 1.2rem;
   background-color: var(--subColor1);
   cursor: pointer;
   &:hover {
@@ -122,11 +132,92 @@ export const AddBtn = styled.button`
 
 // ReviewList
 export const ContentsList = styled.div`
-  width: 40%;
-  height: 70vh;
-  background-color: skyblue;
+  width: 48%;
+  padding: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border: 1px solid var(--subColor2);
+  border-radius: 1rem;
+`;
 
+export const ListMapWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+export const ContentWrapper = styled.div`
+  width: 95%;
+  display: flex;
+  flex-direction: row;
   img {
-    width: 10%;
+    width: 60%;
+    height: 35vh;
+    padding: 1rem;
+    object-fit: contain;
+  }
+`;
+export const ToggleContent = styled.div`
+  padding: 1rem;
+  width: 95%;
+  background-color: var(--subColor2);
+  border-radius: 1rem;
+`;
+export const ContentImgWrapper = styled.div`
+  width: 100%;
+  height: 35vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const ListNickName = styled.div`
+  width: 50%;
+  padding: 1rem;
+  border-radius: 1rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  background-color: var(--subColor2);
+`;
+export const ContentBtnsWrapper = styled.div`
+  width: 100%;
+  height: 35vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+`;
+export const ListContent = styled.div`
+  height: 30vh;
+  width: 100%;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: var(--subColor2);
+`;
+
+export const ContentBtns = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  button {
+    width: 30%;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+  }
+  button:nth-child(1) {
+    background-color: var(--subColor1);
+    &:hover {
+      background-color: var(--subColor2);
+    }
+  }
+  button:nth-child(2) {
+    background-color: var(--mainColor);
+    &:hover {
+      background-color: var(--subColor2);
+    }
   }
 `;
