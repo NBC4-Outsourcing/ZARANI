@@ -1,7 +1,7 @@
 import { uuid } from '@supabase/gotrue-js/dist/module/lib/helpers';
 import { supabase } from 'api/supabase/supabase';
 import check from 'assets/check.gif';
-import zarani from 'assets/zarani.png';
+import defaultProfileImage from 'assets/defaultProfileImage.png';
 import {
   AddBtn,
   AddBtnDiv,
@@ -119,7 +119,7 @@ const ReviewForm = ({ setReviewData, placename }) => {
             <AddFormImg>
               <label>
                 {/* 이미지를 추가하기 전 기본 이미지가 보이고 추가 시 등록한 이미지를 띄움 */}
-                <img src={addImg ? addImg : zarani} alt="이미지" />
+                <img src={addImg ? addImg : defaultProfileImage} alt="이미지" />
                 <ImgMessage>
                   <p>{addImg ? '이미지 변경 시 이미지를 클릭해 주세요' : '이미지 추가 시 이미지를 클릭해 주세요'}</p>
                   <img src={check} />
@@ -132,8 +132,8 @@ const ReviewForm = ({ setReviewData, placename }) => {
               value={reviewContent}
               name="reviewContent"
               onChange={reviewContentHandler}
-              maxLength={'80'}
-              placeholder="최대 80자까지만 입력할 수 있습니다."
+              maxLength={'300'}
+              placeholder="최대 300자까지만 입력할 수 있습니다."
               ref={contentRef}
             ></AddFormTextarea>
           </AddFormContent>
