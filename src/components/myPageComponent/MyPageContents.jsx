@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useQuery } from 'react-query';
 import { supabase } from 'api/supabase/supabase';
@@ -51,8 +51,8 @@ const MyPageContents = () => {
   const editValueNickname = editValue.nickname || '';
   const storageItem = getLocalStorageJSON();
   const isLogin = loginState;
-  // const currUserEmail = storageItem.user.email;
-  // const uid = storageItem.user.id;
+  const blankPattern = /^\s+|\s+$/g;
+  const nicknameBlank = editValueNickname.replace(blankPattern, '');
 
   if (isLogin === false) {
     dispatch(logout());
@@ -84,11 +84,14 @@ const MyPageContents = () => {
       setIsEdit(false);
       return;
     }
-    if (!selectImage || selectImage.name === undefined) {
-      alert('이미지를 선택해주세요.');
+
+    if (selectImage === null) return;
+
+    if (nicknameBlank === '') {
+      alert('닉네임을 적어주세요.');
       return;
     }
-    if (selectImage === null) return;
+
     // storage 내부 저장할 위치(폴더)를 회원 uid 또는 이메일로 정하고 스토리지에 저장.
     const uuid = crypto.randomUUID();
     const filePath = `userOneImage/${uid}+${uuid}`;
@@ -98,9 +101,9 @@ const MyPageContents = () => {
       const ImgDbUrl = imageUrl.publicUrl;
       const newData = { email, nickname: editValueNickname, avatar: ImgDbUrl, id: uid };
       await updateUserAccount({ nickname: editValueNickname, avatar: ImgDbUrl });
+      alert('수정이 완료됐습니다.');
       setSelectImage(ImgDbUrl);
       setThumnailImage(newData.avatar);
-      alert('수정이 완료됐습니다.');
       setIsEdit(false);
     } catch (error) {
       alert('수정이 되지 않았습니다! 다시 해주세용!');
@@ -128,69 +131,84 @@ const MyPageContents = () => {
       </div>
     );
 
-  if (isError) return <div> 정보를 받아올 수 없습니다...</div>;
+  if (isError) return <div> 정보를 받아오는 중에 문제가 발생했습니다.</div>;
 
   return (
-    <MP.MyPageContentsForm>
-      <MP.ImgWrapDiv>
-        <MP.ThumnailImg>
-          <img src={thumnailImage} alt="기본이미지" />
-        </MP.ThumnailImg>
-        <MP.ImgFileInput type="file" accept="image/*" id="imgfileChoice" onChange={onChangeAddImage} />
-        {!isEdit ? (
-          <div></div>
-        ) : (
-          <div>
-            <label htmlFor="imgfileChoice">이미지 등록</label>
-          </div>
-        )}
-      </MP.ImgWrapDiv>
-      <div>
-        {!isEdit ? (
-          <div>
-            <p>
-              <span>이메일 :</span>
-            </p>
-            <p>
-              <span>{email}</span>
-            </p>
-            <p>
-              <span>닉네임</span>
-            </p>
-            <p>
-              <span>{nickname}</span>
-            </p>
-          </div>
-        ) : (
-          <div>
+    <MP.MyPageContentsArticle>
+      <MP.MyPageContentsForm>
+        <MP.ImgWrapDiv>
+          <MP.ThumnailImg>
+            <img src={thumnailImage} alt="기본이미지" />
+          </MP.ThumnailImg>
+          <MP.ImgFileInput type="file" accept="image/*" id="imgfileChoice" onChange={onChangeAddImage} />
+          {!isEdit ? (
+            <div></div>
+          ) : (
+            <MP.PhotoAddBtn>
+              <MP.AddBtnLabel htmlFor="imgfileChoice">이미지 등록</MP.AddBtnLabel>
+            </MP.PhotoAddBtn>
+          )}
+        </MP.ImgWrapDiv>
+        <MP.ContentsBtnsDiv>
+          <MP.EmailNickDiv>
+            {!isEdit ? (
+              <MP.EmailNickWrap>
+                <MP.EmailWrap>
+                  <MP.EmailP>
+                    <span>이메일&nbsp;EMAIL</span>
+                  </MP.EmailP>
+                  <MP.EmailValueP>
+                    <span>{email}</span>
+                  </MP.EmailValueP>
+                </MP.EmailWrap>
+                <MP.NickNameWrap>
+                  <MP.NickNameP>
+                    <span>닉네임&nbsp;NICKNAME</span>
+                  </MP.NickNameP>
+                  <MP.NickNameValueP>
+                    <span>{nickname}</span>
+                  </MP.NickNameValueP>
+                </MP.NickNameWrap>
+              </MP.EmailNickWrap>
+            ) : (
+              <MP.EmailNickWrap>
+                <MP.EmailWrap>
+                  <MP.EmailP>
+                    <span>이메일EMAIL</span>
+                  </MP.EmailP>
+                  <MP.EmailValueP>
+                    <span>{email}</span>
+                  </MP.EmailValueP>
+                </MP.EmailWrap>
+                <MP.NickNameWrap>
+                  <MP.NickNameP htmlFor="nickname">닉네임NICKNAME</MP.NickNameP>
+                  <MP.NickNameValuePut
+                    type="text"
+                    id="nickname"
+                    name="nickname"
+                    value={editValueNickname}
+                    onChange={onChange}
+                    minLength={6}
+                    maxLength={10}
+                    placeholder="닉네임 (6자~10자 이내)"
+                  />
+                </MP.NickNameWrap>
+              </MP.EmailNickWrap>
+            )}
+          </MP.EmailNickDiv>
+          {!isEdit ? (
             <div>
-              <p>Email : {email}</p>
+              <MP.EditBtn onClick={onEditContentsHandler}>수정</MP.EditBtn>
             </div>
-            <label htmlFor="nickname"> 닉네임</label>
-            <input
-              type="text"
-              id="nickname"
-              name="nickname"
-              value={editValueNickname}
-              onChange={onChange}
-              minLength={6}
-              maxLength={10}
-              placeholder="닉네임을 적어주세요. (6자~10자 이내)"
-            />
-          </div>
-        )}
-      </div>
-      {!isEdit ? (
-        <div>
-          <button onClick={onEditContentsHandler}>수정</button>
-        </div>
-      ) : (
-        <div>
-          <button onClick={onSubmitHandler}>완료</button>
-          <button onClick={onEditCancelHandler}>취소</button>
-        </div>
-      )}
-    </MP.MyPageContentsForm>
+          ) : (
+            <MP.DondNdCancelBtnDiv>
+              <MP.DoneBtn onClick={onSubmitHandler}>완료</MP.DoneBtn>
+              <MP.CancelBtn onClick={onEditCancelHandler}>취소</MP.CancelBtn>
+            </MP.DondNdCancelBtnDiv>
+          )}
+        </MP.ContentsBtnsDiv>
+      </MP.MyPageContentsForm>
+    </MP.MyPageContentsArticle>
   );
 };
 

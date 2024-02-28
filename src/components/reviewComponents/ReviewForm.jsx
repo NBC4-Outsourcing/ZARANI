@@ -17,6 +17,7 @@ import useInput from '../../hooks/useInput';
 const ReviewForm = () => {
   // storage에 파일 객체로 이미지 저장을위한 변수
   const imgRef = useRef(null);
+  const contentRef = useRef(null);
   const imgName = uuid();
 
   // 회원 정보
@@ -75,14 +76,19 @@ const ReviewForm = () => {
         console.error('이미지 등록 실패!', error);
       }
     }
-
+    if (!reviewContent) {
+      alert('내용을 입력해주세요');
+      contentRef.current.focus();
+      return;
+    }
     const newReviews = {
       marker: '안양천길',
       email,
       nickname,
       avatar,
       content: reviewContent,
-      reviewimg: storagePath
+      reviewimg: storagePath,
+      imageUrl: '' // reviewList component에서 조회 시 url이 들어감
     };
 
     // 데이터 등록
@@ -127,6 +133,7 @@ const ReviewForm = () => {
               onChange={reviewContentHandler}
               maxLength={'80'}
               placeholder="최대 80자까지만 입력할 수 있습니다."
+              ref={contentRef}
             ></AddFormTextarea>
           </AddFormContent>
           <button type="submit">등록</button>

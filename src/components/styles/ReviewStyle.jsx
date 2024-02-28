@@ -10,6 +10,7 @@ export const ReviewHeader = styled.div`
 `;
 export const ReviewFormWrapper = styled.div`
   display: flex;
+  flex-direction: row;
   margin-top: 5%;
 `;
 export const FormContainer = styled.form`
