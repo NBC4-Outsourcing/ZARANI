@@ -75,7 +75,9 @@ const WritingList = ({ userData, writeList, commentList }) => {
                   <WriteFoot>
                     <WriteDate>{getFormattedDate(item.date)}</WriteDate>
                     <WriteButtons>
-                      <CommunityBtn onClick={() => onClickCommentHandler(item.id)}>댓글</CommunityBtn>
+                      <CommunityBtn onClick={() => onClickCommentHandler(item.id)}>
+                        {commentWriteCheck === item.id ? '댓글 닫기' : '댓글'}
+                      </CommunityBtn>
                       {userData.email === item.userId ? (
                         <>
                           <CommunityBtn onClick={() => onClickEditForm(item.id)}>수정</CommunityBtn>

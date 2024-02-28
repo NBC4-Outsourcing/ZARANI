@@ -25,11 +25,16 @@ export const HeaderNav = styled.section`
 `;
 
 export const TitleP = styled.p`
-  padding: 0 1rem;
-
+  display: flex;
+  align-items: center;
   text-align: center;
   font-size: 2rem;
   font-weight: bold;
+  gap: 8px;
+`;
+
+export const LogoImg = styled.img`
+  height: 60px;
 `;
 
 // 홈버튼

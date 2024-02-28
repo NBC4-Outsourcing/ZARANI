@@ -9,7 +9,9 @@ import img6 from '../../assets/7.png';
 //MainPage.jsx
 export const MainWrapper = styled.section`
   display: flex;
-  gap: 20px;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0px 100px;
 `;
 //MainPageHeader.jsx
 export const HeaderWrapper = styled.div`
@@ -120,9 +122,9 @@ export const Nickname = styled.span`
 // MainPageNav.jsx
 
 export const NavWrapper = styled.div`
-  width: 500px;
   margin-top: 20px;
   height: 250px;
+  width: 100%;
 `;
 export const ListSection = styled.div`
   width: 100%;
@@ -441,4 +443,11 @@ export const FormSearch = styled.form`
       transform: scale(1.05);
     }
   }
+`;
+
+export const KaKaoWrap = styled.div`
+  width: 60vw;
+  height: 790px;
+  position: relative;
+  margin-top: 30px;
 `;

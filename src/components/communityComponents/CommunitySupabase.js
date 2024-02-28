@@ -1,5 +1,4 @@
 import { supabase } from 'api/supabase/supabase';
-import { getLocalStorageJSON } from 'utils/getLocalStorageJSON';
 
 const getUser = async () => {
   const {
