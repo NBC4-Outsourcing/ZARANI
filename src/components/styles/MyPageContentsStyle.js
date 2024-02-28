@@ -140,7 +140,6 @@ export const EmailNickDiv = styled.div`
   box-shadow: 0px 2px 4px 2px var(--subColor2);
 
   padding: 2rem;
-  /* gap: 1rem; */
 `;
 
 export const EmailNickWrap = styled.div`
@@ -197,7 +196,7 @@ export const NickNameValuePut = styled.input`
 
   font-size: 1.1rem;
   background-color: var(--subColor2);
-  /* &:hover, */
+
   &:focus {
     background-color: #fff;
   }
