@@ -6,7 +6,6 @@ export const updateUserAccount = async ({ nickname, avatar }) => {
     data: { nickname, avatar }
   });
   if (error) {
-    console.log('updateUserAccount', error);
     console.error('업데이트를 다시 시도해주세요!');
   }
   return data;
