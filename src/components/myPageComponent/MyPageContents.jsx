@@ -56,8 +56,7 @@ const MyPageContents = () => {
 
   if (isLogin === false) {
     alert('로그인 유저만 사용가능합니다. 로그인 해주세요');
-    // navigate('/login', { replace: true });
-    navigate('/login');
+    navigate('/login', { replace: true });
   }
 
   // 이미지 등록
