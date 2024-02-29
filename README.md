@@ -47,8 +47,8 @@
 |                          ESTJ, INFJ                          |                             ISTP                             |                             ISFP                             |                             ESTP                             |                          ENFJ, INFP                          |
 | <p><img src="https://lh7-us.googleusercontent.com/ZEv3frQuAlfIw0p3Rgj1pbH4zvN9Jojtf8J5aaowsPDnLnJBJ6X_5OSwiSpu-dTiWtqOb6jYxNr_0UijYhhcaVCqcKR4n5yHdk0A6-2_DVrIac2wnVTHOYIVE5ORBpAwzoDdm_y3qj8EHFPNlj7cDCE" width="100%" height="100%px"/></p> | <p><img src="https://lh7-us.googleusercontent.com/lK7tTfpP88h4O_fo3PcA6Byqsi47kOVliRXVqEMZqtSwOgw_9KYNwtBgMFjggtBMjddifWgUUtUZOYiwttGLSniZdBWikgtci6DA9C2Ux0i7NMSHSo47cDwuhDtVU8abNg97DlWxSYQF6soxfkkTUPI" width="100%" height="100%"/></p> | <p><img src="https://lh7-us.googleusercontent.com/01bJM0Q5X0Oc6QwSwo_PnQmUeggzToXW52bA4mnVK0twbFVPPcKQFPg5Xh0kJ46TtfFcZmr8dMNSz6FVIQKllCtL1hVL41oQWDQqHv479ZiDW90wNYiLskgxcAYNodRBT4r6tX8IcBW0WYwl8-Y-7ZA" width="100%" height="100%"/></p> | <p><img src="https://lh7-us.googleusercontent.com/k8bbP8HAvkZe5hPaqzaMfU5r2URn_-ZykIAoWfNxHbdfeSuLAYJH44FwQ24WLEQr3QI2kJBWoWwJz_VPVZGfUmXRZ-g6oxj91Y07lB8oHGai2yCnxePgX476c2jsNiej7Z69KtAsIMWLo5xPMsHdyr4" width="100%" height="100%"/></p> | <p><img src="https://lh7-us.googleusercontent.com/FdFX_DLcLDNfr8lThDp2ekM2dmax-vskQ6DtqzPgRGWf2kpDbYWOLU1t8lOEprkpAS17qUBZWYiupva8fXyp5RC1AhWovRYRF8lCDKe8lJQ10vyuP58TI3KKu6Ln25QAUwVhNI_IwaDS343W87FzxJk" width="100%" height="100%"/></p> |
 |             [@G-NooN](https://github.com/G-NooN)             |             [@CodHan](https://github.com/CodHan)             |        [@DecidedCard](https://github.com/DecidedCard)        |           [@seokahee](https://github.com/seokahee)           |          [@r03181231](https://github.com/r03181231)          |
-|                            🦌 팀장                             |                            🦌 팀원                             |                            🦌 팀원                             |                            🦌 팀원                             |                            🦌 팀원                             |
-|                           FrontEnd                           |                           FrontEnd                           |                           FrontEnd                           |                           FrontEnd                           |                           FrontEnd                           |
+|                            🦌 팀장                             |                            🦌 팀원                             |                            🦌 팀원                             |                            🦌 팀원                                |                            🦌 팀원                             |
+|                           papago                           |                           wonjangnim                           |                           GPT                                |                           tailwind                            |                           bootstrap                           |
 
 <br />
 
@@ -420,10 +420,23 @@ $ yarn run start
 **메인 페이지 - 지도 API 사용 시**
 
 | 문제 | 카카오맵 api  검색기능 사용시 list 데이터를 핸들링 할 수 없는 문제가 생겼습니다. |
-| ---- | ------------------------------------------------------------- |
+| :--: | ------------------------------------------------------------ |
 | 원인 | 다만 사람들이 자주 사용 하는 api로 레퍼런스가 많아,  구글링으로  해결을 했습니다. |
 | 해결 | 데이터를 redux Slice로 디스패치 후 map으로 직접 list를 생성해서 해결했습니다. |
 |      | <img src="https://github.com/NBC4-Outsourcing/zarani/assets/152264010/a6cc39f4-5da0-4dfb-900a-a31fc2dd6ae7" /> |
+
+
+<br />
+
+<br />
+
+
+**커뮤니티 페이지 - css 적용 시**
+
+| 문제 |  와이어프레임과 동일한 형태로 디자인을 구현하기가 어려웠음  |
+| :--: | ------------------------------------------------------------  |
+| 해결 | 팀원들과 문제를 공유하고 서로 의견을 공유하여 여러 CSS 코드를 적용해보고, 구글링을 활용하여 필요한 기능을 탐색함 (Shout Out to BootStrap, TailWind, GPT, PAPAGO, 원장님) |
+
 
 
 <br />
