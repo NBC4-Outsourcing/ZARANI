@@ -2,7 +2,7 @@
 
 ### < 목차 >
 
-**# 프로젝트 "팀 원장님 팔(8)로우 해주세요"소개**
+**# 프로젝트 팀 "💖원장님 팔(8)로우 해주세요"소개**
 
 - 팀원소개
 
@@ -17,6 +17,8 @@
 **# 와이어프레임**
 
 - 프로젝트 화면 구성 및 기능
+  
+  - 트러블슈팅
 
   - 필수 사항
 
@@ -26,17 +28,17 @@
 
   - 기능소개
 
-**# 트러블슈팅**
 
 
 
-<br />
-
-## 프로젝트 팀 "원장님 팔(8)로우 해주세요" 소개
 
 <br />
 
-**팀원 소개**
+## 프로젝트 팀 "💖원장님 팔(8)로우 해주세요" 소개
+
+<br />
+
+**🦌팀원 소개🦌**
 
 ---
 
@@ -45,8 +47,8 @@
 |                          ESTJ, INFJ                          |                             ISTP                             |                             ISFP                             |                             ESTP                             |                          ENFJ, INFP                          |
 | <p><img src="https://lh7-us.googleusercontent.com/ZEv3frQuAlfIw0p3Rgj1pbH4zvN9Jojtf8J5aaowsPDnLnJBJ6X_5OSwiSpu-dTiWtqOb6jYxNr_0UijYhhcaVCqcKR4n5yHdk0A6-2_DVrIac2wnVTHOYIVE5ORBpAwzoDdm_y3qj8EHFPNlj7cDCE" width="100%" height="100%px"/></p> | <p><img src="https://lh7-us.googleusercontent.com/lK7tTfpP88h4O_fo3PcA6Byqsi47kOVliRXVqEMZqtSwOgw_9KYNwtBgMFjggtBMjddifWgUUtUZOYiwttGLSniZdBWikgtci6DA9C2Ux0i7NMSHSo47cDwuhDtVU8abNg97DlWxSYQF6soxfkkTUPI" width="100%" height="100%"/></p> | <p><img src="https://lh7-us.googleusercontent.com/01bJM0Q5X0Oc6QwSwo_PnQmUeggzToXW52bA4mnVK0twbFVPPcKQFPg5Xh0kJ46TtfFcZmr8dMNSz6FVIQKllCtL1hVL41oQWDQqHv479ZiDW90wNYiLskgxcAYNodRBT4r6tX8IcBW0WYwl8-Y-7ZA" width="100%" height="100%"/></p> | <p><img src="https://lh7-us.googleusercontent.com/k8bbP8HAvkZe5hPaqzaMfU5r2URn_-ZykIAoWfNxHbdfeSuLAYJH44FwQ24WLEQr3QI2kJBWoWwJz_VPVZGfUmXRZ-g6oxj91Y07lB8oHGai2yCnxePgX476c2jsNiej7Z69KtAsIMWLo5xPMsHdyr4" width="100%" height="100%"/></p> | <p><img src="https://lh7-us.googleusercontent.com/FdFX_DLcLDNfr8lThDp2ekM2dmax-vskQ6DtqzPgRGWf2kpDbYWOLU1t8lOEprkpAS17qUBZWYiupva8fXyp5RC1AhWovRYRF8lCDKe8lJQ10vyuP58TI3KKu6Ln25QAUwVhNI_IwaDS343W87FzxJk" width="100%" height="100%"/></p> |
 |             [@G-NooN](https://github.com/G-NooN)             |             [@CodHan](https://github.com/CodHan)             |        [@DecidedCard](https://github.com/DecidedCard)        |           [@seokahee](https://github.com/seokahee)           |          [@r03181231](https://github.com/r03181231)          |
-|                             팀장                             |                             팀원                             |                             팀원                             |                             팀원                             |                             팀원                             |
-|                           FrontEnd                           |                           FrontEnd                           |                           FrontEnd                           |                           FrontEnd                           |                           FrontEnd                           |
+|                            🦌 팀장                             |                            🦌 팀원                             |                            🦌 팀원                             |                            🦌 팀원                                |                            🦌 팀원                             |
+|                           papago                           |                           wonjangnim                           |                           GPT                                |                           tailwind                            |                           bootstrap                           |
 
 <br />
 
@@ -54,7 +56,7 @@
 
 
 
-**팀 목표** 
+**🦌팀 목표🦌** 
 
 ---
 
@@ -74,20 +76,20 @@
 
 **배포 도메인** : https://zarani.vercel.app/
 
-**프로젝트 명** : 자라니 (ZARANI, 자전거길 라이더)
+**프로젝트 명** : 자라니 (ZARANI, 자전거 라이더)
 
 **개발 기간** : 2024.02. 23~ 2023.02.28 (6일) 
 
 **프로젝트 소개** : 각 지역의 주요 자전거길에 대해 후기를 남기고 공유하는 서비스입니다.
 
-**프로젝트 목표** : 문화생활과 일상에서 자전거 도로를 이용하는 사용자들이 자전거도로의 위치를
+**프로젝트 목표** : 문화생활과 일상에서 자전거 도로를 이용하는 사용자들이 자전거 도로의 위치를
 지도와 검색을 통해 쉽게 찾도록 하고, 이용한 후기와 정보를 공유할 수 있게 해줍니다.
 
 <br />
 
 ### 🚦 Project Rules
 
-#### **개발 환경**
+#### **개발 환경(버전참고)**
 
 - **Environment :** Visual Studio Code, git(2.37.3), github
 - **Language :**  Javascript
@@ -98,14 +100,14 @@
 
 <br />
 
-# Code Convention
+### Code Convention
 
-1. **주석은 반드시 쓸 것!!!**
+1. **주석은 반드시 포함**
 2. Airbnb ESLint 사용
 3. 작명 방식
    1. JSX 파일 (ex. Home.jsx)
       1. PascalCase
-      2. rafce 스니펫 사용!!
+      2. rafce 스니펫 사용
    2. js 파일 (ex. configStore.js) : camelCase
    3. 함수명, 변수명: camelCase
    4. styled-component
@@ -136,20 +138,21 @@
 ```
 
 
+<br />
 
 <br />
 
 
 
-- # **프로젝트 운영 방식 및 Rules 예시**
+### **📚프로젝트 운영 방식 및 Rules 예시📚**
 
-  ### **깃허브 규칙**
+  #### **깃허브 규칙**
 
   - 브랜치 이름 : 기능 이름
 
   ------
 
-  ### 깃헙 커밋 규칙
+  #### 깃헙 커밋 규칙
 
   | 타입     | 설명                         |
   | -------- | ---------------------------- |
@@ -165,7 +168,7 @@
 
   ------
 
-  ### <이슈(Issue) 작성 규칙>
+  #### <이슈(Issue) 작성 규칙>
 
   - `나 이런 거 할 거다` 를 이슈의 제목으로 입력
 
@@ -220,31 +223,53 @@
   - 본인 github 브랜치에 push도 가능하면 자주 할 것
   - PR은 너무 뜸하지 않게 주기적으로 실시할 것 (주기가 너무 뜸하면, 그만큼 검토해야할 코드가 늘어나기 때문에 그만큼 시간이 지연됨)
 
-  1. **PR (Pull Request) 주의사항**
+  2. **PR (Pull Request) 주의사항**
 
   - **(중요) 반드시 검토할 사람이 있을 때 PR을 올릴 것!!**
   - 라이브러리를 추가한 경우, 어떤 라이브러리가 추가되었는지 PR 본문에 작성할 것
   - 공통적인 부분 (ex. Route, 공통 컴포넌트, 공통 스타일 등) 을 수정한 경우, 어떤 부분을 수정했는지 PR 본문에 작성할 것
 
-  1. **PR (Pull Request) 수행 이후에 할 일**
+  3. **PR (Pull Request) 수행 이후에 할 일**
      1. Slack에 PR URL 주소를 올림
      2. 다른 사람들이 PR을 검토하고 “승인” 하면 Merge 진행
      3. Slack에 Merge 했다고 메시지를 남김
-  2. **Merge 수행 이후에 할 일**
+  4. **Merge 수행 이후에 할 일**
      1. Merge 성공 여부를 검토할 사람이 본인 브랜치에서 작업하던 중간 지점까지 commit
      2. `git pull origin dev`
      3. 추가된 라이브러리가 있는 경우 `yarn`
      4. `yarn start` 하여 충돌 여부 확인
      5. 충돌 없이 정상 작동 시 `"확인했다"` , `"이상 없다"` 같은 내용을 Slack에 남기기 충돌이 있을 시 `"어떤 부분에서 충돌이 있다"` , `"충돌이 있었는데 이렇게 해결했다"` 같은 내용을 Slack에 남기기
-  3. **Pull 규칙**
+  5. **Pull 규칙**
 
   - **(중요) 자주 하기 (나중에 한꺼번에 pull 해서 오류가 와장창 생기면 본인 책임**
 
+  6. 소통 예시
+
+
+
+| 소통 예시                                                    |
+| :----------------------------------------------------------- |
+| <img src="https://lh7-us.googleusercontent.com/aFoW3X75O-VacfTQB8PiYqbfXJZYEFXQ29Nfd89G_1MefYVJKKNNWKWWrEaPZpYcJEO8JZNxoMiYVb8U253PZL3QxoBeVYMI9ZtXJ37WIiluZzqeFsjAkuDLO7y_gZWPcBNT1eIYWPP5xCZqT7BS5T8" width="80%" height="80%" align="center" /> |
+
+
+
+
+
+
+ 
+ 
+
+ 
+![image](https://github.com/NBC4-Outsourcing/zarani/assets/152264010/4747a2fc-a280-4ada-8bdb-c610d40f6f07)
+
+
+<br />
+ 
 <br />
 
 <br />
 
-<br />
+---
 
 
 ## 🚩시작 가이드
@@ -256,9 +281,18 @@
 ```bash
 $ git clone https://github.com/NBC4-Outsourcing/zarani.git
 $ cd zarani
-$ yarn install
-$ yarn run start
+$ yarn install or npm install
+$ yarn run start or npm run start
 ```
+
+### Environment variable
+
+- 파일 이름 : .env.local
+- 변수 이름1 : REACT_APP_SUPABASE_KEY
+- 변수 이름2 : REACT_APP_KAKAOMAP_API_KEY
+
+
+
 
 <br />
 
@@ -267,6 +301,270 @@ $ yarn run start
 
 
 <img src="https://lh7-us.googleusercontent.com/Ucy-N5WIbOnZvEonqYzzE3bWhCoQTInGjtFn2ExMa23Mqg5xVRuka2cjodyfgQiwu0BOvKIgPCC1bHoSEyLl1GdNZhUwfYRz31KLIjrHcBgTyt8So8nQL0AHd4WZvpn47bnhI43YB1DNrsKUWFiqbB0" >
+
+
+
+
+
+<br />
+
+<br />
+
+
+## 🖼 프로젝트 화면 구성 및 기능
+
+<br />
+
+<br />
+
+
+|                  컬러 가이드와 메인 페이지                   |                   로그인과 로그아웃 페이지                   |
+| :----------------------------------------------------------: | :----------------------------------------------------------: |
+| <p><img src="https://lh7-us.googleusercontent.com/2P_vT7hSCIpUHeBSSRoTDXHLlzJWvBnd5PWqB08fK-DrhWh7BwEWU0DasZ_mkfaiC5MRysM8756XqZOBUNRx609XlMtZImjlwWjR5phWXVyLajQ4Fn7SnLkC50up9NGqIqywX4wReJ7zq78cB2QdQ7M" align="center" width="100%" height="100%" ></p><br /><p><img src="https://lh7-us.googleusercontent.com/BRsc_el_abz8thiBKsUimyigww-DGwplbT2LC5_iTMKQQBtzggT5bTZfXM-fwuyOQ6ExnAPmXCrhIub8LYAINe6SPX6J9WNfpS90EhuP0DE-Dh6eSSGL9owNjrBJX8ut4wEJNlZed4q-db0mPB0ckAE" align="center" width="100%" height="100%" ></p> | <p><img src="https://lh7-us.googleusercontent.com/raHOQyDC8IluJDSWHlNo3FO9gw0DOMXW21OoMP4jky0_qzfjBWcy3svMU6XFvCdWSVkcLHJJ0bWnBr3gZ_b0J7fSO1jILXQ0z3mk9rZm0uTKlFtxkSxIbMrLat5XERj6lGXdmzjr62y1H5GP5818gYU" width="100%" height="100%"><p><br /><p><img src="https://lh7-us.googleusercontent.com/0IQdPfddXHNGHkq0gHlBXdrwRHBmaErOGLBbXyECxSDSkEalDXu5iVfVbpr2etQPGgKzATQtTb1ZX-Jyh7zSmv9rSOr50k1qZnsE903DsmsRvho2RzKbx6vwZKRoD6iH6exBXZVcd5JZV-78VNuwtRY" width="100%" height="100%"><p> |
+|                         후기 페이지                          |                       커뮤니티 페이지                        |
+| <p><img src="https://lh7-us.googleusercontent.com/UfeQyBs5LYURZ6dE2U31MHW_QWl71n_foyskSQf-BaK4ThhB_tf0zXzFUK-FzA53HzSKZV1cY0iFlFb5L8mCygnOMCmRI3QXXAcLuPWmAskDLngMzaLcQDXTN3yGgP5mh8gqovAjszQNHrciQOLTyUg" width="100%" height="100%" /><p><br /><p><img src="https://lh7-us.googleusercontent.com/cjTscwZ0QQyK9vEtrfpGyrbo7tbetQA3oLYMC0ClQ46OhMXiktppH7ptNP7e05o_Sw1tINVRh7KPd7w1wd6ztEjo0wQlvfYdg73puuJ6Q1E1pD7Bvw65UeXZvH5Fz_f-M1lus5ZUdqHQ2vfrP4t3CGs" width="100%" height="100%" /><p> | <p><img src="https://lh7-us.googleusercontent.com/ViANyXsQ-xuCU82zyU-OLeAwpKASL2urXpG0cbTTH0HDq3HztpXE_r_FeUvtX9lHOD17rHJhk5YMjeFi84t2tMTH_dIBZ5_5KuLefs-03NpME4b1arMLUiBcB-Bab7M3F7GRGygOuH2kGEgxjyytrR4" width="100%" height="100%" /><p><br /><p><img src="https://lh7-us.googleusercontent.com/JO91b1zyrPAUtGs2XLa8WyhgpiLPKD7Vc2n8w4inRk_Sb28aNL3SO852Vh0qpd9QljUSgQaDwrcyMncobeID9GDSt-Yn21j2gTmrIN1f3QgBUBfGPwmEDw2ykLQcWQ7s0-SPyTqdJTsB5mlvsaHraJk" width="100%" height="100%" /><p> |
+|                          마이페이지                          |                                                              |
+| <p><img src="https://lh7-us.googleusercontent.com/SjNaonYWyQ3HE8cn3Dx1iBY5GSKj1vmQ4cHNXxZmY46WeMZAoCIqMk4DT4deU1IiBclZNRFDDUbQ81YvUahD5Z7bfeBqhI1kIdaklYcsA0LAVPvUjcnYRX76KlMhyUOARpOmH3k8rLEfRY1G_SjeNwA" width="100%" height="100%"><p><br /><p><img src="https://lh7-us.googleusercontent.com/sshh_i1ujYJo_W7WI2SVJo4E_Tnx0ynDyXdOxhlQqT_qVhdbr8HuiyTmtoDvW7B9ztqIfwOjvAQQ2Ob-C9sCvZj2dXMkCxWSr2QpDfvYRv48mSPQrO9yR3p7ytKYL-z7crMIrTjcoo_SrOOJKW04UNE" width="100%" height="100%"><p> |                                                              |
+
+
+
+
+
+<br />
+<br />
+<br />
+
+
+
+### 1. 📍필수 요구 사항
+---
+
+- 아래 3가지 중에 **한 가지**를 반드시 활용해서 만들어주세요.
+
+- [x] 지도 API
+
+  지도상에 Marker를 표시하고 활용해 보세요
+
+  네이버 / 카카오 / 구글 지도 등 api 종류는 자유롭게 조사하여 선택하세요
+
+  - Youtube API
+
+    [API Reference | YouTube Data API | Google Developers](https://developers.google.com/youtube/v3/docs?hl=ko)
+
+    [YouTube Data API (v3) - Quota Calculator | Google Developers](https://developers.google.com/youtube/v3/determine_quota_cost?hl=en)
+
+    Youtube API의 하루 할당량(quota)은 10,000 이며, API 종류에 따라 quota cost가 다르니 고려해서 선택해야 합니다. (참고: search list API는 1회 당 100 이므로 하루 최대 100번까지만 검색 기능 사용 가능)
+
+  - 설문조사
+
+    - 스프레드시트 또는 csv파일을 json파일로 내보내서 db처럼 활용해봅시다.
+
+    - 구글 스프레드시트의 확장 프로그램 → 부가 기능 설치 → “Export Sheet Data” 기능 활용
+
+    - 스프레드시트 : 원하는 데이터를 수집하고 테이블로 정렬 후 json 파일로 변환해서 사용
+
+    - csv : 캐글에서 원하는 csv파일을 찾아서 스프레드시트에 옮긴 후 json으로 변환해서 사용
+
+      [Kaggle: Your Machine Learning and Data Science Community](https://www.kaggle.com/)
+
+- 상태관리 라이브러리는 RTK를 사용하고, React-query 또는 Redux Thunk 사용은 택1 진행
+
+- firebase 또는 json-server 또는 supabase 택1 진행
+
+- [ ] Youtube API
+
+  [API Reference | YouTube Data API | Google Developers](https://developers.google.com/youtube/v3/docs?hl=ko)
+
+  [YouTube Data API (v3) - Quota Calculator | Google Developers](https://developers.google.com/youtube/v3/determine_quota_cost?hl=en)
+
+  Youtube API의 하루 할당량(quota)은 10,000 이며, API 종류에 따라 quota cost가 다르니 고려해서 선택해야 합니다. (참고: search list API는 1회 당 100 이므로 하루 최대 100번까지만 검색 기능 사용 가능)
+
+- [ ] 설문조사
+
+  - 스프레드시트 또는 csv파일을 json파일로 내보내서 db처럼 활용해봅시다.
+
+  - 구글 스프레드시트의 확장 프로그램 → 부가 기능 설치 → “Export Sheet Data” 기능 활용
+  - 스프레드시트 : 원하는 데이터를 수집하고 테이블로 정렬 후 json 파일로 변환해서 사용
+  - csv : 캐글에서 원하는 csv파일을 찾아서 스프레드시트에 옮긴 후 json으로 변환해서 사용
+  - [Kaggle: Your Machine Learning and Data Science Community](https://www.kaggle.com/)
+  - 상태관리 라이브러리는 RTK를 사용하고, React-query 또는 Redux Thunk 사용은 택1 진행
+
+  - Vercel 이라는 호스팅플랫폼을 이용해 배포합니다.
+  - firebase 또는 json-server 또는 supabase 택1 진행
+
+
+
+<br />
+
+### 2. 🎁선택 요구 사항 (추가 구현 기능)    
+---
+
+- [x] 무한스크롤 구현 (Intersection Observer API (Web API)를 사용해보기)
+
+- [ ] Youtube API 요청을 통해 pagination 구현
+
+- [ ] React Query의 Optimistic Update 적용해보기
+
+- [x] firebase Auth, JWT 인증 서버(펜레터함 참고), supabase auth(선택)를 사용하여 로그인 회원가입 기능 구현
+
+  - firebase를 쓰시는 경우 인증은 firebase auth를 사용해주세요.
+
+  - json-server를 쓰시는 경우 JWT 인증 서버를 사용해주세요.
+
+  - (선택) supabase를 쓰시는 경우 Supabase Auth(https://supabase.com/docs/guides/auth)
+
+    
+
+<br />
+
+
+
+
+## 💥트러블 슈팅💥
+---
+<br />
+
+<br />
+
+**메인 페이지 - 지도 API 사용 시**
+
+| 문제 | 카카오맵 api  검색기능 사용시 list 데이터를 핸들링 할 수 없는 문제가 생겼습니다. |
+| :--: | ------------------------------------------------------------ |
+| 원인 | 다만 사람들이 자주 사용 하는 api로 레퍼런스가 많아,  구글링으로  해결을 했습니다. |
+| 해결 | 데이터를 redux Slice로 디스패치 후 map으로 직접 list를 생성해서 해결했습니다. |
+|      | <img src="https://github.com/NBC4-Outsourcing/zarani/assets/152264010/a6cc39f4-5da0-4dfb-900a-a31fc2dd6ae7" /> |
+
+
+<br />
+
+<br />
+
+
+**커뮤니티 페이지 - css 적용 시**
+
+| 문제 |  와이어프레임과 동일한 형태로 디자인을 구현하기가 어려웠음  |
+| :--: | ------------------------------------------------------------  |
+| 해결 | 팀원들과 문제를 공유하고 서로 의견을 공유하여 여러 CSS 코드를 적용해보고, 구글링을 활용하여 필요한 기능을 탐색함 (Shout Out to BootStrap, TailWind, GPT, PAPAGO, 원장님) |
+
+
+
+<br />
+
+<br />
+
+
+**마이페이지, 후기페이지 - 이미지 수정**
+
+| 문제 | 이미지를 supabase 스토리지에 넣으려고 할 때, 예전 정적리소스가 호출되는 브라우저 캐시문제가 생겼습니다. |
+| :--: | ------------------------------------------------------------ |
+| 원인 | 다른 이미지지만 같은 경로의 이름으로 브라우저가 캐시에 저장하고 로드하기 때문에 같은 경로의 이름으로 이미 저장된 데이터를 계속 불러왔던 것.. |
+| 해결 | 저장한 유저를 구분하기 위해 유저의 고유한 정보와 계속 랜덤으로 생성해주는 uuid로 이미지를 생성해줘서 다른 이름과 이미지를 스토리지에 저장해줬습니다. |
+|      | 해결 전 코드 |
+|      |  <img src="https://github.com/NBC4-Outsourcing/zarani/assets/152264010/35f4da6b-469b-49fb-8fef-c6473df00727" />            |
+|      | 해결 후 코드 |
+|      | <img src="https://lh7-us.googleusercontent.com/Vh1sIiDecDYeoDjjk4xBwoiAah99h3Wr4RZIS6Zr2Q2QtT-ovVdcdYGev8vJfmOUrWrfncqsmLejmvCqvgyOA6Al-OyNm0BdwyOlpbyXB0q295vFDkCqFhoG3KoMfvwu1TggHAyDi0uBTGqFFTvz91Y" /> |
+
+
+
+
+
+<br />
+
+<br />
+
+<br />
+
+### 🛠기능 담당
+---
+
+| 기능                                                         | 담당자 |
+| ------------------------------------------------------------ | ------ |
+| 메인페이지(커뮤니티 게시글 목록 랜덤표시,지역별 카테고리 검색 기능,  마커 및 리스트 생성) | 한은범 |
+| 로그인, 회원가입, 유저 데이터 관리                           | 조진훈 |
+| 커뮤니티 페이지( 글 등록, 글 조회, 글 수정, 글 삭제, 댓글 등록, 댓글 조회, 댓글 삭제 ) | 정해준 |
+| 후기 페이지(이미지와 글 등록, 조회, 수정, 삭제)              | 서가희 |
+| 마이페이지(이미지 업로드, 닉네임 편집, 내가 쓴 후기들 보기)  | 남해리 |
+
+
+
+<br />
+<br />
+
+
+### 🔎기능 소개
+---
+
+**로그인/회원가입 페이지**
+
+- 이메일, 비밀번호, 닉네임의 유효성 검사를 실시합니다,
+- 로그인한 유저의 정보를 “현재 로그인한 유저 DB”에 저장합니다.
+- “현재 로그인한 유저 DB”를 참고하여 중복된 로그인을 방지합니다.
+
+
+
+**메인 페이지**
+
+- 커뮤니티 게시글 목록 랜덤표시
+  - 커뮤니티 게시글 중 랜덤한 3개를 가져와 표시 합니다.
+- 지역별 카테고리 검색 기능,  마커 및 리스트 생성
+  - 지역 클릭시 해당 지역의 자전거 길 목록이 지도에 마커와 리스트로 생성 됩니다.
+  - 마커 클릭시 자전거 길로 지도가 변환 되며 해당하는 마커로 확대 됩니다.
+  - 리스트에 원하는 자전거 길을 클릭 하면 해당하는 자전거 길의 후기페이지로 이동합니다.
+
+
+
+**마이 페이지**
+
+- 유저 프로필
+  - 수정 버튼을 클릭 후, 수정 모드일 때,
+  - 이미지 미리보기 :
+    - 등록 버튼을 클릭하고, 선택한 이미지를 등록하면 미리보기로 해당 이미지를 확인할 수 있습니다.
+  - 이미지, 닉네임 수정 :
+    - 이미지를 등록을 하고 닉네임을 수정하고 완료버튼을 클릭 시, “수정내용을 저장하시겠습니까?” 라는 선택 메세지가 뜬 후 “확인 버튼”을 클릭하면 이미지 수정이 됩니다.
+- 내가 쓴 후기 조회 모음
+  - 선택한 지역 후기 게시판에서 유저가 게시한 글을 마이페이지에서 확인할 수 있게 했습니다.
+  - 마이페이지의 게시글 모음 중 글 하나를 클릭 시, 해당 글이 쓰인 게시글로 이동합니다.
+
+
+
+**후기 페이지**
+
+- 메인페이지에서 지역 마커를 클릭하면 해당 마커에 대한 후기를 작성할 수 있습니다.
+- 이미지와 글 등록, 수정, 삭제를 할 수 있습니다
+- 이미지 추가를 하지 않을 경우 기본 이미지로 설정됩니다
+
+
+
+**커뮤니티 페이지**
+
+- 커뮤니티 페이지의 경우 글을 작성, 삭제, 수정, 할 수 있고 글의 경우 댓글이 있으면 삭제가 불가능 합니다.
+- 글의 대해서 댓글을 작성할 수 있고 댓글은 삭제만 가능합니다.
+- 유효성검사가 들어가 있고, 수정, 삭제 시 컨펌을 활용해서 한번 더 의사를 확인합니다.
+- 데이터 통신의 경우 react-query를 활용해서 작성하였고 인풋같은 상태관리는 state로 관리하였습니다.
+
+
+
+
+
+<br />
+<br />
+
+
+## 🎫 파일 구조
+
+<div>
+  <p><img src="https://lh7-us.googleusercontent.com/yFl2iOedO2W28bO2H31PxzP3Rbx1AtWwp7H8Lf4W0KT99V32eyN26rbXcS1PgLcencB196vuJCf-JyMvqkvZT7hEEKNbLXgdJi0DllL80dxg_BGl_f9zMYmutYZ6cpFdy2_w6K8wRbeAykaCbBq5Up4" width="150px" align="left"/><p>
+  <p><img src="https://lh7-us.googleusercontent.com/KiWZYxy-PzeLbLzJIVwtG_3gN4nJKLMvBWkr10ruxjbyYm92IuPQAh92JQbBZAmhwAiCMJDsduT7ynRy2ACNpt0o0p62cGQPKySqyon5ERrLHLGSAV-_tmJ6Df4dHG3ZvgY-VDbQsaUvDJjvY4In8Dc" width="150px" align="left"/><p>
+  <p><img src="https://lh7-us.googleusercontent.com/hwceHIR5ReCd5EPpWzUL871Lf5zpCvCC9-QoFmImj8KE6jd0zt-6WBsl0mwB18FT2Lanacglrf5G8yc6GDIoghEXK3juYpGgel23u-lV0GaKcJcFuNFciC8RtM957xwv5VK2lMZzM5tNeNbPfu2BdOo" width="150px" align="left"/><p>
+  <p><img src="https://lh7-us.googleusercontent.com/1PWmjXpEl0MHk7jxRXqiicZxYfU9SET_wSpZDxvuPo4rvJWPTon0zGcZoTXce2bSChXU9528VquEK2PKF_qQQnkxxjek2FQy0w5kRsDpjtWJ57CUOQVn1k_pCUjXXDILGbG2AgRl6RFFC0RHXJqGJvY" width="150px" align="left"/><p>
+  <p><img src="https://lh7-us.googleusercontent.com/0x2zl36df_YGg1HdLMo-6g-iU4MNpN0hnWbXVIieJ05nhJ5hM3s907XrPFv2RDpqgLECJxg8JLMdHeT408JiRkjARny1xuggnPq0cQ2SsNh2GiB5JwW7h2Z-Q9Qogxyb95Im5EkyRsaRIHHQv5LXCuE" width="150px" align="left"/><p>
+</div>
+
+<br />
+
+
+
+
 
 
 
