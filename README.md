@@ -89,7 +89,7 @@
 
 ### 🚦 Project Rules
 
-#### **개발 환경**
+#### **개발 환경(버전참고)**
 
 - **Environment :** Visual Studio Code, git(2.37.3), github
 - **Language :**  Javascript
@@ -102,12 +102,12 @@
 
 ### Code Convention
 
-1. **주석은 반드시 쓸 것!!!**
+1. **주석은 반드시 포함**
 2. Airbnb ESLint 사용
 3. 작명 방식
    1. JSX 파일 (ex. Home.jsx)
       1. PascalCase
-      2. rafce 스니펫 사용!!
+      2. rafce 스니펫 사용
    2. js 파일 (ex. configStore.js) : camelCase
    3. 함수명, 변수명: camelCase
    4. styled-component
@@ -281,9 +281,18 @@
 ```bash
 $ git clone https://github.com/NBC4-Outsourcing/zarani.git
 $ cd zarani
-$ yarn install
-$ yarn run start
+$ yarn install or npm install
+$ yarn run start or npm run start
 ```
+
+### Environment variable
+
+- 파일 이름 : .env.local
+- 변수 이름1 : REACT_APP_SUPABASE_KEY
+- 변수 이름2 : REACT_APP_KAKAOMAP_API_KEY
+
+
+
 
 <br />
 
