@@ -17,16 +17,18 @@
 **# 와이어프레임**
 
 - 프로젝트 화면 구성 및 기능
-  
-  - 트러블슈팅
 
   - 필수 사항
 
   - 선택 사항
+  
+  - 트러블슈팅
 
   - 기능담당
 
   - 기능소개
+
+- 파일 구조
 
 
 
@@ -102,7 +104,7 @@
 
 ### Code Convention
 
-1. **주석은 반드시 포함**
+1. **기능에 대한 주석은 반드시 포함**
 2. Airbnb ESLint 사용
 3. 작명 방식
    1. JSX 파일 (ex. Home.jsx)
@@ -255,14 +257,6 @@
 
 
 
-
- 
- 
-
- 
-![image](https://github.com/NBC4-Outsourcing/zarani/assets/152264010/4747a2fc-a280-4ada-8bdb-c610d40f6f07)
-
-
 <br />
  
 <br />
@@ -274,7 +268,7 @@
 
 ## 🚩시작 가이드
 
-
+<br />
 
 ### Installation
 
@@ -288,9 +282,11 @@ $ yarn run start or npm run start
 ### Environment variable
 
 - 파일 이름 : .env.local
-- 변수 이름1 : REACT_APP_SUPABASE_KEY
-- 변수 이름2 : REACT_APP_KAKAOMAP_API_KEY
-
+- 변수 이름1 : REACT_APP_SUPABASE_URL
+- 변수 이름2 : REACT_APP_SUPABASE_KEY
+- 변수 이름3 : REACT_APP_KAKAOMAP_API_KEY
+- DB는 supabase, API는 카카오 맵 API를 사용하여 관련된 변수 이름을 부여
+- Supabase 클라이언트를 초기화하기 위한 도우미 파일 : src/api/supabase.js
 
 
 
@@ -300,8 +296,7 @@ $ yarn run start or npm run start
 
 
 
-<img src="https://lh7-us.googleusercontent.com/Ucy-N5WIbOnZvEonqYzzE3bWhCoQTInGjtFn2ExMa23Mqg5xVRuka2cjodyfgQiwu0BOvKIgPCC1bHoSEyLl1GdNZhUwfYRz31KLIjrHcBgTyt8So8nQL0AHd4WZvpn47bnhI43YB1DNrsKUWFiqbB0" >
-
+<img src="https://lh7-us.googleusercontent.com/Ucy-N5WIbOnZvEonqYzzE3bWhCoQTInGjtFn2ExMa23Mqg5xVRuka2cjodyfgQiwu0BOvKIgPCC1bHoSEyLl1GdNZhUwfYRz31KLIjrHcBgTyt8So8nQL0AHd4WZvpn47bnhI43YB1DNrsKUWFiqbB0" />
 
 
 
@@ -399,7 +394,7 @@ $ yarn run start or npm run start
 ### 2. 🎁선택 요구 사항 (추가 구현 기능)    
 ---
 
-- [x] 무한스크롤 구현 (Intersection Observer API (Web API)를 사용해보기)
+- [ ] 무한스크롤 구현 (Intersection Observer API (Web API)를 사용해보기)
 
 - [ ] Youtube API 요청을 통해 pagination 구현
 
@@ -430,8 +425,8 @@ $ yarn run start or npm run start
 
 | 문제 | 카카오맵 api  검색기능 사용시 list 데이터를 핸들링 할 수 없는 문제가 생겼습니다. |
 | :--: | ------------------------------------------------------------ |
-| 원인 | 다만 사람들이 자주 사용 하는 api로 레퍼런스가 많아,  구글링으로  해결을 했습니다. |
-| 해결 | 데이터를 redux Slice로 디스패치 후 map으로 직접 list를 생성해서 해결했습니다. |
+| 해결 | 자주 사용 하는 api인 덕분에 많은 레퍼런스를 찾아 참고하여  | 
+|      | 데이터를 redux Slice로 디스패치 후 map으로 직접 list를 생성해서 해결했습니다. |
 |      | <img src="https://github.com/NBC4-Outsourcing/zarani/assets/152264010/a6cc39f4-5da0-4dfb-900a-a31fc2dd6ae7" /> |
 
 
@@ -444,7 +439,7 @@ $ yarn run start or npm run start
 
 | 문제 |  와이어프레임과 동일한 형태로 디자인을 구현하기가 어려웠음  |
 | :--: | ------------------------------------------------------------  |
-| 해결 | 팀원들과 문제를 공유하고 서로 의견을 공유하여 여러 CSS 코드를 적용해보고, 구글링을 활용하여 필요한 기능을 탐색함 (Shout Out to BootStrap, TailWind, GPT, PAPAGO, 원장님) |
+| 해결 | 팀원들과 문제를 공유하고 서로 의견을 공유하여 여러 CSS 코드를 적용해보고, 여러 개발자 레퍼런스를 참고하여 필요한 기능을 탐색함 (Shout Out to BootStrap, TailWind, GPT, PAPAGO, WonjangNim) |
 
 
 
