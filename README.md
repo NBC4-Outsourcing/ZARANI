@@ -111,8 +111,7 @@
 ### Code Convention
 
 1. **기능에 대한 주석은 반드시 포함**
-2. Airbnb ESLint 사용
-3. 작명 방식
+2. 작명 방식
    1. JSX 파일 (ex. Home.jsx)
       1. PascalCase
       2. rafce 스니펫 사용
@@ -121,16 +120,16 @@
    4. styled-component
       1. PascalCase
       2. 컴포넌트Style.js
-4. 주요 디렉토리 구조
+3. 주요 디렉토리 구조
    1. common : 재사용 가능한 컴포넌트
    2. component/layout : 고정된 컴포넌트 (ex. Header, Footer)
    3. hooks : custom hook
    4. pages : URL에 해당하는 페이지 (ex. Home, Detail)
    5. shared : 라우터, Redux(shared/redux)
    6. styles : styled-component 파일 & GlobalStyle
-5. 시맨틱 태그(main, header, nav, section, ul, li) 사용
+4. 시맨틱 태그(main, header, nav, section, ul, li) 사용
 
-6. 프리티어 설정 :
+5. 프리티어 설정 :
 
 ```json
 {
